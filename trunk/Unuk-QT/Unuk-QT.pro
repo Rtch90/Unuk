@@ -15,7 +15,11 @@ HEADERS += ../src/libUnuk/Vec2.h \
     ../src/Unuk/Player.h \
     ../src/libUnuk/KeyboardInterface.h \
     ../src/libUnuk/XKeyboardInterface.h \
-    ../src/libUnuk/Static.h
+    ../src/libUnuk/Static.h \
+    ../src/libUnuk/UnukWindow.h \
+    ../src/libUnuk/Geometry.h \
+    ../src/libUnuk/Entity.h \
+    ../src/libUnuk/EntityType.h
 SOURCES += ../src/libUnuk/Vec2.cpp \
     ../src/libUnuk/Sprite.cpp \
     ../src/libUnuk/ImageLoader.cpp \
@@ -23,4 +27,5 @@ SOURCES += ../src/libUnuk/Vec2.cpp \
     ../src/libUnuk/Debug.cpp \
     ../src/Unuk/Player.cpp \
     ../src/Unuk/main.cpp \
-    ../src/Unuk/Game.cpp
+    ../src/Unuk/Game.cpp \
+    ../src/libUnuk/Entity.cpp
