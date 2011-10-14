@@ -14,7 +14,8 @@ HEADERS += ../src/libUnuk/Vec2.h \
     ../src/Unuk/Game.h \
     ../src/Unuk/Player.h \
     ../src/libUnuk/KeyboardInterface.h \
-    ../src/libUnuk/XKeyboardInterface.h
+    ../src/libUnuk/XKeyboardInterface.h \
+    ../src/libUnuk/Static.h
 SOURCES += ../src/libUnuk/Vec2.cpp \
     ../src/libUnuk/Sprite.cpp \
     ../src/libUnuk/ImageLoader.cpp \

@@ -100,7 +100,7 @@
     <value type="QString">_=/usr/bin/startx</value>
    </valuelist>
    <valuelist key="abstractProcess.arguments" type="QVariantList">
-    <value type="QString">/drv/storage/Projects/Portfolio/saracraft/trunk/Unuk/Unuk-QT/Unuk-QT.pro</value>
+    <value type="QString">/home/allanis/Unuk/trunk/Unuk-QT/Unuk-QT.pro</value>
     <value type="QString">-spec</value>
     <value type="QString">linux-g++</value>
     <value type="QString">-r</value>
@@ -108,7 +108,7 @@
    </valuelist>
    <value key="abstractProcess.command" type="QString">/usr/bin/qmake-qt4</value>
    <value key="abstractProcess.enabled" type="bool">false</value>
-   <value key="abstractProcess.workingDirectory" type="QString">/drv/storage/Projects/Portfolio/saracraft/trunk/Unuk/Unuk-QT</value>
+   <value key="abstractProcess.workingDirectory" type="QString">/home/allanis/Unuk/trunk/Unuk-QT</value>
   </valuemap>
  </data>
  <data>
@@ -145,7 +145,7 @@
    </valuelist>
    <value key="abstractProcess.command" type="QString">/usr/bin/make</value>
    <value key="abstractProcess.enabled" type="bool">true</value>
-   <value key="abstractProcess.workingDirectory" type="QString">/drv/storage/Projects/Portfolio/saracraft/trunk/Unuk/Unuk-QT</value>
+   <value key="abstractProcess.workingDirectory" type="QString">/home/allanis/Unuk/trunk/Unuk-QT</value>
   </valuemap>
  </data>
  <data>
