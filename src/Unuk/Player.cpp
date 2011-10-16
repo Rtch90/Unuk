@@ -2,12 +2,12 @@
 #include <SDL/SDL.h>
 #include "../libUnuk/Sprite.h"
 #include "../libUnuk/Debug.h"
+#include "../libUnuk/KeyboardInterface.h"
 #include "Player.h"
 
-Player::Player(void) {
-  m_posx = 0;
-  m_posy = 0;
-}
+Player::Player(void) :
+    m_posx(0),
+    m_posy(0) {}
 
 Player::~Player(void) {
   CleanUp();
