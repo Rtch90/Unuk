@@ -1,5 +1,6 @@
 #ifndef _GAME_H_
 #define _GAME_H_
+#include "SDL/SDL.h"
 #include "Player.h"
 
 class Game {
