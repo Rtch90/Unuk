@@ -63,8 +63,6 @@ void Game::Render(void) {
   //glutSwapBuffers();
   glDisable(GL_TEXTURE_2D);
 
-  if(KeyStillDown(SDLK_w)) {Debug::logger->message("Werks"); }
-
   // Get frames per second.
   frames++;
   {

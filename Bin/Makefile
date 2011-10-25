@@ -22,4 +22,4 @@ static:
 clean:
 	$(MAKE) -C ../src/libUnuk clean
 	$(MAKE) -C ../src/Unuk clean
-	rm -f Unuk Debug.log ../Data/Debug.log
+	rm -f Unuk Debug.log ../Data/Debug.log ../Unuk-QT/Unuk-QT

@@ -26,8 +26,6 @@ private:
   GLdouble m_posy;
 
   // Velocity variables.
-  int m_tempvelx;
-  int m_tempvely;
   int m_velx;
   int m_vely;
 };
