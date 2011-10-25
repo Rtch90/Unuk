@@ -11,6 +11,7 @@
 #include "SDL/SDL.h"
 #include "Game.h"
 #include "Player.h"
+#include "../libUnuk/Input.h"
 #include "../libUnuk/Sprite.h"
 #include "../libUnuk/Debug.h"
 
@@ -61,7 +62,9 @@ void Game::Render(void) {
   glFlush();
   //glutSwapBuffers();
   glDisable(GL_TEXTURE_2D);
- 
+
+  if(KeyStillDown(SDLK_w)) {Debug::logger->message("Werks"); }
+
   // Get frames per second.
   frames++;
   {

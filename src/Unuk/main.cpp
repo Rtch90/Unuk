@@ -8,6 +8,7 @@
 #include <GL/glu.h>
 #include "SDL/SDL.h"
 #include "Game.h"
+#include "../libUnuk/Input.h"
 #include "../libUnuk/Debug.h"
 
 // Screen width, height, and bit depth.
@@ -175,6 +176,7 @@ int main() {
   Debug::logger->message("\n\n-----Logic-----");
 
   while(!done) {
+    CreateInput();
     // Time to poll events.
     while(SDL_PollEvent(&event)) {
       switch(event.type) {

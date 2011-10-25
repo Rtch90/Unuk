@@ -21,7 +21,8 @@ HEADERS += ../src/libUnuk/Vec2.h \
     ../src/libUnuk/UnukWindow.h \
     ../src/libUnuk/Geometry.h \
     ../src/libUnuk/Entity.h \
-    ../src/libUnuk/EntityType.h
+    ../src/libUnuk/EntityType.h \
+    ../src/libUnuk/Input.h
 SOURCES += ../src/libUnuk/Vec2.cpp \
     ../src/libUnuk/Sprite.cpp \
     ../src/libUnuk/ImageLoader.cpp \
@@ -29,4 +30,5 @@ SOURCES += ../src/libUnuk/Vec2.cpp \
     ../src/Unuk/Player.cpp \
     ../src/Unuk/main.cpp \
     ../src/Unuk/Game.cpp \
-    ../src/libUnuk/Entity.cpp
+    ../src/libUnuk/Entity.cpp \
+    ../src/libUnuk/Input.cpp
