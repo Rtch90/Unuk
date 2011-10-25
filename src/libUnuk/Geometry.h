@@ -32,7 +32,7 @@ struct Vector2 {
   float x, y;
   Vector2(float X, float Y):
     x(X),
-    y(y) {}
+    y(Y) {}
 
   Vector2(void):
     x(0.0f),
