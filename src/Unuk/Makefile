@@ -18,4 +18,3 @@ all: $(objects)
 
 clean:
 	rm -f $(objects)
-

@@ -1,7 +1,7 @@
 CC = g++
 CFLAGS = -ansi -Wall -g
 LDADD = -lGL -lGLU -lSDL
-objects = Debug.o GlxWindow.o ImageLoader.o Sprite.o Vec2.o Input.o\
+objects = Debug.o Entity.o ImageLoader.o Sprite.o Input.o \
 
 .PHONY: default all clean
 
