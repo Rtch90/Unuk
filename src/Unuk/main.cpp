@@ -200,6 +200,7 @@ int main() {
       default:
         break;
       }
+      UpdateInput();
     }
     // Render the scene.
     float elapsedTime = GetElapsedSeconds();
