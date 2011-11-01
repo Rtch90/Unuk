@@ -16,16 +16,22 @@
 #include "../libUnuk/Debug.h"
 
 Game::Game(void) {
+  m_assets = false;
+  //m_player = new Player();
+  //m_player->SetSprite();
   m_rotationAngle = 0.0f;
 }
 
 Game::~Game(void) {
-
+  DeleteAssets();
 }
 
 bool Game::Init(void) {
   glEnable(GL_DEPTH_TEST);
   glDepthFunc(GL_LEQUAL);
+
+  LoadAssets();
+  m_assets = true;
 
   return true;
 }
@@ -46,7 +52,6 @@ void Game::Prepare(float dt) {
   if(m_rotationAngle > 360.0f) {
     m_rotationAngle -= 360.0f;
   }
-
 }
 
 void Game::Render(void) {
@@ -57,10 +62,12 @@ void Game::Render(void) {
   glRasterPos2i(0, 0);
 
   // Draw the test image.
-  m_player->Render();
+  if(m_assets) {
+    m_player->Render();
+  }
 
   glFlush();
-  //glutSwapBuffers();
+
   glDisable(GL_TEXTURE_2D);
 
   // Get frames per second.
@@ -80,19 +87,46 @@ void Game::Render(void) {
 void Game::Shutdown(void) {
   Debug::logger->message("\n\n-----Cleaning Up-----");
   m_player->CleanUp();
+  delete m_player;
   Debug::logger->message("\nPlayer Deleted.");
   Debug::closeLog();
 }
 
 void Game::UpdateProjection(void) {
+  GLint iViewport[4];
+
+  // Get a copy of the viewport.
+  glGetIntegerv(GL_VIEWPORT, iViewport);
+  glPushMatrix();
+  glLoadIdentity();
+
+  // Save a copy of the projection matrix so that we can restore
+  // it when it's time to do 3D rendering again.
   glMatrixMode(GL_PROJECTION);
+  glPushMatrix();
   glLoadIdentity();
 
   // Set up the orthographic projection.
-  glOrtho(-1.0, 1.0, -1.0, 1.0, 1.0, 1000.0);
-
+  glOrtho( iViewport[0], iViewport[0] + iViewport[2],
+      iViewport[1] + iViewport[3], iViewport[1], -1, 1);
   glMatrixMode(GL_MODELVIEW);
+  glPushMatrix();
   glLoadIdentity();
+
+  // Make sure depth testing and lighting are disabled for 2D rendering
+  //until we are finished rendering in 2D.
+  glPushAttrib(GL_DEPTH_BUFFER_BIT | GL_LIGHTING_BIT);
+  glDisable(GL_DEPTH_TEST);
+  glDisable(GL_LIGHTING);
+
+//  glMatrixMode(GL_PROJECTION);
+//  glLoadIdentity();
+//
+//  // Set up the orthographic projection.
+//  glOrtho(-1.0, 1.0, -1.0, 1.0, 1.0, 1000.0);
+//
+//  glMatrixMode(GL_MODELVIEW);
+//  glLoadIdentity();
 }
 
 void Game::OnResize(int width, int height) {
@@ -104,4 +138,13 @@ void Game::OnResize(int width, int height) {
 
   // Set the projection.
   UpdateProjection();
+}
+
+void Game::LoadAssets(void) {
+  m_player = new Player();
+  m_player->SetSprite();
+}
+
+void Game::DeleteAssets(void) {
+  delete m_player;
 }

@@ -34,11 +34,11 @@ int ResizeWindow(int width, int height) {
   // Height and width ration.
   GLfloat ratio;
 
-  // Prevent devide by zero.
+  // Prevent divide by zero.
   if(height == 0)
     height = 1;
 
-  ratio = (GLfloat )width / (GLfloat)height;
+  ratio = (GLfloat)width / (GLfloat)height;
 
   // Setup our viewport.
   glViewport(0, 0, (GLsizei)width, (GLsizei)height);
@@ -170,13 +170,13 @@ int main() {
   // Initialize OpenGL.
   InitGL();
 
-  // Resize the initial window.
-  ResizeWindow(SCREEN_WIDTH, SCREEN_HEIGHT);
+  game.Init();
+  Debug::logger->message("Game Initialize!");
+
   Debug::logger->message("\n\n-----Engine Initialization Complete-----");
   Debug::logger->message("\n\n-----Logic-----");
 
   while(!done) {
-    CreateInput();
     // Time to poll events.
     while(SDL_PollEvent(&event)) {
       switch(event.type) {
@@ -184,7 +184,7 @@ int main() {
         // Handle resize events.
         surface = SDL_SetVideoMode(event.resize.w, event.resize.h, 16, videoFlags);
         if(!surface) {
-          fprintf(stderr, "Could not get a surface after resize: %s\n", SDL_GetError());
+          Debug::logger->message("Could not get a surface after resize\n");
           Quit(1);
         }
         ResizeWindow(event.resize.w, event.resize.h);
@@ -200,7 +200,8 @@ int main() {
       default:
         break;
       }
-      UpdateInput();
+      //CreateInput();
+      //UpdateInput();
     }
     // Render the scene.
     float elapsedTime = GetElapsedSeconds();
@@ -216,4 +217,3 @@ int main() {
   // We should never get here.
   return(0);
 }
-

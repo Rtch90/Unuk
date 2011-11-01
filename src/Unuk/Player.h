@@ -11,17 +11,17 @@ public:
   void Prepare(void);
   void Render(void);
 
+  void SetSprite(void);
+
   void SetPosition(GLdouble posx, GLdouble posy);
   void SetVelocity(GLdouble velx, GLdouble vely);
 
   void CleanUp(void);
   
 private:
-  Sprite *m_player;
+  Sprite* m_player;
 
   // Position variables.
-  GLdouble m_tempx;
-  GLdouble m_tempy;
   GLdouble m_posx;
   GLdouble m_posy;
 

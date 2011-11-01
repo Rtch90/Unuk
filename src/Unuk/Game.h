@@ -17,8 +17,12 @@ public:
   void OnResize(int width, int height);
 
 private:
+  void LoadAssets(void);
+  void DeleteAssets(void);
   float m_rotationAngle;
   Player *m_player;
+
+  bool m_assets;
 };
 
 #endif 
