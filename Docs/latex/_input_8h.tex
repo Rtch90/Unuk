@@ -1,0 +1,302 @@
+\hypertarget{_input_8h}{
+\section{src/libUnuk/Input.h File Reference}
+\label{_input_8h}\index{src/libUnuk/Input.h@{src/libUnuk/Input.h}}
+}
+{\ttfamily \#include $<$SDL/SDL.h$>$}\par
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structmouse__s}{mouse\_\-s}
+\item 
+struct \hyperlink{structkeyboard__s}{keyboard\_\-s}
+\item 
+struct \hyperlink{structinput__s}{input\_\-s}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \hyperlink{structmouse__s}{mouse\_\-s} \hyperlink{_input_8h_a5a7e90ebfe82da642a8551d39a9637fc}{mouse\_\-t}
+\item 
+typedef struct \hyperlink{structkeyboard__s}{keyboard\_\-s} \hyperlink{_input_8h_ab2e7b7358317743f1a44b3ffcf9d90b6}{keyboard\_\-t}
+\item 
+typedef struct \hyperlink{structinput__s}{input\_\-s} \hyperlink{_input_8h_aa67c1d491678c6e9be7a5b74d9e23179}{input\_\-t}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{_input_8h_ad8bbe9f8003f51fc6e8e809ff471b590}{CreateInput} (void)
+\item 
+void \hyperlink{_input_8h_a386e80233eb4db9ec30e94fc317392dc}{UpdateInput} (void)
+\item 
+char \hyperlink{_input_8h_a44aeae4ff6fca8b29bdc4ef6648afe6a}{GetKey} (void)
+\item 
+unsigned int \hyperlink{_input_8h_a09f58e7168d284f21500b6c4254ab0a2}{GetX} (void)
+\item 
+unsigned int \hyperlink{_input_8h_a2d7dee36ba4424ba7c7ae0f176ce6350}{GetY} (void)
+\item 
+unsigned int \hyperlink{_input_8h_aaabeec50c28ca41dee7b993971536d18}{GetOldX} (void)
+\item 
+unsigned int \hyperlink{_input_8h_afa39e7680c7a17fe9c1bf6c6c6cc4c96}{GetOldY} (void)
+\item 
+unsigned int \hyperlink{_input_8h_a9e0a68cfbd1dc279be89bab1c4bccdbe}{GetMods} (void)
+\item 
+bool \hyperlink{_input_8h_a8d11465c620597cb24f9721b384ed577}{KeyDown} (int index)
+\item 
+bool \hyperlink{_input_8h_a0967678831e4493afe5f39eb09019737}{KeyStillDown} (int index)
+\item 
+bool \hyperlink{_input_8h_a1ea4bd8c6d5ced5217029c7aab4d411e}{KeyUp} (int index)
+\item 
+bool \hyperlink{_input_8h_a5492e04cc8bd1fa21978596831098e50}{KeyStillUp} (int index)
+\item 
+bool \hyperlink{_input_8h_ab0a6ac69a0f227dcd667be0f6befa6ca}{MouseDown} (int button)
+\item 
+bool \hyperlink{_input_8h_aa11b3cacbfb74e61107d363b7bae2a71}{MouseStillDown} (int button)
+\item 
+bool \hyperlink{_input_8h_a169298314efa0dd968e3068d9075dcfe}{MouseUp} (int button)
+\item 
+bool \hyperlink{_input_8h_a048f42f64fcb5db3b9e33a73a15ed899}{MouseStillUp} (int button)
+\item 
+void \hyperlink{_input_8h_a6305e9977789b1461075b25dcffcdf0a}{DestroyInput} (void)
+\end{DoxyCompactItemize}
+
+
+\subsection{Typedef Documentation}
+\hypertarget{_input_8h_aa67c1d491678c6e9be7a5b74d9e23179}{
+\index{Input.h@{Input.h}!input\_\-t@{input\_\-t}}
+\index{input\_\-t@{input\_\-t}!Input.h@{Input.h}}
+\subsubsection[{input\_\-t}]{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf input\_\-s}  {\bf input\_\-t}}}
+\label{_input_8h_aa67c1d491678c6e9be7a5b74d9e23179}
+\hypertarget{_input_8h_ab2e7b7358317743f1a44b3ffcf9d90b6}{
+\index{Input.h@{Input.h}!keyboard\_\-t@{keyboard\_\-t}}
+\index{keyboard\_\-t@{keyboard\_\-t}!Input.h@{Input.h}}
+\subsubsection[{keyboard\_\-t}]{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf keyboard\_\-s}  {\bf keyboard\_\-t}}}
+\label{_input_8h_ab2e7b7358317743f1a44b3ffcf9d90b6}
+\hypertarget{_input_8h_a5a7e90ebfe82da642a8551d39a9637fc}{
+\index{Input.h@{Input.h}!mouse\_\-t@{mouse\_\-t}}
+\index{mouse\_\-t@{mouse\_\-t}!Input.h@{Input.h}}
+\subsubsection[{mouse\_\-t}]{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf mouse\_\-s}  {\bf mouse\_\-t}}}
+\label{_input_8h_a5a7e90ebfe82da642a8551d39a9637fc}
+
+
+\subsection{Function Documentation}
+\hypertarget{_input_8h_ad8bbe9f8003f51fc6e8e809ff471b590}{
+\index{Input.h@{Input.h}!CreateInput@{CreateInput}}
+\index{CreateInput@{CreateInput}!Input.h@{Input.h}}
+\subsubsection[{CreateInput}]{\setlength{\rightskip}{0pt plus 5cm}bool CreateInput (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}
+\label{_input_8h_ad8bbe9f8003f51fc6e8e809ff471b590}
+
+
+Definition at line 23 of file Input.cpp.
+
+\hypertarget{_input_8h_a6305e9977789b1461075b25dcffcdf0a}{
+\index{Input.h@{Input.h}!DestroyInput@{DestroyInput}}
+\index{DestroyInput@{DestroyInput}!Input.h@{Input.h}}
+\subsubsection[{DestroyInput}]{\setlength{\rightskip}{0pt plus 5cm}void DestroyInput (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}
+\label{_input_8h_a6305e9977789b1461075b25dcffcdf0a}
+
+
+Definition at line 79 of file Input.cpp.
+
+\hypertarget{_input_8h_a44aeae4ff6fca8b29bdc4ef6648afe6a}{
+\index{Input.h@{Input.h}!GetKey@{GetKey}}
+\index{GetKey@{GetKey}!Input.h@{Input.h}}
+\subsubsection[{GetKey}]{\setlength{\rightskip}{0pt plus 5cm}char GetKey (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}
+\label{_input_8h_a44aeae4ff6fca8b29bdc4ef6648afe6a}
+
+
+Definition at line 59 of file Input.cpp.
+
+\hypertarget{_input_8h_a9e0a68cfbd1dc279be89bab1c4bccdbe}{
+\index{Input.h@{Input.h}!GetMods@{GetMods}}
+\index{GetMods@{GetMods}!Input.h@{Input.h}}
+\subsubsection[{GetMods}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int GetMods (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}
+\label{_input_8h_a9e0a68cfbd1dc279be89bab1c4bccdbe}
+
+
+Definition at line 69 of file Input.cpp.
+
+\hypertarget{_input_8h_aaabeec50c28ca41dee7b993971536d18}{
+\index{Input.h@{Input.h}!GetOldX@{GetOldX}}
+\index{GetOldX@{GetOldX}!Input.h@{Input.h}}
+\subsubsection[{GetOldX}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int GetOldX (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}
+\label{_input_8h_aaabeec50c28ca41dee7b993971536d18}
+
+
+Definition at line 67 of file Input.cpp.
+
+\hypertarget{_input_8h_afa39e7680c7a17fe9c1bf6c6c6cc4c96}{
+\index{Input.h@{Input.h}!GetOldY@{GetOldY}}
+\index{GetOldY@{GetOldY}!Input.h@{Input.h}}
+\subsubsection[{GetOldY}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int GetOldY (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}
+\label{_input_8h_afa39e7680c7a17fe9c1bf6c6c6cc4c96}
+
+
+Definition at line 68 of file Input.cpp.
+
+\hypertarget{_input_8h_a09f58e7168d284f21500b6c4254ab0a2}{
+\index{Input.h@{Input.h}!GetX@{GetX}}
+\index{GetX@{GetX}!Input.h@{Input.h}}
+\subsubsection[{GetX}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int GetX (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}
+\label{_input_8h_a09f58e7168d284f21500b6c4254ab0a2}
+
+
+Definition at line 65 of file Input.cpp.
+
+\hypertarget{_input_8h_a2d7dee36ba4424ba7c7ae0f176ce6350}{
+\index{Input.h@{Input.h}!GetY@{GetY}}
+\index{GetY@{GetY}!Input.h@{Input.h}}
+\subsubsection[{GetY}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int GetY (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}
+\label{_input_8h_a2d7dee36ba4424ba7c7ae0f176ce6350}
+
+
+Definition at line 66 of file Input.cpp.
+
+\hypertarget{_input_8h_a8d11465c620597cb24f9721b384ed577}{
+\index{Input.h@{Input.h}!KeyDown@{KeyDown}}
+\index{KeyDown@{KeyDown}!Input.h@{Input.h}}
+\subsubsection[{KeyDown}]{\setlength{\rightskip}{0pt plus 5cm}bool KeyDown (
+\begin{DoxyParamCaption}
+\item[{int}]{index}
+\end{DoxyParamCaption}
+)}}
+\label{_input_8h_a8d11465c620597cb24f9721b384ed577}
+
+
+Definition at line 70 of file Input.cpp.
+
+\hypertarget{_input_8h_a0967678831e4493afe5f39eb09019737}{
+\index{Input.h@{Input.h}!KeyStillDown@{KeyStillDown}}
+\index{KeyStillDown@{KeyStillDown}!Input.h@{Input.h}}
+\subsubsection[{KeyStillDown}]{\setlength{\rightskip}{0pt plus 5cm}bool KeyStillDown (
+\begin{DoxyParamCaption}
+\item[{int}]{index}
+\end{DoxyParamCaption}
+)}}
+\label{_input_8h_a0967678831e4493afe5f39eb09019737}
+
+
+Definition at line 71 of file Input.cpp.
+
+\hypertarget{_input_8h_a5492e04cc8bd1fa21978596831098e50}{
+\index{Input.h@{Input.h}!KeyStillUp@{KeyStillUp}}
+\index{KeyStillUp@{KeyStillUp}!Input.h@{Input.h}}
+\subsubsection[{KeyStillUp}]{\setlength{\rightskip}{0pt plus 5cm}bool KeyStillUp (
+\begin{DoxyParamCaption}
+\item[{int}]{index}
+\end{DoxyParamCaption}
+)}}
+\label{_input_8h_a5492e04cc8bd1fa21978596831098e50}
+
+
+Definition at line 73 of file Input.cpp.
+
+\hypertarget{_input_8h_a1ea4bd8c6d5ced5217029c7aab4d411e}{
+\index{Input.h@{Input.h}!KeyUp@{KeyUp}}
+\index{KeyUp@{KeyUp}!Input.h@{Input.h}}
+\subsubsection[{KeyUp}]{\setlength{\rightskip}{0pt plus 5cm}bool KeyUp (
+\begin{DoxyParamCaption}
+\item[{int}]{index}
+\end{DoxyParamCaption}
+)}}
+\label{_input_8h_a1ea4bd8c6d5ced5217029c7aab4d411e}
+
+
+Definition at line 72 of file Input.cpp.
+
+\hypertarget{_input_8h_ab0a6ac69a0f227dcd667be0f6befa6ca}{
+\index{Input.h@{Input.h}!MouseDown@{MouseDown}}
+\index{MouseDown@{MouseDown}!Input.h@{Input.h}}
+\subsubsection[{MouseDown}]{\setlength{\rightskip}{0pt plus 5cm}bool MouseDown (
+\begin{DoxyParamCaption}
+\item[{int}]{button}
+\end{DoxyParamCaption}
+)}}
+\label{_input_8h_ab0a6ac69a0f227dcd667be0f6befa6ca}
+
+
+Definition at line 74 of file Input.cpp.
+
+\hypertarget{_input_8h_aa11b3cacbfb74e61107d363b7bae2a71}{
+\index{Input.h@{Input.h}!MouseStillDown@{MouseStillDown}}
+\index{MouseStillDown@{MouseStillDown}!Input.h@{Input.h}}
+\subsubsection[{MouseStillDown}]{\setlength{\rightskip}{0pt plus 5cm}bool MouseStillDown (
+\begin{DoxyParamCaption}
+\item[{int}]{button}
+\end{DoxyParamCaption}
+)}}
+\label{_input_8h_aa11b3cacbfb74e61107d363b7bae2a71}
+
+
+Definition at line 75 of file Input.cpp.
+
+\hypertarget{_input_8h_a048f42f64fcb5db3b9e33a73a15ed899}{
+\index{Input.h@{Input.h}!MouseStillUp@{MouseStillUp}}
+\index{MouseStillUp@{MouseStillUp}!Input.h@{Input.h}}
+\subsubsection[{MouseStillUp}]{\setlength{\rightskip}{0pt plus 5cm}bool MouseStillUp (
+\begin{DoxyParamCaption}
+\item[{int}]{button}
+\end{DoxyParamCaption}
+)}}
+\label{_input_8h_a048f42f64fcb5db3b9e33a73a15ed899}
+
+
+Definition at line 77 of file Input.cpp.
+
+\hypertarget{_input_8h_a169298314efa0dd968e3068d9075dcfe}{
+\index{Input.h@{Input.h}!MouseUp@{MouseUp}}
+\index{MouseUp@{MouseUp}!Input.h@{Input.h}}
+\subsubsection[{MouseUp}]{\setlength{\rightskip}{0pt plus 5cm}bool MouseUp (
+\begin{DoxyParamCaption}
+\item[{int}]{button}
+\end{DoxyParamCaption}
+)}}
+\label{_input_8h_a169298314efa0dd968e3068d9075dcfe}
+
+
+Definition at line 76 of file Input.cpp.
+
+\hypertarget{_input_8h_a386e80233eb4db9ec30e94fc317392dc}{
+\index{Input.h@{Input.h}!UpdateInput@{UpdateInput}}
+\index{UpdateInput@{UpdateInput}!Input.h@{Input.h}}
+\subsubsection[{UpdateInput}]{\setlength{\rightskip}{0pt plus 5cm}void UpdateInput (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}
+\label{_input_8h_a386e80233eb4db9ec30e94fc317392dc}
+
+
+Definition at line 37 of file Input.cpp.
+

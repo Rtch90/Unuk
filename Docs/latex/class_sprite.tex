@@ -1,0 +1,320 @@
+\hypertarget{class_sprite}{
+\section{Sprite Class Reference}
+\label{class_sprite}\index{Sprite@{Sprite}}
+}
+
+
+{\ttfamily \#include $<$Sprite.h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_sprite_ac9efd3711ed9c2cf94a0f8bdd0fcf332}{Sprite} (string filename)
+\item 
+virtual \hyperlink{class_sprite_ae2cc659dea1ee5802b336d5c9b4f8f41}{$\sim$Sprite} (void)
+\item 
+virtual void \hyperlink{class_sprite_a0f9680e3bd7bf6bcd4c59620ba936347}{Render} (void)
+\item 
+virtual void \hyperlink{class_sprite_ad055732a0053d7d61e2a9a23cdec5b88}{Rotate} (GLint degrees)
+\item 
+GLint \hyperlink{class_sprite_ad8b341a7fa7c1839847d35cf1bef042f}{GetAngle} (void) const 
+\item 
+void \hyperlink{class_sprite_aad89d6d88e1dd4551cb75c4e852d7091}{SetAngle} (GLint angle)
+\item 
+void \hyperlink{class_sprite_a3e88970a65ba19aa9916886f5d7952c6}{SetX} (GLdouble \hyperlink{wglext_8h_ad77deca22f617d3f0e0eb786445689fc}{x})
+\item 
+void \hyperlink{class_sprite_a111f8054c1f27e59536be054ff0044ff}{SetY} (GLdouble \hyperlink{wglext_8h_a9298c7ad619074f5285b32c6b72bfdea}{y})
+\item 
+GLint \hyperlink{class_sprite_a7cfbc6e561e056c300a0aadeadefd5ac}{GetHeight} (void) const 
+\item 
+GLint \hyperlink{class_sprite_a3efc77ab951abaa3b0eed9298b7c165d}{GetWidth} (void) const 
+\item 
+void \hyperlink{class_sprite_a70d31712d0f598d26a68c268bd4390eb}{SetPivot} (GLfloat pivotX, GLfloat pivotY)
+\item 
+GLfloat \hyperlink{class_sprite_a5b3a7ec629671f2a0e55ec35906d4677}{GetPivotX} (void) const 
+\item 
+GLfloat \hyperlink{class_sprite_ae9c1b0ea9f702290518565a279849454}{GetPivotY} (void) const 
+\item 
+GLdouble \hyperlink{class_sprite_ab655c1d242cfc1c671af986f2a4f862a}{GetX} (void) const 
+\item 
+GLdouble \hyperlink{class_sprite_a4caef59883510b0759f9ebb9d30b256a}{GetY} (void) const 
+\item 
+void \hyperlink{class_sprite_aee58f3653a2874def9dfc11086ad109a}{SetPivot} (const \hyperlink{class_sprite}{Sprite} \&obj)
+\item 
+void \hyperlink{class_sprite_ae0db821f5ffe067ab771a419bcbdb971}{SetScale} (GLfloat \hyperlink{wglext_8h_ad77deca22f617d3f0e0eb786445689fc}{x}, GLfloat \hyperlink{wglext_8h_a9298c7ad619074f5285b32c6b72bfdea}{y})
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{class_sprite_a56b5bbc83ef6c8f8d6fc97b281a08cf4}{Enable2D} (void)
+\item 
+static void \hyperlink{class_sprite_ab1074ed774ebbdac0095e711dffc7ff5}{Disable2D} (void)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 11 of file Sprite.h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_sprite_ac9efd3711ed9c2cf94a0f8bdd0fcf332}{
+\index{Sprite@{Sprite}!Sprite@{Sprite}}
+\index{Sprite@{Sprite}!Sprite@{Sprite}}
+\subsubsection[{Sprite}]{\setlength{\rightskip}{0pt plus 5cm}Sprite::Sprite (
+\begin{DoxyParamCaption}
+\item[{string}]{filename}
+\end{DoxyParamCaption}
+)}}
+\label{class_sprite_ac9efd3711ed9c2cf94a0f8bdd0fcf332}
+
+
+Definition at line 8 of file Sprite.cpp.
+
+\hypertarget{class_sprite_ae2cc659dea1ee5802b336d5c9b4f8f41}{
+\index{Sprite@{Sprite}!$\sim$Sprite@{$\sim$Sprite}}
+\index{$\sim$Sprite@{$\sim$Sprite}!Sprite@{Sprite}}
+\subsubsection[{$\sim$Sprite}]{\setlength{\rightskip}{0pt plus 5cm}Sprite::$\sim$Sprite (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
+\label{class_sprite_ae2cc659dea1ee5802b336d5c9b4f8f41}
+
+
+Definition at line 17 of file Sprite.cpp.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_sprite_ab1074ed774ebbdac0095e711dffc7ff5}{
+\index{Sprite@{Sprite}!Disable2D@{Disable2D}}
+\index{Disable2D@{Disable2D}!Sprite@{Sprite}}
+\subsubsection[{Disable2D}]{\setlength{\rightskip}{0pt plus 5cm}void Sprite::Disable2D (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}static\mbox{]}}}}
+\label{class_sprite_ab1074ed774ebbdac0095e711dffc7ff5}
+
+
+Definition at line 53 of file Sprite.cpp.
+
+\hypertarget{class_sprite_a56b5bbc83ef6c8f8d6fc97b281a08cf4}{
+\index{Sprite@{Sprite}!Enable2D@{Enable2D}}
+\index{Enable2D@{Enable2D}!Sprite@{Sprite}}
+\subsubsection[{Enable2D}]{\setlength{\rightskip}{0pt plus 5cm}void Sprite::Enable2D (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}static\mbox{]}}}}
+\label{class_sprite_a56b5bbc83ef6c8f8d6fc97b281a08cf4}
+
+
+Definition at line 23 of file Sprite.cpp.
+
+\hypertarget{class_sprite_ad8b341a7fa7c1839847d35cf1bef042f}{
+\index{Sprite@{Sprite}!GetAngle@{GetAngle}}
+\index{GetAngle@{GetAngle}!Sprite@{Sprite}}
+\subsubsection[{GetAngle}]{\setlength{\rightskip}{0pt plus 5cm}GLint Sprite::GetAngle (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{class_sprite_ad8b341a7fa7c1839847d35cf1bef042f}
+
+
+Definition at line 24 of file Sprite.h.
+
+\hypertarget{class_sprite_a7cfbc6e561e056c300a0aadeadefd5ac}{
+\index{Sprite@{Sprite}!GetHeight@{GetHeight}}
+\index{GetHeight@{GetHeight}!Sprite@{Sprite}}
+\subsubsection[{GetHeight}]{\setlength{\rightskip}{0pt plus 5cm}GLint Sprite::GetHeight (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{class_sprite_a7cfbc6e561e056c300a0aadeadefd5ac}
+
+
+Definition at line 28 of file Sprite.h.
+
+\hypertarget{class_sprite_a5b3a7ec629671f2a0e55ec35906d4677}{
+\index{Sprite@{Sprite}!GetPivotX@{GetPivotX}}
+\index{GetPivotX@{GetPivotX}!Sprite@{Sprite}}
+\subsubsection[{GetPivotX}]{\setlength{\rightskip}{0pt plus 5cm}GLfloat Sprite::GetPivotX (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{class_sprite_a5b3a7ec629671f2a0e55ec35906d4677}
+
+
+Definition at line 32 of file Sprite.h.
+
+\hypertarget{class_sprite_ae9c1b0ea9f702290518565a279849454}{
+\index{Sprite@{Sprite}!GetPivotY@{GetPivotY}}
+\index{GetPivotY@{GetPivotY}!Sprite@{Sprite}}
+\subsubsection[{GetPivotY}]{\setlength{\rightskip}{0pt plus 5cm}GLfloat Sprite::GetPivotY (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{class_sprite_ae9c1b0ea9f702290518565a279849454}
+
+
+Definition at line 33 of file Sprite.h.
+
+\hypertarget{class_sprite_a3efc77ab951abaa3b0eed9298b7c165d}{
+\index{Sprite@{Sprite}!GetWidth@{GetWidth}}
+\index{GetWidth@{GetWidth}!Sprite@{Sprite}}
+\subsubsection[{GetWidth}]{\setlength{\rightskip}{0pt plus 5cm}GLint Sprite::GetWidth (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{class_sprite_a3efc77ab951abaa3b0eed9298b7c165d}
+
+
+Definition at line 29 of file Sprite.h.
+
+\hypertarget{class_sprite_ab655c1d242cfc1c671af986f2a4f862a}{
+\index{Sprite@{Sprite}!GetX@{GetX}}
+\index{GetX@{GetX}!Sprite@{Sprite}}
+\subsubsection[{GetX}]{\setlength{\rightskip}{0pt plus 5cm}GLdouble Sprite::GetX (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{class_sprite_ab655c1d242cfc1c671af986f2a4f862a}
+
+
+Definition at line 35 of file Sprite.h.
+
+\hypertarget{class_sprite_a4caef59883510b0759f9ebb9d30b256a}{
+\index{Sprite@{Sprite}!GetY@{GetY}}
+\index{GetY@{GetY}!Sprite@{Sprite}}
+\subsubsection[{GetY}]{\setlength{\rightskip}{0pt plus 5cm}GLdouble Sprite::GetY (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{class_sprite_a4caef59883510b0759f9ebb9d30b256a}
+
+
+Definition at line 36 of file Sprite.h.
+
+\hypertarget{class_sprite_a0f9680e3bd7bf6bcd4c59620ba936347}{
+\index{Sprite@{Sprite}!Render@{Render}}
+\index{Render@{Render}!Sprite@{Sprite}}
+\subsubsection[{Render}]{\setlength{\rightskip}{0pt plus 5cm}void Sprite::Render (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
+\label{class_sprite_a0f9680e3bd7bf6bcd4c59620ba936347}
+
+
+Definition at line 190 of file Sprite.cpp.
+
+\hypertarget{class_sprite_ad055732a0053d7d61e2a9a23cdec5b88}{
+\index{Sprite@{Sprite}!Rotate@{Rotate}}
+\index{Rotate@{Rotate}!Sprite@{Sprite}}
+\subsubsection[{Rotate}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Sprite::Rotate (
+\begin{DoxyParamCaption}
+\item[{GLint}]{degrees}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline, virtual\mbox{]}}}}
+\label{class_sprite_ad055732a0053d7d61e2a9a23cdec5b88}
+
+
+Definition at line 21 of file Sprite.h.
+
+\hypertarget{class_sprite_aad89d6d88e1dd4551cb75c4e852d7091}{
+\index{Sprite@{Sprite}!SetAngle@{SetAngle}}
+\index{SetAngle@{SetAngle}!Sprite@{Sprite}}
+\subsubsection[{SetAngle}]{\setlength{\rightskip}{0pt plus 5cm}void Sprite::SetAngle (
+\begin{DoxyParamCaption}
+\item[{GLint}]{angle}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{class_sprite_aad89d6d88e1dd4551cb75c4e852d7091}
+
+
+Definition at line 25 of file Sprite.h.
+
+\hypertarget{class_sprite_aee58f3653a2874def9dfc11086ad109a}{
+\index{Sprite@{Sprite}!SetPivot@{SetPivot}}
+\index{SetPivot@{SetPivot}!Sprite@{Sprite}}
+\subsubsection[{SetPivot}]{\setlength{\rightskip}{0pt plus 5cm}void Sprite::SetPivot (
+\begin{DoxyParamCaption}
+\item[{const {\bf Sprite} \&}]{obj}
+\end{DoxyParamCaption}
+)}}
+\label{class_sprite_aee58f3653a2874def9dfc11086ad109a}
+
+
+Definition at line 133 of file Sprite.cpp.
+
+\hypertarget{class_sprite_a70d31712d0f598d26a68c268bd4390eb}{
+\index{Sprite@{Sprite}!SetPivot@{SetPivot}}
+\index{SetPivot@{SetPivot}!Sprite@{Sprite}}
+\subsubsection[{SetPivot}]{\setlength{\rightskip}{0pt plus 5cm}void Sprite::SetPivot (
+\begin{DoxyParamCaption}
+\item[{GLfloat}]{pivotX, }
+\item[{GLfloat}]{pivotY}
+\end{DoxyParamCaption}
+)}}
+\label{class_sprite_a70d31712d0f598d26a68c268bd4390eb}
+
+
+Definition at line 113 of file Sprite.cpp.
+
+\hypertarget{class_sprite_ae0db821f5ffe067ab771a419bcbdb971}{
+\index{Sprite@{Sprite}!SetScale@{SetScale}}
+\index{SetScale@{SetScale}!Sprite@{Sprite}}
+\subsubsection[{SetScale}]{\setlength{\rightskip}{0pt plus 5cm}void Sprite::SetScale (
+\begin{DoxyParamCaption}
+\item[{GLfloat}]{x, }
+\item[{GLfloat}]{y}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{class_sprite_ae0db821f5ffe067ab771a419bcbdb971}
+
+
+Definition at line 46 of file Sprite.h.
+
+\hypertarget{class_sprite_a3e88970a65ba19aa9916886f5d7952c6}{
+\index{Sprite@{Sprite}!SetX@{SetX}}
+\index{SetX@{SetX}!Sprite@{Sprite}}
+\subsubsection[{SetX}]{\setlength{\rightskip}{0pt plus 5cm}void Sprite::SetX (
+\begin{DoxyParamCaption}
+\item[{GLdouble}]{x}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{class_sprite_a3e88970a65ba19aa9916886f5d7952c6}
+
+
+Definition at line 26 of file Sprite.h.
+
+\hypertarget{class_sprite_a111f8054c1f27e59536be054ff0044ff}{
+\index{Sprite@{Sprite}!SetY@{SetY}}
+\index{SetY@{SetY}!Sprite@{Sprite}}
+\subsubsection[{SetY}]{\setlength{\rightskip}{0pt plus 5cm}void Sprite::SetY (
+\begin{DoxyParamCaption}
+\item[{GLdouble}]{y}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{class_sprite_a111f8054c1f27e59536be054ff0044ff}
+
+
+Definition at line 27 of file Sprite.h.
+
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+src/libUnuk/\hyperlink{_sprite_8h}{Sprite.h}\item 
+src/libUnuk/\hyperlink{_sprite_8cpp}{Sprite.cpp}\end{DoxyCompactItemize}

@@ -1,0 +1,327 @@
+\hypertarget{_input_8cpp}{
+\section{src/libUnuk/Input.cpp File Reference}
+\label{_input_8cpp}\index{src/libUnuk/Input.cpp@{src/libUnuk/Input.cpp}}
+}
+{\ttfamily \#include $<$string.h$>$}\par
+{\ttfamily \#include \char`\"{}Input.h\char`\"{}}\par
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{_input_8cpp_a946b66a2a539256a2b3b08515890b059}{\_\-curr\_\-key} (int index)
+\item 
+bool \hyperlink{_input_8cpp_a88650b6a1c428f89922bb5b9cfd96399}{\_\-old\_\-key} (int index)
+\item 
+bool \hyperlink{_input_8cpp_ac2f6442ebfc2539f5fbf1dad45de5fd0}{\_\-curr\_\-mouse} (int button)
+\item 
+bool \hyperlink{_input_8cpp_a3f15985eb98a6c3581e80f103d2c9be4}{\_\-old\_\-mouse} (int button)
+\item 
+bool \hyperlink{_input_8cpp_ad8bbe9f8003f51fc6e8e809ff471b590}{CreateInput} (void)
+\item 
+void \hyperlink{_input_8cpp_a386e80233eb4db9ec30e94fc317392dc}{UpdateInput} (void)
+\item 
+char \hyperlink{_input_8cpp_a44aeae4ff6fca8b29bdc4ef6648afe6a}{GetKey} (void)
+\item 
+unsigned int \hyperlink{_input_8cpp_a09f58e7168d284f21500b6c4254ab0a2}{GetX} (void)
+\item 
+unsigned int \hyperlink{_input_8cpp_a2d7dee36ba4424ba7c7ae0f176ce6350}{GetY} (void)
+\item 
+unsigned int \hyperlink{_input_8cpp_aaabeec50c28ca41dee7b993971536d18}{GetOldX} (void)
+\item 
+unsigned int \hyperlink{_input_8cpp_afa39e7680c7a17fe9c1bf6c6c6cc4c96}{GetOldY} (void)
+\item 
+unsigned int \hyperlink{_input_8cpp_a9e0a68cfbd1dc279be89bab1c4bccdbe}{GetMods} (void)
+\item 
+bool \hyperlink{_input_8cpp_a8d11465c620597cb24f9721b384ed577}{KeyDown} (int index)
+\item 
+bool \hyperlink{_input_8cpp_a0967678831e4493afe5f39eb09019737}{KeyStillDown} (int index)
+\item 
+bool \hyperlink{_input_8cpp_a1ea4bd8c6d5ced5217029c7aab4d411e}{KeyUp} (int index)
+\item 
+bool \hyperlink{_input_8cpp_a5492e04cc8bd1fa21978596831098e50}{KeyStillUp} (int index)
+\item 
+bool \hyperlink{_input_8cpp_ab0a6ac69a0f227dcd667be0f6befa6ca}{MouseDown} (int button)
+\item 
+bool \hyperlink{_input_8cpp_aa11b3cacbfb74e61107d363b7bae2a71}{MouseStillDown} (int button)
+\item 
+bool \hyperlink{_input_8cpp_a169298314efa0dd968e3068d9075dcfe}{MouseUp} (int button)
+\item 
+bool \hyperlink{_input_8cpp_a048f42f64fcb5db3b9e33a73a15ed899}{MouseStillUp} (int button)
+\item 
+void \hyperlink{_input_8cpp_a6305e9977789b1461075b25dcffcdf0a}{DestroyInput} (void)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{_input_8cpp_a946b66a2a539256a2b3b08515890b059}{
+\index{Input.cpp@{Input.cpp}!\_\-curr\_\-key@{\_\-curr\_\-key}}
+\index{\_\-curr\_\-key@{\_\-curr\_\-key}!Input.cpp@{Input.cpp}}
+\subsubsection[{\_\-curr\_\-key}]{\setlength{\rightskip}{0pt plus 5cm}bool \_\-curr\_\-key (
+\begin{DoxyParamCaption}
+\item[{int}]{index}
+\end{DoxyParamCaption}
+)}}
+\label{_input_8cpp_a946b66a2a539256a2b3b08515890b059}
+
+
+Definition at line 7 of file Input.cpp.
+
+\hypertarget{_input_8cpp_ac2f6442ebfc2539f5fbf1dad45de5fd0}{
+\index{Input.cpp@{Input.cpp}!\_\-curr\_\-mouse@{\_\-curr\_\-mouse}}
+\index{\_\-curr\_\-mouse@{\_\-curr\_\-mouse}!Input.cpp@{Input.cpp}}
+\subsubsection[{\_\-curr\_\-mouse}]{\setlength{\rightskip}{0pt plus 5cm}bool \_\-curr\_\-mouse (
+\begin{DoxyParamCaption}
+\item[{int}]{button}
+\end{DoxyParamCaption}
+)}}
+\label{_input_8cpp_ac2f6442ebfc2539f5fbf1dad45de5fd0}
+
+
+Definition at line 15 of file Input.cpp.
+
+\hypertarget{_input_8cpp_a88650b6a1c428f89922bb5b9cfd96399}{
+\index{Input.cpp@{Input.cpp}!\_\-old\_\-key@{\_\-old\_\-key}}
+\index{\_\-old\_\-key@{\_\-old\_\-key}!Input.cpp@{Input.cpp}}
+\subsubsection[{\_\-old\_\-key}]{\setlength{\rightskip}{0pt plus 5cm}bool \_\-old\_\-key (
+\begin{DoxyParamCaption}
+\item[{int}]{index}
+\end{DoxyParamCaption}
+)}}
+\label{_input_8cpp_a88650b6a1c428f89922bb5b9cfd96399}
+
+
+Definition at line 11 of file Input.cpp.
+
+\hypertarget{_input_8cpp_a3f15985eb98a6c3581e80f103d2c9be4}{
+\index{Input.cpp@{Input.cpp}!\_\-old\_\-mouse@{\_\-old\_\-mouse}}
+\index{\_\-old\_\-mouse@{\_\-old\_\-mouse}!Input.cpp@{Input.cpp}}
+\subsubsection[{\_\-old\_\-mouse}]{\setlength{\rightskip}{0pt plus 5cm}bool \_\-old\_\-mouse (
+\begin{DoxyParamCaption}
+\item[{int}]{button}
+\end{DoxyParamCaption}
+)}}
+\label{_input_8cpp_a3f15985eb98a6c3581e80f103d2c9be4}
+
+
+Definition at line 19 of file Input.cpp.
+
+\hypertarget{_input_8cpp_ad8bbe9f8003f51fc6e8e809ff471b590}{
+\index{Input.cpp@{Input.cpp}!CreateInput@{CreateInput}}
+\index{CreateInput@{CreateInput}!Input.cpp@{Input.cpp}}
+\subsubsection[{CreateInput}]{\setlength{\rightskip}{0pt plus 5cm}bool CreateInput (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}
+\label{_input_8cpp_ad8bbe9f8003f51fc6e8e809ff471b590}
+
+
+Definition at line 23 of file Input.cpp.
+
+\hypertarget{_input_8cpp_a6305e9977789b1461075b25dcffcdf0a}{
+\index{Input.cpp@{Input.cpp}!DestroyInput@{DestroyInput}}
+\index{DestroyInput@{DestroyInput}!Input.cpp@{Input.cpp}}
+\subsubsection[{DestroyInput}]{\setlength{\rightskip}{0pt plus 5cm}void DestroyInput (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}
+\label{_input_8cpp_a6305e9977789b1461075b25dcffcdf0a}
+
+
+Definition at line 79 of file Input.cpp.
+
+\hypertarget{_input_8cpp_a44aeae4ff6fca8b29bdc4ef6648afe6a}{
+\index{Input.cpp@{Input.cpp}!GetKey@{GetKey}}
+\index{GetKey@{GetKey}!Input.cpp@{Input.cpp}}
+\subsubsection[{GetKey}]{\setlength{\rightskip}{0pt plus 5cm}char GetKey (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}
+\label{_input_8cpp_a44aeae4ff6fca8b29bdc4ef6648afe6a}
+
+
+Definition at line 59 of file Input.cpp.
+
+\hypertarget{_input_8cpp_a9e0a68cfbd1dc279be89bab1c4bccdbe}{
+\index{Input.cpp@{Input.cpp}!GetMods@{GetMods}}
+\index{GetMods@{GetMods}!Input.cpp@{Input.cpp}}
+\subsubsection[{GetMods}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int GetMods (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}
+\label{_input_8cpp_a9e0a68cfbd1dc279be89bab1c4bccdbe}
+
+
+Definition at line 69 of file Input.cpp.
+
+\hypertarget{_input_8cpp_aaabeec50c28ca41dee7b993971536d18}{
+\index{Input.cpp@{Input.cpp}!GetOldX@{GetOldX}}
+\index{GetOldX@{GetOldX}!Input.cpp@{Input.cpp}}
+\subsubsection[{GetOldX}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int GetOldX (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}
+\label{_input_8cpp_aaabeec50c28ca41dee7b993971536d18}
+
+
+Definition at line 67 of file Input.cpp.
+
+\hypertarget{_input_8cpp_afa39e7680c7a17fe9c1bf6c6c6cc4c96}{
+\index{Input.cpp@{Input.cpp}!GetOldY@{GetOldY}}
+\index{GetOldY@{GetOldY}!Input.cpp@{Input.cpp}}
+\subsubsection[{GetOldY}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int GetOldY (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}
+\label{_input_8cpp_afa39e7680c7a17fe9c1bf6c6c6cc4c96}
+
+
+Definition at line 68 of file Input.cpp.
+
+\hypertarget{_input_8cpp_a09f58e7168d284f21500b6c4254ab0a2}{
+\index{Input.cpp@{Input.cpp}!GetX@{GetX}}
+\index{GetX@{GetX}!Input.cpp@{Input.cpp}}
+\subsubsection[{GetX}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int GetX (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}
+\label{_input_8cpp_a09f58e7168d284f21500b6c4254ab0a2}
+
+
+Definition at line 65 of file Input.cpp.
+
+\hypertarget{_input_8cpp_a2d7dee36ba4424ba7c7ae0f176ce6350}{
+\index{Input.cpp@{Input.cpp}!GetY@{GetY}}
+\index{GetY@{GetY}!Input.cpp@{Input.cpp}}
+\subsubsection[{GetY}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int GetY (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}
+\label{_input_8cpp_a2d7dee36ba4424ba7c7ae0f176ce6350}
+
+
+Definition at line 66 of file Input.cpp.
+
+\hypertarget{_input_8cpp_a8d11465c620597cb24f9721b384ed577}{
+\index{Input.cpp@{Input.cpp}!KeyDown@{KeyDown}}
+\index{KeyDown@{KeyDown}!Input.cpp@{Input.cpp}}
+\subsubsection[{KeyDown}]{\setlength{\rightskip}{0pt plus 5cm}bool KeyDown (
+\begin{DoxyParamCaption}
+\item[{int}]{index}
+\end{DoxyParamCaption}
+)}}
+\label{_input_8cpp_a8d11465c620597cb24f9721b384ed577}
+
+
+Definition at line 70 of file Input.cpp.
+
+\hypertarget{_input_8cpp_a0967678831e4493afe5f39eb09019737}{
+\index{Input.cpp@{Input.cpp}!KeyStillDown@{KeyStillDown}}
+\index{KeyStillDown@{KeyStillDown}!Input.cpp@{Input.cpp}}
+\subsubsection[{KeyStillDown}]{\setlength{\rightskip}{0pt plus 5cm}bool KeyStillDown (
+\begin{DoxyParamCaption}
+\item[{int}]{index}
+\end{DoxyParamCaption}
+)}}
+\label{_input_8cpp_a0967678831e4493afe5f39eb09019737}
+
+
+Definition at line 71 of file Input.cpp.
+
+\hypertarget{_input_8cpp_a5492e04cc8bd1fa21978596831098e50}{
+\index{Input.cpp@{Input.cpp}!KeyStillUp@{KeyStillUp}}
+\index{KeyStillUp@{KeyStillUp}!Input.cpp@{Input.cpp}}
+\subsubsection[{KeyStillUp}]{\setlength{\rightskip}{0pt plus 5cm}bool KeyStillUp (
+\begin{DoxyParamCaption}
+\item[{int}]{index}
+\end{DoxyParamCaption}
+)}}
+\label{_input_8cpp_a5492e04cc8bd1fa21978596831098e50}
+
+
+Definition at line 73 of file Input.cpp.
+
+\hypertarget{_input_8cpp_a1ea4bd8c6d5ced5217029c7aab4d411e}{
+\index{Input.cpp@{Input.cpp}!KeyUp@{KeyUp}}
+\index{KeyUp@{KeyUp}!Input.cpp@{Input.cpp}}
+\subsubsection[{KeyUp}]{\setlength{\rightskip}{0pt plus 5cm}bool KeyUp (
+\begin{DoxyParamCaption}
+\item[{int}]{index}
+\end{DoxyParamCaption}
+)}}
+\label{_input_8cpp_a1ea4bd8c6d5ced5217029c7aab4d411e}
+
+
+Definition at line 72 of file Input.cpp.
+
+\hypertarget{_input_8cpp_ab0a6ac69a0f227dcd667be0f6befa6ca}{
+\index{Input.cpp@{Input.cpp}!MouseDown@{MouseDown}}
+\index{MouseDown@{MouseDown}!Input.cpp@{Input.cpp}}
+\subsubsection[{MouseDown}]{\setlength{\rightskip}{0pt plus 5cm}bool MouseDown (
+\begin{DoxyParamCaption}
+\item[{int}]{button}
+\end{DoxyParamCaption}
+)}}
+\label{_input_8cpp_ab0a6ac69a0f227dcd667be0f6befa6ca}
+
+
+Definition at line 74 of file Input.cpp.
+
+\hypertarget{_input_8cpp_aa11b3cacbfb74e61107d363b7bae2a71}{
+\index{Input.cpp@{Input.cpp}!MouseStillDown@{MouseStillDown}}
+\index{MouseStillDown@{MouseStillDown}!Input.cpp@{Input.cpp}}
+\subsubsection[{MouseStillDown}]{\setlength{\rightskip}{0pt plus 5cm}bool MouseStillDown (
+\begin{DoxyParamCaption}
+\item[{int}]{button}
+\end{DoxyParamCaption}
+)}}
+\label{_input_8cpp_aa11b3cacbfb74e61107d363b7bae2a71}
+
+
+Definition at line 75 of file Input.cpp.
+
+\hypertarget{_input_8cpp_a048f42f64fcb5db3b9e33a73a15ed899}{
+\index{Input.cpp@{Input.cpp}!MouseStillUp@{MouseStillUp}}
+\index{MouseStillUp@{MouseStillUp}!Input.cpp@{Input.cpp}}
+\subsubsection[{MouseStillUp}]{\setlength{\rightskip}{0pt plus 5cm}bool MouseStillUp (
+\begin{DoxyParamCaption}
+\item[{int}]{button}
+\end{DoxyParamCaption}
+)}}
+\label{_input_8cpp_a048f42f64fcb5db3b9e33a73a15ed899}
+
+
+Definition at line 77 of file Input.cpp.
+
+\hypertarget{_input_8cpp_a169298314efa0dd968e3068d9075dcfe}{
+\index{Input.cpp@{Input.cpp}!MouseUp@{MouseUp}}
+\index{MouseUp@{MouseUp}!Input.cpp@{Input.cpp}}
+\subsubsection[{MouseUp}]{\setlength{\rightskip}{0pt plus 5cm}bool MouseUp (
+\begin{DoxyParamCaption}
+\item[{int}]{button}
+\end{DoxyParamCaption}
+)}}
+\label{_input_8cpp_a169298314efa0dd968e3068d9075dcfe}
+
+
+Definition at line 76 of file Input.cpp.
+
+\hypertarget{_input_8cpp_a386e80233eb4db9ec30e94fc317392dc}{
+\index{Input.cpp@{Input.cpp}!UpdateInput@{UpdateInput}}
+\index{UpdateInput@{UpdateInput}!Input.cpp@{Input.cpp}}
+\subsubsection[{UpdateInput}]{\setlength{\rightskip}{0pt plus 5cm}void UpdateInput (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}
+\label{_input_8cpp_a386e80233eb4db9ec30e94fc317392dc}
+
+
+Definition at line 37 of file Input.cpp.
+

@@ -1,0 +1,228 @@
+\hypertarget{class_a_star}{
+\section{AStar Class Reference}
+\label{class_a_star}\index{AStar@{AStar}}
+}
+
+
+{\ttfamily \#include $<$AStar.h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_a_star_ac24e9dfcf9b10e277a2b84d864786cd8}{AStar} (void)
+\item 
+\hyperlink{class_a_star_a6a19cecaac38d0cc8f7f812f027ea98e}{$\sim$AStar} (void)
+\item 
+bool \hyperlink{class_a_star_a49456dd3428034ad96ab7e2bcdae6397}{GeneratePath} (int startx, int starty, int destx, int desty)
+\item 
+int \hyperlink{class_a_star_ab7acb36f1266e9149b674a8b59c2671d}{Step} (void)
+\item 
+int \hyperlink{class_a_star_ae0a4ccaa8582189a62afdb04f73c43b7}{InitStep} (int startx, int starty, int destx, int desty)
+\item 
+void \hyperlink{class_a_star_af91228c86f696a0f66eaf6b6dd7368f2}{SetRows} (int r)
+\item 
+void \hyperlink{class_a_star_ade8f2b86e351895bab6336c4725da0a3}{Reset} (void)
+\item 
+\hyperlink{class_node}{Node} $\ast$ \hyperlink{class_a_star_aa0713000dd611a2855cc4eb96afcc5ce}{GetBestNode} (void)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{_node_8h_a65d456bd1d6bcbf35022277e41f5c9c7}{Func} \hyperlink{class_a_star_a6daaa58fc52045c6a4fad6b7a1fec60a}{udCost}
+\item 
+\hyperlink{_node_8h_a65d456bd1d6bcbf35022277e41f5c9c7}{Func} \hyperlink{class_a_star_a2c97615a0ad52039bec2a7ceaab772a2}{udValid}
+\item 
+\hyperlink{_node_8h_a65d456bd1d6bcbf35022277e41f5c9c7}{Func} \hyperlink{class_a_star_ab5a6376f40d9746e71447acb3b8a05bd}{udNotifyChild}
+\item 
+\hyperlink{_node_8h_a65d456bd1d6bcbf35022277e41f5c9c7}{Func} \hyperlink{class_a_star_a1a4896338d482138954cfbfbd9e93641}{udNotifyList}
+\item 
+void $\ast$ \hyperlink{class_a_star_a5a3067f9cf62dd1542f91f90c2b5dc0a}{CBData}
+\item 
+void $\ast$ \hyperlink{class_a_star_a4fe11c564dceb3cac1352c7fadc0efef}{NCData}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 5 of file AStar.h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_a_star_ac24e9dfcf9b10e277a2b84d864786cd8}{
+\index{AStar@{AStar}!AStar@{AStar}}
+\index{AStar@{AStar}!AStar@{AStar}}
+\subsubsection[{AStar}]{\setlength{\rightskip}{0pt plus 5cm}AStar::AStar (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}
+\label{class_a_star_ac24e9dfcf9b10e277a2b84d864786cd8}
+
+
+Definition at line 5 of file AStar.cpp.
+
+\hypertarget{class_a_star_a6a19cecaac38d0cc8f7f812f027ea98e}{
+\index{AStar@{AStar}!$\sim$AStar@{$\sim$AStar}}
+\index{$\sim$AStar@{$\sim$AStar}!AStar@{AStar}}
+\subsubsection[{$\sim$AStar}]{\setlength{\rightskip}{0pt plus 5cm}AStar::$\sim$AStar (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}
+\label{class_a_star_a6a19cecaac38d0cc8f7f812f027ea98e}
+
+
+Definition at line 16 of file AStar.cpp.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_a_star_a49456dd3428034ad96ab7e2bcdae6397}{
+\index{AStar@{AStar}!GeneratePath@{GeneratePath}}
+\index{GeneratePath@{GeneratePath}!AStar@{AStar}}
+\subsubsection[{GeneratePath}]{\setlength{\rightskip}{0pt plus 5cm}bool AStar::GeneratePath (
+\begin{DoxyParamCaption}
+\item[{int}]{startx, }
+\item[{int}]{starty, }
+\item[{int}]{destx, }
+\item[{int}]{desty}
+\end{DoxyParamCaption}
+)}}
+\label{class_a_star_a49456dd3428034ad96ab7e2bcdae6397}
+
+
+Definition at line 20 of file AStar.cpp.
+
+\hypertarget{class_a_star_aa0713000dd611a2855cc4eb96afcc5ce}{
+\index{AStar@{AStar}!GetBestNode@{GetBestNode}}
+\index{GetBestNode@{GetBestNode}!AStar@{AStar}}
+\subsubsection[{GetBestNode}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Node}$\ast$ AStar::GetBestNode (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{class_a_star_aa0713000dd611a2855cc4eb96afcc5ce}
+
+
+Definition at line 24 of file AStar.h.
+
+\hypertarget{class_a_star_ae0a4ccaa8582189a62afdb04f73c43b7}{
+\index{AStar@{AStar}!InitStep@{InitStep}}
+\index{InitStep@{InitStep}!AStar@{AStar}}
+\subsubsection[{InitStep}]{\setlength{\rightskip}{0pt plus 5cm}int AStar::InitStep (
+\begin{DoxyParamCaption}
+\item[{int}]{startx, }
+\item[{int}]{starty, }
+\item[{int}]{destx, }
+\item[{int}]{desty}
+\end{DoxyParamCaption}
+)}}
+\label{class_a_star_ae0a4ccaa8582189a62afdb04f73c43b7}
+
+
+Definition at line 51 of file AStar.cpp.
+
+\hypertarget{class_a_star_ade8f2b86e351895bab6336c4725da0a3}{
+\index{AStar@{AStar}!Reset@{Reset}}
+\index{Reset@{Reset}!AStar@{AStar}}
+\subsubsection[{Reset}]{\setlength{\rightskip}{0pt plus 5cm}void AStar::Reset (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{class_a_star_ade8f2b86e351895bab6336c4725da0a3}
+
+
+Definition at line 22 of file AStar.h.
+
+\hypertarget{class_a_star_af91228c86f696a0f66eaf6b6dd7368f2}{
+\index{AStar@{AStar}!SetRows@{SetRows}}
+\index{SetRows@{SetRows}!AStar@{AStar}}
+\subsubsection[{SetRows}]{\setlength{\rightskip}{0pt plus 5cm}void AStar::SetRows (
+\begin{DoxyParamCaption}
+\item[{int}]{r}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{class_a_star_af91228c86f696a0f66eaf6b6dd7368f2}
+
+
+Definition at line 21 of file AStar.h.
+
+\hypertarget{class_a_star_ab7acb36f1266e9149b674a8b59c2671d}{
+\index{AStar@{AStar}!Step@{Step}}
+\index{Step@{Step}!AStar@{AStar}}
+\subsubsection[{Step}]{\setlength{\rightskip}{0pt plus 5cm}int AStar::Step (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}
+\label{class_a_star_ab7acb36f1266e9149b674a8b59c2671d}
+
+
+Definition at line 38 of file AStar.cpp.
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_a_star_a5a3067f9cf62dd1542f91f90c2b5dc0a}{
+\index{AStar@{AStar}!CBData@{CBData}}
+\index{CBData@{CBData}!AStar@{AStar}}
+\subsubsection[{CBData}]{\setlength{\rightskip}{0pt plus 5cm}void$\ast$ {\bf AStar::CBData}}}
+\label{class_a_star_a5a3067f9cf62dd1542f91f90c2b5dc0a}
+
+
+Definition at line 15 of file AStar.h.
+
+\hypertarget{class_a_star_a4fe11c564dceb3cac1352c7fadc0efef}{
+\index{AStar@{AStar}!NCData@{NCData}}
+\index{NCData@{NCData}!AStar@{AStar}}
+\subsubsection[{NCData}]{\setlength{\rightskip}{0pt plus 5cm}void$\ast$ {\bf AStar::NCData}}}
+\label{class_a_star_a4fe11c564dceb3cac1352c7fadc0efef}
+
+
+Definition at line 16 of file AStar.h.
+
+\hypertarget{class_a_star_a6daaa58fc52045c6a4fad6b7a1fec60a}{
+\index{AStar@{AStar}!udCost@{udCost}}
+\index{udCost@{udCost}!AStar@{AStar}}
+\subsubsection[{udCost}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Func} {\bf AStar::udCost}}}
+\label{class_a_star_a6daaa58fc52045c6a4fad6b7a1fec60a}
+
+
+Definition at line 10 of file AStar.h.
+
+\hypertarget{class_a_star_ab5a6376f40d9746e71447acb3b8a05bd}{
+\index{AStar@{AStar}!udNotifyChild@{udNotifyChild}}
+\index{udNotifyChild@{udNotifyChild}!AStar@{AStar}}
+\subsubsection[{udNotifyChild}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Func} {\bf AStar::udNotifyChild}}}
+\label{class_a_star_ab5a6376f40d9746e71447acb3b8a05bd}
+
+
+Definition at line 12 of file AStar.h.
+
+\hypertarget{class_a_star_a1a4896338d482138954cfbfbd9e93641}{
+\index{AStar@{AStar}!udNotifyList@{udNotifyList}}
+\index{udNotifyList@{udNotifyList}!AStar@{AStar}}
+\subsubsection[{udNotifyList}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Func} {\bf AStar::udNotifyList}}}
+\label{class_a_star_a1a4896338d482138954cfbfbd9e93641}
+
+
+Definition at line 13 of file AStar.h.
+
+\hypertarget{class_a_star_a2c97615a0ad52039bec2a7ceaab772a2}{
+\index{AStar@{AStar}!udValid@{udValid}}
+\index{udValid@{udValid}!AStar@{AStar}}
+\subsubsection[{udValid}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Func} {\bf AStar::udValid}}}
+\label{class_a_star_a2c97615a0ad52039bec2a7ceaab772a2}
+
+
+Definition at line 11 of file AStar.h.
+
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+src/libUnuk/\hyperlink{_a_star_8h}{AStar.h}\item 
+src/libUnuk/\hyperlink{_a_star_8cpp}{AStar.cpp}\end{DoxyCompactItemize}
