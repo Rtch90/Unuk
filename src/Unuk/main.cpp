@@ -7,14 +7,14 @@
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include "SDL/SDL.h"
-#include "Game.h"
 #include "../libUnuk/Input.h"
 #include "../libUnuk/Debug.h"
+#include "Constants.h"
 
 // Screen width, height, and bit depth.
-const int SCREEN_WIDTH  = 640;
-const int SCREEN_HEIGHT = 480;
-const int SCREEN_BPP    = 16;
+//const int SCREEN_WIDTH  = 640;
+//const int SCREEN_HEIGHT = 480;
+//const int SCREEN_BPP    = 16;
 
 // Define our SDL surface.
 SDL_Surface *surface;
@@ -120,7 +120,6 @@ int main() {
   bool done = false;
   SDL_Event event;
   const SDL_VideoInfo *videoInfo;
-  Game game;
 
   // Initialize SDL.
   if(SDL_Init(SDL_INIT_VIDEO) < 0) {
@@ -170,8 +169,6 @@ int main() {
   // Initialize OpenGL.
   InitGL();
 
-  Debug::logger->message("Game Initialize!");
-
   Debug::logger->message("\n\n-----Engine Initialization Complete-----");
   Debug::logger->message("\n\n-----Logic-----");
 
@@ -204,13 +201,7 @@ int main() {
     }
     // Render the scene.
     float elapsedTime = GetElapsedSeconds();
-    //game.ProcessEvents();
-    //game.Init();
-    if(!game.IsInit()) {
-      game.Init();
-    }
-    game.Prepare(elapsedTime);
-    game.Render();
+
     SDL_GL_SwapBuffers();
   }
   //game.Shutdown();

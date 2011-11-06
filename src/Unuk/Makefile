@@ -2,7 +2,7 @@ CC	= g++
 CFLAGS	= -ansi -Wall -g
 LDADD	= -lGL -lGLU -lSDL -lSDL_image
 
-objects = Game.o Player.o
+objects = 
 
 
 .PHONY: default all clean
