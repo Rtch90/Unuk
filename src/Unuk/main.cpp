@@ -170,7 +170,6 @@ int main() {
   // Initialize OpenGL.
   InitGL();
 
-  game.Init();
   Debug::logger->message("Game Initialize!");
 
   Debug::logger->message("\n\n-----Engine Initialization Complete-----");
@@ -206,11 +205,15 @@ int main() {
     // Render the scene.
     float elapsedTime = GetElapsedSeconds();
     //game.ProcessEvents();
+    //game.Init();
+    if(!game.IsInit()) {
+      game.Init();
+    }
     game.Prepare(elapsedTime);
     game.Render();
     SDL_GL_SwapBuffers();
   }
-  game.Shutdown();
+  //game.Shutdown();
   // Clean ourselves up and exit.
   Quit(0);
 

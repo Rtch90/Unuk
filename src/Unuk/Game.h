@@ -16,6 +16,8 @@ public:
   void UpdateProjection();
   void OnResize(int width, int height);
 
+  bool IsInit(void) { return m_assets; }
+
 private:
   void LoadAssets(void);
   void DeleteAssets(void);

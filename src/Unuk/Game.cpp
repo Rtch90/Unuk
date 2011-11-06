@@ -17,8 +17,6 @@
 
 Game::Game(void) {
   m_assets = false;
-  //m_player = new Player();
-  //m_player->SetSprite();
   m_rotationAngle = 0.0f;
 }
 
@@ -27,12 +25,10 @@ Game::~Game(void) {
 }
 
 bool Game::Init(void) {
+  LoadAssets();
   glEnable(GL_DEPTH_TEST);
   glDepthFunc(GL_LEQUAL);
-
-  LoadAssets();
   m_assets = true;
-
   return true;
 }
 
@@ -142,7 +138,6 @@ void Game::OnResize(int width, int height) {
 
 void Game::LoadAssets(void) {
   m_player = new Player();
-  m_player->SetSprite();
 }
 
 void Game::DeleteAssets(void) {

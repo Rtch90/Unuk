@@ -6,7 +6,7 @@
 #include "Player.h"
 
 Player::Player(void) : m_posx(0), m_posy(0) {
-  //m_player = new Sprite("../Data/Media/test.bmp");
+  m_player = new Sprite("../Data/Media/test.bmp");
 }
 
 Player::~Player(void) {
@@ -37,9 +37,9 @@ void Player::Render(void) {
   m_player->Render();
 }
 
-void Player::SetSprite(void) {
-  m_player = new Sprite("../Data/Media/test.bmp");
-}
+//void Player::SetSprite(void) {
+//  m_player = new Sprite("../Data/Media/test.bmp");
+//}
 
 void Player::SetPosition(GLdouble posx, GLdouble posy) {
   // Set the position of the player sprite.
