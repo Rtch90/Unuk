@@ -6,6 +6,6 @@
 #include "Debug.h"
 using namespace std;
 
-TTF_Font* Font(const char*, const int);
+TTF_Font* Font(const char* filename, const int size);
 
 #endif
