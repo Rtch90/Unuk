@@ -12,7 +12,7 @@ SDL_Surface* LoadImage(const char* filename) {
     SDL_FreeSurface(loadedImage);
     return optimizedImage;
   } else {
-    // Tell us what file is mising and do some stuid error texture thing.
+    // Tell us what file is missing and do some stupid error texture thing.
     Debug::logger->message("ImageLoader: %s cannot be found!");
     return errorTexture;
   }
@@ -30,7 +30,7 @@ SDL_Surface* LoadImageAlpha(const char* filename) {
     SDL_FreeSurface(loadedImage);
     return optimizedImage;
   } else {
-    // Tell us what file is mising and do some stuid error texture thing.
+    // Tell us what file is missing and do some stupid error texture thing.
     Debug::logger->message("ImageLoader: %s cannot be found!");
     return errorTexture;
   }
