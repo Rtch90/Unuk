@@ -16,7 +16,9 @@ HEADERS += ../src/libUnuk/Debug.h \
     ../src/Unuk/Constants.h \
     ../src/libUnuk/ApplySurface.h \
     ../src/Unuk/Globals.h \
-    ../src/libUnuk/ImageLoader.h
+    ../src/libUnuk/ImageLoader.h \
+    ../src/libUnuk/TextureManager.h \
+    ../src/libUnuk/Texture.h
 SOURCES += ../src/libUnuk/Debug.cpp \
     ../src/Unuk/main.cpp \
     ../src/libUnuk/Input.cpp \
@@ -25,4 +27,6 @@ SOURCES += ../src/libUnuk/Debug.cpp \
     ../src/libUnuk/ApplySurface.cpp \
     ../src/Unuk/Globals.cpp \
     ../src/libUnuk/Rect.cpp \
-    ../src/libUnuk/ImageLoader.cpp
+    ../src/libUnuk/ImageLoader.cpp \
+    ../src/libUnuk/TextureManager.cpp \
+    ../src/libUnuk/Texture.cpp
