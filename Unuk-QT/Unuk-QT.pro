@@ -18,7 +18,8 @@ HEADERS += ../src/libUnuk/Debug.h \
     ../src/Unuk/Globals.h \
     ../src/libUnuk/ImageLoader.h \
     ../src/libUnuk/TextureManager.h \
-    ../src/libUnuk/Texture.h
+    ../src/libUnuk/Texture.h \
+    ../src/libUnuk/Text.h
 SOURCES += ../src/libUnuk/Debug.cpp \
     ../src/Unuk/main.cpp \
     ../src/libUnuk/Input.cpp \
@@ -29,4 +30,5 @@ SOURCES += ../src/libUnuk/Debug.cpp \
     ../src/libUnuk/Rect.cpp \
     ../src/libUnuk/ImageLoader.cpp \
     ../src/libUnuk/TextureManager.cpp \
-    ../src/libUnuk/Texture.cpp
+    ../src/libUnuk/Texture.cpp \
+    ../src/libUnuk/Text.cpp
