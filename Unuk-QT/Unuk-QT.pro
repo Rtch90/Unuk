@@ -19,7 +19,14 @@ HEADERS += ../src/libUnuk/Debug.h \
     ../src/libUnuk/ImageLoader.h \
     ../src/libUnuk/TextureManager.h \
     ../src/libUnuk/Texture.h \
-    ../src/libUnuk/Text.h
+    ../src/libUnuk/Text.h \
+    ../src/libUnuk/MapTile.h \
+    ../src/libUnuk/Map.h \
+    ../src/libUnuk/Button.h \
+    ../src/libUnuk/ButtonToggle.h \
+    ../src/libUnuk/Menu.h \
+    ../src/libUnuk/MainMenu.h \
+    ../src/libUnuk/ParticleEmitter.h
 SOURCES += ../src/libUnuk/Debug.cpp \
     ../src/Unuk/main.cpp \
     ../src/libUnuk/Input.cpp \
@@ -31,4 +38,9 @@ SOURCES += ../src/libUnuk/Debug.cpp \
     ../src/libUnuk/ImageLoader.cpp \
     ../src/libUnuk/TextureManager.cpp \
     ../src/libUnuk/Texture.cpp \
-    ../src/libUnuk/Text.cpp
+    ../src/libUnuk/Text.cpp \
+    ../src/libUnuk/Map.cpp \
+    ../src/libUnuk/Button.cpp \
+    ../src/libUnuk/ButtonToggle.cpp \
+    ../src/libUnuk/ParticleEmitter.cpp \
+    ../src/libUnuk/MainMenu.cpp

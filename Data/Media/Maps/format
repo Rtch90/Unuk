@@ -1,0 +1,18 @@
+    grass          0             crate            1          100          n       0   0
+tile texture | solid tile | entity texture | solid entity | zlevel | transition | x | y
+
+off/null in the string fields is represented by "null".
+
+A solid entity is only possible if the entity is smaller than a tile.
+
+A tile with the texture "null" must be used to make the map rectangular, this is to avoid onion skinning.
+
+A zLevel of 100 is the floor.
+
+A zlevel of -1 means a ladder or ramp, it temporarily turns off the zLevel movement restrictions for the player,
+	the next tile that the player walks upon will be the new zLevel of the player.
+There must be solid tiles to either side of the ladder/ramp.
+
+A map name in the transition field will make the game switch to that map when the player walks onto that tile.
+
+The last two fields are the x,y that the player should be transported to if the map is changed.

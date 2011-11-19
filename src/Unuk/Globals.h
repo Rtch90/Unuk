@@ -8,7 +8,7 @@ extern SDL_Surface* errorTexture;
 
 extern SDL_Rect camera;
 
-//extern SDL_Event event;
+extern SDL_Event event;
 
 extern int levelWidth;
 extern int levelHeight;

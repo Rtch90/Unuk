@@ -1,0 +1,18 @@
+<character>
+	<name>Vagrant</name> // can be overrided in the map.char file
+	<sprite>healer_f</sprite> // leave out path and filetype (.png)
+	<aggressive>false</aggressive> // true, false or on-attack
+	
+	<health>100</health>
+	<mana>100</mana>
+	
+	<spells>
+		
+	</spells>
+	
+	<inventory> // this, and/or its child elements can be left out - null will be assumed
+		<weapon></weapon>
+		<hat></hat>
+	</inventory>
+	
+</character>

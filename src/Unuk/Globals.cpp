@@ -5,7 +5,7 @@ SDL_Surface* errorTexture   = NULL;
 
 SDL_Rect camera;
 
-//SDL_Event event;
+SDL_Event event;
 
 int levelWidth;
 int levelHeight;

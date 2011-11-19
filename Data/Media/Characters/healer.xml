@@ -1,0 +1,6 @@
+<character>
+	<name>Healer</name>
+	<sprite>healer_f</sprite>
+	<aggressive>false</aggressive>
+	
+</character>

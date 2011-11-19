@@ -6,10 +6,12 @@
 #include <stdlib.h>
 #include <GL/gl.h>
 #include <GL/glu.h>
-#include "SDL/SDL.h"
+#include <SDL/SDL.h>
+
 #include "../libUnuk/Input.h"
 #include "../libUnuk/Debug.h"
 #include "Constants.h"
+#include "Globals.h"
 
 // Screen width, height, and bit depth.
 //const int SCREEN_WIDTH  = 640;

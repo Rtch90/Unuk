@@ -1,0 +1,7 @@
+<spell>
+	<type>beam</type> // beam, spray, targeted, self // all can either be one-off or sustained
+	<colour>white black</colour> // multiple colours can be listed and the spell will have equal amounts of those colours
+	
+	<manacost>5</manacost> // per sec, or per cast
+	
+</spell>
