@@ -26,7 +26,9 @@ HEADERS += ../src/libUnuk/Debug.h \
     ../src/libUnuk/ButtonToggle.h \
     ../src/libUnuk/Menu.h \
     ../src/libUnuk/MainMenu.h \
-    ../src/libUnuk/ParticleEmitter.h
+    ../src/libUnuk/ParticleEmitter.h \
+    ../src/libUnuk/IngameMenu.h \
+    ../src/libUnuk/Collision.h
 SOURCES += ../src/libUnuk/Debug.cpp \
     ../src/Unuk/main.cpp \
     ../src/libUnuk/Input.cpp \
@@ -43,4 +45,6 @@ SOURCES += ../src/libUnuk/Debug.cpp \
     ../src/libUnuk/Button.cpp \
     ../src/libUnuk/ButtonToggle.cpp \
     ../src/libUnuk/ParticleEmitter.cpp \
-    ../src/libUnuk/MainMenu.cpp
+    ../src/libUnuk/MainMenu.cpp \
+    ../src/libUnuk/IngameMenu.cpp \
+    ../src/libUnuk/Collision.cpp
