@@ -1,215 +1,116 @@
-#ifdef __unix__
-#include <sys/time.h>
-#endif
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <GL/gl.h>
-#include <GL/glu.h>
 #include <SDL/SDL.h>
+#include <SDL/SDL_image.h>
+#include <SDL/SDL_ttf.h>
+#include <time.h>
+#include <iostream>
 
-#include "../libUnuk/Input.h"
+#include "../libUnuk/MainMenu.h"
+#include "../libUnuk/NPC.h"
 #include "../libUnuk/Debug.h"
 #include "Constants.h"
 #include "Globals.h"
-
-// Screen width, height, and bit depth.
-//const int SCREEN_WIDTH  = 640;
-//const int SCREEN_HEIGHT = 480;
-//const int SCREEN_BPP    = 16;
-
-// Define our SDL surface.
-SDL_Surface *surface;
-
-void Quit(int returnCode) {
-  Debug::logger->message("-----Cleaning Up------");
-  // Clean up the window.
-  SDL_Quit();
-  Debug::logger->message("Window destroyed!");
-  Debug::closeLog();
-  // And exit appropriately.
-  exit(returnCode);
-}
-
-// Reset our viewport after a window resize.
-int ResizeWindow(int width, int height) {
-  // Height and width ration.
-  GLfloat ratio;
-
-  // Prevent divide by zero.
-  if(height == 0)
-    height = 1;
-
-  ratio = (GLfloat)width / (GLfloat)height;
-
-  // Setup our viewport.
-  glViewport(0, 0, (GLsizei)width, (GLsizei)height);
-
-  // Change to the projection matrix and set our viewing volume.
-  glMatrixMode(GL_PROJECTION);
-  glLoadIdentity();
-
-  // Set our perspective.
-  gluPerspective(45.0f, ratio, 0.1f, 100.0f);
-
-  // Change to the MODELVIEW.
-  glMatrixMode(GL_MODELVIEW);
-
-  // Reset The View.
-  glLoadIdentity();
-
-  return 1;
-}
-
-void ProcessEvents(SDL_keysym *keysym) {
-  switch(keysym->sym) {
-  case SDLK_ESCAPE:
-    // Quit if we detect 'esc' key.
-    Quit(0);
-    break;
-  case SDLK_F1:
-    // Fullscreen.
-    SDL_WM_ToggleFullScreen(surface);
-    break;
-  default:
-    break;
-  }
-  return;
-}
-
-int InitGL(void) {
-
-  // Enable smooth shading.
-  glShadeModel(GL_SMOOTH);
-
-  // Set the background black.
-  glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-
-  // Depth buffer setup.
-  glClearDepth(1.0f);
-  glEnable(GL_DEPTH_TEST);
-  glDepthFunc(GL_LEQUAL);
-
-  // Nice Perspective Calculations.
-  glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
-
-  return 1;
-}
-
-unsigned int GetTickCount() {
-  struct timeval t;
-  gettimeofday(&t, NULL);
-
-  unsigned long secs = t.tv_sec * 1000;
-  secs += (t.tv_usec / 1000);
-  return secs;
-}
-
-float GetElapsedSeconds(void) {
-  unsigned int lastTime = 0;
-  unsigned int currentTime = GetTickCount();
-  unsigned int diff = currentTime - lastTime;
-  lastTime = currentTime;
-  return float(diff) / 1000.0f;
-}
+#include "Game.h"
 
 int main() {
-  // Initialize our Debug log.
-  Debug::openLog(true);
-  Debug::logger->message("-----Debug Initialized-----");
-
-  int videoFlags;
-  bool done = false;
-  SDL_Event event;
-  const SDL_VideoInfo *videoInfo;
-
-  // Initialize SDL.
-  if(SDL_Init(SDL_INIT_VIDEO) < 0) {
-    fprintf( stderr, "Video initialization failed: %s\n", SDL_GetError());
-    Quit(1);
+  if(SDL_Init(SDL_INIT_VIDEO == -1)) {
+    system("zenity --error --text=\"Could not load SDL\"");
+    Debug::logger->message("Error: Could not load SDL");
+    return 1;
+  }
+  if(TTF_Init() == -1) {
+    system("zenity --error --text=\"Could not load SDL_TTF\"");
+    Debug::logger->message("Error: Could not load SDL_TTF");
+    return 1;
   }
 
-  // Fetch the video info.
-  videoInfo = SDL_GetVideoInfo();
+  screen = SDL_SetVideoMode(SCREEN_WIDTH, SCREEN_HEIGHT, 32, SDL_HWSURFACE);
+  SDL_WM_SetCaption("fps - 00", NULL);
 
-  // Set the window caption.
-  SDL_WM_SetCaption("Unuk", NULL);
+  srand(time(NULL));
 
-  if(!videoInfo) {
-    fprintf( stderr, "Video query failed: %s\n", SDL_GetError());
-    Quit(1);
-  }
+  camera.x = 0;
+  camera.y = 0;
+  camera.w = SCREEN_WIDTH;
+  camera.h = SCREEN_HEIGHT;
 
-  // Pass some flags to SDL_SetVideoMode.
-  videoFlags  = SDL_OPENGL;
-  videoFlags |= SDL_GL_DOUBLEBUFFER;
-  videoFlags |= SDL_HWPALETTE;
-  videoFlags |= SDL_RESIZABLE;
+  errorTexture = LoadImage("../Data/Media/error.png");
 
-  // Can the surface be stored in memory?
-  if(videoInfo->hw_available)
-    videoFlags |= SDL_HWSURFACE;
-  else
-    videoFlags |= SDL_SWSURFACE;
+  Text::LoadFonts();
 
-  // Can we perform blitting on the GPU?
-  if(videoInfo->blit_hw)
-    videoFlags |= SDL_HWACCEL;
+  Game* game = NULL;
+  MainMenu* menu = new MainMenu;
 
-  // Set up the OpenGL double buffer.
-  SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+  int fps;
+  int frame;
+  const int MAX_FPS = 20;
 
-  // Get an SDL surface.
-  surface = SDL_SetVideoMode(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_BPP, videoFlags);
+  Timer frameTimer;
+  frameTimer.Start();
 
-  // Is there an SDL surface?
-  if(!surface) {
-    fprintf( stderr, "Video mode set failed: %s\n", SDL_GetError());
-    Quit(1);
-  }
+  Timer fpsCalc;
+  fpsCalc.Start();
 
-  // Initialize OpenGL.
-  InitGL();
+  int gameReturnVal;
+  bool menuRunning = true;
+  while(menuRunning) {
+    menu->Render();
+    SDL_Flip(screen);
 
-  Debug::logger->message("\n\n-----Engine Initialization Complete-----");
-  Debug::logger->message("\n\n-----Logic-----");
+    switch(menu->HandleInput()) {
+    case MAIN_MENU_NOTHING:
+      break;
+    case MAIN_MENU_NEW_GAME:
+      delete menu;
+      game = new Game;
 
-  while(!done) {
-    // Time to poll events.
-    while(SDL_PollEvent(&event)) {
-      switch(event.type) {
-      case SDL_VIDEORESIZE:
-        // Handle resize events.
-        surface = SDL_SetVideoMode(event.resize.w, event.resize.h, 16, videoFlags);
-        if(!surface) {
-          Debug::logger->message("Could not get a surface after resize\n");
-          Quit(1);
-        }
-        ResizeWindow(event.resize.w, event.resize.h);
-        break;
-      case SDL_KEYDOWN:
-        // handle keydown events.
-        ProcessEvents(&event.key.keysym);
-        break;
-      case SDL_QUIT:
-        // Handle quit events.
-        done = true;
-        break;
-      default:
-        break;
-      }
-      //CreateInput();
-      //UpdateInput();
+      gameReturnVal = game->Run("1");
+
+      if(gameReturnVal == GAME_RETURN_TO_MMENU)
+        menu = new MainMenu;
+      else if(gameReturnVal == GAME_QUIT_GAME)
+        menuRunning = false;
+
+      delete game;
+      break;
+    case MAIN_MENU_LOAD_GAME:
+      break;
+    case MAIN_MENU_OPTIONS:
+      break;
+    case MAIN_MENU_EXIT:
+      menuRunning = false;
+      delete menu;
+      break;
     }
-    // Render the scene.
-    float elapsedTime = GetElapsedSeconds();
+    // Calculate and display the FPS.
+    if(fpsCalc.GetTicks() >= 1000) {
+      fps = frame / (fpsCalc.GetTicks() / 1000);
 
-    SDL_GL_SwapBuffers();
+      stringstream caption;
+      caption << "Unuk: fps - " << fps;
+
+      SDL_WM_SetCaption(caption.str().c_str(), NULL);
+
+      fpsCalc.Start();
+      frame = 0;
+    }
+    // Restrict the FPS.
+    if(1000 / MAX_FPS > frameTimer.GetTicks()) {
+      // SDL_Delay does not accept a float, so for higher
+      // framerate limits there is an innacuracy. This is
+      // as much as 3FPS at a limit of 60FPS.
+      SDL_Delay((1000 / MAX_FPS) - frameTimer.GetTicks());
+    }
+    frameTimer.Start();
+    frame++;
   }
-  //game.Shutdown();
-  // Clean ourselves up and exit.
-  Quit(0);
+  // Clean up after ourselves.
+  Text::FreeFonts();
 
-  // We should never get here.
-  return(0);
+  SDL_FreeSurface(screen);
+  SDL_FreeSurface(errorTexture);
+
+  SDL_Quit();
+  TTF_Quit();
+
+  return 0;
 }

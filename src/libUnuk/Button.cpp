@@ -26,7 +26,7 @@ void Button::SetXY(int xArg, int yArg) {
   y = yArg;
   button.SetXY(x, y);
 
-  text.SetXY(x + 10, y + 10);
+  m_text.SetXY(x + 10, y + 10);
 }
 
 void Button::SetTextRGB(Uint8 r, Uint8 g, Uint8 b) {
@@ -34,14 +34,14 @@ void Button::SetTextRGB(Uint8 r, Uint8 g, Uint8 b) {
   m_textColour.g = g;
   m_textColour.b = b;
 
-  text.SetTextBlended(text.GetText(), "small", m_textColour);
+  m_text.SetTextBlended(m_text.GetText(), "small", m_textColour);
 }
 
 void Button::SetText(string textArg) {
-  text.SetTextBlended(textArg, "small", m_textColour);
+  m_text.SetTextBlended(textArg, "small", m_textColour);
 
-  w = text.GetWidth();
-  h = text.GetHeight();
+  w = m_text.GetWidth();
+  h = m_text.GetHeight();
   button.SetWidthHeight(w + 20, h + 15);
 }
 
@@ -58,5 +58,5 @@ bool Button::CheckMouseOver(void) {
 
 void Button::Render(void) {
   button.DrawLiteral();
-  text.RenderLiteral();
+  m_text.RenderLiteral();
 }

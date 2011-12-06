@@ -24,7 +24,7 @@ void Text::LoadFonts(void) {
   verySmallFont   = Font("../Data/Media/Fonts/Enigma_2.ttf", 16);
   smallFont       = Font("../Data/Media/Fonts/Enigma_2.ttf", 23);
   mediumFont      = Font("../Data/Media/Fonts/Enigma_2.ttf", 27);
-  largeFont      = Font("../Data/Media/Fonts/Enigma_2.ttf", 32);
+  largeFont       = Font("../Data/Media/Fonts/Enigma_2.ttf", 32);
 }
 
 void Text::FreeFonts(void) {

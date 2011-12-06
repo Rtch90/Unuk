@@ -11,6 +11,51 @@ for a portfolio piece. I will place this under the GPL licence.
 
 ##################################################
 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+TODO:
+
+Take the camera into account so we do not draw things off screen.
+
+*Menu:
+~~~~~
+- New Game
+- SaveGame loading
+  - New screen or make buttons appear on the menu
+- SaveGame deleting
+- Game Settings
+  - Keybindings
+  - Fullscreen
+
+*Fix NPC animation
+
+*Map Editor:
+~~~~~~~~~~~~
+
+- Change the array of tiles into a list of tiles.
+- Get a tile selection marker and display the current tile info.
+
+*Proper collision testing.
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+- MapTile objects store a list of character* 's
+  - The character class will add and remove themselves from the list in the MapTile.
+  - When the Character class wants to check for collisions it hands a pointer to
+	itself to the MapTile object, the MapTile will then return true if any
+	Character in it's list collides with the Character* it just recieved.
+  - Create the appropriate methods in the MapTile class
+    - bool CheckCollision(Character *charptr);
+    - void AddCharacter(Character *charptr);
+    - void RemoveCharacter(Character *charptr);
+
+*A way for entities to store information (Like items).
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+- Sort out how we will read in the information
+  - A list of present objects that can be referenced with a single word in the map file.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
 Copyright (C) 2011 Allanis
 allanis@saracraft.net
 

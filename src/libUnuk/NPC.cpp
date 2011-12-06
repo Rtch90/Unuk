@@ -12,6 +12,10 @@ NPC::~NPC(void) {
 
 }
 
+void NPC::Update(void) {
+  Move();
+}
+
 void NPC::Move(void) {
   if(m_moving && m_moveTimer.GetTicks() > m_moveDurationMax) {
     xVel = 0.0f;

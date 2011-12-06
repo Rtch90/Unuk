@@ -13,7 +13,7 @@ extern SDL_Event event;
 extern int levelWidth;
 extern int levelHeight;
 
-//extern bool debugEnabled;
+extern bool debugEnabled;
 
 
 #endif

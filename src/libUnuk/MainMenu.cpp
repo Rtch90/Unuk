@@ -25,7 +25,7 @@ MainMenu::MainMenu(void) {
   btnExit.SetText("Exit");
   btnExit.SetXY(100, 250);
   m_background = new Map;
-  m_background->Load("mainmenu");
+  m_background->Load("MainMenu");
   camera.x = 0;
   camera.y = 0;
 }

@@ -40,7 +40,7 @@ private:
   int h;
 
   Rect button;
-  Text text;
+  Text m_text;
 };
 
 #endif

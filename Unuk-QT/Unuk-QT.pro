@@ -30,7 +30,9 @@ HEADERS += ../src/libUnuk/Debug.h \
     ../src/libUnuk/IngameMenu.h \
     ../src/libUnuk/Collision.h \
     ../src/libUnuk/Character.h \
-    ../src/libUnuk/NPC.h
+    ../src/libUnuk/NPC.h \
+    ../src/Unuk/Player.h \
+    ../src/Unuk/Game.h
 SOURCES += ../src/libUnuk/Debug.cpp \
     ../src/Unuk/main.cpp \
     ../src/libUnuk/Input.cpp \
@@ -51,4 +53,6 @@ SOURCES += ../src/libUnuk/Debug.cpp \
     ../src/libUnuk/IngameMenu.cpp \
     ../src/libUnuk/Collision.cpp \
     ../src/libUnuk/Character.cpp \
-    ../src/libUnuk/NPC.cpp
+    ../src/libUnuk/NPC.cpp \
+    ../src/Unuk/Player.cpp \
+    ../src/Unuk/Game.cpp

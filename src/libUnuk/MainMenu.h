@@ -21,7 +21,7 @@ public:
   void Render(void);
 
 private:
-  Map *m_background;
+  Map* m_background;
 
   Button btnNewGame;
   Button btnLoadGame;
