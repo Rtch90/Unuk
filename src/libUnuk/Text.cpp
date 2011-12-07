@@ -74,6 +74,11 @@ int Text::SetTextBlended(string textArg, string size, SDL_Color colour) {
   }
 }
 
+int Text::SetTextBlended(string textArg, string size, Uint8 r, Uint8 g, Uint8 b) {
+  SDL_Color f = { r, g, b };
+  return SetTextBlended(textArg, size, f);
+}
+
 int Text::SetTextShaded(string textArg, string size, SDL_Color colour, SDL_Color bgColour) {
   m_textContents = textArg;
 
@@ -103,10 +108,24 @@ int Text::SetTextShaded(string textArg, string size, SDL_Color colour, SDL_Color
   }
 }
 
+int Text::SetTextShaded(string textArg, string size, Uint8 rF, Uint8 gF, Uint8 bF, Uint8 rB, Uint8 gB, Uint8 bB) {
+  SDL_Color f = { rF, gF, bF };
+  SDL_Color b = { rB, gB, bB };
+  return SetTextShaded(textArg, size, f, b);
+}
+
 void Text::Render(void) {
   ApplySurface(x, y, m_text, screen);
 }
 
+void Text::Render(int xArg, int yArg) {
+  ApplySurface(xArg, yArg, m_text, screen);
+}
+
 void Text::RenderLiteral(void) {
   ApplySurfaceLiteral(x, y, m_text, screen);
+}
+
+void Text::RenderLiteral(int xArg, int yArg) {
+  ApplySurfaceLiteral(xArg, yArg, m_text, screen);
 }

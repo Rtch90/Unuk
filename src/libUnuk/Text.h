@@ -29,10 +29,14 @@ public:
   void SetXY(int xArg, int yArg);
 
   int SetTextBlended(string textArg, string size, SDL_Color);
+  int SetTextBlended(string textArg, string size, Uint8 r, Uint8 g, Uint8 b);
   int SetTextShaded(string textArg, string size, SDL_Color, SDL_Color);
+  int SetTextShaded(string textArg, string size, Uint8 rF, Uint8 gF, Uint8 bF, Uint8 rB, Uint8 gB, Uint8 bB);
 
   void Render(void);
+  void Render(int xArg, int yArg);
   void RenderLiteral(void);
+  void RenderLiteral(int xArg, int yArg);
 
 private:
   int x, y, w, h;

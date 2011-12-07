@@ -24,8 +24,13 @@ MainMenu::MainMenu(void) {
   btnExit.SetTextRGB(0, 0, 0);
   btnExit.SetText("Exit");
   btnExit.SetXY(100, 250);
+
+  menuLabel.SetXY(100, 50);
+  menuLabel.SetTextBlended("MainMenu", "large", 0, 0, 0);
+
   m_background = new Map;
   m_background->Load("MainMenu");
+
   camera.x = 0;
   camera.y = 0;
 }
@@ -62,6 +67,8 @@ int MainMenu::HandleInput(void) {
 
 void MainMenu::Render(void) {
   m_background->Render();
+
+  menuLabel.Render();
 
   btnNewGame.Render();
   btnLoadGame.Render();

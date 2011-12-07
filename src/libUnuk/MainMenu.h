@@ -1,10 +1,10 @@
 #ifndef _MAINMENU_H_
 #define _MAINMENU_H_
 #include "../Unuk/Constants.h"
-#include "ParticleEmitter.h"
 #include "Menu.h"
 #include "Map.h"
 #include "Rect.h"
+#include "Text.h"
 
 const int MAIN_MENU_NOTHING     = 0;
 const int MAIN_MENU_NEW_GAME    = 1;
@@ -22,6 +22,8 @@ public:
 
 private:
   Map* m_background;
+
+  Text menuLabel;
 
   Button btnNewGame;
   Button btnLoadGame;
