@@ -45,10 +45,11 @@ private:
   SDL_Color m_textColour;
   SDL_Surface* m_text;
 
-  static TTF_Font* verySmallFont;
+  static TTF_Font* vSmallFont;
   static TTF_Font* smallFont;
   static TTF_Font* mediumFont;
   static TTF_Font* largeFont;
+  static TTF_Font* vLargeFont;
 };
 
 #endif

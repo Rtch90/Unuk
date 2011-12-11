@@ -23,9 +23,16 @@ public:
 private:
   Map* m_background;
 
-  Text menuLabel;
+  Text lblMenu;
 
   Button btnNewGame;
+
+  bool    btnNewGameActive;
+  Rect    rectNewGame;
+  Text    lblNewGame;
+  Button  btnNewGameYes;
+  Button  btnNewGameNo;
+
   Button btnLoadGame;
   Button btnOptions;
   Button btnExit;

@@ -1,9 +1,10 @@
 #include "Text.h"
 
-TTF_Font* Text::verySmallFont   = NULL;
-TTF_Font* Text::smallFont       = NULL;
-TTF_Font* Text::mediumFont      = NULL;
-TTF_Font* Text::largeFont      = NULL;
+TTF_Font* Text::vSmallFont   = NULL;
+TTF_Font* Text::smallFont    = NULL;
+TTF_Font* Text::mediumFont   = NULL;
+TTF_Font* Text::largeFont    = NULL;
+TTF_Font* Text::vLargeFont   = NULL;
 
 Text::Text(void) {
   m_text = NULL;
@@ -16,28 +17,32 @@ Text::~Text(void) {
 
 void Text::LoadFonts(void) {
   // Load the fonts if they are not already in memory.
-  assert(verySmallFont == NULL);
+  assert(vSmallFont == NULL);
   assert(smallFont == NULL);
   assert(mediumFont == NULL);
   assert(largeFont == NULL);
+  assert(vLargeFont == NULL);
 
-  verySmallFont   = Font("../Data/Media/Fonts/Enigma_2.ttf", 16);
+  vSmallFont      = Font("../Data/Media/Fonts/Enigma_2.ttf", 16);
   smallFont       = Font("../Data/Media/Fonts/Enigma_2.ttf", 23);
   mediumFont      = Font("../Data/Media/Fonts/Enigma_2.ttf", 27);
   largeFont       = Font("../Data/Media/Fonts/Enigma_2.ttf", 32);
+  vLargeFont      = Font("../Data/Media/Fonts/Enigma_2.ttf", 48);
 }
 
 void Text::FreeFonts(void) {
   // If the fonts are loaded, then free them.
-  assert(verySmallFont != NULL);
+  assert(vSmallFont != NULL);
   assert(smallFont != NULL);
   assert(mediumFont != NULL);
   assert(largeFont != NULL);
+  assert(vLargeFont != NULL);
 
-  TTF_CloseFont(verySmallFont);
+  TTF_CloseFont(vSmallFont);
   TTF_CloseFont(smallFont);
   TTF_CloseFont(mediumFont);
   TTF_CloseFont(largeFont);
+  TTF_CloseFont(vLargeFont);
 }
 
 void Text::SetXY(int xArg, int yArg) {
@@ -53,7 +58,7 @@ int Text::SetTextBlended(string textArg, string size, SDL_Color colour) {
   }
 
   if(size == "vsmall") {
-    m_text = TTF_RenderText_Blended(verySmallFont, textArg.c_str(), colour);
+    m_text = TTF_RenderText_Blended(vSmallFont, textArg.c_str(), colour);
     return 1;
   }
   else if(size == "small") {
@@ -66,6 +71,10 @@ int Text::SetTextBlended(string textArg, string size, SDL_Color colour) {
   }
   else if(size == "large") {
     m_text = TTF_RenderText_Blended(largeFont, textArg.c_str(), colour);
+    return 1;
+  }
+  else if(size == "vlarge") {
+    m_text = TTF_RenderText_Blended(vLargeFont, textArg.c_str(), colour);
     return 1;
   } else {
     Debug::logger->message("Text::SetTextBlended(): Invalid size argument %s. Defaulted to small.", size.c_str());
@@ -87,7 +96,7 @@ int Text::SetTextShaded(string textArg, string size, SDL_Color colour, SDL_Color
   }
 
   if(size == "vsmall") {
-    m_text = TTF_RenderText_Shaded(verySmallFont, textArg.c_str(), colour, bgColour);
+    m_text = TTF_RenderText_Shaded(vSmallFont, textArg.c_str(), colour, bgColour);
     return 1;
   }
   else if(size == "small") {
@@ -100,6 +109,10 @@ int Text::SetTextShaded(string textArg, string size, SDL_Color colour, SDL_Color
   }
   else if(size == "large") {
     m_text = TTF_RenderText_Shaded(largeFont, textArg.c_str(), colour, bgColour);
+    return 1;
+  }
+  else if(size == "vlarge") {
+    m_text = TTF_RenderText_Shaded(vLargeFont, textArg.c_str(), colour, bgColour);
     return 1;
   } else {
     Debug::logger->message("Text::SetTextBlended(): Invalid size argument %s. Defaulted to small.", size.c_str());
