@@ -19,7 +19,7 @@ Game::~Game(void) {
 }
 
 int Game::Run(const string savegameIDArg) {
-  m_player->SetXY(200, 200);
+  m_player->SetXY(100, 50);
   m_player->LoadSprites("../Data/Media/Images/Characters/template.png", 40, 45);
 
   m_npc->SetXY(300, 300);
@@ -167,6 +167,7 @@ void Game::Render(void) {
   } else {
     m_ingameMenu->Render();
   }
+  SDL_Flip(screen);
   SDL_Flip(screen);
 }
 

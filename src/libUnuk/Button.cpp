@@ -15,10 +15,19 @@ void Button::SetOutRGB(Uint8 r, Uint8 g, Uint8 b) {
   m_mouseOutColour.b = b;
 }
 
+void Button::SetOutRGB(SDL_Color colour) {
+  button.SetRGB(colour);
+  m_mouseOutColour = colour;
+}
+
 void Button::SetOverRGB(Uint8 r, Uint8 g, Uint8 b) {
   m_mouseOverColour.r = r;
   m_mouseOverColour.g = g;
   m_mouseOverColour.b = b;
+}
+
+void Button::SetOverRGB(SDL_Color colour) {
+  m_mouseOverColour = colour;
 }
 
 void Button::SetXY(int xArg, int yArg) {
@@ -37,6 +46,11 @@ void Button::SetTextRGB(Uint8 r, Uint8 g, Uint8 b) {
   m_text.SetTextBlended(m_text.GetText(), "small", m_textColour);
 }
 
+void Button::SetTextRGB(SDL_Color colour) {
+  m_textColour = colour;
+  m_text.SetTextBlended(m_text.GetText(), "small", colour);
+}
+
 void Button::SetText(string textArg) {
   m_text.SetTextBlended(textArg, "small", m_textColour);
 
@@ -52,11 +66,16 @@ bool Button::CheckMouseOver(void) {
       return true;
     }
   }
-  button.SetRGB(m_mouseOutColour.r, m_mouseOutColour.g, m_mouseOutColour.b);
+  button.SetRGB(m_mouseOutColour);
   return false;
 }
 
 void Button::Render(void) {
   button.DrawLiteral();
   m_text.RenderLiteral();
+}
+
+void Button::Render(int xArg, int yArg) {
+  button.DrawLiteral(xArg, yArg);
+  m_text.RenderLiteral(xArg, yArg);
 }

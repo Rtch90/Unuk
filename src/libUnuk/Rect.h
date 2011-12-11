@@ -18,10 +18,14 @@ public:
 
   void SetXY(int xArg, int yArg);
   void SetWidthHeight(int wArg, int hArg);
+
   void SetRGB(Uint8 rArg, Uint8 gArg, Uint8 bArg);
+  void SetRGB(SDL_Color);
 
   void Draw(void);
+  void Draw(int xArg, int yArg);
   void DrawLiteral(void);
+  void DrawLiteral(int xArg, int yArg);
 
 protected:
   Uint8 r;

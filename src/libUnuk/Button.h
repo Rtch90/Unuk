@@ -14,11 +14,15 @@ public:
   ~Button(void);
 
   void SetOutRGB(Uint8 r, Uint8 g, Uint8 b);
+  void SetOutRGB(SDL_Color);
   void SetOverRGB(Uint8 r, Uint8 g, Uint8 b);
-  void SetXY(int xArg, int yArg);
+  void SetOverRGB(SDL_Color);
 
   void SetTextRGB(Uint8 r, Uint8 g, Uint8 b);
+  void SetTextRGB(SDL_Color);
   void SetText(string textArg);
+
+  void SetXY(int xArg, int yArg);
 
   int GetX(void)          { return x; }
   int GetY(void)          { return y; }
@@ -28,6 +32,7 @@ public:
   bool CheckMouseOver(void);
 
   void Render(void);
+  void Render(int xArg, int yArg);
 
 private:
   SDL_Color m_mouseOutColour;

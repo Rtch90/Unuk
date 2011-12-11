@@ -1,7 +1,7 @@
 #include "Character.h"
 
 // Pixels * 60 / sec
-const float Character::CHARACTER_SPEED = 2.f;
+const float Character::CHARACTER_SPEED = 3.5f;
 
 static list<Character*>collisionList;
 static list<Character*>::iterator collisionIterator;
@@ -106,7 +106,7 @@ void Character::Move(void) {
   tileY = ((y + (h / 2)) / TILE_HEIGHT);
 
   if((y < 0) || (y + h) > levelHeight)
-  y -= yVel;
+    y -= yVel;
   if(CheckTileCollisions())
     y -= yVel;
   if(CheckEntityCollisions())

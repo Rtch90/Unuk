@@ -10,4 +10,4 @@ SDL_Event event;
 int levelWidth;
 int levelHeight;
 
-bool debugEnabled = false;
+bool debugEnabled = true;
