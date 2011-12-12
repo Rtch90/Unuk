@@ -5,45 +5,51 @@ TextureManager::TextureManager(void) {
 }
 
 TextureManager::~TextureManager(void) {
-  Clear();
+  Unload();
 }
 
-void TextureManager::Clear(void) {
+void TextureManager::Unload(void) {
   for(int i = 0; i < m_allocated; i++) {
-    SDL_FreeSurface(array[i].texture);
-    array[i].name.clear();
+    SDL_FreeSurface(textures[i].texture);
+    textures[i].name.clear();
   }
   m_allocated = 0;
 }
 
-int TextureManager::Add(string filename) {
+SDL_Surface* TextureManager::Add(string filename) {
   assert(m_allocated < TEXTURE_NODE_SIZE);
 
   // Has the texture been loaded already?
   for(int i = 0; i < m_allocated; i++) {
-    if(array[i].name == filename) {
-      return i;
+    if(textures[i].name == filename) {
+      return textures[i].texture;
     }
   }
+  // If not, then load it.
+  textures[m_allocated].name = filename;
+  textures[m_allocated].texture = LoadImage(filename.c_str());
 
-  array[m_allocated].name = filename;
-  array[m_allocated].texture = LoadImage(filename.c_str());
+  m_allocated++;
 
-  return m_allocated++;
+  return textures[m_allocated - 1].texture;
 }
 
-int TextureManager::AddAlpha(string filename) {
+SDL_Surface* TextureManager::AddAlpha(string filename) {
   assert(m_allocated < TEXTURE_NODE_SIZE);
 
   // Has the texture been loaded already?
   for(int i = 0; i < m_allocated; i++) {
-    if(array[i].name == filename) {
-      return i;
+    if(textures[i].name == filename) {
+      return textures[i].texture;
     }
   }
 
-  array[m_allocated].name = filename;
-  array[m_allocated].texture = LoadImageAlpha(filename.c_str());
+  // If not, then load it.
 
-  return m_allocated++;
+  textures[m_allocated].name = filename;
+  textures[m_allocated].texture = LoadImageAlpha(filename.c_str());
+
+  m_allocated++;
+
+  return textures[m_allocated -1].texture;
 }

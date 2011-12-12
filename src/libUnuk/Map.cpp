@@ -30,7 +30,7 @@ void Map::Load(const string filename) {
     string tileName;
     while(iss >> tileName) {
       string fullTilePath = "../Data/Media/Images/Tiles/" + tileName + ".png";
-      m_tile[m_mapRows][m_mapColumns].SetTextureID(m_tileTextures->Add(fullTilePath));
+      m_tile[m_mapRows][m_mapColumns].SetTileTexture(m_tileTextures->Add(fullTilePath));
 
       // Read the file solidity.
       bool tileSolidity;
@@ -45,19 +45,11 @@ void Map::Load(const string filename) {
       iss >> entityName;
 
       if(entityName == "n") {
-        m_tile[m_mapRows][m_mapColumns].SetEntityID(-1);
+        m_tile[m_mapRows][m_mapColumns].SetEntityTexture(NULL);
       } else {
         string entityPath = "../Data/Media/Images/Entities/" + entityName + ".png";
 
-        m_tile[m_mapRows][m_mapColumns].SetEntityID(m_entityTextures->AddAlpha(entityPath));
-
-        // Set the entities width and height variables.
-        m_tile[m_mapRows][m_mapColumns].SetEntityWidthHeight(
-            m_entityTextures->GetTextureWidth(m_tile[m_mapRows][m_mapColumns].GetEntityID()),
-            m_entityTextures->GetTextureHeight(m_tile[m_mapRows][m_mapColumns].GetEntityID()));
-
-        printf("\nw - ", m_entityTextures->GetTextureWidth(m_tile[m_mapRows][m_mapColumns].GetEntityID()));
-        printf("\nh - ", m_entityTextures->GetTextureHeight(m_tile[m_mapRows][m_mapColumns].GetEntityID()));
+        m_tile[m_mapRows][m_mapColumns].SetEntityTexture(m_entityTextures->AddAlpha(entityPath));
 
         // Set the entities x and y variables.
         m_tile[m_mapRows][m_mapColumns].SetEntityXY(
@@ -103,17 +95,17 @@ void Map::Render(void) {
   for(int j = 1; j < m_mapRows; j++)
     for(int i = 1; i < m_mapColumns; i++) {
     ApplySurface(m_tile[j][i].GetTileX(), m_tile[j][i].GetTileY(),
-                 m_tileTextures->Get(m_tile[j][i].GetTextureID()), screen);
-    if(m_tile[j][i].GetEntityID() != -1) {
+                 m_tile[j][i].GetTileTexture(), screen);
+    if(m_tile[j][i].GetEntityTexture() != NULL) {
       ApplySurface(m_tile[j][i].GetEntityX(), m_tile[j][i].GetEntityY(),
-                   m_entityTextures->Get(m_tile[j][i].GetEntityID()), screen);
+                   m_tile[j][i].GetEntityTexture(), screen);
     }
   }
 }
 
 void Map::Unload(void) {
-  m_tileTextures->Clear();
-  m_entityTextures->Clear();
+  m_tileTextures->Unload();
+  m_entityTextures->Unload();
 
   // Start at 1,1 so we do not have to be concerned about messy
   // bounds checking when accessing the tile array within the game loop.
@@ -125,7 +117,8 @@ void Map::Unload(void) {
   // creating an invisible wall anywhere.
   for(int i = 0; i < TILE_ARRAY_SIZE; i++) {
     for(int j = 0; j < TILE_ARRAY_SIZE; j++) {
-      m_tile[i][j].SetTileSolidity(false);
+      m_tile[i][j].SetTileTexture(NULL);
+      m_tile[i][j].SetEntityTexture(NULL);
     }
   }
 }

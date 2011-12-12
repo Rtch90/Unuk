@@ -18,14 +18,10 @@ public:
   TextureManager(void);
   ~TextureManager(void);
 
-  SDL_Surface* Get(int n)      { return array[n].texture; }
-  int GetTextureWidth(int n)   { return array[n].texture->w; }
-  int GetTextureHeight(int n)  { return array[n].texture->h; }
+  void Unload(void);
 
-  void Clear(void);
-
-  int Add(string filename);
-  int AddAlpha(string filename);
+  SDL_Surface* Add(string filename);
+  SDL_Surface* AddAlpha(string filename);
 
 private:
   // The textureNode will hold the name and the texture.
@@ -36,7 +32,7 @@ private:
 
   // We should not need more than a hundred..
   static const int TEXTURE_NODE_SIZE = 100;
-  textureNode array[TEXTURE_NODE_SIZE];
+  textureNode textures[TEXTURE_NODE_SIZE];
 
   int m_allocated;
 };
