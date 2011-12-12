@@ -10,6 +10,7 @@
 #include "Collision.h"
 #include "Map.h"
 #include "Timer.h"
+#include "Debug.h"
 using namespace std;
 
 class Map;
@@ -71,7 +72,7 @@ protected:
   
 private:
   static const int ANIMATION_SPEED         = 200;
-  static const int ATTACKING_DISPLAY_LEN   = 100;
+  static const int ATTACKING_DISPLAY_LEN   = 150;
   
   SDL_Surface* m_texture;
   

@@ -130,12 +130,15 @@ bool Character::CheckTileCollisions(void) {
 bool Character::CheckEntityCollisions(void) {
   for(int i = -1; i < 2; i++) {
     for(int j = -1; j < 2; j++) {
-      if(map->GetEntitySolidity(tileX + i, tileY + j))
+      if(map->GetEntitySolidity(tileX + i, tileY + j)) {
+        printf("\nw - ", map->GetEntityWidth(tileX + i, tileY + j));
+        printf("\nh - ", map->GetEntityHeight(tileX + i, tileY + j));
         if(CheckCollisionXY(x, y, w, h, map->GetEntityX(tileX + i, tileY + j),
                             map->GetEntityY(tileX + i, tileY + j),
                             map->GetEntityWidth(tileX + i, tileY + j),
                             map->GetEntityHeight(tileX + i, tileY + j)))
           return true;
+      }
     }
   }
   return false;

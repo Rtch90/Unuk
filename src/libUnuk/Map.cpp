@@ -56,6 +56,9 @@ void Map::Load(const string filename) {
             m_entityTextures->GetTextureWidth(m_tile[m_mapRows][m_mapColumns].GetEntityID()),
             m_entityTextures->GetTextureHeight(m_tile[m_mapRows][m_mapColumns].GetEntityID()));
 
+        printf("\nw - ", m_entityTextures->GetTextureWidth(m_tile[m_mapRows][m_mapColumns].GetEntityID()));
+        printf("\nh - ", m_entityTextures->GetTextureHeight(m_tile[m_mapRows][m_mapColumns].GetEntityID()));
+
         // Set the entities x and y variables.
         m_tile[m_mapRows][m_mapColumns].SetEntityXY(
             m_tile[m_mapRows][m_mapColumns].GetTileX() - (m_tile[m_mapRows][m_mapColumns].GetEntityWidth()  / 2 + TILE_WIDTH  / 2),
