@@ -20,7 +20,7 @@ MainMenu::MainMenu(void) {
   btnNewGameYes.SetOverRGB(20, 255, 20);
   btnNewGameYes.SetTextRGB(0, 0, 0);
   btnNewGameYes.SetText("Yes");
-  btnNewGameYes.SetXY(rectNewGame.GetX() + rectNewGame.GetWidth() / 2 + 40 - btnNewGameYes.GetWidth(), 190);
+  btnNewGameYes.SetXY(rectNewGame.GetX() + rectNewGame.GetWidth() / 2 - 40 - btnNewGameYes.GetWidth(), 190);
 
   btnNewGameNo.SetOutRGB(150, 20, 20);
   btnNewGameNo.SetOverRGB(255, 20, 20);
