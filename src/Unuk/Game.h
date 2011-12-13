@@ -51,8 +51,8 @@ private:
   static const int GAME_UPDATES_PER_SECOND = 60;
   static const int SKIP_TICKS = 1000 / GAME_UPDATES_PER_SECOND;
 
-  IngameMenu* m_ingameMenu;
-  Map* m_map;
+  IngameMenu m_ingameMenu;
+  Map m_map;
 
   Player* m_player;
   NPC* m_npc;

@@ -1,14 +1,10 @@
 #include "Map.h"
 
 Map::Map(void) {
-  m_tileTextures = new TextureManager;
-  m_entityTextures = new TextureManager;
   //m_characters = CharacterManager;
 }
 
 Map::~Map(void) {
-  delete m_tileTextures;
-  delete m_entityTextures;
   //delete m_characters;
 }
 
@@ -30,9 +26,9 @@ void Map::Load(const string filename) {
     string tileName;
     while(iss >> tileName) {
       string fullTilePath = "../Data/Media/Images/Tiles/" + tileName + ".png";
-      m_tile[m_mapRows][m_mapColumns].SetTileTexture(m_tileTextures->Add(fullTilePath));
+      m_tile[m_mapRows][m_mapColumns].SetTileTexture(m_tileTextures.Add(fullTilePath));
 
-      // Read the file solidity.
+      // Read the tile solidity.
       bool tileSolidity;
       iss >> tileSolidity;
       m_tile[m_mapRows][m_mapColumns].SetTileSolidity(tileSolidity);
@@ -49,7 +45,7 @@ void Map::Load(const string filename) {
       } else {
         string entityPath = "../Data/Media/Images/Entities/" + entityName + ".png";
 
-        m_tile[m_mapRows][m_mapColumns].SetEntityTexture(m_entityTextures->AddAlpha(entityPath));
+        m_tile[m_mapRows][m_mapColumns].SetEntityTexture(m_entityTextures.AddAlpha(entityPath));
 
         // Set the entities x and y variables.
         m_tile[m_mapRows][m_mapColumns].SetEntityXY(
@@ -89,11 +85,20 @@ void Map::Load(const string filename) {
   //character->Load(filename);
 }
 
-// TODO: Take the camera into account so we do not
-// draw things off of screen.
 void Map::Render(void) {
-  for(int j = 1; j < m_mapRows; j++)
-    for(int i = 1; i < m_mapColumns; i++) {
+  int xOrig = (camera.x / TILE_WIDTH)  + 1;
+  int yOrig = (camera.y / TILE_HEIGHT) + 1;
+
+  int xEnd = xOrig + (SCREEN_WIDTH / TILE_WIDTH);
+  int yEnd = yOrig + (SCREEN_HEIGHT / TILE_HEIGHT);
+
+  if(xEnd < m_mapRows)
+    xEnd++;
+  if(yEnd < m_mapColumns)
+    yEnd++;
+
+  for(int j = xOrig; j < xEnd; j++)
+    for(int i = yOrig; i < yEnd; i++) {
     ApplySurface(m_tile[j][i].GetTileX(), m_tile[j][i].GetTileY(),
                  m_tile[j][i].GetTileTexture(), screen);
     if(m_tile[j][i].GetEntityTexture() != NULL) {
@@ -104,8 +109,8 @@ void Map::Render(void) {
 }
 
 void Map::Unload(void) {
-  m_tileTextures->Unload();
-  m_entityTextures->Unload();
+  m_tileTextures.Unload();
+  m_entityTextures.Unload();
 
   // Start at 1,1 so we do not have to be concerned about messy
   // bounds checking when accessing the tile array within the game loop.

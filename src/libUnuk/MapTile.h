@@ -9,8 +9,8 @@ using namespace std;
 
 class MapTile {
 public:
-  MapTile(void)  {}
-  ~MapTile(void) {}
+  MapTile(void)                                     { m_entitySolidity = false; }
+  ~MapTile(void)                                    {  }
 
   void SetTileTexture(SDL_Surface* surface)         { m_tileTexture = surface; }
   SDL_Surface* GetTileTexture(void)                 { return m_tileTexture; }

@@ -50,8 +50,8 @@ private:
   int m_mapColumns;
   int m_mapRows;
 
-  TextureManager* m_tileTextures;
-  TextureManager* m_entityTextures;
+  TextureManager m_tileTextures;
+  TextureManager m_entityTextures;
   //CharacterManager* m_characters;
 
   static const int TILE_ARRAY_SIZE = 150;

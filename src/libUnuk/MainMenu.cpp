@@ -49,15 +49,14 @@ MainMenu::MainMenu(void) {
   lblMenu.SetXY(100, 75);
   lblMenu.SetTextBlended("Unuk", "vlarge", 0, 0, 0);
 
-  m_background = new Map;
-  m_background->Load("MainMenu");
+  m_background.Load("MainMenu");
 
   camera.x = 0;
   camera.y = 0;
 }
 
 MainMenu::~MainMenu(void) {
-  delete m_background;
+
 }
 
 int MainMenu::HandleInput(void) {
@@ -99,7 +98,7 @@ int MainMenu::HandleInput(void) {
 }
 
 void MainMenu::Render(void) {
-  m_background->Render();
+  m_background.Render();
 
   lblMenu.Render();
 

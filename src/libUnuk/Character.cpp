@@ -116,8 +116,8 @@ void Character::Move(void) {
 }
 
 bool Character::CheckTileCollisions(void) {
-  for(int i = -1; i < 2; i++) {
-    for(int j = -1; j < 2; j++) {
+  for(int i = -2; i < 3; i++) {
+    for(int j = -2; j < 3; j++) {
       if(map->GetTileSolidity(tileX + i, tileY + j))
         if(CheckCollisionXY(x, y, w, h, map->GetTileX(tileX + i, tileY + j),
                             map->GetTileY(tileX + i, tileY + j), TILE_WIDTH, TILE_HEIGHT))

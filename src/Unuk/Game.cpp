@@ -1,19 +1,13 @@
 #include "Game.h"
 
 Game::Game(void) {
-  m_map = new Map;
-  m_ingameMenu = new IngameMenu;
-
-  m_player = new Player(m_map);
-  m_npc = new NPC(m_map);
+  m_player = new Player(&m_map);
+  m_npc = new NPC(&m_map);
 
   m_runGameReturnValue = GAME_RETURN_TO_MMENU;
 }
 
 Game::~Game(void) {
-  delete m_map;
-  delete m_ingameMenu;
-
   delete m_player;
   delete m_npc;
 }
@@ -101,13 +95,13 @@ int Game::Run(const string savegameIDArg) {
 }
 
 void Game::HandleInput(void) {
-  if(m_ingameMenu->GetStatus() == false) {
+  if(m_ingameMenu.GetStatus() == false) {
     while(SDL_PollEvent(&event)) {
       m_player->HandleInput();
 
       if(event.key.type == SDL_KEYDOWN) {
         if(event.key.keysym.sym == SDLK_ESCAPE)
-          m_ingameMenu->SetStatus(true);
+          m_ingameMenu.SetStatus(true);
         if(event.key.keysym.sym == SDLK_p)
           debugEnabled = !debugEnabled;
       }
@@ -118,11 +112,11 @@ void Game::HandleInput(void) {
       }
     }
   } else {
-    switch(m_ingameMenu->HandleInput()) {
+    switch(m_ingameMenu.HandleInput()) {
     case INGAME_MENU_NOTHING:
       break;
     case INGAME_MENU_RESUME:
-      m_ingameMenu->SetStatus(false);
+      m_ingameMenu.SetStatus(false);
       break;
     case INGAME_MENU_SAVE_GAME:
       break;
@@ -137,14 +131,14 @@ void Game::HandleInput(void) {
 
     if(event.type == SDL_QUIT) {
       m_gameRunning = false;
-      m_ingameMenu->SetStatus(false);
+      m_ingameMenu.SetStatus(false);
       m_runGameReturnValue = GAME_QUIT_GAME;
     }
   }
 }
 
 void Game::UpdateGame(void) {
-  if(m_ingameMenu->GetStatus() == false) {
+  if(m_ingameMenu.GetStatus() == false) {
     m_player->Update();
     m_npc->Update();
   } else {
@@ -153,8 +147,8 @@ void Game::UpdateGame(void) {
 }
 
 void Game::Render(void) {
-  if(m_ingameMenu->GetStatus() == false) {
-    m_map->Render();
+  if(m_ingameMenu.GetStatus() == false) {
+    m_map.Render();
 
     m_player->Render();
     m_npc->Render();
@@ -165,7 +159,7 @@ void Game::Render(void) {
       m_playerXY.RenderLiteral();
     }
   } else {
-    m_ingameMenu->Render();
+    m_ingameMenu.Render();
   }
   SDL_Flip(screen);
   SDL_Flip(screen);
@@ -180,7 +174,7 @@ void Game::LoadSavegame(const string savegameIDArg) {
   assert(saveFile.is_open());
 
   // Read stuff.
-  m_map->Load("TestLevel");
+  m_map.Load("TestLevel");
 }
 
 void Game::SaveSavegame(void) {
