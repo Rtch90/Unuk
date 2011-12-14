@@ -1,23 +1,25 @@
 #ifndef _MAINMENU_H_
 #define _MAINMENU_H_
 #include "../Unuk/Constants.h"
-#include "Menu.h"
+#include "Button.h"
 #include "Map.h"
 #include "Rect.h"
 #include "Text.h"
 
-const int MAIN_MENU_NOTHING     = 0;
-const int MAIN_MENU_NEW_GAME    = 1;
-const int MAIN_MENU_LOAD_GAME   = 2;
-const int MAIN_MENU_OPTIONS     = 3;
-const int MAIN_MENU_EXIT        = 4;
+enum mainMenuNavVal_t {
+  mainMenuNothing,
+  mainMenuNewGame,
+  mainMenuLoadGame,
+  mainMenuOptions,
+  mainMenuExitGame
+};
 
-class MainMenu : public Menu {
+class MainMenu {
 public:
   MainMenu(void);
   ~MainMenu(void);
 
-  int HandleInput(void);
+  mainMenuNavVal_t HandleInput(void);
   void Render(void);
 
 private:

@@ -50,78 +50,68 @@ void Text::SetXY(int xArg, int yArg) {
   y = yArg;
 }
 
-int Text::SetTextBlended(string textArg, string size, SDL_Color colour) {
+int Text::SetTextBlended(string textArg, textSizes_t size, SDL_Color colour) {
   m_textContents = textArg;
 
   if(m_text != NULL) {
     SDL_FreeSurface(m_text);
   }
 
-  if(size == "vsmall") {
+  if(size == vsmall) {
     m_text = TTF_RenderText_Blended(vSmallFont, textArg.c_str(), colour);
     return 1;
   }
-  else if(size == "small") {
+  else if(size == small) {
     m_text = TTF_RenderText_Blended(smallFont, textArg.c_str(), colour);
     return 1;
   }
-  else if(size == "medium") {
+  else if(size == medium) {
     m_text = TTF_RenderText_Blended(mediumFont, textArg.c_str(), colour);
     return 1;
   }
-  else if(size == "large") {
+  else if(size == large) {
     m_text = TTF_RenderText_Blended(largeFont, textArg.c_str(), colour);
     return 1;
-  }
-  else if(size == "vlarge") {
+  } else {
     m_text = TTF_RenderText_Blended(vLargeFont, textArg.c_str(), colour);
     return 1;
-  } else {
-    Debug::logger->message("Text::SetTextBlended(): Invalid size argument %s. Defaulted to small.", size.c_str());
-    m_text = TTF_RenderText_Blended(smallFont, textArg.c_str(), colour);
-    return 0;
   }
 }
 
-int Text::SetTextBlended(string textArg, string size, Uint8 r, Uint8 g, Uint8 b) {
+int Text::SetTextBlended(string textArg, textSizes_t size, Uint8 r, Uint8 g, Uint8 b) {
   SDL_Color f = { r, g, b };
   return SetTextBlended(textArg, size, f);
 }
 
-int Text::SetTextShaded(string textArg, string size, SDL_Color colour, SDL_Color bgColour) {
+int Text::SetTextShaded(string textArg, textSizes_t size, SDL_Color colour, SDL_Color bgColour) {
   m_textContents = textArg;
 
   if(m_text != NULL) {
     SDL_FreeSurface(m_text);
   }
 
-  if(size == "vsmall") {
+  if(size == vsmall) {
     m_text = TTF_RenderText_Shaded(vSmallFont, textArg.c_str(), colour, bgColour);
     return 1;
   }
-  else if(size == "small") {
+  else if(size == small) {
     m_text = TTF_RenderText_Shaded(smallFont, textArg.c_str(), colour, bgColour);
     return 1;
   }
-  else if(size == "medium") {
+  else if(size == medium) {
     m_text = TTF_RenderText_Shaded(mediumFont, textArg.c_str(), colour, bgColour);
     return 1;
   }
-  else if(size == "large") {
+  else if(size == large) {
     m_text = TTF_RenderText_Shaded(largeFont, textArg.c_str(), colour, bgColour);
     return 1;
-  }
-  else if(size == "vlarge") {
+  } else {
     m_text = TTF_RenderText_Shaded(vLargeFont, textArg.c_str(), colour, bgColour);
     return 1;
-  } else {
-    Debug::logger->message("Text::SetTextBlended(): Invalid size argument %s. Defaulted to small.", size.c_str());
-    m_text = TTF_RenderText_Shaded(smallFont, textArg.c_str(), colour, bgColour);
-    return 0;
   }
 }
 
-int Text::SetTextShaded(string textArg, string size, Uint8 rF, Uint8 gF, Uint8 bF, Uint8 rB, Uint8 gB, Uint8 bB) {
+int Text::SetTextShaded(string textArg, textSizes_t size, Uint8 rF, Uint8 gF, Uint8 bF, Uint8 rB, Uint8 gB, Uint8 bB) {
   SDL_Color f = { rF, gF, bF };
   SDL_Color b = { rB, gB, bB };
   return SetTextShaded(textArg, size, f, b);

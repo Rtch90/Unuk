@@ -19,15 +19,14 @@
 #include "../libUnuk/Text.h"
 using namespace std;
 
-const int GAME_RETURN_TO_MMENU  = 0;
-const int GAME_QUIT_GAME        = 1;
+enum gameNavVal_t { gameMainMenu, gameQuitGame };
 
 class Game {
 public:
   Game(void);
   ~Game(void);
 
-  int Run(const string savegameIDArg);
+  gameNavVal_t Run(const string savegameIDArg);
 
 private:
   void HandleInput(void);
@@ -37,9 +36,13 @@ private:
   void LoadSavegame(const string savegameIDArg);
   void SaveSavegame(void);
 
+  static const int MAX_FPS = 6000;
+  static const int GAME_UPDATES_PER_SECOND = 60;
+  static const int SKIP_TICKS = 1000 / GAME_UPDATES_PER_SECOND;
+
   bool m_gameRunning;
 
-  int m_runGameReturnValue;
+  gameNavVal_t m_runGameReturnValue;
 
   string m_saveGameID;
   string m_mapID;
@@ -47,10 +50,6 @@ private:
   Text m_gameUpdateTime;
   Text m_gameRenderTime;
   Text m_playerXY;
-
-  static const int MAX_FPS = 6000;
-  static const int GAME_UPDATES_PER_SECOND = 60;
-  static const int SKIP_TICKS = 1000 / GAME_UPDATES_PER_SECOND;
 
   IngameMenu m_ingameMenu;
   Map m_map;

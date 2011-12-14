@@ -6,6 +6,7 @@
 #include <sstream>
 #include <fstream>
 #include <assert.h>
+#include <tinyxml.h>
 
 #include "../Unuk/Globals.h"
 #include "../Unuk/Constants.h"
@@ -13,6 +14,7 @@
 #include "ApplySurface.h"
 #include "TextureManager.h"
 #include "MapTile.h"
+#include "Debug.h"
 using namespace std;
 
 //class CharacterManager;
@@ -47,12 +49,11 @@ private:
   void Unload(void);
 
   string m_currentMap;
-  int m_mapColumns;
-  int m_mapRows;
+  int x;
+  int y;
 
   TextureManager m_tileTextures;
   TextureManager m_entityTextures;
-  //CharacterManager* m_characters;
 
   static const int TILE_ARRAY_SIZE = 150;
   MapTile m_tile[TILE_ARRAY_SIZE][TILE_ARRAY_SIZE];

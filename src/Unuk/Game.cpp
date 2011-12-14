@@ -4,7 +4,7 @@ Game::Game(void) {
   m_player = new Player(&m_map);
   m_npc = new NPC(&m_map);
 
-  m_runGameReturnValue = GAME_RETURN_TO_MMENU;
+  m_runGameReturnValue = gameMainMenu;
 }
 
 Game::~Game(void) {
@@ -12,8 +12,8 @@ Game::~Game(void) {
   delete m_npc;
 }
 
-int Game::Run(const string savegameIDArg) {
-  m_player->SetXY(100, 50);
+gameNavVal_t Game::Run(const string savegameIDArg) {
+  m_player->SetXY(50, 50);
   m_player->LoadSprites("../Data/Media/Images/Characters/template.png", 40, 45);
 
   m_npc->SetXY(300, 300);
@@ -35,14 +35,14 @@ int Game::Run(const string savegameIDArg) {
   Timer updateTimer;
 
   m_gameRenderTime.SetXY(10, 10);
-  m_gameRenderTime.SetTextBlended("Render - XX", "vsmall", COLOUR_BLACK);
+  m_gameRenderTime.SetTextBlended("Render - XX", vsmall, COLOUR_BLACK);
 
   m_gameUpdateTime.SetXY(10, 30);
-  m_gameUpdateTime.SetTextBlended("Update - XX", "vsmall", COLOUR_BLACK);
+  m_gameUpdateTime.SetTextBlended("Update - XX", vsmall, COLOUR_BLACK);
 
   stringstream playerXYString;
   m_playerXY.SetXY(10, 50);
-  m_playerXY.SetTextBlended("Player coords - XX XX", "vsmall", COLOUR_BLACK);
+  m_playerXY.SetTextBlended("Player coords - XX XX", vsmall, COLOUR_BLACK);
 
   m_gameRunning = true;
   while(m_gameRunning) {
@@ -73,12 +73,12 @@ int Game::Run(const string savegameIDArg) {
 
       // Check to see if we are allowed to display debug info.
       if(debugEnabled) {
-        m_gameUpdateTime.SetTextBlended("Update - " + updateTimer.GetTicksStr(), "vsmall", COLOUR_BLACK);
-        m_gameRenderTime.SetTextBlended("Render - " + renderTimer.GetTicksStr(), "vsmall", COLOUR_BLACK);
+        m_gameUpdateTime.SetTextBlended("Update - " + updateTimer.GetTicksStr(), vsmall, COLOUR_BLACK);
+        m_gameRenderTime.SetTextBlended("Render - " + renderTimer.GetTicksStr(), vsmall, COLOUR_BLACK);
 
         playerXYString.str("");
         playerXYString << "Player coords: x" << m_player->GetX() << ", y" << m_player->GetY();
-        m_playerXY.SetTextBlended(playerXYString.str(), "vsmall", COLOUR_BLACK);
+        m_playerXY.SetTextBlended(playerXYString.str(), vsmall, COLOUR_BLACK);
       }
     }
     // Restrict the fps.
@@ -107,24 +107,24 @@ void Game::HandleInput(void) {
       }
       else if(event.type == SDL_QUIT) {
         m_gameRunning = false;
-        m_runGameReturnValue = GAME_QUIT_GAME;
+        m_runGameReturnValue = gameQuitGame;
         break;
       }
     }
   } else {
     switch(m_ingameMenu.HandleInput()) {
-    case INGAME_MENU_NOTHING:
+    case ingameMenuNothing:
       break;
-    case INGAME_MENU_RESUME:
+    case ingameMenuResume:
       m_ingameMenu.SetStatus(false);
       break;
-    case INGAME_MENU_SAVE_GAME:
+    case ingameMenuSaveGame:
       break;
-    case INGAME_MENU_LOAD_GAME:
+    case ingameMenuLoadGame:
       break;
-    case INGAME_MENU_OPTIONS:
+    case ingameMenuOptions:
       break;
-    case INGAME_MENU_EXIT_TO_MMENU:
+    case ingameMenuMainMenu:
       m_gameRunning = false;
       break;
     }
@@ -132,7 +132,7 @@ void Game::HandleInput(void) {
     if(event.type == SDL_QUIT) {
       m_gameRunning = false;
       m_ingameMenu.SetStatus(false);
-      m_runGameReturnValue = GAME_QUIT_GAME;
+      m_runGameReturnValue = gameQuitGame;
     }
   }
 }
@@ -203,7 +203,6 @@ void Game::LoadSavegame(const string savegameIDArg) {
     // <map> - Parse the map file.
     dataElem = dataElem->NextSiblingElement("map");
     assert(dataElem != NULL);
-    printf("%s\n", dataElem->GetText());
     m_map.Load(dataElem->GetText());
     // </map>
   }

@@ -17,7 +17,7 @@ void TextureManager::Unload(void) {
 }
 
 SDL_Surface* TextureManager::Add(string filename) {
-  assert(m_allocated < TEXTURE_NODE_SIZE);
+  assert(m_allocated < TEXTURE_ARR_SIZE - 1);
 
   // Has the texture been loaded already?
   for(int i = 0; i < m_allocated; i++) {
@@ -35,7 +35,7 @@ SDL_Surface* TextureManager::Add(string filename) {
 }
 
 SDL_Surface* TextureManager::AddAlpha(string filename) {
-  assert(m_allocated < TEXTURE_NODE_SIZE);
+  assert(m_allocated < TEXTURE_ARR_SIZE - 1);
 
   // Has the texture been loaded already?
   for(int i = 0; i < m_allocated; i++) {

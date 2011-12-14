@@ -1,7 +1,7 @@
 #include "IngameMenu.h"
 
 IngameMenu::IngameMenu(void) {
-  m_isActive = false;
+  m_active = false;
 
   btnResume.SetOutRGB(200, 200, 200);
   btnResume.SetOverRGB(255, 255, 255);
@@ -38,7 +38,7 @@ IngameMenu::~IngameMenu(void) {
 
 }
 
-int IngameMenu::HandleInput(void) {
+ingameMenuNavVal_t IngameMenu::HandleInput(void) {
   while(SDL_PollEvent(&event)) {
     btnResume.CheckMouseOver();
     btnSaveGame.CheckMouseOver();
@@ -48,24 +48,24 @@ int IngameMenu::HandleInput(void) {
 
     if(event.key.type == SDL_KEYDOWN) {
       if(event.key.keysym.sym == SDLK_ESCAPE)
-        return INGAME_MENU_RESUME;
+        return ingameMenuResume;
     }
     else if(event.type == SDL_MOUSEBUTTONUP) {
       if(event.button.button == SDL_BUTTON_LEFT) {
         if(btnResume.CheckMouseOver())
-          return INGAME_MENU_RESUME;
+          return ingameMenuResume;
         else if(btnSaveGame.CheckMouseOver())
-          return INGAME_MENU_SAVE_GAME;
+          return ingameMenuSaveGame;
         else if(btnLoadGame.CheckMouseOver())
-          return INGAME_MENU_LOAD_GAME;
+          return ingameMenuLoadGame;
         else if(btnOptions.CheckMouseOver())
-          return INGAME_MENU_OPTIONS;
+          return ingameMenuOptions;
         else if(btnExitToMenu.CheckMouseOver())
-          return INGAME_MENU_EXIT_TO_MMENU;
+          return ingameMenuMainMenu;
       }
     }
   }
-  return INGAME_MENU_NOTHING;
+  return ingameMenuNothing;
 }
 
 void IngameMenu::Render(void) {

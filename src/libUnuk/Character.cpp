@@ -54,7 +54,7 @@ void Character::LoadSprites(string filename, int wArg, int hArg) {
 void Character::AddSpeachBubble(string text) {
   m_speachBubble.push_back(text);
 
-  m_speachBubbleText.SetTextBlended(text, "small", 0, 0, 0);
+  //m_speachBubbleText.SetTextBlended(text, "small", 0, 0, 0);
 
   if(m_speachBubbleTimer.IsStarted() == false)
     m_speachBubbleTimer.Start();
@@ -125,7 +125,7 @@ void Character::Update(void) {
       }
     } else {
       if(m_speachBubble.front() != m_speachBubbleText.GetText()) {
-        m_speachBubbleText.SetTextBlended(m_speachBubble.front(), "small", 0, 0, 0);
+        //m_speachBubbleText.SetTextBlended(m_speachBubble.front(), "small", 0, 0, 0);
       }
     }
   }
@@ -136,27 +136,19 @@ void Character::Move(void) {
   tileX = ((x + (w / 2)) / TILE_WIDTH);
   tileY = ((y + (h / 2)) / TILE_HEIGHT);
 
-  if((x < 0) || (x + w) > levelWidth)
-    x -= xVel;
-  if(CheckTileCollisions())
-    x -= xVel;
-  if(CheckEntityCollisions())
-    x -= xVel;
-  if(CheckCharacterCollisions())
-    x -= xVel;
+  if((x < 0) || (x + w) > levelWidth)     x -= xVel;
+  if(CheckTileCollisions())               x -= xVel;
+  if(CheckEntityCollisions())             x -= xVel;
+  if(CheckCharacterCollisions())          x -= xVel;
 
   y += yVel;
   tileX = ((x + (w / 2)) / TILE_WIDTH);
   tileY = ((y + (h / 2)) / TILE_HEIGHT);
 
-  if((y < 0) || (y + h) > levelHeight)
-    y -= yVel;
-  if(CheckTileCollisions())
-    y -= yVel;
-  if(CheckEntityCollisions())
-    y -= yVel;
-  if(CheckCharacterCollisions())
-    y -= yVel;
+  if((y < 0) || (y + h) > levelHeight)    y -= yVel;
+  if(CheckTileCollisions())               y -= yVel;
+  if(CheckEntityCollisions())             y -= yVel;
+  if(CheckCharacterCollisions())          y -= yVel;
 }
 
 bool Character::CheckTileCollisions(void) {

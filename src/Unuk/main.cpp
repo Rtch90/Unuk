@@ -50,33 +50,34 @@ int main() {
   Timer fpsCalc;
   fpsCalc.Start();
 
-  int gameReturnVal;
   bool menuRunning = true;
   while(menuRunning) {
     menu->Render();
     SDL_Flip(screen);
 
     switch(menu->HandleInput()) {
-    case MAIN_MENU_NOTHING:
+    case mainMenuNothing:
       break;
-    case MAIN_MENU_NEW_GAME:
+    case mainMenuNewGame:
       delete menu;
       game = new Game;
 
-      gameReturnVal = game->Run("save.xml");
-
-      if(gameReturnVal == GAME_RETURN_TO_MMENU)
+      switch(game->Run("save")) {
+      case gameMainMenu:
         menu = new MainMenu;
-      else if(gameReturnVal == GAME_QUIT_GAME)
+        break;
+      case gameQuitGame:
         menuRunning = false;
+        break;
+      }
 
       delete game;
       break;
-    case MAIN_MENU_LOAD_GAME:
+    case mainMenuLoadGame:
       break;
-    case MAIN_MENU_OPTIONS:
+    case mainMenuOptions:
       break;
-    case MAIN_MENU_EXIT:
+    case mainMenuExitGame:
       menuRunning = false;
       delete menu;
       break;

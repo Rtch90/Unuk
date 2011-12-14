@@ -10,8 +10,8 @@ using namespace std;
  * The Texture Manager will keep a small "Database"
  * of the name of the texture that is loaded and the
  * actual texture so we can query it with the filename
- * and it will return an index that we can use to retrieve
- * the texture.
+ * and it will return the teture if it is already in memory
+ * or load the tture if it is not.
  */
 class TextureManager {
 public:
@@ -31,8 +31,8 @@ private:
   };
 
   // We should not need more than a hundred..
-  static const int TEXTURE_NODE_SIZE = 100;
-  textureNode textures[TEXTURE_NODE_SIZE];
+  static const int TEXTURE_ARR_SIZE = 100;
+  textureNode textures[TEXTURE_ARR_SIZE];
 
   int m_allocated;
 };

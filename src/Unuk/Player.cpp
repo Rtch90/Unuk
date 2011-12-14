@@ -57,7 +57,7 @@ void Player::HandleInput(void) {
 
 void Player::Update(void) {
   Move();
-  SetCamera();
+  //SetCamera();
 }
 
 void Player::SetName(string nameArg) {

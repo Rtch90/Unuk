@@ -62,10 +62,10 @@ private:
   int m_entityH;
 
   // -1 is a 'special' tile, the next tile that the player walks
-  // on is the new player z-level.
+  // on is the players new zlevel.
   int m_zLevel;
 
-  //If not 'n', switch map when the player walks on this tile.
+  // If not 'null', switch map when the player walks on this tile.
   string m_mapTransitionName;
   int m_mapTransitionX;
   int m_mapTransitionY;

@@ -1,27 +1,33 @@
 #ifndef _INGAMEMENU_H_
 #define _INGAMEMENU_H_
-#include "Menu.h"
 
-const int INGAME_MENU_NOTHING          = 0;
-const int INGAME_MENU_RESUME           = 1;
-const int INGAME_MENU_SAVE_GAME        = 2;
-const int INGAME_MENU_LOAD_GAME        = 3;
-const int INGAME_MENU_OPTIONS          = 4;
-const int INGAME_MENU_EXIT_TO_MMENU    = 5;
+#include "../Unuk/Globals.h"
+#include "../Unuk/Constants.h"
+#include "Button.h"
+#include "ButtonToggle.h"
 
-class IngameMenu : public Menu {
+enum ingameMenuNavVal_t {
+  ingameMenuNothing,
+  ingameMenuResume,
+  ingameMenuSaveGame,
+  ingameMenuLoadGame,
+  ingameMenuOptions,
+  ingameMenuMainMenu
+};
+
+class IngameMenu {
 public:
   IngameMenu(void);
   ~IngameMenu(void);
 
-  int HandleInput(void);
+  ingameMenuNavVal_t HandleInput(void);
   void Render(void);
 
-  void SetStatus(bool arg)  { m_isActive = arg; }
-  bool GetStatus(void)      { return m_isActive; }
+  void SetStatus(bool arg)  { m_active = arg; }
+  bool GetStatus(void)      { return m_active; }
 
 private:
-  bool m_isActive;
+  bool m_active;
 
   Button btnResume;
   Button btnSaveGame;

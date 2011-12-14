@@ -43,16 +43,16 @@ void Button::SetTextRGB(Uint8 r, Uint8 g, Uint8 b) {
   m_textColour.g = g;
   m_textColour.b = b;
 
-  m_text.SetTextBlended(m_text.GetText(), "small", m_textColour);
+  m_text.SetTextBlended(m_text.GetText(), small, m_textColour);
 }
 
 void Button::SetTextRGB(SDL_Color colour) {
   m_textColour = colour;
-  m_text.SetTextBlended(m_text.GetText(), "small", colour);
+  m_text.SetTextBlended(m_text.GetText(), small, colour);
 }
 
 void Button::SetText(string textArg) {
-  m_text.SetTextBlended(textArg, "small", m_textColour);
+  m_text.SetTextBlended(textArg, small, m_textColour);
 
   w = m_text.GetWidth();
   h = m_text.GetHeight();

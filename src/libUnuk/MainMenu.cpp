@@ -10,7 +10,7 @@ MainMenu::MainMenu(void) {
   btnNewGameActive = false;
 
   lblNewGame.SetXY(275, 160);
-  lblNewGame.SetTextBlended("This will delete your current game, are you sure?", "vsmall", 0, 0, 0);
+  lblNewGame.SetTextBlended("This will delete your current game, are you sure?", vsmall, 0, 0, 0);
 
   rectNewGame.SetRGB(200, 200, 200);
   rectNewGame.SetXY(250, 150);
@@ -47,9 +47,9 @@ MainMenu::MainMenu(void) {
   btnExit.SetXY(100, 300);
 
   lblMenu.SetXY(100, 75);
-  lblMenu.SetTextBlended("Unuk", "vlarge", 0, 0, 0);
+  lblMenu.SetTextBlended("Unuk", vlarge, 0, 0, 0);
 
-  m_background.Load("MainMenu");
+  //m_background.Load("MainMenu");
 
   camera.x = 0;
   camera.y = 0;
@@ -59,7 +59,7 @@ MainMenu::~MainMenu(void) {
 
 }
 
-int MainMenu::HandleInput(void) {
+mainMenuNavVal_t MainMenu::HandleInput(void) {
   while(SDL_PollEvent(&event)) {
     btnNewGame.CheckMouseOver();
     if(btnNewGameActive) {
@@ -76,29 +76,29 @@ int MainMenu::HandleInput(void) {
         if(btnNewGame.CheckMouseOver())
           btnNewGameActive = !btnNewGameActive;
         else if(btnLoadGame.CheckMouseOver())
-          return MAIN_MENU_LOAD_GAME;
+          return mainMenuLoadGame;
         else if(btnOptions.CheckMouseOver())
-          return MAIN_MENU_OPTIONS;
+          return mainMenuOptions;
         else if(btnExit.CheckMouseOver())
-          return MAIN_MENU_EXIT;
+          return mainMenuOptions;
 
         if(btnNewGameActive) {
           if(btnNewGameYes.CheckMouseOver())
-            return MAIN_MENU_NEW_GAME;
+            return mainMenuNewGame;
           else if(btnNewGameNo.CheckMouseOver())
             btnNewGameActive = false;
         }
       }
     }
     else if(event.type == SDL_QUIT) {
-      return MAIN_MENU_EXIT;
+      return mainMenuExitGame;
     }
   }
-  return MAIN_MENU_NOTHING;
+  return mainMenuNothing;
 }
 
 void MainMenu::Render(void) {
-  m_background.Render();
+  //m_background.Render();
 
   lblMenu.Render();
 

@@ -10,6 +10,8 @@
 #include "Debug.h"
 using namespace std;
 
+enum textSizes_t { vsmall, small, medium, large, vlarge };
+
 class Text {
 public:
   Text(void);
@@ -28,10 +30,10 @@ public:
 
   void SetXY(int xArg, int yArg);
 
-  int SetTextBlended(string textArg, string size, SDL_Color);
-  int SetTextBlended(string textArg, string size, Uint8 r, Uint8 g, Uint8 b);
-  int SetTextShaded(string textArg, string size, SDL_Color, SDL_Color);
-  int SetTextShaded(string textArg, string size, Uint8 rF, Uint8 gF, Uint8 bF, Uint8 rB, Uint8 gB, Uint8 bB);
+  int SetTextBlended(string textArg, textSizes_t size, SDL_Color);
+  int SetTextBlended(string textArg, textSizes_t size, Uint8 r, Uint8 g, Uint8 b);
+  int SetTextShaded(string textArg, textSizes_t size, SDL_Color, SDL_Color);
+  int SetTextShaded(string textArg, textSizes_t size, Uint8 rF, Uint8 gF, Uint8 bF, Uint8 rB, Uint8 gB, Uint8 bB);
 
   void Render(void);
   void Render(int xArg, int yArg);
