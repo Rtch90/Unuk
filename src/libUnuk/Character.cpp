@@ -4,7 +4,7 @@
 const float Character::CHARACTER_SPEED = 3.5f;
 
 static list<Character*>collisionList;
-static list<Character*>::iterator collisionIterator;
+static list<Character*>::iterator collisionIter;
 
 Character::Character(Map* mapArg) {
   map = mapArg;
@@ -24,15 +24,64 @@ Character::Character(Map* mapArg) {
 
 Character::~Character(void) {
   SDL_FreeSurface(m_texture);
-  for(collisionIterator = collisionList.begin(); collisionIterator != collisionList.end(); collisionIterator++) {
-    if((*collisionIterator) == this) {
-      collisionList.erase(collisionIterator);
+  for(collisionIter = collisionList.begin(); collisionIter != collisionList.end(); collisionIter++) {
+    if((*collisionIter) == this) {
+      collisionList.erase(collisionIter);
       break;
     }
   }
 }
 
+void Character::LoadSprites(string filename, int wArg, int hArg) {
+  if(m_texture != NULL)
+    SDL_FreeSurface(m_texture);
+
+  m_texture = LoadImageAlpha(filename.c_str());
+
+  w = wArg;
+  h = hArg;
+
+  for(int m_direction = 0; m_direction < 4; m_direction++) {
+    for(int m_action = 0; m_action < 4; m_action++) {
+      sprites[m_direction][m_action].x = w * m_action;
+      sprites[m_direction][m_action].y = h * m_direction;
+      sprites[m_direction][m_action].w = w;
+      sprites[m_direction][m_action].h = h;
+    }
+  }
+}
+
+void Character::AddSpeachBubble(string text) {
+  m_speachBubble.push_back(text);
+
+  m_speachBubbleText.SetTextBlended(text, "small", 0, 0, 0);
+
+  if(m_speachBubbleTimer.IsStarted() == false)
+    m_speachBubbleTimer.Start();
+}
+
 void Character::Render(void) {
+  // Draw some fancy speach bubbles. It is a bit of a mess, I am playing.
+  if(m_speachBubble.size() != 0) {
+    if(m_speachBubbleTimer.GetTicks() < SPEACH_BUBBLE_DISPLAY_LENGTH) {
+      roundedBoxRGBA(screen, (x + w / 2) - 100,
+                     y - 100,
+                     (x + w / 2) + 100,
+                     y - 35,
+                     5, 255, 255, 255, 255);
+
+      filledTrigonRGBA(screen, (x + w / 2) - 100,
+                       y - 100,
+                       (x + w / 2) - 10,
+                       y - 40,
+                       (x + w / 2) + 10,
+                       y - 40,
+                       255, 255, 255, 255);
+
+      m_speachBubbleText.Render((x + w / 2) - 90, y - 90);
+    }
+  }
+
   if(m_attacking && m_attackTimer.GetTicks() < ATTACKING_DISPLAY_LEN) {
     ApplySurface(x, y, m_texture, screen, &sprites[m_directionFacing][ANIM_ATTACK]);
     return;
@@ -64,27 +113,22 @@ void Character::Render(void) {
   }
 }
 
-void Character::LoadSprites(string filename, int wArg, int hArg) {
-  if(m_texture != NULL)
-    SDL_FreeSurface(m_texture);
-
-  m_texture = LoadImageAlpha(filename.c_str());
-
-  w = wArg;
-  h = hArg;
-
-  for(int m_direction = 0; m_direction < 4; m_direction++) {
-    for(int m_action = 0; m_action < 4; m_action++) {
-      sprites[m_direction][m_action].x = w * m_action;
-      sprites[m_direction][m_action].y = h * m_direction;
-      sprites[m_direction][m_action].w = w;
-      sprites[m_direction][m_action].h = h;
-    }
-  }
-}
-
 void Character::Update(void) {
   Move();
+
+  if(m_speachBubble.size() != 0) {
+    if(m_speachBubbleTimer.GetTicks() > SPEACH_BUBBLE_DISPLAY_LENGTH) {
+      m_speachBubble.pop_front();
+
+      if(m_speachBubble.size() != 0) {
+        m_speachBubbleTimer.Start();
+      }
+    } else {
+      if(m_speachBubble.front() != m_speachBubbleText.GetText()) {
+        m_speachBubbleText.SetTextBlended(m_speachBubble.front(), "small", 0, 0, 0);
+      }
+    }
+  }
 }
 
 void Character::Move(void) {
@@ -143,15 +187,15 @@ bool Character::CheckEntityCollisions(void) {
 }
 
 bool Character::CheckCharacterCollisions(void) {
-  for(collisionIterator = collisionList.begin();
-      collisionIterator != collisionList.end();
-      collisionIterator++) {
-    if((*collisionIterator) != this) {
+  for(collisionIter = collisionList.begin();
+      collisionIter != collisionList.end();
+      collisionIter++) {
+    if((*collisionIter) != this) {
       if(CheckCollisionXY(x, y, w, h,
-                          (*collisionIterator)->GetX(),
-                          (*collisionIterator)->GetY(),
-                          (*collisionIterator)->GetWidth(),
-                          (*collisionIterator)->GetHeight())) {
+                          (*collisionIter)->GetX(),
+                          (*collisionIter)->GetY(),
+                          (*collisionIter)->GetWidth(),
+                          (*collisionIter)->GetHeight())) {
         return true;
       }
     }

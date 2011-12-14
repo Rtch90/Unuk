@@ -1,6 +1,7 @@
 #ifndef _CHARACTER_H_
 #define _CHARACTER_H_
 #include <SDL/SDL.h>
+#include <SDL/SDL_gfxPrimitives.h>
 #include <list>
 
 #include "../Unuk/Globals.h"
@@ -10,6 +11,7 @@
 #include "Collision.h"
 #include "Map.h"
 #include "Timer.h"
+#include "Text.h"
 #include "Debug.h"
 using namespace std;
 
@@ -19,6 +21,8 @@ class Character {
 public:
   Character(Map* mapArg);
   ~Character(void);
+
+  void LoadSprites(string filename, int wArg, int hArg);
   
   float GetX(void) 		{ return x; }
   float GetY(void)		{ return y; }
@@ -29,9 +33,9 @@ public:
   void SetXVelocity(float arg)			{ xVel = arg; }
   void SetYVelocity(float arg)			{ yVel = arg; }
   
+  void AddSpeachBubble(string text);
+
   void Render(void);
-  void LoadSprites(string filename, int wArg, int hArg);
-  
   void Update(void);
   
 protected:
@@ -73,6 +77,8 @@ protected:
 private:
   static const int ANIMATION_SPEED         = 200;
   static const int ATTACKING_DISPLAY_LEN   = 150;
+
+  static const int SPEACH_BUBBLE_DISPLAY_LENGTH = 6000;
   
   SDL_Surface* m_texture;
   
@@ -82,6 +88,11 @@ private:
   Timer m_animationTimer;
   int m_animationStage;
   bool m_leftFoot;
+
+  list<string> m_speachBubble;
+  list<string>::iterator m_speachBubbleIter;
+  Timer m_speachBubbleTimer;
+  Text m_speachBubbleText;
 };
 
 #endif

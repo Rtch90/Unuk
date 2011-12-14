@@ -14,6 +14,9 @@ public:
   void HandleInput(void);
   void Update(void);
 
+  void SetName(string nameArg);
+  string GetName(void) { return m_name; }
+
 protected:
   void Move(void);
   void CheckTileCollisions(void);
@@ -21,6 +24,8 @@ protected:
 private:
   void SetCamera(void);
   static const float PLAYER_SPEED;
+
+  string m_name;
 };
 
 #endif

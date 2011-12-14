@@ -60,6 +60,10 @@ void Player::Update(void) {
   SetCamera();
 }
 
+void Player::SetName(string nameArg) {
+  m_name = nameArg;
+}
+
 void Player::SetCamera(void) {
   camera.x = (x + w / 2) - SCREEN_WIDTH  / 2;
   camera.y = (y + h / 2) - SCREEN_HEIGHT / 2;

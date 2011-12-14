@@ -63,7 +63,7 @@ int main() {
       delete menu;
       game = new Game;
 
-      gameReturnVal = game->Run("1");
+      gameReturnVal = game->Run("save.xml");
 
       if(gameReturnVal == GAME_RETURN_TO_MMENU)
         menu = new MainMenu;

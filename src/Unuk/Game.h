@@ -6,6 +6,7 @@
 #include <sstream>
 #include <fstream>
 #include <string>
+#include <tinyxml.h>
 
 #include "Constants.h"
 #include "Globals.h"

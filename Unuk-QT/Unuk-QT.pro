@@ -2,6 +2,8 @@ LIBS += -lGL \
     -lSDL \
     -lSDL_ttf \
     -lSDL_image \
+    -lSDL_gfx \
+    -ltinyxml \
     -lGLU
 RESOURCES += 
 OTHER_FILES += ../src/libUnuk/Debug.o

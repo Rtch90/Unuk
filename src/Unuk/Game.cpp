@@ -162,19 +162,54 @@ void Game::Render(void) {
     m_ingameMenu.Render();
   }
   SDL_Flip(screen);
-  SDL_Flip(screen);
+  //SDL_Flip(screen);
 }
 
 void Game::LoadSavegame(const string savegameIDArg) {
   m_saveGameID = savegameIDArg;
-
   string saveFilename = "../Save/" + m_saveGameID;
 
-  ifstream saveFile(saveFilename.c_str());
-  assert(saveFile.is_open());
-
-  // Read stuff.
-  m_map.Load("TestLevel");
+  // Converting to XML ftw!
+  TiXmlDocument mapFile(saveFilename.c_str());
+  assert(mapFile.LoadFile() == true);
+  
+  TiXmlElement* rootElem = NULL;
+  TiXmlElement* dataElem = NULL;
+  
+  // <save> - Grab a save file.
+  rootElem = mapFile.FirstChildElement("save");
+  assert(rootElem != NULL);
+  if(rootElem) {
+    // <name> - Parse the player name.
+    dataElem = rootElem->FirstChildElement("name");
+    assert(dataElem != NULL);
+    m_player->SetName(dataElem->GetText());
+    // </name>
+    
+    // <x> - Parse the player x coord.
+    dataElem = dataElem->NextSiblingElement("x");
+    assert(dataElem != NULL);
+    int playerX = atoi(dataElem->GetText());
+    // </x>
+    
+    // <y> - Parse the player y coord.
+    dataElem = dataElem->NextSiblingElement("y");
+    assert(dataElem != NULL);
+    int playerY = atoi(dataElem->GetText());
+    // </y>
+    
+    m_player->SetXY(playerX, playerY);
+    
+    // <map> - Parse the map file.
+    dataElem = dataElem->NextSiblingElement("map");
+    assert(dataElem != NULL);
+    printf("%s\n", dataElem->GetText());
+    m_map.Load(dataElem->GetText());
+    // </map>
+  }
+  // <save>
+  
+  // </save>
 }
 
 void Game::SaveSavegame(void) {
