@@ -77,8 +77,8 @@ void Map::Load(const string filename) {
           entityPath << "../Data/Media/Images/Entities/" << entityName << ".png";
           m_tile[x][y].SetEntityTexture(m_entityTextures.AddAlpha(entityPath.str()));
 
-          m_tile[x][y].SetEntityXY(m_tile[x][y].GetTileX() - (m_tile[x][y].GetEntityWidth()   / 2 + TILE_WIDTH / 2),
-                                   m_tile[x][y].GetTileY() - (m_tile[x][y].GetEntityHeight() / 2 + TILE_HEIGHT / 2));
+          m_tile[x][y].SetEntityXY(m_tile[x][y].GetTileX() + TILE_WIDTH  / 2 - m_tile[x][y].GetEntityWidth()  / 2,
+                                   m_tile[x][y].GetTileY() + TILE_HEIGHT / 2 - m_tile[x][y].GetEntityHeight() / 2);
         }
         // </entityTexture>
 
