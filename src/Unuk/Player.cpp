@@ -81,7 +81,7 @@ void Player::SetCamera(void) {
 
 void Player::Move() {
   Character::Move();
-  if(map->GetMapTransitionName(tileX, tileY) != "n") {
+  if(map->GetMapTransitionName(tileX, tileY) != "null") {
     SetXY(map->GetMapTransitionX(tileX, tileY), map->GetMapTransitionY(tileX, tileY));
     map->Load(map->GetMapTransitionName(tileX, tileY));
   }

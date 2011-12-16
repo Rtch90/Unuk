@@ -92,7 +92,7 @@ void Map::Load(const string filename) {
         // </solidEntity>
 
         // <zlevel>
-        dataElem = dataElem->NextSiblingElement("zlevel");
+        dataElem = dataElem->NextSiblingElement("zLevel");
         assert(dataElem != NULL);
         m_tile[x][y].SetZLevel(atoi(dataElem->GetText()));
         // </zlevel>
