@@ -9,7 +9,7 @@
 
 <zLevel>100</zLevel>
 
-<mapTransition>null</mapTransition>
+<mapTransition>map</mapTransition>
 <mapTransX>0</mapTransX>
 <mapTransY>0</mapTransY>
 </tile>
@@ -18,7 +18,7 @@
 <tileTexture>ice</tileTexture>
 <solidTile>false</solidTile>
 
-<entityTexture>tree</entityTexture>
+<entityTexture>openChest</entityTexture>
 <solidEntity>true</solidEntity>
 
 <zLevel>100</zLevel>

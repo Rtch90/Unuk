@@ -12,7 +12,6 @@
 #include "../Unuk/Constants.h"
 #include "ImageLoader.h"
 #include "ApplySurface.h"
-#include "TextureManager.h"
 #include "MapTile.h"
 #include "Debug.h"
 using namespace std;
@@ -27,21 +26,21 @@ public:
   void Load(const string filename);
   void Render(void);
 
-  bool GetTileSolidity(int row, int column);
-  int  GetTileX(int row, int column);
-  int  GetTileY(int row, int column);
+  bool GetTileSolidity(int xArg, int yArg);
+  int  GetTileX(int xArg, int yArg);
+  int  GetTileY(int xArg, int yArg);
 
-  bool GetEntitySolidity(int row, int column);
-  int  GetEntityX(int row, int column);
-  int  GetEntityY(int row, int column);
-  int  GetEntityWidth(int row, int column);
-  int  GetEntityHeight(int row, int column);
+  bool GetEntitySolidity(int xArg, int yArg);
+  int  GetEntityX(int xArg, int yArg);
+  int  GetEntityY(int xArg, int yArg);
+  int  GetEntityWidth(int xArg, int yArg);
+  int  GetEntityHeight(int xArg, int yArg);
 
-  int  GetTileZLevel(int row, int column);
+  int  GetTileZLevel(int xArg, int yArg);
 
-  string GetMapTransitionName(int row, int column);
-  int    GetMapTransitionX(int row, int column);
-  int    GetMapTransitionY(int row, int column);
+  string GetMapTransitionName(int xArg, int yArg);
+  int    GetMapTransitionX(int xArg, int yArg);
+  int    GetMapTransitionY(int xArg, int yArg);
 
   string GetCurrentMap(void);
 
@@ -52,11 +51,11 @@ private:
   int x;
   int y;
 
-  TextureManager m_tileTextures;
-  TextureManager m_entityTextures;
-
   static const int TILE_ARRAY_SIZE = 150;
   MapTile m_tile[TILE_ARRAY_SIZE][TILE_ARRAY_SIZE];
+
+  TextureManager m_tileTextures;
+  TextureManager m_entityTextures;
 };
 
 #endif

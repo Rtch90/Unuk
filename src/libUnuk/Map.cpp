@@ -25,8 +25,8 @@ void Map::Load(const string filename) {
 
   // We will set x and y positions to zero for now, as we
   // are going to set them withing the XML file.
-  x = 0;
-  y = 0;
+  x = -1;
+  y = -1;
 
   // <map> - Let's start parsing the map.
   rootElem = mapFile.FirstChildElement("map");
@@ -38,14 +38,14 @@ void Map::Load(const string filename) {
     assert(lineElem != NULL);
     while(lineElem) {
       y++;
-      x = 0;
+      x = -1;
 
       // <tile> - Then we will select the tile. and increment x to keep tiling that row.
       tileElem = lineElem->FirstChildElement("tile");
       assert(tileElem != NULL);
       while(tileElem) {
         x++;
-        m_tile[x][y].SetTileXY((x - 1) * TILE_WIDTH, (y - 1) * TILE_HEIGHT);
+        m_tile[x][y].SetTileXY(x * TILE_WIDTH, y * TILE_HEIGHT);
 
         // <tileTexture> - Apply a teture to the tile.
         dataElem = tileElem->FirstChildElement("tileTexture");
@@ -70,9 +70,7 @@ void Map::Load(const string filename) {
         dataElem = dataElem->NextSiblingElement("entityTexture");
         assert(dataElem != NULL);
         string entityName = dataElem->GetText();
-        if(entityName == "null")
-          m_tile[x][y].SetEntityTexture(NULL);
-        else {
+        if(entityName != "null") {
           stringstream entityPath;
           entityPath << "../Data/Media/Images/Entities/" << entityName << ".png";
           m_tile[x][y].SetEntityTexture(m_entityTextures.AddAlpha(entityPath.str()));
@@ -126,41 +124,32 @@ void Map::Load(const string filename) {
     // </line>
   }
   // </map>
-  levelWidth  = (x - 1)  * TILE_WIDTH;
-  levelHeight = (y - 1)  * TILE_HEIGHT;
+  levelWidth  = x * TILE_WIDTH;
+  levelHeight = y * TILE_HEIGHT;
 
   //character->Load(filename);
 }
 
 void Map::Render(void) {
-  for(int j = 1; j < x; j++)
-    for(int i = 1; i < y; i++) {
-    ApplySurface(m_tile[j][i].GetTileX(), m_tile[j][i].GetTileY(), m_tile[j][i].GetTileTexture(), screen);
+  int xOrig = (camera.x / TILE_WIDTH);
+  int yOrig = (camera.y / TILE_HEIGHT);
 
-    if(m_tile[j][i].GetEntityTexture() != NULL)
-      ApplySurface(m_tile[j][i].GetEntityX(), m_tile[j][i].GetEntityY(), m_tile[j][i].GetEntityTexture(), screen);
-  }
-  return;
-
-  int xOrig = (camera.x / TILE_WIDTH)  + 1;
-  int yOrig = (camera.y / TILE_HEIGHT) + 1;
-
-  int xEnd = xOrig + (SCREEN_WIDTH / TILE_WIDTH);
-  int yEnd = yOrig + (SCREEN_HEIGHT / TILE_HEIGHT);
+  int xEnd = (SCREEN_WIDTH  / TILE_WIDTH);
+  int yEnd = (SCREEN_HEIGHT / TILE_HEIGHT);
 
   if(xEnd < x)
     xEnd++;
+  else
+    xEnd = x;
+
   if(yEnd < y)
     yEnd++;
+  else
+    yEnd = y;
 
-  for(int j = 1; j < xEnd; j++)
-  for(int i = 1; i < yEnd; i++) {
-    ApplySurface(m_tile[j][i].GetTileX(), m_tile[j][i].GetTileY(),
-                 m_tile[j][i].GetTileTexture(), screen);
-    if(m_tile[j][i].GetEntityTexture() != NULL) {
-      Debug::logger->message("Entity");
-      ApplySurface(m_tile[j][i].GetEntityX(), m_tile[j][i].GetEntityY(),
-                   m_tile[j][i].GetEntityTexture(), screen);
+  for(int i = xOrig; i < xEnd; i++) {
+    for(int j = yOrig; j < yEnd; j++) {
+      m_tile[i][j].Render();
     }
   }
 }
@@ -168,66 +157,60 @@ void Map::Render(void) {
 void Map::Unload(void) {
   m_tileTextures.Unload();
   m_entityTextures.Unload();
-
-  for(int i = 0; i < TILE_ARRAY_SIZE; i++) {
-    for(int j = 0; j < TILE_ARRAY_SIZE; j++) {
-      m_tile[i][j].SetTileTexture(NULL);
-      m_tile[i][j].SetTileSolidity(false);
-      m_tile[i][j].SetEntityTexture(NULL);
-      m_tile[i][j].SetEntitySolidity(false);
-      m_tile[i][j].SetMapTransitionName("null");
-    }
-  }
 }
 
 string Map::GetCurrentMap(void) {
   return m_currentMap;
 }
 
-bool Map::GetTileSolidity(int row, int column) {
-  return m_tile[row + 1][column + 1].GetTileSolidity();
+bool Map::GetTileSolidity(int xArg, int yArg) {
+  return m_tile[xArg + 1][yArg + 1].GetTileSolidity();
 }
 
-int Map::GetTileX(int row, int column) {
-  return m_tile[row + 1][column + 1].GetTileX();
+int Map::GetTileX(int xArg, int yArg) {
+  return m_tile[xArg + 1][yArg + 1].GetTileX();
 }
 
-int Map::GetTileY(int row, int column) {
-  return m_tile[row + 1][column + 1].GetTileY();
+int Map::GetTileY(int xArg, int yArg) {
+  return m_tile[xArg + 1][yArg + 1].GetTileY();
 }
 
-bool Map::GetEntitySolidity(int row, int column) {
-  return m_tile[row + 1][column + 1].GetEntitySolitity();
+bool Map::GetEntitySolidity(int xArg, int yArg) {
+  if(xArg > x || yArg > y || yArg < 0 || yArg < 0) {
+    return false;
+  }
+
+  return m_tile[xArg + 1][yArg + 1].GetEntitySolitity();
 }
 
-int Map::GetEntityX(int row, int column) {
-  return m_tile[row + 1][column + 1].GetEntityX();
+int Map::GetEntityX(int xArg, int yArg) {
+  return m_tile[xArg + 1][yArg + 1].GetEntityX();
 }
 
-int Map::GetEntityY(int row, int column) {
-  return m_tile[row + 1][column + 1].GetEntityY();
+int Map::GetEntityY(int xArg, int yArg) {
+  return m_tile[xArg + 1][yArg + 1].GetEntityY();
 }
 
-int Map::GetEntityWidth(int row, int column) {
-  return m_tile[row + 1][column + 1].GetEntityWidth();
+int Map::GetEntityWidth(int xArg, int yArg) {
+  return m_tile[xArg + 1][yArg + 1].GetEntityWidth();
 }
 
-int Map::GetEntityHeight(int row, int column) {
-  return m_tile[row + 1][column + 1].GetEntityHeight();
+int Map::GetEntityHeight(int xArg, int yArg) {
+  return m_tile[xArg + 1][yArg + 1].GetEntityHeight();
 }
 
-int Map::GetTileZLevel(int row, int column) {
-  return m_tile[row + 1][column + 1].GetZLevel();
+int Map::GetTileZLevel(int xArg, int yArg) {
+  return m_tile[xArg + 1][yArg + 1].GetZLevel();
 }
 
-string Map::GetMapTransitionName(int row, int column) {
-  return m_tile[row + 1][column + 1].GetMapTransitionName();
+string Map::GetMapTransitionName(int xArg, int yArg) {
+  return m_tile[xArg + 1][yArg + 1].GetMapTransitionName();
 }
 
-int Map::GetMapTransitionX(int row, int column) {
-  return m_tile[row + 1][column + 1].GetMapTransitionX();
+int Map::GetMapTransitionX(int xArg, int yArg) {
+  return m_tile[xArg + 1][yArg + 1].GetMapTransitionX();
 }
 
-int Map::GetMapTransitionY(int row, int column) {
-  return m_tile[row + 1][column + 1].GetMapTransitionY();
+int Map::GetMapTransitionY(int xArg, int yArg) {
+  return m_tile[xArg + 1][yArg + 1].GetMapTransitionY();
 }

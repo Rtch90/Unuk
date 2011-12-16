@@ -4,43 +4,44 @@
 #include <string>
 #include <SDL/SDL.h>
 
-#include "Entity.h"
+#include "../Unuk/Constants.h"
+#include "ApplySurface.h"
+#include "MapElement.h"
+#include "MapEntities.h"
 using namespace std;
 
 class MapTile {
 public:
-  MapTile(void)                                     { m_entitySolidity = false; }
+  MapTile(void)                                     {  }
   ~MapTile(void)                                    {  }
 
-  void SetTileTexture(SDL_Surface* surface)         { m_tileTexture = surface; }
-  SDL_Surface* GetTileTexture(void)                 { return m_tileTexture; }
+  void Render(void)                                 { m_tile.Render(), m_entity.Render(); }
 
-  void SetTileSolidity(bool arg)                    { m_tileSolidity = arg; }
-  bool GetTileSolidity(void)                        { return m_tileSolidity; }
-  void SetTileXY(int xArg, int yArg)                { m_tileX = xArg, m_tileY = yArg; }
-  int GetTileX(void)                                { return m_tileX; }
-  int GetTileY(void)                                { return m_tileY; }
+  // Tile Mutators.
+  SDL_Surface SetTileTexture(SDL_Surface* arg)      { m_tile.SetTexture(arg); }
+  void SetTileSolidity(bool arg)                    { m_tile.SetSolidity(arg); }
+  bool GetTileSolidity(void)                        { return m_tile.GetSolidity(); }
+  void SetTileXY(int xArg, int yArg)                { m_tile.GetX(), m_tile.GetY(); }
+  int GetTileX(void)                                { return m_tile.GetX(); }
+  int GetTileY(void)                                { return m_tile.GetY(); }
 
-  void SetEntityTexture(SDL_Surface* surface) {
-    m_entityTexture = surface;
-    if(m_entityTexture != NULL) {
-      m_entityW = m_entityTexture->w;
-      m_entityH = m_entityTexture->h;
-    }
-  }
-  SDL_Surface* GetEntityTexture(void)               { return m_entityTexture; }
-  void SetEntitySolidity(bool arg)                  { m_entitySolidity = arg; }
-  bool GetEntitySolitity(void)                      { return m_entitySolidity; }
-  void SetEntityXY(int xArg, int yArg)              { m_entityX = xArg, m_entityY = yArg; }
-  int GetEntityX(void)                              { return m_entityX; }
-  int GetEntityY(void)                              { return m_entityY; }
+  // Entity Mutators.
+  void SetEntityTexture(SDL_Surface* arg)           { m_entity.SetTexture(arg); }
+  void SetEntityXY(int xArg, int yArg)              { m_entity.SetXY(xArg, yArg); }
+  void SetEntitySolidity(bool arg)                  { m_entity.SetSolidity(arg); }
+  bool GetEntitySolitity(void)                      { return m_entity.GetSolidity(); }
 
-  int GetEntityWidth(void)                          { return m_entityW; }
-  int GetEntityHeight(void)                         { return m_entityH; }
+  // Entity Mutators.
+  int GetEntityX(void)                              { return m_entity.GetX(); }
+  int GetEntityY(void)                              { return m_entity.GetY(); }
+  int GetEntityWidth(void)                          { return m_entity.GetWidth(); }
+  int GetEntityHeight(void)                         { return m_entity.GetHeight(); }
 
+  // ZLevel Mutators.
   void SetZLevel(int arg)                           { m_zLevel = arg; }
   int GetZLevel(void)                               { return m_zLevel; }
 
+  // Map Transition Mutators.
   void SetMapTransitionName(string arg)             { m_mapTransitionName = arg; }
   string GetMapTransitionName(void)                 { return m_mapTransitionName; }
 
@@ -49,17 +50,8 @@ public:
   int GetMapTransitionY(void)                       { return m_mapTransitionY; }
 
 private:
-  SDL_Surface* m_entityTexture;
-  bool m_tileSolidity;
-  int m_tileX;
-  int m_tileY;
-
-  SDL_Surface* m_tileTexture;
-  bool m_entitySolidity;
-  int m_entityX;
-  int m_entityY;
-  int m_entityW;
-  int m_entityH;
+  MapElement m_tile;
+  MapEntityGeneric m_entity;
 
   // -1 is a 'special' tile, the next tile that the player walks
   // on is the players new zlevel.
