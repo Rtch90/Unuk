@@ -37,7 +37,8 @@ HEADERS += ../src/libUnuk/Debug.h \
     ../src/Unuk/Game.h \
     ../src/libUnuk/MapElement.h \
     ../src/libUnuk/MapEntities.h \
-    ../src/libUnuk/FPS.h
+    ../src/libUnuk/FPS.h \
+    ../src/libUnuk/DialogueBox.h
 SOURCES += ../src/libUnuk/Debug.cpp \
     ../src/Unuk/main.cpp \
     ../src/libUnuk/Input.cpp \
@@ -63,4 +64,5 @@ SOURCES += ../src/libUnuk/Debug.cpp \
     ../src/Unuk/Game.cpp \
     ../src/libUnuk/MapElement.cpp \
     ../src/libUnuk/MapEntities.cpp \
-    ../src/libUnuk/FPS.cpp
+    ../src/libUnuk/FPS.cpp \
+    ../src/libUnuk/DialogueBox.cpp

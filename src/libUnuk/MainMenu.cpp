@@ -59,42 +59,50 @@ MainMenu::~MainMenu(void) {
 
 }
 
-mainMenuNavVal_t MainMenu::HandleInput(void) {
-  while(SDL_PollEvent(&event)) {
-    btnNewGame.CheckMouseOver();
-    if(btnNewGameActive) {
-      btnNewGameYes.CheckMouseOver();
-      btnNewGameNo.CheckMouseOver();
-    }
+mainMenuNavVal_t MainMenu::Run(void) {
+  FPS fpsLimiter(20);
 
-    btnLoadGame.CheckMouseOver();
-    btnOptions.CheckMouseOver();
-    btnExit.CheckMouseOver();
+  while(1) {
+    Render();
+    SDL_Flip(screen);
 
-    if(event.type == SDL_MOUSEBUTTONUP) {
-      if(event.button.button == SDL_BUTTON_LEFT) {
-        if(btnNewGame.CheckMouseOver())
-          btnNewGameActive = !btnNewGameActive;
-        else if(btnLoadGame.CheckMouseOver())
-          return mainMenuLoadGame;
-        else if(btnOptions.CheckMouseOver())
-          return mainMenuOptions;
-        else if(btnExit.CheckMouseOver())
-          return mainMenuOptions;
+    while(SDL_PollEvent(&event)) {
+      btnNewGame.CheckMouseOver();
+      if(btnNewGameActive) {
+        btnNewGameYes.CheckMouseOver();
+        btnNewGameNo.CheckMouseOver();
+      }
 
-        if(btnNewGameActive) {
-          if(btnNewGameYes.CheckMouseOver())
-            return mainMenuNewGame;
-          else if(btnNewGameNo.CheckMouseOver())
-            btnNewGameActive = false;
+      btnLoadGame.CheckMouseOver();
+      btnOptions.CheckMouseOver();
+      btnExit.CheckMouseOver();
+
+      if(event.type == SDL_MOUSEBUTTONUP) {
+        if(event.button.button == SDL_BUTTON_LEFT) {
+          if(btnNewGame.CheckMouseOver())
+            btnNewGameActive = !btnNewGameActive;
+          else if(btnLoadGame.CheckMouseOver())
+            return mainMenuLoadGame;
+          else if(btnOptions.CheckMouseOver())
+            return mainMenuOptions;
+          else if(btnExit.CheckMouseOver())
+            return mainMenuExitGame;
+
+          if(btnNewGameActive) {
+            if(btnNewGameYes.CheckMouseOver())
+              return mainMenuNewGame;
+//            else if(btnNewGameNo.CheckMouseOver())
+//              return btnNewGameActive = false;
+          }
         }
       }
+      else if(event.type == SDL_QUIT) {
+        return mainMenuExitGame;
+      }
     }
-    else if(event.type == SDL_QUIT) {
-      return mainMenuExitGame;
-    }
+
+    fpsLimiter.LimitFPS();
   }
-  return mainMenuNothing;
 }
 
 void MainMenu::Render(void) {

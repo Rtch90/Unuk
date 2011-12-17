@@ -1,13 +1,14 @@
 #ifndef _MAINMENU_H_
 #define _MAINMENU_H_
+
 #include "../Unuk/Constants.h"
+#include "FPS.h"
 #include "Button.h"
 #include "Map.h"
 #include "Rect.h"
 #include "Text.h"
 
 enum mainMenuNavVal_t {
-  mainMenuNothing,
   mainMenuNewGame,
   mainMenuLoadGame,
   mainMenuOptions,
@@ -19,7 +20,7 @@ public:
   MainMenu(void);
   ~MainMenu(void);
 
-  mainMenuNavVal_t HandleInput(void);
+  mainMenuNavVal_t Run(void);
   void Render(void);
 
 private:

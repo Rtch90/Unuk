@@ -40,24 +40,9 @@ int main() {
   Game* game = NULL;
   MainMenu* menu = new MainMenu;
 
-  int fps;
-  int frame;
-  const int MAX_FPS = 20;
-
-  Timer frameTimer;
-  frameTimer.Start();
-
-  Timer fpsCalc;
-  fpsCalc.Start();
-
   bool menuRunning = true;
   while(menuRunning) {
-    menu->Render();
-    SDL_Flip(screen);
-
-    switch(menu->HandleInput()) {
-    case mainMenuNothing:
-      break;
+    switch(menu->Run()) {
     case mainMenuNewGame:
       delete menu;
       game = new Game;
@@ -82,28 +67,12 @@ int main() {
       delete menu;
       break;
     }
-    // Calculate and display the FPS.
-    if(fpsCalc.GetTicks() >= 1000) {
-      fps = frame / (fpsCalc.GetTicks() / 1000);
-
-      stringstream caption;
-      caption << "Unuk: fps - " << fps;
-
-      SDL_WM_SetCaption(caption.str().c_str(), NULL);
-
-      fpsCalc.Start();
-      frame = 0;
-    }
-    // Restrict the FPS.
-    if(1000 / MAX_FPS > frameTimer.GetTicks()) {
-      // SDL_Delay does not accept a float, so for higher
-      // framerate limits there is an innacuracy. This is
-      // as much as 3FPS at a limit of 60FPS.
-      SDL_Delay((1000 / MAX_FPS) - frameTimer.GetTicks());
-    }
-    frameTimer.Start();
-    frame++;
   }
+  //stringstream caption;
+  //caption << "Unuk - FPS: " << fps;
+
+  //SDL_WM_SetCaption(caption.str().c_str(), NULL);
+
   // Clean up after ourselves.
   Text::FreeFonts();
 

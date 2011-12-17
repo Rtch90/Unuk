@@ -6,7 +6,7 @@
 
 class FPS {
 public:
-  FPS(void);
+  FPS(int maxFPSArg);
   ~FPS(void);
 
   void LimitFPS(void);

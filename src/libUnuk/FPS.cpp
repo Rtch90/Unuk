@@ -1,7 +1,13 @@
 #include "FPS.h"
 
-FPS::FPS(void) {
+FPS::FPS(int maxFPSArg) {
+  _maxFPS = maxFPSArg;
 
+  _fps = 0;
+  _frame = 0;
+
+  _frameTimer.Start();
+  _fpsCalc.Start();
 }
 
 FPS::~FPS(void) {
