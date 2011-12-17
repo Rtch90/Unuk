@@ -1,6 +1,6 @@
 CC = g++
 CFLAGS = -ansi -Wall -g
-LDADD = -lGL -lGLU  -lglut -lSDL
+LDADD = -lGL -lGLU  -lglut -lSDL -lSDL_image -lSDL_gfx -lSDL_ttf -ltinyxml
 LDADDSTATIC = -Wl,-Bstatic -lSDL -lSDL_image -lopenal -lalut -L/usr/X11 -Wl,-Bdynamic -lasound -lartsc -lesd -lpulse -lpulse-simple -ldirectfb -lvga -laa -lcaca -ljpeg -ltiff -
 
 .PHONY: default static all clean
