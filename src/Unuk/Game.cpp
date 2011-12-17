@@ -161,8 +161,8 @@ void Game::Render(void) {
   } else {
     m_ingameMenu.Render();
   }
+
   SDL_Flip(screen);
-  //SDL_Flip(screen);
 }
 
 void Game::LoadSavegame(const string savegameIDArg) {

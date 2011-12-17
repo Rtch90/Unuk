@@ -23,8 +23,6 @@ void Map::Load(const string filename) {
   TiXmlElement* tileElem = NULL;
   TiXmlElement* dataElem = NULL;
 
-  // We will set x and y positions to zero for now, as we
-  // are going to set them withing the XML file.
   x = -1;
   y = -1;
 
