@@ -1,47 +1,47 @@
 #include "Timer.h"
 
 Timer::Timer(void) {
-  m_startTicks  = 0;
-  m_pausedTicks = 0;
-  m_paused  = false;
-  m_started = false;
+  _startTicks  = 0;
+  _pausedTicks = 0;
+  _paused  = false;
+  _started = false;
 }
 
 Timer::~Timer(void) {
 }
 
 void Timer::Start(void) {
-  m_paused  = false;
-  m_started = true;
-  m_startTicks = SDL_GetTicks();
+  _paused  = false;
+  _started = true;
+  _startTicks = SDL_GetTicks();
 }
 
 void Timer::Stop(void) {
-  m_paused  = false;
-  m_started = true;
+  _paused  = false;
+  _started = true;
 }
 
 void Timer::Pause(void) {
-  assert(m_paused == false);
-  m_paused = true;
+  assert(_paused == false);
+  _paused = true;
 
-  m_pausedTicks = SDL_GetTicks() - m_startTicks;
+  _pausedTicks = SDL_GetTicks() - _startTicks;
 }
 
 void Timer::Unpause(void) {
-  assert(m_paused == true);
-  m_paused = false;
+  assert(_paused == true);
+  _paused = false;
 
-  m_startTicks = SDL_GetTicks() - m_pausedTicks;
+  _startTicks = SDL_GetTicks() - _pausedTicks;
 
-  m_pausedTicks = 0;
+  _pausedTicks = 0;
 }
 
 int Timer::GetTicks(void) {
-  if(m_paused == true)
-    return m_pausedTicks;
-  else if(m_started == true)
-    return SDL_GetTicks() - m_startTicks;
+  if(_paused == true)
+    return _pausedTicks;
+  else if(_started == true)
+    return SDL_GetTicks() - _startTicks;
   else
     return 0;
 }

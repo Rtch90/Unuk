@@ -17,7 +17,7 @@ public:
   static Debug *logger;
 
 private: 
-  std::ofstream logFile;
+  std::ofstream _logFile;
 };
 
 #endif // _DEBUG_H_

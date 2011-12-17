@@ -1,11 +1,11 @@
 #include "NPC.h"
 
 NPC::NPC(Map* mapArg) : Character(mapArg) {
-  m_moveTimer.Start();
+  _moveTimer.Start();
   
-  m_moveChangeFrequency = 14000;
-  m_moveDurationMax	= 3000;
-  m_moveDurationMin	= 1000;
+  _moveChangeFrequency = 14000;
+  _moveDurationMax	= 3000;
+  _moveDurationMin	= 1000;
 }
 
 NPC::~NPC(void) {
@@ -15,28 +15,28 @@ NPC::~NPC(void) {
 void NPC::Update(void) {
   Move();
 
-  if(xVel > 0) m_directionFacing          = FACING_RIGHT;
-  else if(xVel < 0) m_directionFacing     = FACING_LEFT;
-  else if(yVel > 0) m_directionFacing     = FACING_DOWN;
-  else if(yVel < 0) m_directionFacing     = FACING_UP;
+  if(xVel > 0) directionFacing          = FACING_RIGHT;
+  else if(xVel < 0) directionFacing     = FACING_LEFT;
+  else if(yVel > 0) directionFacing     = FACING_DOWN;
+  else if(yVel < 0) directionFacing     = FACING_UP;
 }
 
 void NPC::Move(void) {
-  if(m_moving && m_moveTimer.GetTicks() > m_moveDurationMax) {
+  if(_moving && _moveTimer.GetTicks() > _moveDurationMax) {
     xVel = 0.0f;
     yVel = 0.0f;
-    m_moving = false;
+    _moving = false;
   }
   
-  if(m_moving && m_moveTimer.GetTicks() >= m_moveDurationCurrent) {
+  if(_moving && _moveTimer.GetTicks() >= _moveDurationCurrent) {
     xVel = 0.0f;
     yVel = 0.0f;
-    m_moving = false;
+    _moving = false;
   }
   
-  if(m_moveTimer.GetTicks() > m_moveChangeFrequency) {
-    m_moveTimer.Start();
-    m_moveDurationCurrent = m_moveDurationMin + (rand() % (m_moveDurationMax - m_moveDurationMin));
+  if(_moveTimer.GetTicks() > _moveChangeFrequency) {
+    _moveTimer.Start();
+    _moveDurationCurrent = _moveDurationMin + (rand() % (_moveDurationMax - _moveDurationMin));
     if(rand() % 2) {
       yVel = 0.0f;
       if(rand() % 2)
@@ -50,7 +50,7 @@ void NPC::Move(void) {
       else
         yVel = -CHARACTER_SPEED;
     }
-    m_moving = true;
+    _moving = true;
   }
   Character::Move();
 }

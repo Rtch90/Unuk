@@ -9,8 +9,8 @@ public:
   Texture(void);
   ~Texture(void);
 
-  int GetWidth(void)    { return texture->w; }
-  int GetHeight(void)   { return texture->h; }
+  int GetWidth(void)    { return _texture->w; }
+  int GetHeight(void)   { return _texture->h; }
   int GetX(void)        { return x; }
   int GetY(void)        { return y; }
 
@@ -30,7 +30,7 @@ protected:
   int x, y;
 
 private:
-  SDL_Surface* texture;
+  SDL_Surface* _texture;
 };
 
 #endif

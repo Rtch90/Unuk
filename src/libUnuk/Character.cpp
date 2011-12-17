@@ -8,22 +8,22 @@ static list<Character*>::iterator collisionIter;
 
 Character::Character(Map* mapArg) {
   map = mapArg;
-  m_attacking = false;
-  m_directionFacing = FACING_DOWN;
-  m_animationStage  = ANIM_NO_FOOT;
-  m_animationTimer.Start();
-  m_leftFoot = false;
+  attacking = false;
+  directionFacing = FACING_DOWN;
+  _animationStage  = ANIM_NO_FOOT;
+  _animationTimer.Start();
+  _leftFoot = false;
   
   xVel = 0.0f;
   yVel = 0.0f;
   
-  m_texture = NULL;
+  _texture = NULL;
   
   collisionList.push_front(this);
 }
 
 Character::~Character(void) {
-  SDL_FreeSurface(m_texture);
+  SDL_FreeSurface(_texture);
   for(collisionIter = collisionList.begin(); collisionIter != collisionList.end(); collisionIter++) {
     if((*collisionIter) == this) {
       collisionList.erase(collisionIter);
@@ -33,37 +33,37 @@ Character::~Character(void) {
 }
 
 void Character::LoadSprites(string filename, int wArg, int hArg) {
-  if(m_texture != NULL)
-    SDL_FreeSurface(m_texture);
+  if(_texture != NULL)
+    SDL_FreeSurface(_texture);
 
-  m_texture = LoadImageAlpha(filename.c_str());
+  _texture = LoadImageAlpha(filename.c_str());
 
   w = wArg;
   h = hArg;
 
   for(int m_direction = 0; m_direction < 4; m_direction++) {
     for(int m_action = 0; m_action < 4; m_action++) {
-      sprites[m_direction][m_action].x = w * m_action;
-      sprites[m_direction][m_action].y = h * m_direction;
-      sprites[m_direction][m_action].w = w;
-      sprites[m_direction][m_action].h = h;
+      _sprites[m_direction][m_action].x = w * m_action;
+      _sprites[m_direction][m_action].y = h * m_direction;
+      _sprites[m_direction][m_action].w = w;
+      _sprites[m_direction][m_action].h = h;
     }
   }
 }
 
 void Character::AddSpeachBubble(string text) {
-  m_speachBubble.push_back(text);
+  _speachBubble.push_back(text);
 
   //m_speachBubbleText.SetTextBlended(text, "small", 0, 0, 0);
 
-  if(m_speachBubbleTimer.IsStarted() == false)
-    m_speachBubbleTimer.Start();
+  if(_speachBubbleTimer.IsStarted() == false)
+    _speachBubbleTimer.Start();
 }
 
 void Character::Render(void) {
   // Draw some fancy speach bubbles. It is a bit of a mess, I am playing.
-  if(m_speachBubble.size() != 0) {
-    if(m_speachBubbleTimer.GetTicks() < SPEACH_BUBBLE_DISPLAY_LENGTH) {
+  if(_speachBubble.size() != 0) {
+    if(_speachBubbleTimer.GetTicks() < SPEACH_BUBBLE_DISPLAY_LENGTH) {
       roundedBoxRGBA(screen, (x + w / 2) - 100,
                      y - 100,
                      (x + w / 2) + 100,
@@ -78,53 +78,53 @@ void Character::Render(void) {
                        y - 40,
                        255, 255, 255, 255);
 
-      m_speachBubbleText.Render((x + w / 2) - 90, y - 90);
+      _speachBubbleText.Render((x + w / 2) - 90, y - 90);
     }
   }
 
-  if(m_attacking && m_attackTimer.GetTicks() < ATTACKING_DISPLAY_LEN) {
-    ApplySurface(x, y, m_texture, screen, &sprites[m_directionFacing][ANIM_ATTACK]);
+  if(attacking && attackTimer.GetTicks() < ATTACKING_DISPLAY_LEN) {
+    ApplySurface(x, y, _texture, screen, &_sprites[directionFacing][ANIM_ATTACK]);
     return;
   }
-  else if(m_attacking)
-    m_attacking = false;
+  else if(attacking)
+    attacking = false;
   
   if(xVel == 0.0f && yVel == 0.0f)
-    ApplySurface(x, y, m_texture, screen, &sprites[m_directionFacing][ANIM_NO_FOOT]);
+    ApplySurface(x, y, _texture, screen, &_sprites[directionFacing][ANIM_NO_FOOT]);
   else {
-    if(m_animationTimer.GetTicks() > ANIMATION_SPEED) {
-      if(m_animationStage == ANIM_NO_FOOT) {
-        if(m_leftFoot == true)
-          m_animationStage = ANIM_RIGHT_FOOT;
+    if(_animationTimer.GetTicks() > ANIMATION_SPEED) {
+      if(_animationStage == ANIM_NO_FOOT) {
+        if(_leftFoot == true)
+          _animationStage = ANIM_RIGHT_FOOT;
         else
-          m_animationStage = ANIM_LEFT_FOOT;
+          _animationStage = ANIM_LEFT_FOOT;
       }
-      else if(m_animationStage == ANIM_LEFT_FOOT) {
-        m_animationStage = ANIM_NO_FOOT;
-        m_leftFoot = true;
+      else if(_animationStage == ANIM_LEFT_FOOT) {
+        _animationStage = ANIM_NO_FOOT;
+        _leftFoot = true;
       }
-      else if(m_animationStage == ANIM_RIGHT_FOOT) {
-        m_animationStage = ANIM_NO_FOOT;
-        m_leftFoot = false;
+      else if(_animationStage == ANIM_RIGHT_FOOT) {
+        _animationStage = ANIM_NO_FOOT;
+        _leftFoot = false;
       }
-      m_animationTimer.Start();
+      _animationTimer.Start();
     }
-    ApplySurface(x, y, m_texture, screen, &sprites[m_directionFacing][m_animationStage]);
+    ApplySurface(x, y, _texture, screen, &_sprites[directionFacing][_animationStage]);
   }
 }
 
 void Character::Update(void) {
   Move();
 
-  if(m_speachBubble.size() != 0) {
-    if(m_speachBubbleTimer.GetTicks() > SPEACH_BUBBLE_DISPLAY_LENGTH) {
-      m_speachBubble.pop_front();
+  if(_speachBubble.size() != 0) {
+    if(_speachBubbleTimer.GetTicks() > SPEACH_BUBBLE_DISPLAY_LENGTH) {
+      _speachBubble.pop_front();
 
-      if(m_speachBubble.size() != 0) {
-        m_speachBubbleTimer.Start();
+      if(_speachBubble.size() != 0) {
+        _speachBubbleTimer.Start();
       }
     } else {
-      if(m_speachBubble.front() != m_speachBubbleText.GetText()) {
+      if(_speachBubble.front() != _speachBubbleText.GetText()) {
         //m_speachBubbleText.SetTextBlended(m_speachBubble.front(), "small", 0, 0, 0);
       }
     }

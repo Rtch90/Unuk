@@ -28,9 +28,9 @@ public:
   int GetHeight(void);
 
 protected:
-  SDL_Surface* m_texture;
+  SDL_Surface* _texture;
 
-  bool m_solid;
+  bool _solid;
 
   int x;
   int y;

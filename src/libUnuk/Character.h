@@ -56,14 +56,14 @@ protected:
   int tileX;
   int tileY;
   
-  Timer m_attackTimer;
-  bool m_attacking;
+  Timer attackTimer;
+  bool attacking;
   
   Map* map;
   
   static const float CHARACTER_SPEED;
   
-  int m_directionFacing;
+  int directionFacing;
   static const int FACING_UP     = 0;
   static const int FACING_RIGHT  = 1;
   static const int FACING_DOWN   = 2;
@@ -80,19 +80,19 @@ private:
 
   static const int SPEACH_BUBBLE_DISPLAY_LENGTH = 6000;
   
-  SDL_Surface* m_texture;
+  SDL_Surface* _texture;
   
   // [direction][action]
-  SDL_Rect sprites[4][4];
+  SDL_Rect _sprites[4][4];
   
-  Timer m_animationTimer;
-  int m_animationStage;
-  bool m_leftFoot;
+  Timer _animationTimer;
+  int _animationStage;
+  bool _leftFoot;
 
-  list<string> m_speachBubble;
-  list<string>::iterator m_speachBubbleIter;
-  Timer m_speachBubbleTimer;
-  Text m_speachBubbleText;
+  list<string> _speachBubble;
+  list<string>::iterator _speachBubbleIter;
+  Timer _speachBubbleTimer;
+  Text _speachBubbleText;
 };
 
 #endif

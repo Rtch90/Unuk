@@ -14,15 +14,15 @@ protected:
   void Move(void);
   
 private:
-  int m_moveChangeFrequency;
+  int _moveChangeFrequency;
   
-  int m_moveDurationCurrent;
-  int m_moveDurationMin;
-  int m_moveDurationMax;
+  int _moveDurationCurrent;
+  int _moveDurationMin;
+  int _moveDurationMax;
   
-  bool m_moving;
+  bool _moving;
   
-  Timer m_moveTimer;
+  Timer _moveTimer;
 };
 
 #endif

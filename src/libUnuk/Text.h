@@ -20,13 +20,13 @@ public:
   static void LoadFonts(void);
   static void FreeFonts(void);
 
-  int GetWidth(void)          { return m_text->w; }
-  int GetHeight(void)         { return m_text->h; }
+  int GetWidth(void)          { return _text->w; }
+  int GetHeight(void)         { return _text->h; }
   int GetX(void)              { return x; }
   int GetY(void)              { return y; }
 
-  string GetText(void)        { return m_textContents; }
-  SDL_Color GetColour(void)   { return m_textColour; }
+  string GetText(void)        { return _textContents; }
+  SDL_Color GetColour(void)   { return _textColour; }
 
   void SetXY(int xArg, int yArg);
 
@@ -43,9 +43,9 @@ public:
 private:
   int x, y, w, h;
 
-  string m_textContents;
-  SDL_Color m_textColour;
-  SDL_Surface* m_text;
+  string _textContents;
+  SDL_Color _textColour;
+  SDL_Surface* _text;
 
   static TTF_Font* vSmallFont;
   static TTF_Font* smallFont;

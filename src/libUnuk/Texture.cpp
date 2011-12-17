@@ -1,12 +1,12 @@
 #include "Texture.h"
 
 Texture::Texture(void) {
-  texture = NULL;
+  _texture = NULL;
 }
 
 Texture::~Texture(void) {
-  assert(texture != NULL);
-  SDL_FreeSurface(texture);
+  assert(_texture != NULL);
+  SDL_FreeSurface(_texture);
 }
 
 void Texture::SetXY(int xArg, int yArg) {
@@ -15,39 +15,39 @@ void Texture::SetXY(int xArg, int yArg) {
 }
 
 void Texture::Render(void) {
-  ApplySurface(x, y, texture, screen);
+  ApplySurface(x, y, _texture, screen);
 }
 
 void Texture::Render(int xArg, int yArg) {
-  ApplySurface(xArg, yArg, texture, screen);
+  ApplySurface(xArg, yArg, _texture, screen);
 }
 
 void Texture::RenderLiteral(void) {
-  ApplySurfaceLiteral(x, y, texture, screen);
+  ApplySurfaceLiteral(x, y, _texture, screen);
 }
 
 void Texture::RenderLiteral(int xArg, int yArg) {
-  ApplySurfaceLiteral(xArg, yArg,texture, screen);
+  ApplySurfaceLiteral(xArg, yArg,_texture, screen);
 }
 
 void Texture::Load(const char* filename) {
-  if(texture != NULL) {
+  if(_texture != NULL) {
     // Free the texture.
-    SDL_FreeSurface(texture);
+    SDL_FreeSurface(_texture);
   }
   // Load the texture.
-  texture = LoadImage(filename);
+  _texture = LoadImage(filename);
 }
 
 void Texture::LoadAlpha(const char* filename) {
-  if(texture != NULL) {
+  if(_texture != NULL) {
     // Free the texture.
-    SDL_FreeSurface(texture);
+    SDL_FreeSurface(_texture);
   }
   // Load the texture with an alpha channel.
-  texture = LoadImageAlpha(filename);
+  _texture = LoadImageAlpha(filename);
 }
 
 void Texture::SetAlpha(int alphaArg) {
-  SDL_SetAlpha(texture, SDL_SRCALPHA, alphaArg);
+  SDL_SetAlpha(_texture, SDL_SRCALPHA, alphaArg);
 }

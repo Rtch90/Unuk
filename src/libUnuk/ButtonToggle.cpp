@@ -25,11 +25,11 @@ void ButtonToggle::SetOffRGB(SDL_Color colour) {
 }
 
 void ButtonToggle::SetOnRGB(Uint8 r, Uint8 g, Uint8 b) {
-  m_onColour.r = r;
-  m_onColour.g = g;
-  m_onColour.b = b;
+  _onColour.r = r;
+  _onColour.g = g;
+  _onColour.b = b;
 }
 
 void ButtonToggle::SetOnRGB(SDL_Color colour) {
-  m_onColour = colour;
+  _onColour = colour;
 }

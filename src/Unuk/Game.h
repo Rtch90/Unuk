@@ -40,22 +40,22 @@ private:
   static const int GAME_UPDATES_PER_SECOND = 60;
   static const int SKIP_TICKS = 1000 / GAME_UPDATES_PER_SECOND;
 
-  bool m_gameRunning;
+  bool _gameRunning;
 
-  gameNavVal_t m_runGameReturnValue;
+  gameNavVal_t _runGameReturnValue;
 
-  string m_saveGameID;
-  string m_mapID;
+  string _saveGameID;
+  string _mapID;
 
-  Text m_gameUpdateTime;
-  Text m_gameRenderTime;
-  Text m_playerXY;
+  Text _gameUpdateTime;
+  Text _gameRenderTime;
+  Text _playerXY;
 
-  IngameMenu m_ingameMenu;
-  Map m_map;
+  IngameMenu _ingameMenu;
+  Map _map;
 
-  Player* m_player;
-  NPC* m_npc;
+  Player* _player;
+  NPC* _npc;
 };
 
 #endif

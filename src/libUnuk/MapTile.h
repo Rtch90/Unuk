@@ -15,52 +15,52 @@ public:
   MapTile(void)                                     {  }
   ~MapTile(void)                                    {  }
 
-  void Render(void)                                 { m_tile.Render(), m_entity.Render(); }
+  void Render(void)                                 { _tile.Render(), _entity.Render(); }
 
   // Tile Mutators.
-  SDL_Surface SetTileTexture(SDL_Surface* arg)      { m_tile.SetTexture(arg); }
-  void SetTileSolidity(bool arg)                    { m_tile.SetSolidity(arg); }
-  bool GetTileSolidity(void)                        { return m_tile.GetSolidity(); }
-  void SetTileXY(int xArg, int yArg)                { m_tile.GetX(), m_tile.GetY(); }
-  int GetTileX(void)                                { return m_tile.GetX(); }
-  int GetTileY(void)                                { return m_tile.GetY(); }
+  SDL_Surface SetTileTexture(SDL_Surface* arg)      { _tile.SetTexture(arg); }
+  void SetTileSolidity(bool arg)                    { _tile.SetSolidity(arg); }
+  bool GetTileSolidity(void)                        { return _tile.GetSolidity(); }
+  void SetTileXY(int xArg, int yArg)                { _tile.GetX(), _tile.GetY(); }
+  int GetTileX(void)                                { return _tile.GetX(); }
+  int GetTileY(void)                                { return _tile.GetY(); }
 
   // Entity Mutators.
-  void SetEntityTexture(SDL_Surface* arg)           { m_entity.SetTexture(arg); }
-  void SetEntityXY(int xArg, int yArg)              { m_entity.SetXY(xArg, yArg); }
-  void SetEntitySolidity(bool arg)                  { m_entity.SetSolidity(arg); }
-  bool GetEntitySolitity(void)                      { return m_entity.GetSolidity(); }
+  void SetEntityTexture(SDL_Surface* arg)           { _entity.SetTexture(arg); }
+  void SetEntityXY(int xArg, int yArg)              { _entity.SetXY(xArg, yArg); }
+  void SetEntitySolidity(bool arg)                  { _entity.SetSolidity(arg); }
+  bool GetEntitySolitity(void)                      { return _entity.GetSolidity(); }
 
   // Entity Mutators.
-  int GetEntityX(void)                              { return m_entity.GetX(); }
-  int GetEntityY(void)                              { return m_entity.GetY(); }
-  int GetEntityWidth(void)                          { return m_entity.GetWidth(); }
-  int GetEntityHeight(void)                         { return m_entity.GetHeight(); }
+  int GetEntityX(void)                              { return _entity.GetX(); }
+  int GetEntityY(void)                              { return _entity.GetY(); }
+  int GetEntityWidth(void)                          { return _entity.GetWidth(); }
+  int GetEntityHeight(void)                         { return _entity.GetHeight(); }
 
   // ZLevel Mutators.
-  void SetZLevel(int arg)                           { m_zLevel = arg; }
-  int GetZLevel(void)                               { return m_zLevel; }
+  void SetZLevel(int arg)                           { _zLevel = arg; }
+  int GetZLevel(void)                               { return _zLevel; }
 
   // Map Transition Mutators.
-  void SetMapTransitionName(string arg)             { m_mapTransitionName = arg; }
-  string GetMapTransitionName(void)                 { return m_mapTransitionName; }
+  void SetMapTransitionName(string arg)             { _mapTransitionName = arg; }
+  string GetMapTransitionName(void)                 { return _mapTransitionName; }
 
-  void SetMapTransitionXY(int xArg, int yArg)       { m_mapTransitionX = xArg, m_mapTransitionY = yArg; }
-  int GetMapTransitionX(void)                       { return m_mapTransitionX; }
-  int GetMapTransitionY(void)                       { return m_mapTransitionY; }
+  void SetMapTransitionXY(int xArg, int yArg)       { _mapTransitionX = xArg, _mapTransitionY = yArg; }
+  int GetMapTransitionX(void)                       { return _mapTransitionX; }
+  int GetMapTransitionY(void)                       { return _mapTransitionY; }
 
 private:
-  MapElement m_tile;
-  MapEntityGeneric m_entity;
+  MapElement _tile;
+  MapEntityGeneric _entity;
 
   // -1 is a 'special' tile, the next tile that the player walks
   // on is the players new zlevel.
-  int m_zLevel;
+  int _zLevel;
 
   // If not 'null', switch map when the player walks on this tile.
-  string m_mapTransitionName;
-  int m_mapTransitionX;
-  int m_mapTransitionY;
+  string _mapTransitionName;
+  int _mapTransitionX;
+  int _mapTransitionY;
 };
 
 #endif

@@ -9,11 +9,11 @@ MapElement::~MapElement(void) {
 }
 
 void MapElement::SetTexture(SDL_Surface* arg) {
-  m_texture = arg;
+  _texture = arg;
 }
 
 void MapElement::Render(void) {
-  ApplySurface(x, y, m_texture, screen);
+  ApplySurface(x, y, _texture, screen);
 }
 
 void MapElement::Update(void) {
@@ -21,11 +21,11 @@ void MapElement::Update(void) {
 }
 
 void MapElement::SetSolidity(bool arg) {
-  m_solid = arg;
+  _solid = arg;
 }
 
 bool MapElement::GetSolidity(void) {
-  return m_solid;
+  return _solid;
 }
 
 void MapElement::SetXY(int xArg, int yArg) {
@@ -35,5 +35,5 @@ void MapElement::SetXY(int xArg, int yArg) {
 
 int MapElement::GetX(void)        { return x; }
 int MapElement::GetY(void)        { return y; }
-int MapElement::GetWidth(void)    { return m_texture->w; }
-int MapElement::GetHeight(void)   { return m_texture->h; }
+int MapElement::GetWidth(void)    { return _texture->w; }
+int MapElement::GetHeight(void)   { return _texture->h; }

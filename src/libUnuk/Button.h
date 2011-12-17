@@ -35,9 +35,9 @@ public:
   void Render(int xArg, int yArg);
 
 private:
-  SDL_Color m_mouseOutColour;
-  SDL_Color m_mouseOverColour;
-  SDL_Color m_textColour;
+  SDL_Color _mouseOutColour;
+  SDL_Color _mouseOverColour;
+  SDL_Color _textColour;
 
   int x;
   int y;
@@ -45,7 +45,7 @@ private:
   int h;
 
   Rect button;
-  Text m_text;
+  Text _text;
 };
 
 #endif

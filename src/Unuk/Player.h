@@ -15,7 +15,7 @@ public:
   void Update(void);
 
   void SetName(string nameArg);
-  string GetName(void) { return m_name; }
+  string GetName(void) { return _name; }
 
 protected:
   void Move(void);
@@ -25,7 +25,7 @@ private:
   void SetCamera(void);
   static const float PLAYER_SPEED;
 
-  string m_name;
+  string _name;
 };
 
 #endif

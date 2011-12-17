@@ -16,19 +16,19 @@ public:
   void Start(void);
   void Stop(void);
 
-  bool IsPaused(void)  { return m_paused; }
-  bool IsStarted(void) { return m_started; }
+  bool IsPaused(void)  { return _paused; }
+  bool IsStarted(void) { return _started; }
 
   int GetTicks(void);
 
   string GetTicksStr(void);
 
 private:
-  bool m_paused;
-  bool m_started;
+  bool _paused;
+  bool _started;
 
-  int  m_startTicks;
-  int  m_pausedTicks;
+  int  _startTicks;
+  int  _pausedTicks;
 };
 
 #endif

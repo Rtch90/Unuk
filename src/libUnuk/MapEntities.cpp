@@ -1,7 +1,7 @@
 #include "MapEntities.h"
 
 MapEntityGeneric::MapEntityGeneric(void) {
-  m_texture = NULL;
+  _texture = NULL;
 
 }
 
@@ -10,7 +10,7 @@ MapEntityGeneric::~MapEntityGeneric(void) {
 }
 
 void MapEntityGeneric::Render(void) {
-  if(m_texture != NULL) {
+  if(_texture != NULL) {
     MapElement::Render();
   }
 }

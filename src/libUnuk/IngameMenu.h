@@ -23,11 +23,11 @@ public:
   ingameMenuNavVal_t HandleInput(void);
   void Render(void);
 
-  void SetStatus(bool arg)  { m_active = arg; }
-  bool GetStatus(void)      { return m_active; }
+  void SetStatus(bool arg)  { _active = arg; }
+  bool GetStatus(void)      { return _active; }
 
 private:
-  bool m_active;
+  bool _active;
 
   Button btnResume;
   Button btnSaveGame;

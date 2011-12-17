@@ -7,12 +7,12 @@ TTF_Font* Text::largeFont    = NULL;
 TTF_Font* Text::vLargeFont   = NULL;
 
 Text::Text(void) {
-  m_text = NULL;
+  _text = NULL;
 }
 
 Text::~Text(void) {
-  assert(m_text != NULL);
-  SDL_FreeSurface(m_text);
+  assert(_text != NULL);
+  SDL_FreeSurface(_text);
 }
 
 void Text::LoadFonts(void) {
@@ -51,29 +51,29 @@ void Text::SetXY(int xArg, int yArg) {
 }
 
 int Text::SetTextBlended(string textArg, textSizes_t size, SDL_Color colour) {
-  m_textContents = textArg;
+  _textContents = textArg;
 
-  if(m_text != NULL) {
-    SDL_FreeSurface(m_text);
+  if(_text != NULL) {
+    SDL_FreeSurface(_text);
   }
 
   if(size == vsmall) {
-    m_text = TTF_RenderText_Blended(vSmallFont, textArg.c_str(), colour);
+    _text = TTF_RenderText_Blended(vSmallFont, textArg.c_str(), colour);
     return 1;
   }
   else if(size == small) {
-    m_text = TTF_RenderText_Blended(smallFont, textArg.c_str(), colour);
+    _text = TTF_RenderText_Blended(smallFont, textArg.c_str(), colour);
     return 1;
   }
   else if(size == medium) {
-    m_text = TTF_RenderText_Blended(mediumFont, textArg.c_str(), colour);
+    _text = TTF_RenderText_Blended(mediumFont, textArg.c_str(), colour);
     return 1;
   }
   else if(size == large) {
-    m_text = TTF_RenderText_Blended(largeFont, textArg.c_str(), colour);
+    _text = TTF_RenderText_Blended(largeFont, textArg.c_str(), colour);
     return 1;
   } else {
-    m_text = TTF_RenderText_Blended(vLargeFont, textArg.c_str(), colour);
+    _text = TTF_RenderText_Blended(vLargeFont, textArg.c_str(), colour);
     return 1;
   }
 }
@@ -84,29 +84,29 @@ int Text::SetTextBlended(string textArg, textSizes_t size, Uint8 r, Uint8 g, Uin
 }
 
 int Text::SetTextShaded(string textArg, textSizes_t size, SDL_Color colour, SDL_Color bgColour) {
-  m_textContents = textArg;
+  _textContents = textArg;
 
-  if(m_text != NULL) {
-    SDL_FreeSurface(m_text);
+  if(_text != NULL) {
+    SDL_FreeSurface(_text);
   }
 
   if(size == vsmall) {
-    m_text = TTF_RenderText_Shaded(vSmallFont, textArg.c_str(), colour, bgColour);
+    _text = TTF_RenderText_Shaded(vSmallFont, textArg.c_str(), colour, bgColour);
     return 1;
   }
   else if(size == small) {
-    m_text = TTF_RenderText_Shaded(smallFont, textArg.c_str(), colour, bgColour);
+    _text = TTF_RenderText_Shaded(smallFont, textArg.c_str(), colour, bgColour);
     return 1;
   }
   else if(size == medium) {
-    m_text = TTF_RenderText_Shaded(mediumFont, textArg.c_str(), colour, bgColour);
+    _text = TTF_RenderText_Shaded(mediumFont, textArg.c_str(), colour, bgColour);
     return 1;
   }
   else if(size == large) {
-    m_text = TTF_RenderText_Shaded(largeFont, textArg.c_str(), colour, bgColour);
+    _text = TTF_RenderText_Shaded(largeFont, textArg.c_str(), colour, bgColour);
     return 1;
   } else {
-    m_text = TTF_RenderText_Shaded(vLargeFont, textArg.c_str(), colour, bgColour);
+    _text = TTF_RenderText_Shaded(vLargeFont, textArg.c_str(), colour, bgColour);
     return 1;
   }
 }
@@ -118,17 +118,17 @@ int Text::SetTextShaded(string textArg, textSizes_t size, Uint8 rF, Uint8 gF, Ui
 }
 
 void Text::Render(void) {
-  ApplySurface(x, y, m_text, screen);
+  ApplySurface(x, y, _text, screen);
 }
 
 void Text::Render(int xArg, int yArg) {
-  ApplySurface(xArg, yArg, m_text, screen);
+  ApplySurface(xArg, yArg, _text, screen);
 }
 
 void Text::RenderLiteral(void) {
-  ApplySurfaceLiteral(x, y, m_text, screen);
+  ApplySurfaceLiteral(x, y, _text, screen);
 }
 
 void Text::RenderLiteral(int xArg, int yArg) {
-  ApplySurfaceLiteral(xArg, yArg, m_text, screen);
+  ApplySurfaceLiteral(xArg, yArg, _text, screen);
 }

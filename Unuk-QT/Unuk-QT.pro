@@ -26,7 +26,6 @@ HEADERS += ../src/libUnuk/Debug.h \
     ../src/libUnuk/Map.h \
     ../src/libUnuk/Button.h \
     ../src/libUnuk/ButtonToggle.h \
-    ../src/libUnuk/Menu.h \
     ../src/libUnuk/MainMenu.h \
     ../src/libUnuk/ParticleEmitter.h \
     ../src/libUnuk/IngameMenu.h \

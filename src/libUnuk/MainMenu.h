@@ -24,7 +24,7 @@ public:
   void Render(void);
 
 private:
-  Map m_background;
+  Map _background;
 
   Text lblMenu;
 

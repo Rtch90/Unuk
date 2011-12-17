@@ -22,18 +22,18 @@ public:
   void SetOffText(string);
 
   void SetState(bool);
-  bool GetState(void) { return m_state; }
+  bool GetState(void) { return _state; }
 
   bool CheckMouseOver(void);
 
   void Render(void);
 
 private:
-  bool m_state;
+  bool _state;
 
-  SDL_Colour m_onColour;
+  SDL_Colour _onColour;
 
-  Text m_onText;
+  Text _onText;
 };
 
 

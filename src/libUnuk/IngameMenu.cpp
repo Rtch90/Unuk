@@ -1,7 +1,7 @@
 #include "IngameMenu.h"
 
 IngameMenu::IngameMenu(void) {
-  m_active = false;
+  _active = false;
 
   btnResume.SetOutRGB(200, 200, 200);
   btnResume.SetOverRGB(255, 255, 255);

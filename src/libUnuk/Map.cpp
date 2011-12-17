@@ -10,7 +10,7 @@ Map::~Map(void) {
 
 void Map::Load(const string filename) {
   Unload();
-  m_currentMap = filename;
+  _currentMap = filename;
   string fullMapPath = "../Data/Media/Maps/" + filename;
   TiXmlDocument mapFile(fullMapPath);
 
@@ -43,14 +43,14 @@ void Map::Load(const string filename) {
       assert(tileElem != NULL);
       while(tileElem) {
         x++;
-        m_tile[x][y].SetTileXY(x * TILE_WIDTH, y * TILE_HEIGHT);
+        _tile[x][y].SetTileXY(x * TILE_WIDTH, y * TILE_HEIGHT);
 
         // <tileTexture> - Apply a teture to the tile.
         dataElem = tileElem->FirstChildElement("tileTexture");
         assert(dataElem != NULL);
         stringstream tilePath;
         tilePath << "../Data/Media/Images/Tiles/" << dataElem->GetText() << ".png";
-        m_tile[x][y].SetTileTexture(m_tileTextures.Add(tilePath.str()));
+        _tile[x][y].SetTileTexture(_tileTextures.Add(tilePath.str()));
         // <tileTexture> - Finished applying the texture, move to the next sibling.
 
         // <solidTile> - Check to see if the tile is solid or not.
@@ -59,9 +59,9 @@ void Map::Load(const string filename) {
         string tileSolidity = dataElem->GetText();
         assert(tileSolidity == "false" || tileSolidity == "true");
         if(tileSolidity == "false")
-          m_tile[x][y].SetTileSolidity(false);
+          _tile[x][y].SetTileSolidity(false);
         else
-          m_tile[x][y].SetTileSolidity(true);
+          _tile[x][y].SetTileSolidity(true);
         // </solidTile>
 
         // <entityTexture>
@@ -71,10 +71,10 @@ void Map::Load(const string filename) {
         if(entityName != "null") {
           stringstream entityPath;
           entityPath << "../Data/Media/Images/Entities/" << entityName << ".png";
-          m_tile[x][y].SetEntityTexture(m_entityTextures.AddAlpha(entityPath.str()));
+          _tile[x][y].SetEntityTexture(_entityTextures.AddAlpha(entityPath.str()));
 
-          m_tile[x][y].SetEntityXY(m_tile[x][y].GetTileX() + TILE_WIDTH  / 2 - m_tile[x][y].GetEntityWidth()  / 2,
-                                   m_tile[x][y].GetTileY() + TILE_HEIGHT / 2 - m_tile[x][y].GetEntityHeight() / 2);
+          _tile[x][y].SetEntityXY(_tile[x][y].GetTileX() + TILE_WIDTH  / 2 - _tile[x][y].GetEntityWidth()  / 2,
+                                   _tile[x][y].GetTileY() + TILE_HEIGHT / 2 - _tile[x][y].GetEntityHeight() / 2);
         }
         // </entityTexture>
 
@@ -84,21 +84,21 @@ void Map::Load(const string filename) {
         string entitySolidity = dataElem->GetText();
         assert(entitySolidity == "false" || entitySolidity == "true");
         if(entitySolidity == "false")
-          m_tile[x][y].SetEntitySolidity(false);
+          _tile[x][y].SetEntitySolidity(false);
         else
-          m_tile[x][y].SetEntitySolidity(true);
+          _tile[x][y].SetEntitySolidity(true);
         // </solidEntity>
 
         // <zlevel>
         dataElem = dataElem->NextSiblingElement("zLevel");
         assert(dataElem != NULL);
-        m_tile[x][y].SetZLevel(atoi(dataElem->GetText()));
+        _tile[x][y].SetZLevel(atoi(dataElem->GetText()));
         // </zlevel>
 
         // <mapTransition>
         dataElem = dataElem->NextSiblingElement("mapTransition");
         assert(dataElem != NULL);
-        m_tile[x][y].SetMapTransitionName(dataElem->GetText());
+        _tile[x][y].SetMapTransitionName(dataElem->GetText());
         // </mapTransition>
 
         // <mapTransX>
@@ -147,30 +147,30 @@ void Map::Render(void) {
 
   for(int i = xOrig; i < xEnd; i++) {
     for(int j = yOrig; j < yEnd; j++) {
-      m_tile[i][j].Render();
+      _tile[i][j].Render();
     }
   }
 }
 
 void Map::Unload(void) {
-  m_tileTextures.Unload();
-  m_entityTextures.Unload();
+  _tileTextures.Unload();
+  _entityTextures.Unload();
 }
 
 string Map::GetCurrentMap(void) {
-  return m_currentMap;
+  return _currentMap;
 }
 
 bool Map::GetTileSolidity(int xArg, int yArg) {
-  return m_tile[xArg + 1][yArg + 1].GetTileSolidity();
+  return _tile[xArg + 1][yArg + 1].GetTileSolidity();
 }
 
 int Map::GetTileX(int xArg, int yArg) {
-  return m_tile[xArg + 1][yArg + 1].GetTileX();
+  return _tile[xArg + 1][yArg + 1].GetTileX();
 }
 
 int Map::GetTileY(int xArg, int yArg) {
-  return m_tile[xArg + 1][yArg + 1].GetTileY();
+  return _tile[xArg + 1][yArg + 1].GetTileY();
 }
 
 bool Map::GetEntitySolidity(int xArg, int yArg) {
@@ -178,37 +178,37 @@ bool Map::GetEntitySolidity(int xArg, int yArg) {
     return false;
   }
 
-  return m_tile[xArg + 1][yArg + 1].GetEntitySolitity();
+  return _tile[xArg + 1][yArg + 1].GetEntitySolitity();
 }
 
 int Map::GetEntityX(int xArg, int yArg) {
-  return m_tile[xArg + 1][yArg + 1].GetEntityX();
+  return _tile[xArg + 1][yArg + 1].GetEntityX();
 }
 
 int Map::GetEntityY(int xArg, int yArg) {
-  return m_tile[xArg + 1][yArg + 1].GetEntityY();
+  return _tile[xArg + 1][yArg + 1].GetEntityY();
 }
 
 int Map::GetEntityWidth(int xArg, int yArg) {
-  return m_tile[xArg + 1][yArg + 1].GetEntityWidth();
+  return _tile[xArg + 1][yArg + 1].GetEntityWidth();
 }
 
 int Map::GetEntityHeight(int xArg, int yArg) {
-  return m_tile[xArg + 1][yArg + 1].GetEntityHeight();
+  return _tile[xArg + 1][yArg + 1].GetEntityHeight();
 }
 
 int Map::GetTileZLevel(int xArg, int yArg) {
-  return m_tile[xArg + 1][yArg + 1].GetZLevel();
+  return _tile[xArg + 1][yArg + 1].GetZLevel();
 }
 
 string Map::GetMapTransitionName(int xArg, int yArg) {
-  return m_tile[xArg + 1][yArg + 1].GetMapTransitionName();
+  return _tile[xArg + 1][yArg + 1].GetMapTransitionName();
 }
 
 int Map::GetMapTransitionX(int xArg, int yArg) {
-  return m_tile[xArg + 1][yArg + 1].GetMapTransitionX();
+  return _tile[xArg + 1][yArg + 1].GetMapTransitionX();
 }
 
 int Map::GetMapTransitionY(int xArg, int yArg) {
-  return m_tile[xArg + 1][yArg + 1].GetMapTransitionY();
+  return _tile[xArg + 1][yArg + 1].GetMapTransitionY();
 }

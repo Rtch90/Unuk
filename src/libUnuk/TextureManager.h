@@ -32,9 +32,9 @@ private:
 
   // We should not need more than a hundred..
   static const int TEXTURE_ARR_SIZE = 100;
-  textureNode textures[TEXTURE_ARR_SIZE];
+  textureNode _textures[TEXTURE_ARR_SIZE];
 
-  int m_allocated;
+  int _allocated;
 };
 
 #endif

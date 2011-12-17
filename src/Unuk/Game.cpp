@@ -1,23 +1,23 @@
 #include "Game.h"
 
 Game::Game(void) {
-  m_player = new Player(&m_map);
-  m_npc = new NPC(&m_map);
+  _player = new Player(&_map);
+  _npc = new NPC(&_map);
 
-  m_runGameReturnValue = gameMainMenu;
+  _runGameReturnValue = gameMainMenu;
 }
 
 Game::~Game(void) {
-  delete m_player;
-  delete m_npc;
+  delete _player;
+  delete _npc;
 }
 
 gameNavVal_t Game::Run(const string savegameIDArg) {
-  m_player->SetXY(50, 50);
-  m_player->LoadSprites("../Data/Media/Images/Characters/template.png", 40, 45);
+  _player->SetXY(50, 50);
+  _player->LoadSprites("../Data/Media/Images/Characters/template.png", 40, 45);
 
-  m_npc->SetXY(300, 300);
-  m_npc->LoadSprites("../Data/Media/Images/Characters/template.png", 40,45);
+  _npc->SetXY(300, 300);
+  _npc->LoadSprites("../Data/Media/Images/Characters/template.png", 40,45);
 
   LoadSavegame(savegameIDArg);
 
@@ -34,18 +34,18 @@ gameNavVal_t Game::Run(const string savegameIDArg) {
   Timer renderTimer;
   Timer updateTimer;
 
-  m_gameRenderTime.SetXY(10, 10);
-  m_gameRenderTime.SetTextBlended("Render - XX", vsmall, COLOUR_BLACK);
+  _gameRenderTime.SetXY(10, 10);
+  _gameRenderTime.SetTextBlended("Render - XX", vsmall, COLOUR_BLACK);
 
-  m_gameUpdateTime.SetXY(10, 30);
-  m_gameUpdateTime.SetTextBlended("Update - XX", vsmall, COLOUR_BLACK);
+  _gameUpdateTime.SetXY(10, 30);
+  _gameUpdateTime.SetTextBlended("Update - XX", vsmall, COLOUR_BLACK);
 
   stringstream playerXYString;
-  m_playerXY.SetXY(10, 50);
-  m_playerXY.SetTextBlended("Player coords - XX XX", vsmall, COLOUR_BLACK);
+  _playerXY.SetXY(10, 50);
+  _playerXY.SetTextBlended("Player coords - XX XX", vsmall, COLOUR_BLACK);
 
-  m_gameRunning = true;
-  while(m_gameRunning) {
+  _gameRunning = true;
+  while(_gameRunning) {
     updateTimer.Start();
     while((int)SDL_GetTicks() > nextGameTick) {
       HandleInput();
@@ -73,12 +73,12 @@ gameNavVal_t Game::Run(const string savegameIDArg) {
 
       // Check to see if we are allowed to display debug info.
       if(debugEnabled) {
-        m_gameUpdateTime.SetTextBlended("Update - " + updateTimer.GetTicksStr(), vsmall, COLOUR_BLACK);
-        m_gameRenderTime.SetTextBlended("Render - " + renderTimer.GetTicksStr(), vsmall, COLOUR_BLACK);
+        _gameUpdateTime.SetTextBlended("Update - " + updateTimer.GetTicksStr(), vsmall, COLOUR_BLACK);
+        _gameRenderTime.SetTextBlended("Render - " + renderTimer.GetTicksStr(), vsmall, COLOUR_BLACK);
 
         playerXYString.str("");
-        playerXYString << "Player coords: x" << m_player->GetX() << ", y" << m_player->GetY();
-        m_playerXY.SetTextBlended(playerXYString.str(), vsmall, COLOUR_BLACK);
+        playerXYString << "Player coords: x" << _player->GetX() << ", y" << _player->GetY();
+        _playerXY.SetTextBlended(playerXYString.str(), vsmall, COLOUR_BLACK);
       }
     }
     // Restrict the fps.
@@ -91,32 +91,32 @@ gameNavVal_t Game::Run(const string savegameIDArg) {
     frameTimer.Start();
     frame++;
   }
-  return m_runGameReturnValue;
+  return _runGameReturnValue;
 }
 
 void Game::HandleInput(void) {
-  if(m_ingameMenu.GetStatus() == false) {
+  if(_ingameMenu.GetStatus() == false) {
     while(SDL_PollEvent(&event)) {
-      m_player->HandleInput();
+      _player->HandleInput();
 
       if(event.key.type == SDL_KEYDOWN) {
         if(event.key.keysym.sym == SDLK_ESCAPE)
-          m_ingameMenu.SetStatus(true);
+          _ingameMenu.SetStatus(true);
         if(event.key.keysym.sym == SDLK_p)
           debugEnabled = !debugEnabled;
       }
       else if(event.type == SDL_QUIT) {
-        m_gameRunning = false;
-        m_runGameReturnValue = gameQuitGame;
+        _gameRunning = false;
+        _runGameReturnValue = gameQuitGame;
         break;
       }
     }
   } else {
-    switch(m_ingameMenu.HandleInput()) {
+    switch(_ingameMenu.HandleInput()) {
     case ingameMenuNothing:
       break;
     case ingameMenuResume:
-      m_ingameMenu.SetStatus(false);
+      _ingameMenu.SetStatus(false);
       break;
     case ingameMenuSaveGame:
       break;
@@ -125,49 +125,49 @@ void Game::HandleInput(void) {
     case ingameMenuOptions:
       break;
     case ingameMenuMainMenu:
-      m_gameRunning = false;
+      _gameRunning = false;
       break;
     }
 
     if(event.type == SDL_QUIT) {
-      m_gameRunning = false;
-      m_ingameMenu.SetStatus(false);
-      m_runGameReturnValue = gameQuitGame;
+      _gameRunning = false;
+      _ingameMenu.SetStatus(false);
+      _runGameReturnValue = gameQuitGame;
     }
   }
 }
 
 void Game::UpdateGame(void) {
-  if(m_ingameMenu.GetStatus() == false) {
-    m_player->Update();
-    m_npc->Update();
+  if(_ingameMenu.GetStatus() == false) {
+    _player->Update();
+    _npc->Update();
   } else {
     // :D
   }
 }
 
 void Game::Render(void) {
-  if(m_ingameMenu.GetStatus() == false) {
-    m_map.Render();
+  if(_ingameMenu.GetStatus() == false) {
+    _map.Render();
 
-    m_player->Render();
-    m_npc->Render();
+    _player->Render();
+    _npc->Render();
 
     if(debugEnabled) {
-      m_gameRenderTime.RenderLiteral();
-      m_gameUpdateTime.RenderLiteral();
-      m_playerXY.RenderLiteral();
+      _gameRenderTime.RenderLiteral();
+      _gameUpdateTime.RenderLiteral();
+      _playerXY.RenderLiteral();
     }
   } else {
-    m_ingameMenu.Render();
+    _ingameMenu.Render();
   }
 
   SDL_Flip(screen);
 }
 
 void Game::LoadSavegame(const string savegameIDArg) {
-  m_saveGameID = savegameIDArg;
-  string saveFilename = "../Save/" + m_saveGameID;
+  _saveGameID = savegameIDArg;
+  string saveFilename = "../Save/" + _saveGameID;
 
   // Converting to XML ftw!
   TiXmlDocument mapFile(saveFilename.c_str());
@@ -183,7 +183,7 @@ void Game::LoadSavegame(const string savegameIDArg) {
     // <name> - Parse the player name.
     dataElem = rootElem->FirstChildElement("name");
     assert(dataElem != NULL);
-    m_player->SetName(dataElem->GetText());
+    _player->SetName(dataElem->GetText());
     // </name>
     
     // <x> - Parse the player x coord.
@@ -198,12 +198,12 @@ void Game::LoadSavegame(const string savegameIDArg) {
     int playerY = atoi(dataElem->GetText());
     // </y>
     
-    m_player->SetXY(playerX, playerY);
+    _player->SetXY(playerX, playerY);
     
     // <map> - Parse the map file.
     dataElem = dataElem->NextSiblingElement("map");
     assert(dataElem != NULL);
-    m_map.Load(dataElem->GetText());
+    _map.Load(dataElem->GetText());
     // </map>
   }
   // <save>
@@ -212,7 +212,7 @@ void Game::LoadSavegame(const string savegameIDArg) {
 }
 
 void Game::SaveSavegame(void) {
-  string saveFilename = "../Save/" + m_saveGameID;
+  string saveFilename = "../Save/" + _saveGameID;
 
   ofstream saveFile(saveFilename.c_str());
   assert(saveFile.is_open());

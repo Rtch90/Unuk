@@ -20,14 +20,14 @@ Debug *Debug::logger = NULL;
 Debug::Debug(bool logToFile) {
   time_t timestamp;
   if(logToFile) {
-    logFile.open("../Bin/Debug.log", ios::out);
+    _logFile.open("../Bin/Debug.log", ios::out);
     if(!logToFile) {
       // We can not open our log.
       cerr << "Warning: Can not open Debug.log to write, continueing without logging\n";
     } else {
       // Log File is open, let us give it a nice time stamp.
       timestamp = time(NULL);
-      logFile << "Log Started: " << ctime(&timestamp) << endl;
+      _logFile << "Log Started: " << ctime(&timestamp) << endl;
     }
   }
 }
@@ -36,19 +36,19 @@ Debug::~Debug(void) {
   time_t timestamp;
   
   // We only need to close the log if it is open.
-  if(logFile) {
+  if(_logFile) {
     // Give it a closing timestamp.
     timestamp = time(NULL);
-    logFile << endl << "Log Closed: " << ctime(&timestamp) << endl;
+    _logFile << endl << "Log Closed: " << ctime(&timestamp) << endl;
     
     // Close the log file.
-    logFile.close();
+    _logFile.close();
   }
 }
 
 void Debug::message(std::string msg) {
-  if(logFile) {
-    logFile << msg << endl;
+  if(_logFile) {
+    _logFile << msg << endl;
   }
   cerr << msg << endl << endl;
 }
@@ -74,8 +74,8 @@ void Debug::message(const char *msg, ...) {
     outLen = sizeof(outBuf);
   }
   
-  if(logFile) {
-    logFile << outBuf << endl;
+  if(_logFile) {
+    _logFile << outBuf << endl;
   }
   
   cerr << outBuf << endl;

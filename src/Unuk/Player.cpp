@@ -17,22 +17,22 @@ void Player::HandleInput(void) {
     case SDLK_w:
       yVel -= PLAYER_SPEED;
       xVel = 0;
-      m_directionFacing = FACING_UP;
+      directionFacing = FACING_UP;
       break;
     case SDLK_s:
       yVel += PLAYER_SPEED;
       xVel = 0;
-      m_directionFacing = FACING_DOWN;
+      directionFacing = FACING_DOWN;
       break;
     case SDLK_a:
       xVel -= PLAYER_SPEED;
       yVel = 0;
-      m_directionFacing = FACING_LEFT;
+      directionFacing = FACING_LEFT;
       break;
     case SDLK_d:
       xVel += PLAYER_SPEED;
       yVel = 0;
-      m_directionFacing = FACING_RIGHT;
+      directionFacing = FACING_RIGHT;
       break;
     default:
       break;
@@ -49,8 +49,8 @@ void Player::HandleInput(void) {
   }
   else if(event.type == SDL_MOUSEBUTTONDOWN) {
     if(event.button.button == SDL_BUTTON_LEFT) {
-      m_attacking = true;
-      m_attackTimer.Start();
+      attacking = true;
+      attackTimer.Start();
     }
   }
 }
@@ -61,7 +61,7 @@ void Player::Update(void) {
 }
 
 void Player::SetName(string nameArg) {
-  m_name = nameArg;
+  _name = nameArg;
 }
 
 void Player::SetCamera(void) {

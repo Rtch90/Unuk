@@ -45,11 +45,11 @@ private:
   int x;
   int y;
 
-  int     m_particleCount;
-  int     m_particleLifetime;
-  float   m_particleSpeed;
+  int     _particleCount;
+  int     _particleLifetime;
+  float   _particleSpeed;
 
-  SDL_Surface* particleTexture;
+  SDL_Surface* _particleTexture;
 };
 
 #endif

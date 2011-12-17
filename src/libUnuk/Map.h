@@ -47,15 +47,15 @@ public:
 private:
   void Unload(void);
 
-  string m_currentMap;
+  string _currentMap;
   int x;
   int y;
 
   static const int TILE_ARRAY_SIZE = 150;
-  MapTile m_tile[TILE_ARRAY_SIZE][TILE_ARRAY_SIZE];
+  MapTile _tile[TILE_ARRAY_SIZE][TILE_ARRAY_SIZE];
 
-  TextureManager m_tileTextures;
-  TextureManager m_entityTextures;
+  TextureManager _tileTextures;
+  TextureManager _entityTextures;
 };
 
 #endif
