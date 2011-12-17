@@ -14,6 +14,11 @@ NPC::~NPC(void) {
 
 void NPC::Update(void) {
   Move();
+
+  if(xVel > 0) m_directionFacing          = FACING_RIGHT;
+  else if(xVel < 0) m_directionFacing     = FACING_LEFT;
+  else if(yVel > 0) m_directionFacing     = FACING_DOWN;
+  else if(yVel < 0) m_directionFacing     = FACING_UP;
 }
 
 void NPC::Move(void) {

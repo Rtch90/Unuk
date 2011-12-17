@@ -8,7 +8,7 @@ Player::Player(Map *mapArg) : Character(mapArg) {
 }
 
 Player::~Player(void) {
-
+\
 }
 
 void Player::HandleInput(void) {
