@@ -71,11 +71,21 @@ bool Button::CheckMouseOver(void) {
 }
 
 void Button::Render(void) {
+  button.Draw();
+  _text.Render();
+}
+
+void Button::Render(int xArg, int yArg) {
+  button.Draw(xArg, yArg);
+  _text.Render(xArg, yArg);
+}
+
+void Button::RenderLiteral(void) {
   button.DrawLiteral();
   _text.RenderLiteral();
 }
 
-void Button::Render(int xArg, int yArg) {
+void Button::RenderLiteral(int xArg, int yArg) {
   button.DrawLiteral(xArg, yArg);
   _text.RenderLiteral(xArg, yArg);
 }

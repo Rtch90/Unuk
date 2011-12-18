@@ -1,3 +1,11 @@
+/*
+ * The Texture Manager will keep a small "Database"
+ * of the name of the texture that is loaded and the
+ * actual texture so we can query it with the filename
+ * and it will return the teture if it is already in memory
+ * or load the tture if it is not.
+ */
+
 #ifndef _TEXTUREMANAGER_H_
 #define _TEXTUREMANAGER_H_
 #include <SDL/SDL.h>
@@ -6,13 +14,6 @@
 #include "ImageLoader.h"
 using namespace std;
 
-/*
- * The Texture Manager will keep a small "Database"
- * of the name of the texture that is loaded and the
- * actual texture so we can query it with the filename
- * and it will return the teture if it is already in memory
- * or load the tture if it is not.
- */
 class TextureManager {
 public:
   TextureManager(void);

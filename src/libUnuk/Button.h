@@ -33,6 +33,8 @@ public:
 
   void Render(void);
   void Render(int xArg, int yArg);
+  void RenderLiteral(void);
+  void RenderLiteral(int xArg, int yArg);
 
 private:
   SDL_Color _mouseOutColour;

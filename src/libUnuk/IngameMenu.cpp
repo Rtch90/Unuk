@@ -7,31 +7,31 @@ IngameMenu::IngameMenu(void) {
   btnResume.SetOverRGB(255, 255, 255);
   btnResume.SetTextRGB(0, 0, 0);
   btnResume.SetText("Resume Game");
-  btnResume.SetXY((SCREEN_WIDTH / 2) - (btnResume.GetWidth() / 2), 50);
+  btnResume.SetXY(SCREEN_WIDTH / 2 - btnResume.GetWidth() / 2, 50);
 
   btnSaveGame.SetOutRGB(200, 200, 200);
   btnSaveGame.SetOverRGB(255, 255, 255);
   btnSaveGame.SetTextRGB(0, 0, 0);
   btnSaveGame.SetText("SaveGame");
-  btnSaveGame.SetXY((SCREEN_WIDTH / 2) - (btnSaveGame.GetWidth() / 2), 100);
+  btnSaveGame.SetXY(SCREEN_WIDTH / 2 - btnSaveGame.GetWidth() / 2, 100);
 
   btnLoadGame.SetOutRGB(200, 200, 200);
   btnLoadGame.SetOverRGB(255, 255, 255);
   btnLoadGame.SetTextRGB(0, 0, 0);
   btnLoadGame.SetText("LoadGame");
-  btnLoadGame.SetXY((SCREEN_WIDTH / 2) - (btnLoadGame.GetWidth() / 2), 150);
+  btnLoadGame.SetXY(SCREEN_WIDTH / 2 - btnLoadGame.GetWidth() / 2, 150);
 
   btnOptions.SetOutRGB(200, 200, 200);
   btnOptions.SetOverRGB(255, 255, 255);
   btnOptions.SetTextRGB(0, 0, 0);
   btnOptions.SetText("Options");
-  btnOptions.SetXY((SCREEN_WIDTH / 2) - (btnOptions.GetWidth() / 2), 200);
+  btnOptions.SetXY(SCREEN_WIDTH / 2 - btnOptions.GetWidth() / 2, 200);
 
   btnExitToMenu.SetOutRGB(200, 200, 200);
   btnExitToMenu.SetOverRGB(255, 255, 255);
   btnExitToMenu.SetTextRGB(0, 0, 0);
   btnExitToMenu.SetText("Exit To Main Menu");
-  btnExitToMenu.SetXY((SCREEN_WIDTH / 2) - (btnExitToMenu.GetWidth() / 2), 250);
+  btnExitToMenu.SetXY(SCREEN_WIDTH / 2 - btnExitToMenu.GetWidth() / 2, 250);
 }
 
 IngameMenu::~IngameMenu(void) {

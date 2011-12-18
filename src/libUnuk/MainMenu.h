@@ -21,9 +21,10 @@ public:
   ~MainMenu(void);
 
   mainMenuNavVal_t Run(void);
-  void Render(void);
 
 private:
+  void Render(void);
+
   Map _background;
 
   Text lblMenu;

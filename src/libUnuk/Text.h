@@ -25,7 +25,6 @@ public:
   int GetX(void)              { return x; }
   int GetY(void)              { return y; }
 
-  string GetText(void)        { return _textContents; }
   SDL_Color GetColour(void)   { return _textColour; }
 
   void SetXY(int xArg, int yArg);
@@ -34,6 +33,8 @@ public:
   int SetTextBlended(string textArg, textSizes_t size, Uint8 r, Uint8 g, Uint8 b);
   int SetTextShaded(string textArg, textSizes_t size, SDL_Color, SDL_Color);
   int SetTextShaded(string textArg, textSizes_t size, Uint8 rF, Uint8 gF, Uint8 bF, Uint8 rB, Uint8 gB, Uint8 bB);
+
+  string GetText(void)        { return _textContents; }
 
   void Render(void);
   void Render(int xArg, int yArg);
