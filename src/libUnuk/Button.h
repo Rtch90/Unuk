@@ -24,10 +24,10 @@ public:
 
   void SetXY(int xArg, int yArg);
 
-  int GetX(void)          { return x; }
-  int GetY(void)          { return y; }
-  int GetWidth(void)      { return w; }
-  int GetHeight(void)     { return h; }
+  int GetX(void)        const     { return x; }
+  int GetY(void)        const     { return y; }
+  int GetWidth(void)    const     { return w; }
+  int GetHeight(void)   const     { return h; }
 
   bool CheckMouseOver(void);
 
@@ -46,7 +46,7 @@ private:
   int w;
   int h;
 
-  Rect button;
+  Rect _button;
   Text _text;
 };
 
