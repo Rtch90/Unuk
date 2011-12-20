@@ -21,7 +21,10 @@ public:
   SDL_Surface SetTileTexture(SDL_Surface* arg)      { _tile.SetTexture(arg); }
   void SetTileSolidity(bool arg)                    { _tile.SetSolidity(arg); }
   bool GetTileSolidity(void)                        { return _tile.GetSolidity(); }
-  void SetTileXY(int xArg, int yArg)                { _tile.GetX(), _tile.GetY(); }
+  // Well, it kinda helps if I lay the
+  // tiles rather than just get the
+  // return value right??
+  void SetTileXY(int xArg, int yArg)                { _tile.SetXY(xArg, yArg); }
   int GetTileX(void)                                { return _tile.GetX(); }
   int GetTileY(void)                                { return _tile.GetY(); }
 
