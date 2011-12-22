@@ -91,8 +91,8 @@ mainMenuNavVal_t MainMenu::Run(void) {
           if(btnNewGameActive) {
             if(btnNewGameYes.CheckMouseOver())
               return mainMenuNewGame;
-//            else if(btnNewGameNo.CheckMouseOver())
-//              return btnNewGameActive = false;
+            //else if(btnNewGameNo.CheckMouseOver())
+              //return btnNewGameActive = false;
           }
         }
       }

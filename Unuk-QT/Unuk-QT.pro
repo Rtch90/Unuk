@@ -6,7 +6,8 @@ LIBS += -lGL \
     -ltinyxml \
     -lGLU
 RESOURCES += 
-OTHER_FILES += ../src/libUnuk/Debug.o
+OTHER_FILES += ../src/libUnuk/Debug.o \
+    ../Data/Media/Maps/map
 HEADERS += ../src/libUnuk/Debug.h \
     ../src/Libs/wglext.h \
     ../src/Libs/glxext.h \
