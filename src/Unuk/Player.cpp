@@ -57,6 +57,8 @@ void Player::HandleInput(void) {
 
 void Player::Update(void) {
   Move();
+
+  // For now The camera will be static.
   //SetCamera();
 }
 

@@ -161,7 +161,6 @@ void Game::Render(void) {
   } else {
     _ingameMenu.Render();
   }
-
   SDL_Flip(screen);
 }
 

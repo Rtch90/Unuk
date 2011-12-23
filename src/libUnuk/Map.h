@@ -24,6 +24,7 @@ public:
   ~Map(void);
 
   void Load(const string filename);
+  void Update(void);
   void Render(void);
 
   bool GetTileSolidity(int xArg, int yArg);

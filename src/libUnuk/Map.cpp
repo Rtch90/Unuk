@@ -128,6 +128,10 @@ void Map::Load(const string filename) {
   //character->Load(filename);
 }
 
+void Map::Update(void) {
+  // Update the map so we can render when camera moves.
+}
+
 void Map::Render(void) {
   int xOrig = (camera.x / TILE_WIDTH);
   int yOrig = (camera.y / TILE_HEIGHT);

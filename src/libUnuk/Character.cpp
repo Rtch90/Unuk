@@ -136,19 +136,23 @@ void Character::Move(void) {
   tileX = ((x + (w / 2)) / TILE_WIDTH);
   tileY = ((y + (h / 2)) / TILE_HEIGHT);
 
-  if((x < 0) || (x + w) > levelWidth)     x -= xVel;
-  if(CheckTileCollisions())               x -= xVel;
-  if(CheckEntityCollisions())             x -= xVel;
-  if(CheckCharacterCollisions())          x -= xVel;
+  // While we have a static camera, ensure that we do not go out
+  // of the camera boundaries.
+  if((x < 0) || (x + w) > levelWidth || (x + w) > SCREEN_WIDTH)     x -= xVel;
+  if(CheckTileCollisions())                                         x -= xVel;
+  if(CheckEntityCollisions())                                       x -= xVel;
+  if(CheckCharacterCollisions())                                    x -= xVel;
 
   y += yVel;
   tileX = ((x + (w / 2)) / TILE_WIDTH);
   tileY = ((y + (h / 2)) / TILE_HEIGHT);
 
-  if((y < 0) || (y + h) > levelHeight)    y -= yVel;
-  if(CheckTileCollisions())               y -= yVel;
-  if(CheckEntityCollisions())             y -= yVel;
-  if(CheckCharacterCollisions())          y -= yVel;
+  // While we have a static camera, ensure that we do not go out
+  // of the camera boundaries.
+  if((y < 0) || (y + h) > levelHeight || (y + h) > SCREEN_HEIGHT)    y -= yVel;
+  if(CheckTileCollisions())                                          y -= yVel;
+  if(CheckEntityCollisions())                                        y -= yVel;
+  if(CheckCharacterCollisions())                                     y -= yVel;
 }
 
 /*
