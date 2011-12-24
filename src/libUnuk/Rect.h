@@ -1,7 +1,6 @@
 #ifndef _RECT_H_
 #define _RECT_H_
 #include <SDL/SDL.h>
-#include <iostream> // May not need this.
 #include "../Unuk/Globals.h"
 #include "ApplySurface.h"
 using namespace std;

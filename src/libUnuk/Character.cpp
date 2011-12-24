@@ -54,7 +54,7 @@ void Character::LoadSprites(string filename, int wArg, int hArg) {
 void Character::AddSpeachBubble(string text) {
   _speachBubble.push_back(text);
 
-  //m_speachBubbleText.SetTextBlended(text, "small", 0, 0, 0);
+  _speachBubbleText.SetTextBlended(text, small, 0, 0, 0);
 
   if(_speachBubbleTimer.IsStarted() == false)
     _speachBubbleTimer.Start();
@@ -125,7 +125,7 @@ void Character::Update(void) {
       }
     } else {
       if(_speachBubble.front() != _speachBubbleText.GetText()) {
-        //m_speachBubbleText.SetTextBlended(m_speachBubble.front(), "small", 0, 0, 0);
+        _speachBubbleText.SetTextBlended(_speachBubble.front(), small, 0, 0, 0);
       }
     }
   }
