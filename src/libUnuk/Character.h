@@ -24,14 +24,17 @@ public:
 
   void LoadSprites(string filename, int wArg, int hArg);
   
-  float GetX(void) 		{ return x; }
-  float GetY(void)		{ return y; }
-  float GetWidth(void)		{ return w; }
-  float GetHeight(void)		{ return h; }
+  float GetX(void)                   	{ return x; }
+  float GetY(void)                  	{ return y; }
+  float GetWidth(void)               	{ return w; }
+  float GetHeight(void)             	{ return h; }
   
-  void SetXY(float xArg, float yArg)		{ x = xArg, y = yArg; }
-  void SetXVelocity(float arg)			{ xVel = arg; }
-  void SetYVelocity(float arg)			{ yVel = arg; }
+  void SetXY(float xArg, float yArg)	{ x = xArg, y = yArg; }
+  void SetXVelocity(float arg)        { xVel = arg; }
+  void SetYVelocity(float arg)      	{ yVel = arg; }
+
+  void SetHealth(int health)          { _health = health; }
+  int GetHealth(void)                 { return _health; }
   
   void AddSpeachBubble(string text);
 
@@ -58,6 +61,8 @@ protected:
   
   Timer attackTimer;
   bool attacking;
+
+  int _health;
   
   Map* map;
   
@@ -73,7 +78,7 @@ protected:
   static const int ANIM_NO_FOOT      = 1;
   static const int ANIM_RIGHT_FOOT   = 2;
   static const int ANIM_ATTACK       = 3;
-  
+
 private:
   static const int ANIMATION_SPEED         = 200;
   static const int ATTACKING_DISPLAY_LEN   = 150;

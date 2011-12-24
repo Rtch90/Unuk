@@ -13,7 +13,8 @@ Character::Character(Map* mapArg) {
   _animationStage  = ANIM_NO_FOOT;
   _animationTimer.Start();
   _leftFoot = false;
-  
+  _health = 100;
+
   xVel = 0.0f;
   yVel = 0.0f;
   

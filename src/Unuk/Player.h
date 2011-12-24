@@ -5,6 +5,7 @@
 #include "Globals.h"
 #include "Constants.h"
 #include "../libUnuk/Character.h"
+#include "../libUnuk/Debug.h"
 
 class Player : public Character {
 public:
@@ -26,6 +27,7 @@ private:
   static const float PLAYER_SPEED;
 
   string _name;
+  //int _health;
 };
 
 #endif
