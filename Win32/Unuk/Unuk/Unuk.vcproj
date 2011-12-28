@@ -3,7 +3,7 @@
 	ProjectType="Visual C++"
 	Version="9.00"
 	Name="Unuk"
-	ProjectGUID="{11A27A91-A8BA-4267-949A-FE5D3DEF3B1A}"
+	ProjectGUID="{8B76F6A2-6AC4-414F-9056-342F22333611}"
 	RootNamespace="Unuk"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="196613"
@@ -61,8 +61,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="SDL.lib SDL_gfx.lib SDL_image.lib SDL_ttf.lib TinyXML.lib OpenGL32.lib GLU32.lib"
-				OutputFile="$(OutDir)$(TargetName)$(TargetExt)"
+				AdditionalDependencies="SDL.lib SDL_gfx.lib SDl_image.lib SDL_ttf.lib TinyXML.lib OpenGL32.lib GLU32.lib"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="..\..\Dependencies\Lib\"
 				GenerateDebugInformation="true"
@@ -89,7 +88,6 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine=""
 			/>
 		</Configuration>
 		<Configuration
@@ -138,7 +136,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="SDL.lib SDL_gfx.lib SDL_image.lib SDL_ttf.lib TinyXML.lib OpenGL32.lib GLU32.lib"
+				AdditionalDependencies="SDL.lib SDL_gfx.lib SDl_image.lib SDL_ttf.lib TinyXML.lib OpenGL32.lib GLU32.lib"
 				OutputFile="..\..\..\Bin\$(ProjectName).exe"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="..\..\Dependencies\Lib\"
@@ -168,7 +166,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="copy ..\..\Dependencies\Bin\jpeg.dll ..\..\..\Bin\&#x0D;&#x0A;copy ..\..\Dependencies\Bin\libfreetype-6.dll ..\..\..\Bin\&#x0D;&#x0A;copy ..\..\Dependencies\Bin\libpng12-0.dll ..\..\..\Bin\&#x0D;&#x0A;copy ..\..\Dependencies\Bin\libtiff-3.dll ..\..\..\Bin\&#x0D;&#x0A;copy ..\..\Dependencies\Bin\SDL.dll ..\..\..\Bin\&#x0D;&#x0A;copy ..\..\Dependencies\Bin\SDL_gfx.dll ..\..\..\Bin\&#x0D;&#x0A;copy ..\..\Dependencies\Bin\SDL_image.dll ..\..\..\Bin\&#x0D;&#x0A;copy ..\..\Dependencies\Bin\SDL_ttf.dll ..\..\..\Bin\&#x0D;&#x0A;copy ..\..\Dependencies\Bin\zlib1.dll ..\..\..\Bin\&#x0D;&#x0A;"
+				CommandLine="copy ..\..\Dependencies\Bin\jpeg.dll ..\..\..\Bin\&#x0D;&#x0A;copy ..\..\Dependencies\Bin\libfreetype-6.dll ..\..\..\Bin\&#x0D;&#x0A;copy ..\..\Dependencies\Bin\libpng12-0.dll ..\..\..\Bin\&#x0D;&#x0A;copy ..\..\Dependencies\Bin\libtiff-3.dll ..\..\..\Bin\&#x0D;&#x0A;copy ..\..\Dependencies\Bin\SDL.dll ..\..\..\Bin\&#x0D;&#x0A;copy ..\..\Dependencies\Bin\SDL_gfx.dll ..\..\..\Bin\&#x0D;&#x0A;copy ..\..\Dependencies\Bin\SDL_image.dll ..\..\..\Bin\&#x0D;&#x0A;copy ..\..\Dependencies\Bin\SDL_ttf.dll ..\..\..\Bin\&#x0D;&#x0A;copy ..\..\Dependencies\Bin\zlib1.dll ..\..\..\Bin\"
 			/>
 		</Configuration>
 	</Configurations>
