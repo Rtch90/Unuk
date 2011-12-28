@@ -8,7 +8,7 @@ Player::Player(Map *mapArg) : Character(mapArg) {
 }
 
 Player::~Player(void) {
-\
+
 }
 
 void Player::HandleInput(void) {
@@ -60,7 +60,7 @@ void Player::Update(void) {
   AddSpeachBubble("Woot, My name is Allanis, welcome to my home");
 
   // For now The camera will be static.
-  //SetCamera();
+  SetCamera();
 }
 
 void Player::SetName(string nameArg) {
