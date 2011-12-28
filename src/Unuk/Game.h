@@ -50,6 +50,8 @@ private:
   Text _gameUpdateTime;
   Text _gameRenderTime;
   Text _playerXY;
+  Text _playerHealth;
+  Text _npcHealth;
 
   IngameMenu _ingameMenu;
   Map _map;

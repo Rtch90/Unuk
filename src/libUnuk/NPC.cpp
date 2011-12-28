@@ -13,12 +13,18 @@ NPC::~NPC(void) {
 }
 
 void NPC::Update(void) {
+  // Store the NPC's health.
+  int health = GetHealth();
+
   Move();
 
   if(xVel > 0) directionFacing          = FACING_RIGHT;
   else if(xVel < 0) directionFacing     = FACING_LEFT;
   else if(yVel > 0) directionFacing     = FACING_DOWN;
   else if(yVel < 0) directionFacing     = FACING_UP;
+
+  // Deduct health when collision with player is detected.
+  if(CheckCharacterCollisions()) { health -= 1, SetHealth(health); }
 }
 
 void NPC::Move(void) {

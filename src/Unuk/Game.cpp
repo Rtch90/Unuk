@@ -44,6 +44,14 @@ gameNavVal_t Game::Run(const string savegameIDArg) {
   _playerXY.SetXY(10, 50);
   _playerXY.SetTextBlended("Player coords - XX XX", vsmall, COLOUR_BLACK);
 
+  stringstream playerHealth;
+  _playerHealth.SetXY(10, 80);
+  _playerHealth.SetTextBlended("Player Health - XX", vsmall, COLOUR_BLACK);
+
+  stringstream npcHealth;
+  _npcHealth.SetXY(10, 100);
+  _npcHealth.SetTextBlended("NPC Health - XX", vsmall, COLOUR_BLACK);
+
   _gameRunning = true;
   while(_gameRunning) {
     updateTimer.Start();
@@ -79,6 +87,14 @@ gameNavVal_t Game::Run(const string savegameIDArg) {
         playerXYString.str("");
         playerXYString << "Player coords: x" << _player->GetX() << ", y" << _player->GetY();
         _playerXY.SetTextBlended(playerXYString.str(), vsmall, COLOUR_BLACK);
+
+        playerHealth.str("");
+        playerHealth << "Player Health: " << _player->GetHealth();
+        _playerHealth.SetTextBlended(playerHealth.str(), vsmall, COLOUR_BLACK);
+
+        npcHealth.str("");
+        npcHealth << "NPC Health: " << _npc->GetHealth();
+        _npcHealth.SetTextBlended(npcHealth.str(), vsmall, COLOUR_BLACK);
       }
     }
     // Restrict the fps.
@@ -157,6 +173,8 @@ void Game::Render(void) {
       _gameRenderTime.RenderLiteral();
       _gameUpdateTime.RenderLiteral();
       _playerXY.RenderLiteral();
+      _playerHealth.RenderLiteral();
+      _npcHealth.RenderLiteral();
     }
   } else {
     _ingameMenu.Render();
