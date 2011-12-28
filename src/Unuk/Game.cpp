@@ -21,7 +21,7 @@ gameNavVal_t Game::Run(const string savegameIDArg) {
 
   LoadSavegame(savegameIDArg);
 
-  int fps;
+  int fps = 0;
   int frame = 0;
   int nextGameTick = SDL_GetTicks();
 
