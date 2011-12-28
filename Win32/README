@@ -1,0 +1,11 @@
+================
+	SETUP
+================
+Go to project settings for Unuk, then go to Debugging, and set Working Directory to "$(SolutionDir)..\..\Bin\".
+
+================
+	NOTES
+================
+When compiling in Debug, the executable will be output to Unuk/Debug. 
+When compiling in Release, the executable will be output the Bin folder on the root and the
+necessary DLLs will be copied as well.

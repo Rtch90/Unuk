@@ -11,7 +11,23 @@
 #include "Globals.h"
 #include "Game.h"
 
+// The following is needed to avoid linking SDLmain.lib and prevent
+// a name clash with LoadImage from the Win32 API.
+#if defined(_WIN32)
+#include <Windows.h>
+#if defined(main)
+#undef main
+#endif
+#if defined(LoadImage)
+#undef LoadImage
+#endif
+#endif
+
+#ifndef _WIN32
 int main() {
+#else
+int WINAPI WinMain(HINSTANCE,HINSTANCE,LPSTR,int) {
+#endif
   if(SDL_Init(SDL_INIT_VIDEO == -1)) {
     system("zenity --error --text=\"Could not load SDL\"");
     Debug::logger->message("Error: Could not load SDL");

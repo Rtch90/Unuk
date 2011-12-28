@@ -12,7 +12,7 @@ void Map::Load(const string filename) {
   Unload();
   _currentMap = filename;
   string fullMapPath = "../Data/Media/Maps/" + filename;
-  TiXmlDocument mapFile(fullMapPath);
+  TiXmlDocument mapFile(fullMapPath.c_str());
 
   assert(mapFile.LoadFile() == true);
 

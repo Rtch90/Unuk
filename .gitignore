@@ -1,0 +1,11 @@
+Win32/Unuk/Debug
+Win32/Unuk/Release
+Win32/Unuk/LibUnuk/Debug
+Win32/Unuk/LibUnuk/Release
+Win32/Unuk/Unuk/Debug
+Win32/Unuk/Unuk/Release
+Win32/Unuk/Unuk.ncb
+Win32/Unuk/Unuk.suo
+*.o
+*.exe
+*log

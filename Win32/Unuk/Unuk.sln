@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LibUnuk", "LibUnuk\LibUnuk.vcproj", "{69313976-426F-41C8-ABCD-E83A9320458F}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Unuk", "Unuk\Unuk.vcproj", "{11A27A91-A8BA-4267-949A-FE5D3DEF3B1A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{69313976-426F-41C8-ABCD-E83A9320458F} = {69313976-426F-41C8-ABCD-E83A9320458F}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{69313976-426F-41C8-ABCD-E83A9320458F}.Debug|Win32.ActiveCfg = Debug|Win32
+		{69313976-426F-41C8-ABCD-E83A9320458F}.Debug|Win32.Build.0 = Debug|Win32
+		{69313976-426F-41C8-ABCD-E83A9320458F}.Release|Win32.ActiveCfg = Release|Win32
+		{69313976-426F-41C8-ABCD-E83A9320458F}.Release|Win32.Build.0 = Release|Win32
+		{11A27A91-A8BA-4267-949A-FE5D3DEF3B1A}.Debug|Win32.ActiveCfg = Debug|Win32
+		{11A27A91-A8BA-4267-949A-FE5D3DEF3B1A}.Debug|Win32.Build.0 = Debug|Win32
+		{11A27A91-A8BA-4267-949A-FE5D3DEF3B1A}.Release|Win32.ActiveCfg = Release|Win32
+		{11A27A91-A8BA-4267-949A-FE5D3DEF3B1A}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
