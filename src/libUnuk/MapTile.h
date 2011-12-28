@@ -18,7 +18,7 @@ public:
   void Render(void)                                 { _tile.Render(), _entity.Render(); }
 
   // Tile Mutators.
-  void SetTileTexture(SDL_Surface* arg)             { _tile.SetTexture(arg); }
+  SDL_Surface* SetTileTexture(SDL_Surface* arg)	 	  { _tile.SetTexture(arg); return NULL; }
   void SetTileSolidity(bool arg)                    { _tile.SetSolidity(arg); }
   bool GetTileSolidity(void)                        { return _tile.GetSolidity(); }
   // Well, it kinda helps if I lay the
