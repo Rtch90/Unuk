@@ -54,14 +54,25 @@ gameNavVal_t Game::Run(const string savegameIDArg) {
 
   _gameRunning = true;
   while(_gameRunning) {
+	bool stillRunning = true;
+
     updateTimer.Start();
     while((int)SDL_GetTicks() > nextGameTick) {
       HandleInput();
-      UpdateGame();
+	  if (!_gameRunning) {
+        stillRunning = false;
+        break;
+	  }
+	  
+	  UpdateGame();
 
       nextGameTick += SKIP_TICKS;
     }
     updateTimer.Pause();
+
+	if (!stillRunning) {
+		break;
+	}
 
     renderTimer.Start();
     Render();

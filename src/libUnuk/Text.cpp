@@ -11,8 +11,10 @@ Text::Text(void) {
 }
 
 Text::~Text(void) {
-  assert(_text != NULL);
-  SDL_FreeSurface(_text);
+  if (_text) {
+	SDL_FreeSurface(_text);
+	_text = NULL;
+  }
 }
 
 void Text::LoadFonts(void) {

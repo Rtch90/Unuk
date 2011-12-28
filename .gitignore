@@ -8,6 +8,7 @@ Win32/Unuk/Unuk/Release
 Win32/Unuk/Unuk/*.user
 Win32/Unuk/Unuk.ncb
 Win32/Unuk/Unuk.suo
+Bin/*.dll
 *.o
 *.exe
 *log
