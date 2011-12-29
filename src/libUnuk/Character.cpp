@@ -141,7 +141,7 @@ void Character::Move(void) {
   if((x < 0) || (x + w) > levelWidth)                               x -= xVel;
   if(CheckTileCollisions())                                         x -= xVel;
   if(CheckEntityCollisions())                                       x -= xVel;
-  //if(CheckCharacterCollisions())                                    x -= xVel;
+  if(CheckCharacterCollisions())                                    x -= xVel;
 
   y += yVel;
   tileX = ((x + (w / 2)) / TILE_WIDTH);

@@ -142,7 +142,7 @@ void Map::Render(void) {
   int xEnd = xOrig + (SCREEN_WIDTH  / TILE_WIDTH) + 3;
   int yEnd = yOrig + (SCREEN_HEIGHT / TILE_HEIGHT) + 3;
 
-  /* the fuck is this sara? --konom
+  /* the fuck is this Allanis? --konom
   if(xEnd < x)
     xEnd++;
   else
