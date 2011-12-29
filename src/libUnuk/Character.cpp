@@ -65,18 +65,18 @@ void Character::Render(void) {
   // Draw some fancy speach bubbles. It is a bit of a mess, I am playing.
   if(_speachBubble.size() != 0) {
     if(_speachBubbleTimer.GetTicks() < SPEACH_BUBBLE_DISPLAY_LENGTH) {
-      roundedBoxRGBA(screen, (x + w / 2) - 100,
-                     y - 100,
-                     (x + w / 2) + 100,
-                     y - 35,
+      roundedBoxRGBA(screen, (x + w / 2) - 100 - camera.x,
+                     y - 100 - camera.y,
+                     (x + w / 2) + 100 - camera.x,
+                     y - 35 - camera.y,
                      5, 255, 255, 255, 255);
 
-      filledTrigonRGBA(screen, (x + w / 2) - 100,
-                       y - 100,
-                       (x + w / 2) - 10,
-                       y - 40,
-                       (x + w / 2) + 10,
-                       y - 40,
+      filledTrigonRGBA(screen, (x + w / 2) - 100 - camera.x,
+                       y - 100 - camera.y,
+                       (x + w / 2) - 10 - camera.x,
+                       y - 40 - camera.y,
+                       (x + w / 2) + 10 - camera.x,
+                       y - 40 - camera.y,
                        255, 255, 255, 255);
 
       _speachBubbleText.Render((x + w / 2) - 90, y - 90);

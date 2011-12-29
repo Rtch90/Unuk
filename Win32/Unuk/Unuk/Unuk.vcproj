@@ -65,7 +65,7 @@
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="..\..\Dependencies\Lib\"
 				GenerateDebugInformation="true"
-				SubSystem="2"
+				SubSystem="1"
 				TargetMachine="1"
 			/>
 			<Tool
@@ -166,7 +166,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="copy ..\..\Dependencies\Bin\jpeg.dll ..\..\..\Bin\&#x0D;&#x0A;copy ..\..\Dependencies\Bin\libfreetype-6.dll ..\..\..\Bin\&#x0D;&#x0A;copy ..\..\Dependencies\Bin\libpng12-0.dll ..\..\..\Bin\&#x0D;&#x0A;copy ..\..\Dependencies\Bin\libtiff-3.dll ..\..\..\Bin\&#x0D;&#x0A;copy ..\..\Dependencies\Bin\SDL.dll ..\..\..\Bin\&#x0D;&#x0A;copy ..\..\Dependencies\Bin\SDL_gfx.dll ..\..\..\Bin\&#x0D;&#x0A;copy ..\..\Dependencies\Bin\SDL_image.dll ..\..\..\Bin\&#x0D;&#x0A;copy ..\..\Dependencies\Bin\SDL_ttf.dll ..\..\..\Bin\&#x0D;&#x0A;copy ..\..\Dependencies\Bin\zlib1.dll ..\..\..\Bin\"
+				CommandLine="copy ..\..\Dependencies\Bin\jpeg.dll ..\..\..\Bin\&#x0D;&#x0A;copy ..\..\Dependencies\Bin\libfreetype-6.dll ..\..\..\Bin\&#x0D;&#x0A;copy ..\..\Dependencies\Bin\libpng12-0.dll ..\..\..\Bin\&#x0D;&#x0A;copy ..\..\Dependencies\Bin\libtiff-3.dll ..\..\..\Bin\&#x0D;&#x0A;copy ..\..\Dependencies\Bin\SDL.dll ..\..\..\Bin\&#x0D;&#x0A;copy ..\..\Dependencies\Bin\SDL_gfx.dll ..\..\..\Bin\&#x0D;&#x0A;copy ..\..\Dependencies\Bin\SDL_image.dll ..\..\..\Bin\&#x0D;&#x0A;copy ..\..\Dependencies\Bin\SDL_ttf.dll ..\..\..\Bin\&#x0D;&#x0A;copy ..\..\Dependencies\Bin\zlib1.dll ..\..\..\Bin\&#x0D;&#x0A;"
 			/>
 		</Configuration>
 	</Configurations>

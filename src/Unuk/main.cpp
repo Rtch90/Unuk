@@ -23,7 +23,7 @@
 #endif
 #endif
 
-#ifndef _WIN32
+#if !defined(_WIN32) || defined(_DEBUG)
 int main() {
 #else
 int WINAPI WinMain(HINSTANCE,HINSTANCE,LPSTR,int) {

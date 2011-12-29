@@ -133,12 +133,16 @@ void Map::Update(void) {
 }
 
 void Map::Render(void) {
-  int xOrig = (camera.x / TILE_WIDTH);
-  int yOrig = (camera.y / TILE_HEIGHT);
+  int xOrig = (camera.x / TILE_WIDTH) - 1;
+  int yOrig = (camera.y / TILE_HEIGHT) - 1;
 
-  int xEnd = (SCREEN_WIDTH  / TILE_WIDTH);
-  int yEnd = (SCREEN_HEIGHT / TILE_HEIGHT);
+  if (xOrig < 0) xOrig = 0;
+  if (yOrig < 0) yOrig = 0;
 
+  int xEnd = xOrig + (SCREEN_WIDTH  / TILE_WIDTH) + 3;
+  int yEnd = yOrig + (SCREEN_HEIGHT / TILE_HEIGHT) + 3;
+
+  /* the fuck is this sara? --konom
   if(xEnd < x)
     xEnd++;
   else
@@ -148,6 +152,15 @@ void Map::Render(void) {
     yEnd++;
   else
     yEnd = y;
+  */
+
+  if (xEnd > x) xEnd = x;
+  if (yEnd > y) yEnd = y;
+  if (xEnd < 0) xEnd = 0;
+  if (yEnd < 0) yEnd = 0;
+
+  if (xOrig > xEnd) xOrig = xEnd - 1;
+  if (yOrig > yEnd) yOrig = yEnd - 1;
 
   for(int i = xOrig; i < xEnd; i++) {
     for(int j = yOrig; j < yEnd; j++) {
