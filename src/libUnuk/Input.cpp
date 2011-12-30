@@ -58,7 +58,7 @@ void UpdateInput(void) {
 
 char GetKey(void) {
   if(keyboard.lastChar != -1)
-    return keyboard.lastChar;
+    return (char)keyboard.lastChar;
   return 0;
 }
 

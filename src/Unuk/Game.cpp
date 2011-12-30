@@ -227,7 +227,7 @@ void Game::LoadSavegame(const string savegameIDArg) {
     int playerY = atoi(dataElem->GetText());
     // </y>
     
-    _player->SetXY(playerX, playerY);
+    _player->SetXY((float)playerX, (float)playerY);
     
     // <map> - Parse the map file.
     dataElem = dataElem->NextSiblingElement("map");

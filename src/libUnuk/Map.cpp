@@ -104,13 +104,13 @@ void Map::Load(const string filename) {
         // <mapTransX>
         dataElem = dataElem->NextSiblingElement("mapTransX");
         assert(dataElem != NULL);
-        int mapTransX = atoi(dataElem->GetText());
+        // int mapTransX = atoi(dataElem->GetText()); // not referenced
         // </mapTransX>
 
         // <mapTransY>
         dataElem = dataElem->NextSiblingElement("mapTransY");
         assert(dataElem != NULL);
-        int mapTransY = atoi(dataElem->GetText());
+       // int mapTransY = atoi(dataElem->GetText()); // not referenced
         // </mapTransY>
 
         tileElem = tileElem->NextSiblingElement("tile");

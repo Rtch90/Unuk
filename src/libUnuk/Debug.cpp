@@ -63,7 +63,7 @@ void Debug::message(const char *msg, ...) {
   va_start(vargList, msg);
 
 #if defined WIN32
-  outLen = _vsnprintf(outBuf, sizeof(outBuf), msg, vargList);
+  outLen = (unsigned short)_vsnprintf(outBuf, sizeof(outBuf), msg, vargList);
 #else
   outLen = vsnprintf(outBuf, sizeof(outBuf), msg, vargList);
 #endif

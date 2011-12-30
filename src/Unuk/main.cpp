@@ -42,7 +42,7 @@ int WINAPI WinMain(HINSTANCE,HINSTANCE,LPSTR,int) {
   screen = SDL_SetVideoMode(SCREEN_WIDTH, SCREEN_HEIGHT, 32, SDL_HWSURFACE);
   SDL_WM_SetCaption("fps - 00", NULL);
 
-  srand(time(NULL));
+  srand((unsigned int)time(NULL));
 
   camera.x = 0;
   camera.y = 0;

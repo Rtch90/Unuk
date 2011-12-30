@@ -49,5 +49,5 @@ void Texture::LoadAlpha(const char* filename) {
 }
 
 void Texture::SetAlpha(int alphaArg) {
-  SDL_SetAlpha(_texture, SDL_SRCALPHA, alphaArg);
+  SDL_SetAlpha(_texture, SDL_SRCALPHA, (Uint8)alphaArg);
 }

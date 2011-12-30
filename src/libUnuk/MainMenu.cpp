@@ -62,7 +62,8 @@ MainMenu::~MainMenu(void) {
 mainMenuNavVal_t MainMenu::Run(void) {
   FPS fpsLimiter(20);
 
-  while(1) {
+  bool running = true;
+  while(running) {
     Render();
     SDL_Flip(screen);
 
@@ -103,6 +104,7 @@ mainMenuNavVal_t MainMenu::Run(void) {
 
     fpsLimiter.LimitFPS();
   }
+  return mainMenuExitGame;
 }
 
 void MainMenu::Render(void) {

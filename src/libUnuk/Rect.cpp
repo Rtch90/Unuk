@@ -7,13 +7,13 @@ Rect::~Rect(void) {
 }
 
 void Rect::SetXY(int xArg, int yArg) {
-  rect.x = xArg;
-  rect.y = yArg;
+  rect.x = (Sint16)xArg;
+  rect.y = (Sint16)yArg;
 }
 
 void Rect::SetWidthHeight(int wArg, int hArg) {
-  rect.w = wArg;
-  rect.h = hArg;
+  rect.w = (Uint16)wArg;
+  rect.h = (Uint16)hArg;
 }
 
 void Rect::SetRGB(Uint8 rArg, Uint8 gArg, Uint8 bArg) {
@@ -42,10 +42,10 @@ void Rect::Draw(void) {
 void Rect::Draw(int xArg, int yArg) {
   SDL_Rect offset;
 
-  offset.x = xArg - camera.x;
-  offset.y = yArg - camera.y;
-  offset.w = rect.w;
-  offset.h = rect.h;
+  offset.x = (Sint16)(xArg - camera.x);
+  offset.y = (Sint16)(yArg - camera.y);
+  offset.w = (Sint16)rect.w;
+  offset.h = (Sint16)rect.h;
 }
 
 void Rect::DrawLiteral(void) {
@@ -55,8 +55,8 @@ void Rect::DrawLiteral(void) {
 void Rect::DrawLiteral(int xArg, int yArg) {
   SDL_Rect offset;
 
-  offset.x = xArg;
-  offset.y = yArg;
+  offset.x = (Sint16)xArg;
+  offset.y = (Sint16)yArg;
   offset.w = rect.w;
   offset.h = rect.h;
 

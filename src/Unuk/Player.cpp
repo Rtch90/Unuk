@@ -1,7 +1,7 @@
 #include "Player.h"
 
 // Pixels * 60 / sec.
-const float Player::PLAYER_SPEED = Character::CHARACTER_SPEED + 0.5;
+const float Player::PLAYER_SPEED = Character::CHARACTER_SPEED + 0.5f;
 
 Player::Player(Map *mapArg) : Character(mapArg) {
 
@@ -68,8 +68,8 @@ void Player::SetName(string nameArg) {
 }
 
 void Player::SetCamera(void) {
-  camera.x = (x + w / 2) - SCREEN_WIDTH  / 2;
-  camera.y = (y + h / 2) - SCREEN_HEIGHT / 2;
+  camera.x = (Sint16)((x + w / 2) - SCREEN_WIDTH  / 2);
+  camera.y = (Sint16)((y + h / 2) - SCREEN_HEIGHT / 2);
 
   if(camera.x < 0)
     camera.x = 0;
@@ -85,7 +85,7 @@ void Player::SetCamera(void) {
 void Player::Move() {
   Character::Move();
   if(map->GetMapTransitionName(tileX, tileY) != "null") {
-    SetXY(map->GetMapTransitionX(tileX, tileY), map->GetMapTransitionY(tileX, tileY));
+    SetXY((float)map->GetMapTransitionX(tileX, tileY), (float)map->GetMapTransitionY(tileX, tileY));
     map->Load(map->GetMapTransitionName(tileX, tileY));
   }
 }

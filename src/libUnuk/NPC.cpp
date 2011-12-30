@@ -14,7 +14,7 @@ NPC::~NPC(void) {
 
 void NPC::Update(void) {
   // Store the NPC's health.
-  int health = GetHealth();
+  // int health = GetHealth(); // not referenced
 
   Move();
 

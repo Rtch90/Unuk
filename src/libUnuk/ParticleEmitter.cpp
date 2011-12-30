@@ -15,8 +15,8 @@ void ParticleEmitter::SetXY(int xArg, int yArg) {
 
 void ParticleEmitter::ForceXY(int xArg, int yArg) {
   for(int i = 0; i < _particleCount; i++) {
-    m_particle[i].x = xArg;
-    m_particle[i].y = yArg;
+    m_particle[i].x = (float)xArg;
+    m_particle[i].y = (float)yArg;
   }
 }
 
@@ -52,7 +52,7 @@ void ParticleEmitter::SetParticleLifetime(int lifetimeArg) {
 
 void ParticleEmitter::Render(void) {
   for(int i = 0; i < _particleCount; i++) {
-    ApplySurface(m_particle[i].x, m_particle[i].y, _particleTexture, screen);
+    ApplySurface((int)m_particle[i].x, (int)m_particle[i].y, _particleTexture, screen);
   }
 }
 
@@ -60,16 +60,16 @@ void ParticleEmitter::Update(void) {
   for(int i = 0; i < _particleCount; i++) {
     if((int)SDL_GetTicks() - m_particle[i].startTime > m_particle[i].lifetime) {
       // Reset the x and y coords.
-      m_particle[i].x = x;
-      m_particle[i].y = y;
+      m_particle[i].x = (float)x;
+      m_particle[i].y = (float)y;
 
-      m_particle[i].xVel = rand() % 360;
-      m_particle[i].yVel = rand() % 360;
+      m_particle[i].xVel = (float)(rand() % 360);
+      m_particle[i].yVel = (float)(rand() % 360);
 
       if(rand() % 2)
-        m_particle[i].xVel = m_particle[i].xVel * -1;
+        m_particle[i].xVel = m_particle[i].xVel * -1.0f;
       if(rand() % 2)
-        m_particle[i].yVel = m_particle[i].yVel * -1;
+        m_particle[i].yVel = m_particle[i].yVel * -1.0f;
 
       m_particle[i].startTime = SDL_GetTicks();
     } else {
