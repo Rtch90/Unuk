@@ -17,6 +17,7 @@
 #include "../libUnuk/NPC.h"
 #include "../libUnuk/Debug.h"
 #include "../libUnuk/Text.h"
+#include "../libUnuk/MemClass.h"
 using namespace std;
 
 enum gameNavVal_t { gameMainMenu, gameQuitGame };

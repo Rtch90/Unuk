@@ -69,9 +69,9 @@ ingameMenuNavVal_t IngameMenu::HandleInput(void) {
 }
 
 void IngameMenu::Render(void) {
-  btnResume.Render();
-  btnSaveGame.Render();
-  btnLoadGame.Render();
-  btnOptions.Render();
-  btnExitToMenu.Render();
+  btnResume.RenderLiteral();
+  btnSaveGame.RenderLiteral();
+  btnLoadGame.RenderLiteral();
+  btnOptions.RenderLiteral();
+  btnExitToMenu.RenderLiteral();
 }

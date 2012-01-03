@@ -7,6 +7,7 @@
 #include "../libUnuk/MainMenu.h"
 #include "../libUnuk/NPC.h"
 #include "../libUnuk/Debug.h"
+#include "../libUnuk/MemClass.h"
 #include "Constants.h"
 #include "Globals.h"
 #include "Game.h"
@@ -82,6 +83,18 @@ int WINAPI WinMain(HINSTANCE,HINSTANCE,LPSTR,int) {
       menuRunning = false;
       delete menu;
       break;
+    }
+    // This is NOT going to go nicely. But I want to test this.
+    MemClass* array[1000];
+    // Allocate a shitload of memory.
+    for(int i = 0; i < 5000; i++) {
+      for(int j = 0; j < 1000; j++) {
+        array[j] = new MemClass(i, j);
+      }
+      // Get rid of it.
+      for(int j = 0; j < 1000; j++) {
+        delete array[j];
+      }
     }
   }
   //stringstream caption;
