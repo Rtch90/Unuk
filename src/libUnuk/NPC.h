@@ -9,7 +9,7 @@ public:
   ~NPC(void);
   
   void Update(void);
-  
+
 protected:
   void Move(void);
   

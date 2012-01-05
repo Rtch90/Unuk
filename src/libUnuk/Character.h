@@ -6,6 +6,7 @@
 
 #include "../Unuk/Globals.h"
 #include "../Unuk/Constants.h"
+#include "MemClass.h"
 #include "ApplySurface.h"
 #include "ImageLoader.h"
 #include "Collision.h"
@@ -40,6 +41,22 @@ public:
 
   void Render(void);
   void Update(void);
+
+  inline void* operator new(size_t size) {
+    return gMemManager.Allocate(size);
+  }
+
+  inline void operator delete(void* object) {
+    gMemManager.Free(object);
+  }
+
+  inline void* operator new [](size_t size) {
+    return gMemManager.Allocate(size);
+  }
+
+  inline void operator delete [](void* object) {
+    gMemManager.Free(object);
+  }
   
 protected:
   void Move(void);

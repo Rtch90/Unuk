@@ -212,7 +212,10 @@ void Game::LoadSavegame(const string savegameIDArg) {
     // <name> - Parse the player name.
     dataElem = rootElem->FirstChildElement("name");
     assert(dataElem != NULL);
-    _player->SetName(dataElem->GetText());
+
+    // Overloaded new/delete operator takes this out of scope..
+    // TODO: Fix.
+    //_player->SetName(dataElem->GetText());
     // </name>
     
     // <x> - Parse the player x coord.
