@@ -6,14 +6,21 @@ TTF_Font* Text::mediumFont   = NULL;
 TTF_Font* Text::largeFont    = NULL;
 TTF_Font* Text::vLargeFont   = NULL;
 
+const static int lineSpacing = 3;
+
 Text::Text(void) {
-  _text = NULL;
+  x=0;
+  y=0;
+  w=0;
+  h=0;
 }
 
 Text::~Text(void) {
-  if (_text) {
-	SDL_FreeSurface(_text);
-	_text = NULL;
+  if(!_lines.empty()) {
+    for(std::list<SDL_Surface*>::iterator it = _lines.begin(); it != _lines.end(); ++it) {
+      SDL_FreeSurface(*it);
+    }
+    _lines.clear();
   }
 }
 
@@ -55,29 +62,83 @@ void Text::SetXY(int xArg, int yArg) {
 int Text::SetTextBlended(string textArg, textSizes_t size, SDL_Color colour) {
   _textContents = textArg;
 
-  if(_text != NULL) {
-    SDL_FreeSurface(_text);
+  if(!_lines.empty()) {
+    for(std::list<SDL_Surface*>::iterator it = _lines.begin(); it != _lines.end(); ++it) {
+      SDL_FreeSurface(*it);
+    }
+    _lines.clear();
+  }
+  
+  std::list<std::string> lines;
+  std::string line;
+  for(int i = 0; i < (int)textArg.size(); i++) {
+    char c = textArg.at(i);
+    if(c=='\n') {
+      lines.push_back(line);
+      line.clear();
+    } else {
+      line += c;
+    }
+  }
+  if (!line.empty()) {
+    lines.push_back(line);
   }
 
-  if(size == vsmall) {
-    _text = TTF_RenderText_Blended(vSmallFont, textArg.c_str(), colour);
-    return 1;
+  for(std::list<std::string>::iterator it = lines.begin(); it != lines.end(); ++it) {
+    SDL_Surface* lineSurf = NULL;
+    if(size == vsmall) {
+      lineSurf = TTF_RenderText_Blended(vSmallFont, textArg.c_str(), colour);
+      int linePixelWidth;
+      int linePixelHeight;
+      TTF_SizeText(vSmallFont, textArg.c_str(), &linePixelWidth, &linePixelHeight);
+      if(linePixelWidth > w) {
+        w = linePixelWidth;
+      }
+      h += linePixelHeight + lineSpacing; 
+    }
+    else if(size == small) {
+      lineSurf = TTF_RenderText_Blended(smallFont, it->c_str(), colour);
+      int linePixelWidth;
+      int linePixelHeight;
+      TTF_SizeText(smallFont, it->c_str(), &linePixelWidth, &linePixelHeight);
+      if(linePixelWidth > w) {
+        w = linePixelWidth;
+      }
+      h += linePixelHeight + lineSpacing; 
+    }
+    else if(size == medium) {
+      lineSurf = TTF_RenderText_Blended(mediumFont, it->c_str(), colour);
+      int linePixelWidth;
+      int linePixelHeight;
+      TTF_SizeText(mediumFont, it->c_str(), &linePixelWidth, &linePixelHeight);
+      if(linePixelWidth > w) {
+        w = linePixelWidth;
+      }
+      h += linePixelHeight + lineSpacing; 
+    }
+    else if(size == large) {
+      lineSurf = TTF_RenderText_Blended(largeFont, it->c_str(), colour);
+      int linePixelWidth;
+      int linePixelHeight;
+      TTF_SizeText(largeFont, it->c_str(), &linePixelWidth, &linePixelHeight);
+      if(linePixelWidth > w) {
+        w = linePixelWidth;
+      }
+      h += linePixelHeight + lineSpacing; 
+    } else {
+      lineSurf = TTF_RenderText_Blended(vLargeFont, it->c_str(), colour);
+      int linePixelWidth;
+      int linePixelHeight;
+      TTF_SizeText(vLargeFont, it->c_str(), &linePixelWidth, &linePixelHeight);
+      if(linePixelWidth > w) {
+        w = linePixelWidth;
+      }
+      h += linePixelHeight + lineSpacing; 
+    }
+    _lines.push_back(lineSurf);
+    
   }
-  else if(size == small) {
-    _text = TTF_RenderText_Blended(smallFont, textArg.c_str(), colour);
-    return 1;
-  }
-  else if(size == medium) {
-    _text = TTF_RenderText_Blended(mediumFont, textArg.c_str(), colour);
-    return 1;
-  }
-  else if(size == large) {
-    _text = TTF_RenderText_Blended(largeFont, textArg.c_str(), colour);
-    return 1;
-  } else {
-    _text = TTF_RenderText_Blended(vLargeFont, textArg.c_str(), colour);
-    return 1;
-  }
+  return 1;
 }
 
 int Text::SetTextBlended(string textArg, textSizes_t size, Uint8 r, Uint8 g, Uint8 b) {
@@ -88,29 +149,82 @@ int Text::SetTextBlended(string textArg, textSizes_t size, Uint8 r, Uint8 g, Uin
 int Text::SetTextShaded(string textArg, textSizes_t size, SDL_Color colour, SDL_Color bgColour) {
   _textContents = textArg;
 
-  if(_text != NULL) {
-    SDL_FreeSurface(_text);
+  if(!_lines.empty()) {
+    for(std::list<SDL_Surface*>::iterator it = _lines.begin(); it != _lines.end(); ++it) {
+      SDL_FreeSurface(*it);
+    }
+    _lines.clear();
   }
 
-  if(size == vsmall) {
-    _text = TTF_RenderText_Shaded(vSmallFont, textArg.c_str(), colour, bgColour);
-    return 1;
+  std::list<std::string> lines;
+  std::string line;
+  for(int i = 0; i < (int)textArg.size(); i++) {
+    char c = textArg.at(i);
+    if(c=='\n') {
+      lines.push_back(line);
+      line.clear();
+    } else {
+      line += c;
+    }
   }
-  else if(size == small) {
-    _text = TTF_RenderText_Shaded(smallFont, textArg.c_str(), colour, bgColour);
-    return 1;
+  if (!line.empty()) {
+    lines.push_back(line);
   }
-  else if(size == medium) {
-    _text = TTF_RenderText_Shaded(mediumFont, textArg.c_str(), colour, bgColour);
-    return 1;
+
+  for(std::list<std::string>::iterator it = lines.begin(); it != lines.end(); ++it) {
+    SDL_Surface* lineSurf;
+    if(size == vsmall) {
+      lineSurf = TTF_RenderText_Shaded(vSmallFont, it->c_str(), colour, bgColour);
+      int linePixelWidth;
+      int linePixelHeight;
+      TTF_SizeText(vSmallFont, it->c_str(), &linePixelWidth, &linePixelHeight);
+      if(linePixelWidth > w) {
+        w = linePixelWidth;
+      }
+      h += linePixelHeight + lineSpacing; 
+    }
+    else if(size == small) {
+      lineSurf = TTF_RenderText_Shaded(smallFont, it->c_str(), colour, bgColour);
+      int linePixelWidth;
+      int linePixelHeight;
+      TTF_SizeText(smallFont, it->c_str(), &linePixelWidth, &linePixelHeight);
+      if(linePixelWidth > w) {
+        w = linePixelWidth;
+      }
+      h += linePixelHeight + lineSpacing; 
+    }
+    else if(size == medium) {
+      lineSurf = TTF_RenderText_Shaded(mediumFont, it->c_str(), colour, bgColour);
+      int linePixelWidth;
+      int linePixelHeight;
+      TTF_SizeText(mediumFont, it->c_str(), &linePixelWidth, &linePixelHeight);
+      if(linePixelWidth > w) {
+        w = linePixelWidth;
+      }
+      h += linePixelHeight + lineSpacing; 
+    }
+    else if(size == large) {
+      lineSurf = TTF_RenderText_Shaded(largeFont, it->c_str(), colour, bgColour);
+      int linePixelWidth;
+      int linePixelHeight;
+      TTF_SizeText(largeFont, it->c_str(), &linePixelWidth, &linePixelHeight);
+      if(linePixelWidth > w) {
+        w = linePixelWidth;
+      }
+      h += linePixelHeight + lineSpacing; 
+    } else {
+      lineSurf = TTF_RenderText_Shaded(vLargeFont, it->c_str(), colour, bgColour);
+      int linePixelWidth;
+      int linePixelHeight;
+      TTF_SizeText(vLargeFont, it->c_str(), &linePixelWidth, &linePixelHeight);
+      if(linePixelWidth > w) {
+        w = linePixelWidth;
+      }
+      h += linePixelHeight + lineSpacing; 
+    }
+    _lines.push_back(lineSurf);
   }
-  else if(size == large) {
-    _text = TTF_RenderText_Shaded(largeFont, textArg.c_str(), colour, bgColour);
-    return 1;
-  } else {
-    _text = TTF_RenderText_Shaded(vLargeFont, textArg.c_str(), colour, bgColour);
-    return 1;
-  }
+  return 1;
 }
 
 int Text::SetTextShaded(string textArg, textSizes_t size, Uint8 rF, Uint8 gF, Uint8 bF, Uint8 rB, Uint8 gB, Uint8 bB) {
@@ -120,17 +234,37 @@ int Text::SetTextShaded(string textArg, textSizes_t size, Uint8 rF, Uint8 gF, Ui
 }
 
 void Text::Render(void) {
-  ApplySurface(x, y, _text, screen);
+  int yOffset = 0;
+  for(std::list<SDL_Surface*>::iterator it = _lines.begin(); it != _lines.end(); ++it) {
+    SDL_Surface* lineSurf = *it;
+    ApplySurface(x, y + yOffset, lineSurf, screen);  
+    yOffset += lineSurf->h + lineSpacing; 
+  }
 }
 
 void Text::Render(int xArg, int yArg) {
-  ApplySurface(xArg, yArg, _text, screen);
+  int yOffset = 0;
+  for(std::list<SDL_Surface*>::iterator it = _lines.begin(); it != _lines.end(); ++it) {
+    SDL_Surface* lineSurf = *it;
+    ApplySurface(x + xArg, y + yArg + yOffset, lineSurf, screen);  
+    yOffset += lineSurf->h + lineSpacing; 
+  }
 }
 
 void Text::RenderLiteral(void) {
-  ApplySurfaceLiteral(x, y, _text, screen);
+  int yOffset = 0;
+  for(std::list<SDL_Surface*>::iterator it = _lines.begin(); it != _lines.end(); ++it) {
+    SDL_Surface* lineSurf = *it;
+    ApplySurfaceLiteral(x, y + yOffset, lineSurf, screen);  
+    yOffset += lineSurf->h + lineSpacing; 
+  }
 }
 
 void Text::RenderLiteral(int xArg, int yArg) {
-  ApplySurfaceLiteral(xArg, yArg, _text, screen);
+  int yOffset = 0;
+  for(std::list<SDL_Surface*>::iterator it = _lines.begin(); it != _lines.end(); ++it) {
+    SDL_Surface* lineSurf = *it;
+    ApplySurfaceLiteral(x + xArg, y + yArg + yOffset, lineSurf, screen);  
+    yOffset += lineSurf->h + lineSpacing; 
+  }
 }

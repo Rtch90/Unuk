@@ -270,6 +270,14 @@
 			>
 		</File>
 		<File
+			RelativePath="..\..\..\src\libUnuk\MemManager.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\libUnuk\MemManager.h"
+			>
+		</File>
+		<File
 			RelativePath="..\..\..\src\libUnuk\NPC.cpp"
 			>
 		</File>

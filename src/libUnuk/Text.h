@@ -3,6 +3,7 @@
 #include <SDL/SDL.h>
 #include <SDL/SDL_ttf.h>
 #include <string>
+#include <list>
 
 #include "../Unuk/Globals.h"
 #include "ApplySurface.h"
@@ -20,8 +21,8 @@ public:
   static void LoadFonts(void);
   static void FreeFonts(void);
 
-  int GetWidth(void)          { return _text->w; }
-  int GetHeight(void)         { return _text->h; }
+  int GetWidth(void)          { return w; }
+  int GetHeight(void)         { return h; }
   int GetX(void)              { return x; }
   int GetY(void)              { return y; }
 
@@ -46,7 +47,7 @@ private:
 
   string _textContents;
   SDL_Color _textColour;
-  SDL_Surface* _text;
+  std::list<SDL_Surface*> _lines;
 
   static TTF_Font* vSmallFont;
   static TTF_Font* smallFont;
