@@ -13,6 +13,7 @@ Text::Text(void) {
   y=0;
   w=0;
   h=0;
+  lineWidth=50;
 }
 
 Text::~Text(void) {
@@ -59,7 +60,7 @@ void Text::SetXY(int xArg, int yArg) {
   y = yArg;
 }
 
-int Text::SetTextBlended(string textArg, textSizes_t size, SDL_Color colour) {
+int Text::SetTextBlended(string textArg, textSizes_t size, SDL_Color colour,bool wordWrap) {
   _textContents = textArg;
 
   if(!_lines.empty()) {
@@ -67,12 +68,31 @@ int Text::SetTextBlended(string textArg, textSizes_t size, SDL_Color colour) {
       SDL_FreeSurface(*it);
     }
     _lines.clear();
+  }
+
+  TTF_Font* font = NULL;
+  if(size == vsmall) {
+    font = vSmallFont;
+  } else if(size == small) {
+    font = smallFont;
+  } else if(size == medium) {
+    font = mediumFont;
+  } else if(size == large) {
+    font = largeFont;
+  } else {
+    font = vLargeFont;
+  }
+
+  std::string finalTextContents = textArg;
+
+  if(wordWrap) {
+    finalTextContents = DoWordWrap(font, finalTextContents);
   }
   
   std::list<std::string> lines;
   std::string line;
-  for(int i = 0; i < (int)textArg.size(); i++) {
-    char c = textArg.at(i);
+  for(int i = 0; i < (int)finalTextContents.size(); i++) {
+    char c = finalTextContents.at(i);
     if(c=='\n') {
       lines.push_back(line);
       line.clear();
@@ -85,68 +105,30 @@ int Text::SetTextBlended(string textArg, textSizes_t size, SDL_Color colour) {
   }
 
   for(std::list<std::string>::iterator it = lines.begin(); it != lines.end(); ++it) {
-    SDL_Surface* lineSurf = NULL;
-    if(size == vsmall) {
-      lineSurf = TTF_RenderText_Blended(vSmallFont, textArg.c_str(), colour);
-      int linePixelWidth;
-      int linePixelHeight;
-      TTF_SizeText(vSmallFont, textArg.c_str(), &linePixelWidth, &linePixelHeight);
-      if(linePixelWidth > w) {
-        w = linePixelWidth;
-      }
-      h += linePixelHeight + lineSpacing; 
+    SDL_Surface* lineSurf = TTF_RenderText_Blended(font, it->c_str(), colour);
+
+    int linePixelWidth;
+    int linePixelHeight;
+    TTF_SizeText(font, it->c_str(), &linePixelWidth, &linePixelHeight);
+
+    if(linePixelWidth > w) {
+      w = linePixelWidth;
     }
-    else if(size == small) {
-      lineSurf = TTF_RenderText_Blended(smallFont, it->c_str(), colour);
-      int linePixelWidth;
-      int linePixelHeight;
-      TTF_SizeText(smallFont, it->c_str(), &linePixelWidth, &linePixelHeight);
-      if(linePixelWidth > w) {
-        w = linePixelWidth;
-      }
-      h += linePixelHeight + lineSpacing; 
-    }
-    else if(size == medium) {
-      lineSurf = TTF_RenderText_Blended(mediumFont, it->c_str(), colour);
-      int linePixelWidth;
-      int linePixelHeight;
-      TTF_SizeText(mediumFont, it->c_str(), &linePixelWidth, &linePixelHeight);
-      if(linePixelWidth > w) {
-        w = linePixelWidth;
-      }
-      h += linePixelHeight + lineSpacing; 
-    }
-    else if(size == large) {
-      lineSurf = TTF_RenderText_Blended(largeFont, it->c_str(), colour);
-      int linePixelWidth;
-      int linePixelHeight;
-      TTF_SizeText(largeFont, it->c_str(), &linePixelWidth, &linePixelHeight);
-      if(linePixelWidth > w) {
-        w = linePixelWidth;
-      }
-      h += linePixelHeight + lineSpacing; 
-    } else {
-      lineSurf = TTF_RenderText_Blended(vLargeFont, it->c_str(), colour);
-      int linePixelWidth;
-      int linePixelHeight;
-      TTF_SizeText(vLargeFont, it->c_str(), &linePixelWidth, &linePixelHeight);
-      if(linePixelWidth > w) {
-        w = linePixelWidth;
-      }
-      h += linePixelHeight + lineSpacing; 
-    }
+
+    h += linePixelHeight + lineSpacing; 
+
     _lines.push_back(lineSurf);
-    
   }
+
   return 1;
 }
 
-int Text::SetTextBlended(string textArg, textSizes_t size, Uint8 r, Uint8 g, Uint8 b) {
+int Text::SetTextBlended(string textArg, textSizes_t size, Uint8 r, Uint8 g, Uint8 b, bool wordWrap) {
   SDL_Color f = { r, g, b };
-  return SetTextBlended(textArg, size, f);
+  return SetTextBlended(textArg, size, f, wordWrap);
 }
 
-int Text::SetTextShaded(string textArg, textSizes_t size, SDL_Color colour, SDL_Color bgColour) {
+int Text::SetTextShaded(string textArg, textSizes_t size, SDL_Color colour, SDL_Color bgColour, bool wordWrap) {
   _textContents = textArg;
 
   if(!_lines.empty()) {
@@ -156,10 +138,29 @@ int Text::SetTextShaded(string textArg, textSizes_t size, SDL_Color colour, SDL_
     _lines.clear();
   }
 
+  TTF_Font* font = NULL;
+  if(size == vsmall) {
+    font = vSmallFont;
+  } else if(size == small) {
+    font = smallFont;
+  } else if(size == medium) {
+    font = mediumFont;
+  } else if(size == large) {
+    font = largeFont;
+  } else {
+    font = vLargeFont;
+  }
+
+  std::string finalTextContents = textArg;
+
+  if(wordWrap) {
+    finalTextContents = DoWordWrap(font, finalTextContents);
+  }
+
   std::list<std::string> lines;
   std::string line;
-  for(int i = 0; i < (int)textArg.size(); i++) {
-    char c = textArg.at(i);
+  for(int i = 0; i < (int)finalTextContents.size(); i++) {
+    char c = finalTextContents.at(i);
     if(c=='\n') {
       lines.push_back(line);
       line.clear();
@@ -172,65 +173,28 @@ int Text::SetTextShaded(string textArg, textSizes_t size, SDL_Color colour, SDL_
   }
 
   for(std::list<std::string>::iterator it = lines.begin(); it != lines.end(); ++it) {
-    SDL_Surface* lineSurf;
-    if(size == vsmall) {
-      lineSurf = TTF_RenderText_Shaded(vSmallFont, it->c_str(), colour, bgColour);
-      int linePixelWidth;
-      int linePixelHeight;
-      TTF_SizeText(vSmallFont, it->c_str(), &linePixelWidth, &linePixelHeight);
-      if(linePixelWidth > w) {
-        w = linePixelWidth;
-      }
-      h += linePixelHeight + lineSpacing; 
+    SDL_Surface* lineSurf = TTF_RenderText_Shaded(font, it->c_str(), colour, bgColour);
+
+    int linePixelWidth;
+    int linePixelHeight;
+    TTF_SizeText(font, it->c_str(), &linePixelWidth, &linePixelHeight);
+
+    if(linePixelWidth > w) {
+      w = linePixelWidth;
     }
-    else if(size == small) {
-      lineSurf = TTF_RenderText_Shaded(smallFont, it->c_str(), colour, bgColour);
-      int linePixelWidth;
-      int linePixelHeight;
-      TTF_SizeText(smallFont, it->c_str(), &linePixelWidth, &linePixelHeight);
-      if(linePixelWidth > w) {
-        w = linePixelWidth;
-      }
-      h += linePixelHeight + lineSpacing; 
-    }
-    else if(size == medium) {
-      lineSurf = TTF_RenderText_Shaded(mediumFont, it->c_str(), colour, bgColour);
-      int linePixelWidth;
-      int linePixelHeight;
-      TTF_SizeText(mediumFont, it->c_str(), &linePixelWidth, &linePixelHeight);
-      if(linePixelWidth > w) {
-        w = linePixelWidth;
-      }
-      h += linePixelHeight + lineSpacing; 
-    }
-    else if(size == large) {
-      lineSurf = TTF_RenderText_Shaded(largeFont, it->c_str(), colour, bgColour);
-      int linePixelWidth;
-      int linePixelHeight;
-      TTF_SizeText(largeFont, it->c_str(), &linePixelWidth, &linePixelHeight);
-      if(linePixelWidth > w) {
-        w = linePixelWidth;
-      }
-      h += linePixelHeight + lineSpacing; 
-    } else {
-      lineSurf = TTF_RenderText_Shaded(vLargeFont, it->c_str(), colour, bgColour);
-      int linePixelWidth;
-      int linePixelHeight;
-      TTF_SizeText(vLargeFont, it->c_str(), &linePixelWidth, &linePixelHeight);
-      if(linePixelWidth > w) {
-        w = linePixelWidth;
-      }
-      h += linePixelHeight + lineSpacing; 
-    }
+
+    h += linePixelHeight + lineSpacing; 
+
     _lines.push_back(lineSurf);
   }
+
   return 1;
 }
 
-int Text::SetTextShaded(string textArg, textSizes_t size, Uint8 rF, Uint8 gF, Uint8 bF, Uint8 rB, Uint8 gB, Uint8 bB) {
+int Text::SetTextShaded(string textArg, textSizes_t size, Uint8 rF, Uint8 gF, Uint8 bF, Uint8 rB, Uint8 gB, Uint8 bB, bool wordWrap) {
   SDL_Color f = { rF, gF, bF };
   SDL_Color b = { rB, gB, bB };
-  return SetTextShaded(textArg, size, f, b);
+  return SetTextShaded(textArg, size, f, b, wordWrap);
 }
 
 void Text::Render(void) {
@@ -267,4 +231,39 @@ void Text::RenderLiteral(int xArg, int yArg) {
     ApplySurfaceLiteral(x + xArg, y + yArg + yOffset, lineSurf, screen);  
     yOffset += lineSurf->h + lineSpacing; 
   }
+}
+
+std::string Text::DoWordWrap(TTF_Font* fontArg, const std::string& textArg) {
+  int leftSpace = lineWidth;
+
+  char* tokenizedText = strdup(textArg.c_str());
+  char* tokenizedTextOrigin = tokenizedText;
+
+  std::string wrappedText(textArg);
+  int offsetInWrappedText = 0;
+
+  int spaceWidth;
+  TTF_SizeText(fontArg, " ", &spaceWidth, NULL);
+
+  char* word = strtok(tokenizedText, " ");
+
+  while (word) {
+    int wordWidth;
+    TTF_SizeText(fontArg, word, &wordWidth, NULL);
+
+    if ((wordWidth + spaceWidth) > leftSpace) {
+      wrappedText.insert((word - tokenizedTextOrigin) + offsetInWrappedText, "\n");
+      offsetInWrappedText++;
+
+      leftSpace = lineWidth - wordWidth;
+    } else {
+      leftSpace -= wordWidth + spaceWidth;
+    }
+
+    word = strtok(NULL, " ");
+  }
+
+ // delete[] tokenizedText;
+
+  return wrappedText;
 }

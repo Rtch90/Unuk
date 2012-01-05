@@ -30,10 +30,13 @@ public:
 
   void SetXY(int xArg, int yArg);
 
-  int SetTextBlended(string textArg, textSizes_t size, SDL_Color);
-  int SetTextBlended(string textArg, textSizes_t size, Uint8 r, Uint8 g, Uint8 b);
-  int SetTextShaded(string textArg, textSizes_t size, SDL_Color, SDL_Color);
-  int SetTextShaded(string textArg, textSizes_t size, Uint8 rF, Uint8 gF, Uint8 bF, Uint8 rB, Uint8 gB, Uint8 bB);
+  int GetLineWidth()                  { return lineWidth; }
+  void SetLineWidth(int lineWidthArg) { lineWidth = lineWidthArg; }
+
+  int SetTextBlended(string textArg, textSizes_t size, SDL_Color, bool wordWrap=false);
+  int SetTextBlended(string textArg, textSizes_t size, Uint8 r, Uint8 g, Uint8 b, bool wordWrap=false);
+  int SetTextShaded(string textArg, textSizes_t size, SDL_Color, SDL_Color, bool wordWrap=false);
+  int SetTextShaded(string textArg, textSizes_t size, Uint8 rF, Uint8 gF, Uint8 bF, Uint8 rB, Uint8 gB, Uint8 bB, bool wordWrap=false);
 
   string GetText(void)        { return _textContents; }
 
@@ -44,10 +47,13 @@ public:
 
 private:
   int x, y, w, h;
+  int lineWidth;
 
   string _textContents;
   SDL_Color _textColour;
   std::list<SDL_Surface*> _lines;
+
+  std::string DoWordWrap(TTF_Font* fontArg, const std::string& textArg);
 
   static TTF_Font* vSmallFont;
   static TTF_Font* smallFont;

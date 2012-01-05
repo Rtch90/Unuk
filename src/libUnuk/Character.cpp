@@ -55,7 +55,8 @@ void Character::LoadSprites(string filename, int wArg, int hArg) {
 void Character::AddSpeachBubble(string text) {
   _speachBubble.push_back(text);
 
-  _speachBubbleText.SetTextBlended(text, small, 0, 0, 0);
+  _speachBubbleText.SetLineWidth(200);
+  _speachBubbleText.SetTextBlended(text, small, 0, 0, 0, true);
 
   if(_speachBubbleTimer.IsStarted() == false)
     _speachBubbleTimer.Start();

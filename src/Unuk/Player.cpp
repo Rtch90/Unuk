@@ -57,7 +57,7 @@ void Player::HandleInput(void) {
 
 void Player::Update(void) {
   Move();
-  AddSpeachBubble("Woot, My name is Allanis\n, welcome to my home");
+  AddSpeachBubble("Woot, My name is Allanis, welcome to my home. Just testing some more text to see if this works..");
 
   // For now The camera will be static.
   SetCamera();
