@@ -9,6 +9,7 @@ Win32/Unuk/Unuk/*.user
 Win32/Unuk/Unuk.ncb
 Win32/Unuk/Unuk.suo
 Bin/*.dll
+*.swp
 *.o
 *.exe
 *log
