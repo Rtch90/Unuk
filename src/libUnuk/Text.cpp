@@ -9,10 +9,10 @@ TTF_Font* Text::vLargeFont   = NULL;
 const static int lineSpacing = 3;
 
 Text::Text(void) {
-  x=0;
-  y=0;
-  w=0;
-  h=0;
+  x = 0;
+  y = 0;
+  w = 0;
+  h = 0;
   lineWidth=50;
 }
 
@@ -28,9 +28,9 @@ Text::~Text(void) {
 void Text::LoadFonts(void) {
   // Load the fonts if they are not already in memory.
   assert(vSmallFont == NULL);
-  assert(smallFont == NULL);
+  assert(smallFont  == NULL);
   assert(mediumFont == NULL);
-  assert(largeFont == NULL);
+  assert(largeFont  == NULL);
   assert(vLargeFont == NULL);
 
   vSmallFont      = Font("../Data/Media/Fonts/Enigma_2.ttf", 16);
@@ -43,9 +43,9 @@ void Text::LoadFonts(void) {
 void Text::FreeFonts(void) {
   // If the fonts are loaded, then free them.
   assert(vSmallFont != NULL);
-  assert(smallFont != NULL);
+  assert(smallFont  != NULL);
   assert(mediumFont != NULL);
-  assert(largeFont != NULL);
+  assert(largeFont  != NULL);
   assert(vLargeFont != NULL);
 
   TTF_CloseFont(vSmallFont);
@@ -93,7 +93,7 @@ int Text::SetTextBlended(string textArg, textSizes_t size, SDL_Color colour,bool
   std::string line;
   for(int i = 0; i < (int)finalTextContents.size(); i++) {
     char c = finalTextContents.at(i);
-    if(c=='\n') {
+    if(c == '\n') {
       lines.push_back(line);
       line.clear();
     } else {
@@ -161,7 +161,7 @@ int Text::SetTextShaded(string textArg, textSizes_t size, SDL_Color colour, SDL_
   std::string line;
   for(int i = 0; i < (int)finalTextContents.size(); i++) {
     char c = finalTextContents.at(i);
-    if(c=='\n') {
+    if(c == '\n') {
       lines.push_back(line);
       line.clear();
     } else {
@@ -247,7 +247,7 @@ std::string Text::DoWordWrap(TTF_Font* fontArg, const std::string& textArg) {
 
   char* word = strtok(tokenizedText, " ");
 
-  while (word) {
+  while(word) {
     int wordWidth;
     TTF_SizeText(fontArg, word, &wordWidth, NULL);
 

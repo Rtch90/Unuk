@@ -39,7 +39,8 @@ HEADERS += ../src/libUnuk/Debug.h \
     ../src/libUnuk/MapEntities.h \
     ../src/libUnuk/FPS.h \
     ../src/libUnuk/MemManager.h \
-    ../src/libUnuk/MemClass.h
+    ../src/libUnuk/MemClass.h \
+    ../src/libUnuk/Node.h
 SOURCES += ../src/libUnuk/Debug.cpp \
     ../src/Unuk/main.cpp \
     ../src/libUnuk/Input.cpp \

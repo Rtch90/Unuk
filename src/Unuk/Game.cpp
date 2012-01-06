@@ -8,7 +8,8 @@ Game::Game(void) {
 }
 
 Game::~Game(void) {
-  delete _player;
+  // cleaning _player up caused a nice seg fault. I'll look later.
+  //delete _player;
   delete _npc;
 }
 
