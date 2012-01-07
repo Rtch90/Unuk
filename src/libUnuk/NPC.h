@@ -2,6 +2,7 @@
 #define _NPC_H_
 
 #include "Character.h"
+#include "AStar.h"
 
 class NPC : public Character {
 public:

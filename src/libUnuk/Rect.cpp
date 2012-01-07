@@ -46,6 +46,8 @@ void Rect::Draw(int xArg, int yArg) {
   offset.y = (Sint16)(yArg - camera.y);
   offset.w = (Sint16)rect.w;
   offset.h = (Sint16)rect.h;
+
+  SDL_FillRect(screen, &offset, SDL_MapRGB(screen->format, r, g, b));
 }
 
 void Rect::DrawLiteral(void) {

@@ -56,7 +56,7 @@ AStarBase* AStar::Search(void) {
     // Put best on the closed list.
     _closedList[key] = best;
 
-    // Check id best is our goal.
+    // Check if best is our goal.
     if(best->isGoal())
       return best;
 
