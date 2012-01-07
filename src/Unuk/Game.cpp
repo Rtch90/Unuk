@@ -2,7 +2,7 @@
 
 Game::Game(void) {
   _player = new Player(&_map);
-  _npc = new NPC(&_map);
+  _npc    = new NPC(&_map);
 
   _runGameReturnValue = gameMainMenu;
 }
@@ -147,9 +147,13 @@ void Game::HandleInput(void) {
       _ingameMenu.SetStatus(false);
       break;
     case ingameMenuSaveGame:
-		SaveSavegame();
+      SaveSavegame();
+      Debug::logger->message("Game Saved!");
       break;
     case ingameMenuLoadGame:
+      LoadSavegame(_saveGameID);
+      _ingameMenu.SetStatus(false);
+      Debug::logger->message("Game Loaded!");
       break;
     case ingameMenuOptions:
       break;
