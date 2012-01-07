@@ -258,18 +258,18 @@ void Game::SaveSavegame(void) {
   TiXmlText* nameText = new TiXmlText("Allanis"); //TODO: replace with _player->GetName() when it works. --konom
   nameElement->LinkEndChild(nameText);
 
-  char xString[16];
-  itoa(_player->GetX(), xString, 10);
+  std::stringstream xString;
+  xString << _player->GetX();
 
   TiXmlElement* xElement = new TiXmlElement("x");
-  TiXmlText* xText = new TiXmlText(xString);
+  TiXmlText* xText = new TiXmlText(xString.str().c_str());
   xElement->LinkEndChild(xText);
 
-  char yString[16];
-  itoa(_player->GetY(), yString, 10);
+  std::stringstream yString;
+  yString << _player->GetY();
 
   TiXmlElement* yElement = new TiXmlElement("y");
-  TiXmlText* yText = new TiXmlText(yString);
+  TiXmlText* yText = new TiXmlText(yString.str().c_str());
   yElement->LinkEndChild(yText);
 
   TiXmlElement* mapElement = new TiXmlElement("map");
