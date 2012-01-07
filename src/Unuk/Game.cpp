@@ -1,6 +1,7 @@
 #include "Game.h"
 
 Game::Game(void) {
+  Debug::logger->message("Creating characters..");
   _player = new Player(&_map);
   _npc    = new NPC(&_map);
 
@@ -8,7 +9,7 @@ Game::Game(void) {
 }
 
 Game::~Game(void) {
-  Debug::logger->message("----- Cleaning Up ------");
+  Debug::logger->message("\n----- Cleaning Up ------");
   // cleaning _player up caused a nice seg fault. I'll look later.
   //delete _player;
   delete _npc;
