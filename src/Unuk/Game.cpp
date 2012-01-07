@@ -8,6 +8,7 @@ Game::Game(void) {
 }
 
 Game::~Game(void) {
+  Debug::logger->message("----- Cleaning Up ------");
   // cleaning _player up caused a nice seg fault. I'll look later.
   //delete _player;
   delete _npc;
@@ -148,6 +149,7 @@ void Game::HandleInput(void) {
       break;
     case ingameMenuSaveGame:
       SaveSavegame();
+      _ingameMenu.SetStatus(false);
       Debug::logger->message("Game Saved!");
       break;
     case ingameMenuLoadGame:

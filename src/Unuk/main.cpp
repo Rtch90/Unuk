@@ -31,19 +31,27 @@ int WINAPI WinMain(HINSTANCE,HINSTANCE,LPSTR,int) {
 #endif
 
   Debug::openLog(true);
+  Debug::logger->message("\n----- Engine Loading -----");
 
   if(SDL_Init(SDL_INIT_VIDEO == -1)) {
     system("zenity --error --text=\"Could not load SDL\"");
     Debug::logger->message("Error: Could not load SDL");
     return 1;
-  }
+  } else
+    Debug::logger->message("SDL loaded..");
+
   if(TTF_Init() == -1) {
     system("zenity --error --text=\"Could not load SDL_TTF\"");
     Debug::logger->message("Error: Could not load SDL_TTF");
     return 1;
-  }
+  } else
+    Debug::logger->message("SDL_TTF loaded..");
+
+
 
   screen = SDL_SetVideoMode(SCREEN_WIDTH, SCREEN_HEIGHT, 32, SDL_HWSURFACE);
+  Debug::logger->message("Video mode set..");
+
   SDL_WM_SetCaption("fps - 00", NULL);
 
   srand((unsigned int)time(NULL));
@@ -58,13 +66,19 @@ int WINAPI WinMain(HINSTANCE,HINSTANCE,LPSTR,int) {
   Text::LoadFonts();
 
   Game* game = NULL;
+
+  Debug::logger->message("Creating mainmenu..");
   MainMenu* menu = new MainMenu;
+
+  Debug::logger->message("\n----- Engine Initialization Complete -----");
+  Debug::logger->message("\n----- Logic -----");
 
   bool menuRunning = true;
   while(menuRunning) {
     switch(menu->Run()) {
     case mainMenuNewGame:
       delete menu;
+      Debug::logger->message("Entering game state..");
       game = new Game;
 
       switch(game->Run("save")) {
@@ -75,7 +89,6 @@ int WINAPI WinMain(HINSTANCE,HINSTANCE,LPSTR,int) {
         menuRunning = false;
         break;
       }
-
       delete game;
       break;
     case mainMenuLoadGame:
