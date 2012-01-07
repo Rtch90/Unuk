@@ -154,6 +154,14 @@
 			>
 		</File>
 		<File
+			RelativePath="..\..\..\src\libUnuk\AStar.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\libUnuk\AStar.h"
+			>
+		</File>
+		<File
 			RelativePath="..\..\..\src\libUnuk\Button.cpp"
 			>
 		</File>
@@ -275,6 +283,10 @@
 		</File>
 		<File
 			RelativePath="..\..\..\src\libUnuk\MemManager.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\libUnuk\Node.h"
 			>
 		</File>
 		<File

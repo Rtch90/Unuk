@@ -147,6 +147,7 @@ void Game::HandleInput(void) {
       _ingameMenu.SetStatus(false);
       break;
     case ingameMenuSaveGame:
+		SaveSavegame();
       break;
     case ingameMenuLoadGame:
       break;
@@ -247,8 +248,41 @@ void Game::LoadSavegame(const string savegameIDArg) {
 void Game::SaveSavegame(void) {
   string saveFilename = "../Save/" + _saveGameID;
 
-  ofstream saveFile(saveFilename.c_str());
-  assert(saveFile.is_open());
+  TiXmlDocument doc;
 
-  // Write stuff.
+  TiXmlDeclaration* decl = new TiXmlDeclaration("1.0", "", "");
+
+  TiXmlElement* saveElement = new TiXmlElement("save");
+
+  TiXmlElement* nameElement = new TiXmlElement("name");
+  TiXmlText* nameText = new TiXmlText("Allanis"); //TODO: replace with _player->GetName() when it works. --konom
+  nameElement->LinkEndChild(nameText);
+
+  char xString[16];
+  itoa(_player->GetX(), xString, 10);
+
+  TiXmlElement* xElement = new TiXmlElement("x");
+  TiXmlText* xText = new TiXmlText(xString);
+  xElement->LinkEndChild(xText);
+
+  char yString[16];
+  itoa(_player->GetY(), yString, 10);
+
+  TiXmlElement* yElement = new TiXmlElement("y");
+  TiXmlText* yText = new TiXmlText(yString);
+  yElement->LinkEndChild(yText);
+
+  TiXmlElement* mapElement = new TiXmlElement("map");
+  TiXmlText* mapText = new TiXmlText("map"); //TODO: replace with actual map name.
+  mapElement->LinkEndChild(mapText);
+
+  saveElement->LinkEndChild(nameElement);
+  saveElement->LinkEndChild(xElement);
+  saveElement->LinkEndChild(yElement);
+  saveElement->LinkEndChild(mapElement);
+
+  doc.LinkEndChild(decl);
+  doc.LinkEndChild(saveElement);
+
+  doc.SaveFile(saveFilename.c_str());
 }
