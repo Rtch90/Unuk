@@ -40,7 +40,9 @@ HEADERS += ../src/libUnuk/Debug.h \
     ../src/libUnuk/FPS.h \
     ../src/libUnuk/MemManager.h \
     ../src/libUnuk/MemClass.h \
-    ../src/libUnuk/Node.h
+    ../src/libUnuk/Node.h \
+    ../src/libUnuk/AStarBase.h \
+    ../src/libUnuk/AStar.h
 SOURCES += ../src/libUnuk/Debug.cpp \
     ../src/Unuk/main.cpp \
     ../src/libUnuk/Input.cpp \
@@ -67,4 +69,5 @@ SOURCES += ../src/libUnuk/Debug.cpp \
     ../src/libUnuk/MapElement.cpp \
     ../src/libUnuk/MapEntities.cpp \
     ../src/libUnuk/FPS.cpp \
-    ../src/libUnuk/MemManager.cpp
+    ../src/libUnuk/MemManager.cpp \
+    ../src/libUnuk/AStar.cpp
