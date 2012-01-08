@@ -15,21 +15,25 @@ void Player::HandleInput(void) {
   if(event.key.type == SDL_KEYDOWN) {
     switch(event.key.keysym.sym) {
     case SDLK_w:
+    case SDLK_UP:
       yVel -= PLAYER_SPEED;
       xVel = 0;
       directionFacing = FACING_UP;
       break;
     case SDLK_s:
+    case SDLK_DOWN:
       yVel += PLAYER_SPEED;
       xVel = 0;
       directionFacing = FACING_DOWN;
       break;
     case SDLK_a:
+    case SDLK_LEFT:
       xVel -= PLAYER_SPEED;
       yVel = 0;
       directionFacing = FACING_LEFT;
       break;
     case SDLK_d:
+    case SDLK_RIGHT:
       xVel += PLAYER_SPEED;
       yVel = 0;
       directionFacing = FACING_RIGHT;
@@ -40,10 +44,10 @@ void Player::HandleInput(void) {
   }
   else if(event.key.type == SDL_KEYUP) {
     switch(event.key.keysym.sym) {
-    case SDLK_w: yVel = 0; break;
-    case SDLK_s: yVel = 0; break;
-    case SDLK_a: xVel = 0; break;
-    case SDLK_d: xVel = 0; break;
+    case SDLK_w: case SDLK_UP:      yVel = 0; break;
+    case SDLK_s: case SDLK_DOWN:    yVel = 0; break;
+    case SDLK_a: case SDLK_LEFT:    xVel = 0; break;
+    case SDLK_d: case SDLK_RIGHT:   xVel = 0; break;
     default: break;
     }
   }

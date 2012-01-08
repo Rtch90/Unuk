@@ -28,7 +28,6 @@ private:
 
   std::vector<AStarBase*> GetSolutionSequence(AStarBase* node);
   std::vector<AStarBase*> _solution;
-    
 };
 
 #endif
