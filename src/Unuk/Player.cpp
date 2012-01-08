@@ -64,7 +64,7 @@ void Player::Update(void) {
   AddSpeachBubble("Woot, My name is Allanis, welcome to my home. Just testing some more text to see if this works..");
 
   // For now The camera will be static.
-  SetCamera();
+  //SetCamera();
 }
 
 void Player::SetName(string nameArg) {

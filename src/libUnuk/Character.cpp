@@ -139,7 +139,7 @@ void Character::Move(void) {
   tileY = (int)(((y + (h / 2)) / TILE_HEIGHT));
 
   // Check collisions.
-  if((x < 0) || (x + w) > levelWidth)                               x -= xVel;
+  if((x < 0) || (x + w) > levelWidth || (x + w) > SCREEN_WIDTH)     x -= xVel;
   if(CheckTileCollisions())                                         x -= xVel;
   if(CheckEntityCollisions())                                       x -= xVel;
   if(CheckCharacterCollisions())                                    x -= xVel;
@@ -148,7 +148,7 @@ void Character::Move(void) {
   tileX = (int)(((x + (w / 2)) / TILE_WIDTH));
   tileY = (int)(((y + (h / 2)) / TILE_HEIGHT));
 
-  if((y < 0) || (y + h) > levelHeight)                               y -= yVel;
+  if((y < 0) || (y + h) > levelHeight || (y + h) > SCREEN_HEIGHT)    y -= yVel;
   if(CheckTileCollisions())                                          y -= yVel;
   if(CheckEntityCollisions())                                        y -= yVel;
   if(CheckCharacterCollisions())                                     y -= yVel;
