@@ -6,7 +6,6 @@ Button::Button(void) {
 }
 
 Button::~Button(void) {
-
 }
 
 void Button::SetOutRGB(Uint8 r, Uint8 g, Uint8 b) {

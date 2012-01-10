@@ -3,7 +3,7 @@
 
 #include "../Unuk/Globals.h"
 #include "../Unuk/Constants.h"
-#include "Button.h"
+#include "ButtonGroup.h"
 #include "ButtonToggle.h"
 
 enum ingameMenuNavVal_t {
@@ -27,17 +27,9 @@ public:
   bool GetStatus(void)      { return _active; }
 
 private:
-  void HighlightNewSelection(int newButton);
-
   bool _active;
 
-  Button btnResume;
-  Button btnSaveGame;
-  Button btnLoadGame;
-  Button btnOptions;
-  Button btnExitToMenu;
-
-  int _highlightedButton;
+  ButtonGroup _buttons;
 };
 
 #endif

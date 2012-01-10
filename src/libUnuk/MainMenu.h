@@ -3,7 +3,7 @@
 
 #include "../Unuk/Constants.h"
 #include "FPS.h"
-#include "Button.h"
+#include "ButtonGroup.h"
 #include "Map.h"
 #include "Rect.h"
 #include "Text.h"
@@ -29,17 +29,12 @@ private:
 
   Text lblMenu;
 
-  Button btnNewGame;
+  ButtonGroup grpMain;
 
-  bool    btnNewGameActive;
-  Rect    rectNewGame;
-  Text    lblNewGame;
-  Button  btnNewGameYes;
-  Button  btnNewGameNo;
-
-  Button btnLoadGame;
-  Button btnOptions;
-  Button btnExit;
+  bool        btnNewGameActive;
+  Rect        rectNewGame;
+  Text        lblNewGame;
+  ButtonGroup grpNewGame;
 };
 
 #endif

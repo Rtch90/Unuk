@@ -170,6 +170,14 @@
 			>
 		</File>
 		<File
+			RelativePath="..\..\..\src\libUnuk\ButtonGroup.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\libUnuk\ButtonGroup.h"
+			>
+		</File>
+		<File
 			RelativePath="..\..\..\src\libUnuk\ButtonToggle.cpp"
 			>
 		</File>
