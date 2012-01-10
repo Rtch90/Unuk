@@ -103,10 +103,10 @@ void IngameMenu::Render(void) {
 void IngameMenu::HighlightNewSelection(int newButton) {
   // Turn of highlight for currently highlighted button
   switch(_highlightedButton) {
-    case 0: btnResume.SetHighlighted(false); break;
-    case 1: btnSaveGame.SetHighlighted(false); break;
-    case 2: btnLoadGame.SetHighlighted(false); break;
-    case 3: btnOptions.SetHighlighted(false); break;
+    case 0: btnResume.SetHighlighted(false);     break;
+    case 1: btnSaveGame.SetHighlighted(false);   break;
+    case 2: btnLoadGame.SetHighlighted(false);   break;
+    case 3: btnOptions.SetHighlighted(false);    break;
     case 4: btnExitToMenu.SetHighlighted(false); break;
   }
   
@@ -122,10 +122,10 @@ void IngameMenu::HighlightNewSelection(int newButton) {
 
   // Highlight new selection
   switch(_highlightedButton) {
-    case 0: btnResume.SetHighlighted(true);  break;
-    case 1: btnSaveGame.SetHighlighted(true); break;
-    case 2: btnLoadGame.SetHighlighted(true); break;
-    case 3: btnOptions.SetHighlighted(true); break;
+    case 0: btnResume.SetHighlighted(true);     break;
+    case 1: btnSaveGame.SetHighlighted(true);   break;
+    case 2: btnLoadGame.SetHighlighted(true);   break;
+    case 3: btnOptions.SetHighlighted(true);    break;
     case 4: btnExitToMenu.SetHighlighted(true); break;
   }
 }
