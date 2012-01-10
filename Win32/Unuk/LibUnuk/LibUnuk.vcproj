@@ -286,10 +286,6 @@
 			>
 		</File>
 		<File
-			RelativePath="..\..\..\src\libUnuk\Node.h"
-			>
-		</File>
-		<File
 			RelativePath="..\..\..\src\libUnuk\NPC.cpp"
 			>
 		</File>

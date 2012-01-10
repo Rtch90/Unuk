@@ -1,7 +1,8 @@
 #include "Button.h"
 
 Button::Button(void) {
-
+  _highlighted = false;
+  _mouseOver = false;
 }
 
 Button::~Button(void) {
@@ -28,6 +29,16 @@ void Button::SetOverRGB(Uint8 r, Uint8 g, Uint8 b) {
 
 void Button::SetOverRGB(SDL_Color colour) {
   _mouseOverColour = colour;
+}
+
+void Button::SetHighlightRGB(Uint8 r, Uint8 g, Uint8 b) {
+  _highlightColour.r = r;
+  _highlightColour.g = g;
+  _highlightColour.b = b;
+}
+
+void Button::SetHighlightRGB(SDL_Color colour) {
+  _highlightColour = colour;
 }
 
 void Button::SetXY(int xArg, int yArg) {
@@ -62,12 +73,31 @@ void Button::SetText(string textArg) {
 bool Button::CheckMouseOver(void) {
   if(event.motion.x > _button.GetX() && event.motion.x < _button.GetX() + _button.GetWidth()) {
     if(event.motion.y > _button.GetY() && event.motion.y < _button.GetY() + _button.GetHeight()) {
-      _button.SetRGB(_mouseOverColour.r, _mouseOverColour.g, _mouseOverColour.b);
+      if (!_highlighted) {
+        _button.SetRGB(_mouseOverColour.r, _mouseOverColour.g, _mouseOverColour.b);
+      }
       return true;
     }
   }
-  _button.SetRGB(_mouseOutColour);
+  if (!_highlighted) {
+    _button.SetRGB(_mouseOutColour);
+  }
   return false;
+}
+
+void Button::SetHighlighted(bool highlighted) { 
+  if(_highlighted != highlighted) {
+    if(highlighted) {
+      _button.SetRGB(_highlightColour);
+    } else {
+      if(_mouseOver) {
+        _button.SetRGB(_mouseOverColour);
+      } else {
+        _button.SetRGB(_textColour);
+      }
+    }
+  }
+  _highlighted = highlighted;
 }
 
 void Button::Render(void) {

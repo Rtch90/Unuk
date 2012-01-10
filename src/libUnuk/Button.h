@@ -22,12 +22,19 @@ public:
   void SetTextRGB(SDL_Color);
   void SetText(string textArg);
 
+  void SetHighlightRGB(Uint8 r, Uint8 g, Uint8 b);
+  void SetHighlightRGB(SDL_Color);
+
+  void SetHighlighted(bool highlighted);
+
   void SetXY(int xArg, int yArg);
 
   int GetX(void)        const     { return x; }
   int GetY(void)        const     { return y; }
   int GetWidth(void)    const     { return w; }
   int GetHeight(void)   const     { return h; }
+
+  bool GetHighlighted(void) { return _highlighted; }
 
   bool CheckMouseOver(void);
 
@@ -40,6 +47,7 @@ private:
   SDL_Color _mouseOutColour;
   SDL_Color _mouseOverColour;
   SDL_Color _textColour;
+  SDL_Color _highlightColour;
 
   int x;
   int y;
@@ -48,6 +56,10 @@ private:
 
   Rect _button;
   Text _text;
+
+  bool _highlighted;
+
+  bool _mouseOver;
 };
 
 #endif

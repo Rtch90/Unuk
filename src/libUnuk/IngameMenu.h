@@ -27,6 +27,8 @@ public:
   bool GetStatus(void)      { return _active; }
 
 private:
+  void HighlightNewSelection(int newButton);
+
   bool _active;
 
   Button btnResume;
@@ -34,6 +36,8 @@ private:
   Button btnLoadGame;
   Button btnOptions;
   Button btnExitToMenu;
+
+  int _highlightedButton;
 };
 
 #endif
