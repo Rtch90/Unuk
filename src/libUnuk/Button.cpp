@@ -90,7 +90,7 @@ void Button::SetHighlighted(bool highlighted) {
     if(highlighted) {
       _button.SetRGB(_highlightColour);
     } else {
-      if(_mouseOver) {
+      if(!_mouseOver) {
         _button.SetRGB(_mouseOverColour);
       } else {
         _button.SetRGB(_textColour);
