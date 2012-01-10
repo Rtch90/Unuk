@@ -73,7 +73,7 @@ void Button::SetText(string textArg) {
 bool Button::CheckMouseOver(void) {
   if(event.motion.x > _button.GetX() && event.motion.x < _button.GetX() + _button.GetWidth()) {
     if(event.motion.y > _button.GetY() && event.motion.y < _button.GetY() + _button.GetHeight()) {
-      if(_highlighted) {
+      if(!_highlighted) {
         _button.SetRGB(_mouseOverColour.r, _mouseOverColour.g, _mouseOverColour.b);
       }
       return true;
