@@ -18,3 +18,4 @@ public:
 private:
   std::list<NPC*> _npcs;
 };
+
