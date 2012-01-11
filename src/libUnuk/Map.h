@@ -14,6 +14,7 @@
 #include "ApplySurface.h"
 #include "MapTile.h"
 #include "Debug.h"
+#include "WorldManager.h"
 using namespace std;
 
 //class CharacterManager;
@@ -45,6 +46,8 @@ public:
 
   string GetCurrentMap(void);
 
+  WorldManager& GetWorld(void) { return _world; }
+
 private:
   void Unload(void);
 
@@ -57,6 +60,8 @@ private:
 
   TextureManager _tileTextures;
   TextureManager _entityTextures;
+
+  WorldManager _world;
 };
 
 #endif

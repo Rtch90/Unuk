@@ -349,6 +349,14 @@
 			RelativePath="..\..\..\src\libUnuk\Timer.h"
 			>
 		</File>
+		<File
+			RelativePath="..\..\..\src\libUnuk\WorldManager.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\libUnuk\WorldManager.h"
+			>
+		</File>
 	</Files>
 	<Globals>
 	</Globals>

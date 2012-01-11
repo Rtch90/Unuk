@@ -1,9 +1,10 @@
 #include "Game.h"
+#include "../libUnuk/NPC.h"
+#include "../libUnuk/WorldManager.h"
 
 Game::Game(void) {
   Debug::logger->message("Creating characters..");
   _player = new Player(&_map);
-  _npc    = new NPC(&_map);
 
   _runGameReturnValue = gameMainMenu;
 }
@@ -12,15 +13,11 @@ Game::~Game(void) {
   Debug::logger->message("\n----- Cleaning Up ------");
   // cleaning _player up caused a nice seg fault. I'll look later.
   //delete _player;
-  delete _npc;
 }
 
 gameNavVal_t Game::Run(const string savegameIDArg) {
   _player->SetXY(50, 50);
   _player->LoadSprites("../Data/Media/Images/Characters/template.png", 40, 45);
-
-  _npc->SetXY(300, 300);
-  _npc->LoadSprites("../Data/Media/Images/Characters/template.png", 40,45);
 
   LoadSavegame(savegameIDArg);
 
@@ -73,9 +70,9 @@ gameNavVal_t Game::Run(const string savegameIDArg) {
     }
     updateTimer.Pause();
 
-	if (!stillRunning) {
-		break;
-	}
+    if (!stillRunning) {
+	    break;
+    }
 
     renderTimer.Start();
     Render();
@@ -107,7 +104,7 @@ gameNavVal_t Game::Run(const string savegameIDArg) {
         _playerHealth.SetTextBlended(playerHealth.str(), vsmall, COLOUR_BLACK);
 
         npcHealth.str("");
-        npcHealth << "NPC Health: " << _npc->GetHealth();
+        npcHealth << "NPC Health: " << _map.GetWorld().GetNPC(0)->GetHealth();
         _npcHealth.SetTextBlended(npcHealth.str(), vsmall, COLOUR_BLACK);
       }
     }
@@ -175,8 +172,8 @@ void Game::HandleInput(void) {
 
 void Game::UpdateGame(void) {
   if(_ingameMenu.GetStatus() == false) {
+    _map.Update();
     _player->Update();
-    _npc->Update();
   } else {
     // :D
   }
@@ -186,9 +183,7 @@ void Game::Render(void) {
  // SDL_FillRect(screen, NULL, 0); //  You might want to clear the buffer! --konom
   if(_ingameMenu.GetStatus() == false) {
     _map.Render();
-
     _player->Render();
-    _npc->Render();
 
     if(debugEnabled) {
       _gameRenderTime.RenderLiteral();

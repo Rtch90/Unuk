@@ -1,4 +1,5 @@
 #include "Map.h"
+#include "NPC.h"
 
 Map::Map(void) {
 
@@ -126,9 +127,26 @@ void Map::Load(const string filename) {
   levelHeight = y * TILE_HEIGHT;
 
   //character->Load(filename);
+
+  NPC* npc = new NPC(this);
+
+  npc->SetXY(300, 300);
+  npc->LoadSprites("../Data/Media/Images/Characters/template.png", 40,45);
+  _world.AddNPC(npc);
+
+  npc = new NPC(this);
+  npc->SetXY(150, 350);
+  npc->LoadSprites("../Data/Media/Images/Characters/template.png", 40,45);
+  _world.AddNPC(npc);
+
+  npc = new NPC(this);
+  npc->SetXY(100, 250);
+  npc->LoadSprites("../Data/Media/Images/Characters/template.png", 40,45);
+  _world.AddNPC(npc);
 }
 
 void Map::Update(void) {
+  _world.Update();
   // Update the map so we can render when camera moves.
 }
 
@@ -167,6 +185,8 @@ void Map::Render(void) {
       _tile[i][j].Render();
     }
   }
+
+  _world.Render();
 }
 
 void Map::Unload(void) {

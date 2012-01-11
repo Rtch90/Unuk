@@ -14,7 +14,6 @@
 #include "../libUnuk/IngameMenu.h"
 #include "../libUnuk/Map.h"
 #include "../libUnuk/Timer.h"
-#include "../libUnuk/NPC.h"
 #include "../libUnuk/Debug.h"
 #include "../libUnuk/Text.h"
 #include "../libUnuk/MemClass.h"
@@ -58,7 +57,6 @@ private:
   Map _map;
 
   Player* _player;
-  NPC* _npc;
 };
 
 #endif
