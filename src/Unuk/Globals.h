@@ -1,5 +1,4 @@
-#ifndef _GLOBALS_H_
-#define _GLOBALS_H_
+#pragma once
 #include <SDL/SDL.h>
 
 extern SDL_Surface* screen;
@@ -11,6 +10,3 @@ extern int levelWidth;
 extern int levelHeight;
 
 extern bool debugEnabled;
-
-
-#endif

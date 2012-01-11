@@ -1,5 +1,4 @@
-#ifndef _FONT_H_
-#define _FONT_H_
+#pragma once
 #include <SDL/SDL_ttf.h>
 #include <fstream>
 #include <assert.h>
@@ -7,5 +6,3 @@
 using namespace std;
 
 TTF_Font* Font(const char* filename, const int size);
-
-#endif

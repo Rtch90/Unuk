@@ -1,5 +1,4 @@
-#ifndef _APPLYSURFACE_H_
-#define _APPLYSURFACE_H_
+#pragma once
 #include <SDL/SDL.h>
 #include <assert.h>
 #include "Debug.h"
@@ -15,5 +14,3 @@ void ApplySurface(int x, int y, SDL_Surface* source, SDL_Surface* destination, S
 
 // This one won't take the camera into account, so we could use it for GUI stuff.
 void ApplySurfaceLiteral(int x, int y, SDL_Surface* source, SDL_Surface* destination, SDL_Rect* clip = NULL);
-
-#endif

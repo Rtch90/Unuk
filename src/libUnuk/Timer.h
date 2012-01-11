@@ -1,5 +1,4 @@
-#ifndef _TIMER_H_
-#define _TIMER_H_
+#pragma once
 #include <SDL/SDL.h>
 #include <string>
 #include <assert.h>
@@ -30,5 +29,3 @@ private:
   int  _startTicks;
   int  _pausedTicks;
 };
-
-#endif

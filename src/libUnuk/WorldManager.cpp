@@ -52,4 +52,3 @@ NPC* WorldManager::GetNPC(int index) {
   }
   return NULL;
 }
-

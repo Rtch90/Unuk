@@ -1,5 +1,4 @@
-#ifndef _TEXT_H_
-#define _TEXT_H_
+#pragma once
 #include <SDL/SDL.h>
 #include <SDL/SDL_ttf.h>
 #include <string>
@@ -61,5 +60,3 @@ private:
   static TTF_Font* largeFont;
   static TTF_Font* vLargeFont;
 };
-
-#endif

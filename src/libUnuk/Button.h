@@ -1,5 +1,4 @@
-#ifndef _BUTTON_H_
-#define _BUTTON_H_
+#pragma once
 #include <SDL/SDL.h>
 #include <SDL/SDL_ttf.h>
 
@@ -61,5 +60,3 @@ private:
 
   bool _mouseOver;
 };
-
-#endif

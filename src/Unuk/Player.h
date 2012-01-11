@@ -1,5 +1,4 @@
-#ifndef _PLAYER_H_
-#define _PLAYER_H_
+#pragma once
 #include <SDL/SDL.h>
 
 #include "Globals.h"
@@ -29,5 +28,3 @@ private:
   string _name;
   //int _health;
 };
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef _MEMMANAGER_H_
-#define _MEMMANAGER_H_
+#pragma once
 #include <iostream>
 #include <vector>
 #include <string>
@@ -87,5 +86,3 @@ private:
   set<BitMapEntry*> _freeMapEntries;
   map<void*, ArrayMemoryInfo> _arrayMemoryList;
 };
-
-#endif

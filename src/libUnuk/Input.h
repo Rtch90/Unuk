@@ -1,5 +1,4 @@
-#ifndef _INPUT_H_
-#define _INPUT_H_
+#pragma once
 #include <SDL/SDL.h>
 
 typedef struct mouse_s {
@@ -42,5 +41,3 @@ typedef struct input_s {
   bool MouseStillUp(int button);
 
   void DestroyInput(void);
-
-#endif

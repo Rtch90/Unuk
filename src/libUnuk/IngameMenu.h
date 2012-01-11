@@ -1,5 +1,4 @@
-#ifndef _INGAMEMENU_H_
-#define _INGAMEMENU_H_
+#pragma once
 
 #include "../Unuk/Globals.h"
 #include "../Unuk/Constants.h"
@@ -31,5 +30,3 @@ private:
 
   ButtonGroup _buttons;
 };
-
-#endif

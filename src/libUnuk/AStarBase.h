@@ -1,5 +1,4 @@
-#ifndef _ASTARBASE_H_
-#define _ASTARBASE_H_
+#pragma once
 #include <vector>
 
 class AStarBase {
@@ -25,6 +24,3 @@ public:
 
   long _key;
 };
-
-#endif
-

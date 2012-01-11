@@ -1,5 +1,4 @@
-#ifndef _BUTTONGROUP_H_
-#define _BUTTONGROUP_H_
+#pragma once
 #include <list>
 
 #include "Button.h"
@@ -32,6 +31,3 @@ private:
   std::list<Button*> _buttons;
   int _selectedButton;
 };
-
-#endif
-

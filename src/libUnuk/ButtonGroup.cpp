@@ -99,4 +99,3 @@ Button* ButtonGroup::GetButton(int index) {
   }
   return NULL;
 }
-

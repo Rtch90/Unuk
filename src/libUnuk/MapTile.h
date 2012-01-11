@@ -1,5 +1,4 @@
-#ifndef _MAPTILE_H_
-#define _MAPTILE_H_
+#pragma once
 #include <list>
 #include <string>
 #include <SDL/SDL.h>
@@ -65,5 +64,3 @@ private:
   int _mapTransitionX;
   int _mapTransitionY;
 };
-
-#endif

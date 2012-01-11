@@ -1,5 +1,4 @@
-#ifndef _NPC_H_
-#define _NPC_H_
+#pragma once
 
 #include "Character.h"
 #include "AStar.h"
@@ -25,5 +24,3 @@ private:
   
   Timer _moveTimer;
 };
-
-#endif

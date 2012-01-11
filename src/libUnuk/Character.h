@@ -1,5 +1,4 @@
-#ifndef _CHARACTER_H_
-#define _CHARACTER_H_
+#pragma once
 #include <SDL/SDL.h>
 #include <SDL/SDL_gfxPrimitives.h>
 #include <list>
@@ -116,5 +115,3 @@ private:
   Timer _speachBubbleTimer;
   Text _speachBubbleText;
 };
-
-#endif

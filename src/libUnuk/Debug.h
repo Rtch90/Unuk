@@ -1,5 +1,4 @@
-#ifndef _DEBUG_H_
-#define _DEBUG_H_
+#pragma once
 #include <fstream>
 #include "string"
 
@@ -19,5 +18,3 @@ public:
 private: 
   std::ofstream _logFile;
 };
-
-#endif // _DEBUG_H_

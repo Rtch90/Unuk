@@ -1,3 +1,5 @@
+#pragma once
+
 /*
  * The Texture Manager will keep a small "Database"
  * of the name of the texture that is loaded and the
@@ -6,8 +8,6 @@
  * or load the tture if it is not.
  */
 
-#ifndef _TEXTUREMANAGER_H_
-#define _TEXTUREMANAGER_H_
 #include <SDL/SDL.h>
 #include <string>
 #include <assert.h>
@@ -37,5 +37,3 @@ private:
 
   int _allocated;
 };
-
-#endif

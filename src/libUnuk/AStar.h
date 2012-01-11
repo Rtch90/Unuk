@@ -1,5 +1,4 @@
-#ifndef _ASTAR_H_
-#define _ASTAR_H_
+#pragma once
 #include <vector>
 #include <map>
 #include <queue>
@@ -29,6 +28,3 @@ private:
   std::vector<AStarBase*> GetSolutionSequence(AStarBase* node);
   std::vector<AStarBase*> _solution;
 };
-
-#endif
-

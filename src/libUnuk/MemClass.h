@@ -1,5 +1,4 @@
-#ifndef _MEMCLASS_H_
-#define _MEMCLASS_H_
+#pragma once
 #include "MemManager.h"
 
 extern MemManager gMemManager;
@@ -31,5 +30,3 @@ private:
   // Complex part.
   double c;
 };
-
-#endif

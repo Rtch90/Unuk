@@ -1,5 +1,4 @@
-#ifndef _GAME_H_
-#define _GAME_H_
+#pragma once
 #include <SDL/SDL.h>
 #include <stdlib.h>
 #include <iostream>
@@ -58,5 +57,3 @@ private:
 
   Player* _player;
 };
-
-#endif

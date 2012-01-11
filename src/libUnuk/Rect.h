@@ -1,5 +1,4 @@
-#ifndef _RECT_H_
-#define _RECT_H_
+#pragma once
 #include <SDL/SDL.h>
 #include "../Unuk/Globals.h"
 #include "ApplySurface.h"
@@ -34,6 +33,3 @@ protected:
 private:
   SDL_Rect rect;
 };
-
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef _MAINMENU_H_
-#define _MAINMENU_H_
+#pragma once
 
 #include "../Unuk/Constants.h"
 #include "FPS.h"
@@ -36,5 +35,3 @@ private:
   Text        lblNewGame;
   ButtonGroup grpNewGame;
 };
-
-#endif

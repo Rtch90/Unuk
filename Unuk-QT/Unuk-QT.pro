@@ -43,7 +43,8 @@ HEADERS += ../src/libUnuk/Debug.h \
     ../src/libUnuk/Node.h \
     ../src/libUnuk/AStarBase.h \
     ../src/libUnuk/AStar.h \
-    ../src/libUnuk/ButtonGroup.h
+    ../src/libUnuk/ButtonGroup.h \
+    ../src/libUnuk/WorldManager.h
 SOURCES += ../src/libUnuk/Debug.cpp \
     ../src/Unuk/main.cpp \
     ../src/libUnuk/Input.cpp \
@@ -72,4 +73,5 @@ SOURCES += ../src/libUnuk/Debug.cpp \
     ../src/libUnuk/FPS.cpp \
     ../src/libUnuk/MemManager.cpp \
     ../src/libUnuk/AStar.cpp \
-    ../src/libUnuk/ButtonGroup.cpp
+    ../src/libUnuk/ButtonGroup.cpp \
+    ../src/libUnuk/WorldManager.cpp

@@ -1,5 +1,4 @@
-#ifndef _PARTICLEEMITTER_H_
-#define _PARTICLEEMITTER_H_
+#pragma once
 #include <SDL/SDL.h>
 #include <vector>
 #include <string>
@@ -51,5 +50,3 @@ private:
 
   SDL_Surface* _particleTexture;
 };
-
-#endif

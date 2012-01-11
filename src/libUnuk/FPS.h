@@ -1,5 +1,4 @@
-#ifndef _FPS_H_
-#define _FPS_H_
+#pragma once
 #include "../Unuk/Globals.h"
 #include "Timer.h"
 
@@ -24,5 +23,3 @@ private:
   Timer _frameTimer;
   Timer _fpsCalc;
 };
-
-#endif

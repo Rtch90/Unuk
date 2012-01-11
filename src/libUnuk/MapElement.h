@@ -1,5 +1,4 @@
-#ifndef _MAPELEMENT_H_
-#define _MAPELEMENT_H_
+#pragma once
 #include <SDL/SDL.h>
 #include <string>
 
@@ -35,5 +34,3 @@ protected:
   int x;
   int y;
 };
-
-#endif

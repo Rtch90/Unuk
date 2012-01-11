@@ -1,5 +1,4 @@
-#ifndef _MAP_H_
-#define _MAP_H_
+#pragma once
 #include <SDL/SDL.h>
 #include <iostream>
 #include <string>
@@ -63,5 +62,3 @@ private:
 
   WorldManager _world;
 };
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef _TEXTURE_H_
-#define _TEXTURE_H_
+#pragma once
 #include "../Unuk/Globals.h"
 #include "ImageLoader.h"
 #include "ApplySurface.h"
@@ -32,5 +31,3 @@ protected:
 private:
   SDL_Surface* _texture;
 };
-
-#endif

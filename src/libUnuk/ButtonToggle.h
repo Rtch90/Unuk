@@ -1,5 +1,4 @@
-#ifndef _BUTTONTOGGLE_H_
-#define _BUTTONTOGGLE_H_
+#pragma once
 #include <SDL/SDL.h>
 #include <SDL/SDL_ttf.h>
 
@@ -35,6 +34,3 @@ private:
 
   Text _onText;
 };
-
-
-#endif
