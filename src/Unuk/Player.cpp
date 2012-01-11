@@ -38,6 +38,10 @@ void Player::HandleInput(void) {
       yVel = 0;
       directionFacing = FACING_RIGHT;
       break;
+    case SDLK_SPACE:
+      attacking = true;
+      attackTimer.Start();
+      break;
     default:
       break;
     }

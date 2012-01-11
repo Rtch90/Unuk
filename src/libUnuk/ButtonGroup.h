@@ -3,6 +3,7 @@
 #include <list>
 
 #include "Button.h"
+#include "MemClass.h"
 
 class ButtonGroup {
 public:

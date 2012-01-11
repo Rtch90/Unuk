@@ -12,4 +12,6 @@ Bin/*.dll
 *.swp
 *.o
 *.exe
-*log
+*.log
+*Unuk-QT
+*Unuk
