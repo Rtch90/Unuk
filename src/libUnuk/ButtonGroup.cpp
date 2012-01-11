@@ -71,14 +71,14 @@ void ButtonGroup::SetSelectedButton(int button) {
 
 void ButtonGroup::HighlightNewSelection(int newButton) {
   if(_selectedButton != -1) {
-    // Turn of highlight for currently highlighted button
+    // Turn off highlight for currently highlighted button
     GetButton(_selectedButton)->SetHighlighted(false);
   }
 
   _selectedButton = newButton;
 
   // If < 0 then up was pressed when first index was selected
-  // If > 0 then down was pressed when last index was selected
+  // If >= _buttons.size() then down was pressed when last index was selected
   if(_selectedButton < 0) {
     _selectedButton = _buttons.size() - 1;
   } else if(_selectedButton >= (int)_buttons.size()) {
