@@ -3,8 +3,8 @@
 
 #include "Globals.h"
 #include "Constants.h"
-#include "../libUnuk/Character.h"
-#include "../libUnuk/Debug.h"
+#include "../libUnuk/Engine/Character.h"
+#include "../libUnuk//System/Debug.h"
 
 class Player : public Character {
 public:

@@ -4,10 +4,10 @@
 #include <time.h>
 #include <iostream>
 
-#include "../libUnuk/MainMenu.h"
-#include "../libUnuk/NPC.h"
-#include "../libUnuk/Debug.h"
-#include "../libUnuk/MemClass.h"
+#include "../libUnuk/Ui/MainMenu.h"
+#include "../libUnuk/Engine/NPC.h"
+#include "../libUnuk/System/Debug.h"
+#include "../libUnuk/Engine/MemClass.h"
 #include "Constants.h"
 #include "Globals.h"
 #include "Game.h"

@@ -1,6 +1,6 @@
 #include "Game.h"
-#include "../libUnuk/NPC.h"
-#include "../libUnuk/WorldManager.h"
+#include "../libUnuk/Engine/NPC.h"
+#include "../libUnuk/Engine/WorldManager.h"
 
 Game::Game(void) {
   Debug::logger->message("Creating characters..");
