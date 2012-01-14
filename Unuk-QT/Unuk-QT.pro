@@ -29,17 +29,19 @@ HEADERS += ../src/Libs/wglext.h \
     ../src/libUnuk/System/FPS.h \
     ../src/libUnuk/System/Debug.h \
     ../src/libUnuk/System/Timer.h \
-		../src/libUnuk/UI/MainMenu.h \
-		../src/libUnuk/UI/IngameMenu.h \
-		../src/libUnuk/UI/Font.h \
-		../src/libUnuk/UI/ButtonToggle.h \
-		../src/libUnuk/UI/ButtonGroup.h \
-		../src/libUnuk/UI/Button.h \
-		../src/libUnuk/UI/Text.h \
+    ../src/libUnuk/UI/MainMenu.h \
+    ../src/libUnuk/UI/IngameMenu.h \
+    ../src/libUnuk/UI/Font.h \
+    ../src/libUnuk/UI/ButtonToggle.h \
+    ../src/libUnuk/UI/ButtonGroup.h \
+    ../src/libUnuk/UI/Button.h \
+    ../src/libUnuk/UI/Text.h \
     ../src/Unuk/Globals.h \
     ../src/Unuk/Game.h \
     ../src/Unuk/Constants.h \
-    ../src/Unuk/Player.h
+    ../src/Unuk/Player.h \
+    ../src/libUnuk/LevelGen/LevelGen.h \
+    ../src/libUnuk/LevelGen/Level.h
 SOURCES += ../src/libUnuk/Engine/WorldManager.cpp \
     ../src/libUnuk/Engine/ParticleEmitter.cpp \
     ../src/libUnuk/Engine/NPC.cpp \
@@ -59,15 +61,17 @@ SOURCES += ../src/libUnuk/Engine/WorldManager.cpp \
     ../src/libUnuk/System/Input.cpp \
     ../src/libUnuk/System/FPS.cpp \
     ../src/libUnuk/System/Debug.cpp \
-		../src/libUnuk/UI/Text.cpp \
-		../src/libUnuk/UI/MainMenu.cpp \
-		../src/libUnuk/UI/IngameMenu.cpp \
-		../src/libUnuk/UI/Font.cpp \
-		../src/libUnuk/UI/ButtonToggle.cpp \
-		../src/libUnuk/UI/ButtonGroup.cpp \
-		../src/libUnuk/UI/Button.cpp \
+    ../src/libUnuk/UI/Text.cpp \
+    ../src/libUnuk/UI/MainMenu.cpp \
+    ../src/libUnuk/UI/IngameMenu.cpp \
+    ../src/libUnuk/UI/Font.cpp \
+    ../src/libUnuk/UI/ButtonToggle.cpp \
+    ../src/libUnuk/UI/ButtonGroup.cpp \
+    ../src/libUnuk/UI/Button.cpp \
     ../src/Unuk/Player.cpp \
     ../src/Unuk/main.cpp \
     ../src/Unuk/Globals.cpp \
-    ../src/Unuk/Game.cpp
+    ../src/Unuk/Game.cpp \
+    ../src/libUnuk/LevelGen/LevelGen.cpp \
+    ../src/libUnuk/LevelGen/Level.cpp
 OTHER_FILES += 

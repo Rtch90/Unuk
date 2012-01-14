@@ -50,7 +50,7 @@ gameNavVal_t Game::Run(const string savegameIDArg) {
 
   stringstream npcHealth;
   _npcHealth.SetXY(10, 100);
-  _npcHealth.SetTextBlended("NPC 0 Health - XX", vsmall, COLOUR_BLACK);
+	_npcHealth.SetTextBlended("NPC X Health - XX", vsmall, COLOUR_BLACK);
 
   _gameRunning = true;
   while(_gameRunning) {

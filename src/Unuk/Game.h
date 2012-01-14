@@ -35,7 +35,7 @@ private:
   void LoadSavegame(const string savegameIDArg);
   void SaveSavegame(void);
 
-  static const int MAX_FPS = 200;
+	static const int MAX_FPS = 200;
   static const int GAME_UPDATES_PER_SECOND = 60;
   static const int SKIP_TICKS = 1000 / GAME_UPDATES_PER_SECOND;
 
