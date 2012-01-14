@@ -50,7 +50,7 @@ gameNavVal_t Game::Run(const string savegameIDArg) {
 
   stringstream npcHealth;
   _npcHealth.SetXY(10, 100);
-  _npcHealth.SetTextBlended("NPC Health - XX", vsmall, COLOUR_BLACK);
+  _npcHealth.SetTextBlended("NPC 0 Health - XX", vsmall, COLOUR_BLACK);
 
   _gameRunning = true;
   while(_gameRunning) {
@@ -103,8 +103,16 @@ gameNavVal_t Game::Run(const string savegameIDArg) {
         playerHealth << "Player Health: " << _player->GetHealth();
         _playerHealth.SetTextBlended(playerHealth.str(), vsmall, COLOUR_BLACK);
 
+        int npc0Health = 0;
+        if(_map.GetWorld().GetNPCCount() == 0) {
+          npc0Health = 0;
+        }
+        else {
+          npc0Health = _map.GetWorld().GetNPC(0)->GetHealth();
+        }
+
         npcHealth.str("");
-        npcHealth << "NPC Health: " << _map.GetWorld().GetNPC(0)->GetHealth();
+        npcHealth << "NPC 0 Health: " << npc0Health;
         _npcHealth.SetTextBlended(npcHealth.str(), vsmall, COLOUR_BLACK);
       }
     }

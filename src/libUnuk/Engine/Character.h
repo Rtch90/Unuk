@@ -36,6 +36,9 @@ public:
   void SetHealth(int health)          { _health = health; }
   int GetHealth(void)                 { return _health; }
   
+  int  GetDirectionFacing(void)        { return directionFacing; }
+  void SetDirectionFacing(int dir)     { directionFacing = dir;  }
+
   void AddSpeachBubble(string text);
 
   void Render(void);
@@ -56,6 +59,11 @@ public:
   inline void operator delete [](void* object) {
     gMemManager.Free(object);
   }
+
+  static const int FACING_UP     = 0;
+  static const int FACING_RIGHT  = 1;
+  static const int FACING_DOWN   = 2;
+  static const int FACING_LEFT   = 3;
   
 protected:
   void Move(void);
@@ -85,10 +93,6 @@ protected:
   static const float CHARACTER_SPEED;
   
   int directionFacing;
-  static const int FACING_UP     = 0;
-  static const int FACING_RIGHT  = 1;
-  static const int FACING_DOWN   = 2;
-  static const int FACING_LEFT   = 3;
   
   static const int ANIM_LEFT_FOOT    = 0;
   static const int ANIM_NO_FOOT      = 1;

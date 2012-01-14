@@ -41,6 +41,7 @@ void Player::HandleInput(void) {
     case SDLK_SPACE:
       attacking = true;
       attackTimer.Start();
+      map->GetWorld().OnPlayerAttack(this);
       break;
     default:
       break;
@@ -59,6 +60,7 @@ void Player::HandleInput(void) {
     if(event.button.button == SDL_BUTTON_LEFT) {
       attacking = true;
       attackTimer.Start();
+      map->GetWorld().OnPlayerAttack(this);
     }
   }
 }
