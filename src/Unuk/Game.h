@@ -10,11 +10,11 @@
 #include "Constants.h"
 #include "Globals.h"
 #include "Player.h"
-#include "../libUnuk/Ui/IngameMenu.h"
+#include "../libUnuk/UI/IngameMenu.h"
 #include "../libUnuk/Map/Map.h"
 #include "../libUnuk/System/Timer.h"
 #include "../libUnuk/System/Debug.h"
-#include "../libUnuk/Ui/Text.h"
+#include "../libUnuk/UI/Text.h"
 #include "../libUnuk/Engine/MemClass.h"
 using namespace std;
 

@@ -12,11 +12,11 @@ all:
 	$(MAKE) -C ../src/libUnuk/Map
 	$(MAKE) -C ../src/libUnuk/Sprite
 	$(MAKE) -C ../src/libUnuk/System
-	$(MAKE) -C ../src/libUnuk/Ui
+	$(MAKE) -C ../src/libUnuk/UI
 	$(MAKE) -C ../src/Unuk
 	
 	$(CC) $(CFLAGS) -o Unuk ../src/Unuk/main.cpp ../src/libUnuk/Engine/*.o ../src/libUnuk/Map/*.o \
-                          ../src/libUnuk/Sprite/*.o ../src/libUnuk/System/*.o ../src/libUnuk/Ui/*.o \
+                          ../src/libUnuk/Sprite/*.o ../src/libUnuk/System/*.o ../src/libUnuk/UI/*.o \
                           ../src/Unuk/*.o $(LDADD)
 
 static:
@@ -26,11 +26,11 @@ static:
 	$(MAKE) -C ../src/libUnuk/Map
 	$(MAKE) -C ../src/libUnuk/Sprite
 	$(MAKE) -C ../src/libUnuk/System
-	$(MAKE) -C ../src/libUnuk/Ui
+	$(MAKE) -C ../src/libUnuk/UI
 	$(MAKE) -C ../src/Unuk
 	
 	$(CC) $(CFLAGS) -o build/Unuk-static ../src/Unuk/main.cpp ../src/libUnuk/Engine/*.o ..src/libUnuk/Map/*.o \
-                                       ../src/libUnuk/Sprite/*.o ../src/libUnuk/System/*.o ../src/libUnuk/Ui/*.o \
+                                       ../src/libUnuk/Sprite/*.o ../src/libUnuk/System/*.o ../src/libUnuk/UI/*.o \
                                        ../src/Unuk/*.o $(LDADDSTATIC)
 
 clean:
@@ -38,7 +38,7 @@ clean:
 	$(MAKE) -C ../src/libUnuk/Map          clean
 	$(MAKE) -C ../src/libUnuk/Sprite       clean
 	$(MAKE) -C ../src/libUnuk/System       clean
-	$(MAKE) -C ../src/libUnuk/Ui           clean
+	$(MAKE) -C ../src/libUnuk/UI           clean
 	$(MAKE) -C ../src/Unuk                 clean
 	rm -f Unuk Debug.log ../Data/Debug.log ../Unuk-QT/Unuk-QT
 

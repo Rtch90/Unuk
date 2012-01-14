@@ -54,17 +54,17 @@ gameNavVal_t Game::Run(const string savegameIDArg) {
 
   _gameRunning = true;
   while(_gameRunning) {
-	bool stillRunning = true;
+		bool stillRunning = true;
 
     updateTimer.Start();
     while((int)SDL_GetTicks() > nextGameTick) {
       HandleInput();
-	  if (!_gameRunning) {
+			if (!_gameRunning) {
         stillRunning = false;
         break;
-	  }
-	  
-	  UpdateGame();
+			}
+
+			UpdateGame();
 
       nextGameTick += SKIP_TICKS;
     }
@@ -180,7 +180,7 @@ void Game::UpdateGame(void) {
 }
 
 void Game::Render(void) {
- // SDL_FillRect(screen, NULL, 0); //  You might want to clear the buffer! --konom
+	// SDL_FillRect(screen, NULL, 0); //  You might want to clear the buffer! --konom
   if(_ingameMenu.GetStatus() == false) {
     _map.Render();
     _player->Render();
