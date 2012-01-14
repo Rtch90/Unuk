@@ -70,4 +70,4 @@ SOURCES += ../src/libUnuk/Engine/WorldManager.cpp \
     ../src/Unuk/main.cpp \
     ../src/Unuk/Globals.cpp \
     ../src/Unuk/Game.cpp
-OTHER_FILES += ../src/Unuk/Makefile
+OTHER_FILES += 
