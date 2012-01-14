@@ -2,10 +2,10 @@
 
 #include "../../Unuk/Constants.h"
 #include "../System/FPS.h"
-#include "../Ui/ButtonGroup.h"
+#include "../UI/ButtonGroup.h"
 #include "../Map/Map.h"
 #include "../System/Rect.h"
-#include "../Ui/Text.h"
+#include "../UI/Text.h"
 
 enum mainMenuNavVal_t {
   mainMenuNewGame,

@@ -4,7 +4,7 @@
 #include <time.h>
 #include <iostream>
 
-#include "../libUnuk/Ui/MainMenu.h"
+#include "../libUnuk/UI/MainMenu.h"
 #include "../libUnuk/Engine/NPC.h"
 #include "../libUnuk/System/Debug.h"
 #include "../libUnuk/Engine/MemClass.h"

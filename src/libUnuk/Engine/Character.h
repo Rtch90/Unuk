@@ -11,7 +11,7 @@
 #include "../Engine/Collision.h"
 #include "../Map/Map.h"
 #include "../System/Timer.h"
-#include "../Ui/Text.h"
+#include "../UI/Text.h"
 #include "../System/Debug.h"
 using namespace std;
 

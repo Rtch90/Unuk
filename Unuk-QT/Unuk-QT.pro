@@ -29,13 +29,13 @@ HEADERS += ../src/Libs/wglext.h \
     ../src/libUnuk/System/FPS.h \
     ../src/libUnuk/System/Debug.h \
     ../src/libUnuk/System/Timer.h \
-    ../src/libUnuk/Ui/MainMenu.h \
-    ../src/libUnuk/Ui/IngameMenu.h \
-    ../src/libUnuk/Ui/Font.h \
-    ../src/libUnuk/Ui/ButtonToggle.h \
-    ../src/libUnuk/Ui/ButtonGroup.h \
-    ../src/libUnuk/Ui/Button.h \
-    ../src/libUnuk/Ui/Text.h \
+		../src/libUnuk/UI/MainMenu.h \
+		../src/libUnuk/UI/IngameMenu.h \
+		../src/libUnuk/UI/Font.h \
+		../src/libUnuk/UI/ButtonToggle.h \
+		../src/libUnuk/UI/ButtonGroup.h \
+		../src/libUnuk/UI/Button.h \
+		../src/libUnuk/UI/Text.h \
     ../src/Unuk/Globals.h \
     ../src/Unuk/Game.h \
     ../src/Unuk/Constants.h \
@@ -59,13 +59,13 @@ SOURCES += ../src/libUnuk/Engine/WorldManager.cpp \
     ../src/libUnuk/System/Input.cpp \
     ../src/libUnuk/System/FPS.cpp \
     ../src/libUnuk/System/Debug.cpp \
-    ../src/libUnuk/Ui/Text.cpp \
-    ../src/libUnuk/Ui/MainMenu.cpp \
-    ../src/libUnuk/Ui/IngameMenu.cpp \
-    ../src/libUnuk/Ui/Font.cpp \
-    ../src/libUnuk/Ui/ButtonToggle.cpp \
-    ../src/libUnuk/Ui/ButtonGroup.cpp \
-    ../src/libUnuk/Ui/Button.cpp \
+		../src/libUnuk/UI/Text.cpp \
+		../src/libUnuk/UI/MainMenu.cpp \
+		../src/libUnuk/UI/IngameMenu.cpp \
+		../src/libUnuk/UI/Font.cpp \
+		../src/libUnuk/UI/ButtonToggle.cpp \
+		../src/libUnuk/UI/ButtonGroup.cpp \
+		../src/libUnuk/UI/Button.cpp \
     ../src/Unuk/Player.cpp \
     ../src/Unuk/main.cpp \
     ../src/Unuk/Globals.cpp \
