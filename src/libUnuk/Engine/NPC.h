@@ -5,7 +5,7 @@
 
 class NPC : public Character {
 public:
-  NPC(Map* mapArg);
+  NPC(LevelGen* mapArg);
   ~NPC(void);
   
   void Update(void);

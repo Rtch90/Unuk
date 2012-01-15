@@ -8,7 +8,7 @@
 
 class Player : public Character {
 public:
-  Player(Map* mapArg);
+  Player(LevelGen* mapArg);
   ~Player(void);
 
   void HandleInput(void);

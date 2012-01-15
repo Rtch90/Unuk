@@ -3,7 +3,7 @@
 // Pixels * 60 / sec.
 const float Player::PLAYER_SPEED = Character::CHARACTER_SPEED + 0.5f;
 
-Player::Player(Map *mapArg) : Character(mapArg) {
+Player::Player(LevelGen *mapArg) : Character(mapArg) {
 
 }
 

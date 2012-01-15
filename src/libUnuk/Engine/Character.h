@@ -9,17 +9,17 @@
 #include "../Sprite/ApplySurface.h"
 #include "../Sprite/ImageLoader.h"
 #include "../Engine/Collision.h"
-#include "../Map/Map.h"
+#include "../LevelGen/LevelGen.h"
 #include "../System/Timer.h"
 #include "../UI/Text.h"
 #include "../System/Debug.h"
 using namespace std;
 
-class Map;
+class LevelGen;
 
 class Character {
 public:
-  Character(Map* mapArg);
+	Character(LevelGen* mapArg);
   ~Character(void);
 
   void LoadSprites(string filename, int wArg, int hArg);
@@ -88,7 +88,7 @@ protected:
 
   int _health;
   
-  Map* map;
+	LevelGen* map;
   
   static const float CHARACTER_SPEED;
   

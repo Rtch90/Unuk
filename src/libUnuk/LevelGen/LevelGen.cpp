@@ -1,15 +1,15 @@
-#include "Map.h"
+#include "LevelGen.h"
 #include "../Engine/NPC.h"
 
-Map::Map(void) {
+LevelGen::LevelGen(void) {
 
 }
 
-Map::~Map(void) {
+LevelGen::~LevelGen(void) {
 
 }
 
-void Map::Load(const string filename) {
+void LevelGen::Load(const string filename) {
   Unload();
   _currentMap = filename;
   string fullMapPath = "../Data/Media/Maps/" + filename;
@@ -18,7 +18,7 @@ void Map::Load(const string filename) {
   assert(mapFile.LoadFile() == true);
 
   // Getting dirty with some XML. This seems like a nicer
-  // approach to loading maps, rather than parsing tet files.
+	// approach to loading maps, rather than parsing text files.
   TiXmlElement* rootElem = NULL;
   TiXmlElement* lineElem = NULL;
   TiXmlElement* tileElem = NULL;
@@ -145,12 +145,12 @@ void Map::Load(const string filename) {
   _world.AddNPC(npc);
 }
 
-void Map::Update(void) {
+void LevelGen::Update(void) {
   _world.Update();
   // Update the map so we can render when camera moves.
 }
 
-void Map::Render(void) {
+void LevelGen::Render(void) {
   int xOrig = (camera.x / TILE_WIDTH) - 1;
   int yOrig = (camera.y / TILE_HEIGHT) - 1;
 
@@ -189,28 +189,28 @@ void Map::Render(void) {
   _world.Render();
 }
 
-void Map::Unload(void) {
+void LevelGen::Unload(void) {
   _tileTextures.Unload();
   _entityTextures.Unload();
 }
 
-string Map::GetCurrentMap(void) {
+string LevelGen::GetCurrentMap(void) {
   return _currentMap;
 }
 
-bool Map::GetTileSolidity(int xArg, int yArg) {
+bool LevelGen::GetTileSolidity(int xArg, int yArg) {
   return _tile[xArg + 1][yArg + 1].GetTileSolidity();
 }
 
-int Map::GetTileX(int xArg, int yArg) {
+int LevelGen::GetTileX(int xArg, int yArg) {
   return _tile[xArg + 1][yArg + 1].GetTileX();
 }
 
-int Map::GetTileY(int xArg, int yArg) {
+int LevelGen::GetTileY(int xArg, int yArg) {
   return _tile[xArg + 1][yArg + 1].GetTileY();
 }
 
-bool Map::GetEntitySolidity(int xArg, int yArg) {
+bool LevelGen::GetEntitySolidity(int xArg, int yArg) {
   if(xArg > x || yArg > y || yArg < 0 || yArg < 0) {
     return false;
   }
@@ -218,34 +218,34 @@ bool Map::GetEntitySolidity(int xArg, int yArg) {
   return _tile[xArg + 1][yArg + 1].GetEntitySolitity();
 }
 
-int Map::GetEntityX(int xArg, int yArg) {
+int LevelGen::GetEntityX(int xArg, int yArg) {
   return _tile[xArg + 1][yArg + 1].GetEntityX();
 }
 
-int Map::GetEntityY(int xArg, int yArg) {
+int LevelGen::GetEntityY(int xArg, int yArg) {
   return _tile[xArg + 1][yArg + 1].GetEntityY();
 }
 
-int Map::GetEntityWidth(int xArg, int yArg) {
+int LevelGen::GetEntityWidth(int xArg, int yArg) {
   return _tile[xArg + 1][yArg + 1].GetEntityWidth();
 }
 
-int Map::GetEntityHeight(int xArg, int yArg) {
+int LevelGen::GetEntityHeight(int xArg, int yArg) {
   return _tile[xArg + 1][yArg + 1].GetEntityHeight();
 }
 
-int Map::GetTileZLevel(int xArg, int yArg) {
+int LevelGen::GetTileZLevel(int xArg, int yArg) {
   return _tile[xArg + 1][yArg + 1].GetZLevel();
 }
 
-string Map::GetMapTransitionName(int xArg, int yArg) {
+string LevelGen::GetMapTransitionName(int xArg, int yArg) {
   return _tile[xArg + 1][yArg + 1].GetMapTransitionName();
 }
 
-int Map::GetMapTransitionX(int xArg, int yArg) {
+int LevelGen::GetMapTransitionX(int xArg, int yArg) {
   return _tile[xArg + 1][yArg + 1].GetMapTransitionX();
 }
 
-int Map::GetMapTransitionY(int xArg, int yArg) {
+int LevelGen::GetMapTransitionY(int xArg, int yArg) {
   return _tile[xArg + 1][yArg + 1].GetMapTransitionY();
 }

@@ -5,8 +5,8 @@
 
 #include "../../Unuk/Constants.h"
 #include "../Sprite/ApplySurface.h"
-#include "../Map/MapElement.h"
-#include "../Map/MapEntities.h"
+#include "../LevelGen/MapElement.h"
+#include "../LevelGen/MapEntities.h"
 using namespace std;
 
 class MapTile {

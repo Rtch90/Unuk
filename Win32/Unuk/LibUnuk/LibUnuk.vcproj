@@ -214,34 +214,34 @@
 			</File>
 		</Filter>
 		<Filter
-			Name="Map"
+			Name="LevelGen"
 			>
 			<File
-				RelativePath="..\..\..\src\libUnuk\Map\Map.cpp"
+				RelativePath="..\..\..\src\libUnuk\LevelGen\LevelGen.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\libUnuk\Map\Map.h"
+				RelativePath="..\..\..\src\libUnuk\LevelGen\LevelGen.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\libUnuk\Map\MapElement.cpp"
+				RelativePath="..\..\..\src\libUnuk\LevelGen\MapElement.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\libUnuk\Map\MapElement.h"
+				RelativePath="..\..\..\src\libUnuk\LevelGen\MapElement.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\libUnuk\Map\MapEntities.cpp"
+				RelativePath="..\..\..\src\libUnuk\LevelGen\MapEntities.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\libUnuk\Map\MapEntities.h"
+				RelativePath="..\..\..\src\libUnuk\LevelGen\MapEntities.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\libUnuk\Map\MapTile.h"
+				RelativePath="..\..\..\src\libUnuk\LevelGen\MapTile.h"
 				>
 			</File>
 		</Filter>

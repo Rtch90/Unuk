@@ -11,41 +11,39 @@
 #include "../../Unuk/Constants.h"
 #include "../Sprite/ImageLoader.h"
 #include "../Sprite/ApplySurface.h"
-#include "../Map/MapTile.h"
+#include "../LevelGen/MapTile.h"
 #include "../System/Debug.h"
 #include "../Engine/WorldManager.h"
 using namespace std;
 
-//class CharacterManager;
-
-class Map {
+class LevelGen {
 public:
-  Map(void);
-  ~Map(void);
+	LevelGen(void);
+	~LevelGen(void);
 
   void Load(const string filename);
   void Update(void);
   void Render(void);
 
-  bool GetTileSolidity(int xArg, int yArg);
-  int  GetTileX(int xArg, int yArg);
-  int  GetTileY(int xArg, int yArg);
+	bool GetTileSolidity(int xArg, int yArg);
+	int  GetTileX(int xArg, int yArg);
+	int  GetTileY(int xArg, int yArg);
 
-  bool GetEntitySolidity(int xArg, int yArg);
-  int  GetEntityX(int xArg, int yArg);
-  int  GetEntityY(int xArg, int yArg);
-  int  GetEntityWidth(int xArg, int yArg);
-  int  GetEntityHeight(int xArg, int yArg);
+	bool GetEntitySolidity(int xArg, int yArg);
+	int  GetEntityX(int xArg, int yArg);
+	int  GetEntityY(int xArg, int yArg);
+	int  GetEntityWidth(int xArg, int yArg);
+	int  GetEntityHeight(int xArg, int yArg);
 
-  int  GetTileZLevel(int xArg, int yArg);
+	int  GetTileZLevel(int xArg, int yArg);
 
-  string GetMapTransitionName(int xArg, int yArg);
-  int    GetMapTransitionX(int xArg, int yArg);
-  int    GetMapTransitionY(int xArg, int yArg);
+	string GetMapTransitionName(int xArg, int yArg);
+	int    GetMapTransitionX(int xArg, int yArg);
+	int    GetMapTransitionY(int xArg, int yArg);
 
-  string GetCurrentMap(void);
+	string GetCurrentMap(void);
 
-  WorldManager& GetWorld(void) { return _world; }
+	WorldManager& GetWorld(void) { return _world; }
 
 private:
   void Unload(void);

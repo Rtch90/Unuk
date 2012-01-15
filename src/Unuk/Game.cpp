@@ -17,7 +17,7 @@ Game::~Game(void) {
 
 gameNavVal_t Game::Run(const string savegameIDArg) {
   _player->SetXY(50, 50);
-  _player->LoadSprites("../Data/Media/Images/Characters/template.png", 40, 45);
+	_player->LoadSprites("../Data/Media/Images/Characters/Player.png", 40, 45);
 
   LoadSavegame(savegameIDArg);
 
@@ -46,7 +46,7 @@ gameNavVal_t Game::Run(const string savegameIDArg) {
 
   stringstream npcHealth;
   _npcHealth.SetXY(10, 110);
-  _npcHealth.SetTextBlended("NPC 0 Health - XX", vsmall, COLOUR_BLACK);
+	_npcHealth.SetTextBlended("NPC X Health - XX", vsmall, COLOUR_BLACK);
 
   _healthBarBg.SetRGB(0, 0, 0);
   _healthBarBg.SetXY(10, 20);
