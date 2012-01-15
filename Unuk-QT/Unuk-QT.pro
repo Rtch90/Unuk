@@ -16,10 +16,6 @@ HEADERS += ../src/Libs/wglext.h \
     ../src/libUnuk/Engine/Character.h \
     ../src/libUnuk/Engine/AStarBase.h \
     ../src/libUnuk/Engine/AStar.h \
-    ../src/libUnuk/Map/MapTile.h \
-    ../src/libUnuk/Map/MapEntities.h \
-    ../src/libUnuk/Map/MapElement.h \
-    ../src/libUnuk/Map/Map.h \
     ../src/libUnuk/Sprite/TextureManager.h \
     ../src/libUnuk/Sprite/Texture.h \
     ../src/libUnuk/Sprite/ImageLoader.h \
@@ -41,7 +37,9 @@ HEADERS += ../src/Libs/wglext.h \
     ../src/Unuk/Constants.h \
     ../src/Unuk/Player.h \
     ../src/libUnuk/LevelGen/LevelGen.h \
-    ../src/libUnuk/LevelGen/Level.h
+    ../src/libUnuk/LevelGen/MapEntities.h \
+    ../src/libUnuk/LevelGen/MapElement.h \
+    ../src/libUnuk/LevelGen/MapTile.h
 SOURCES += ../src/libUnuk/Engine/WorldManager.cpp \
     ../src/libUnuk/Engine/ParticleEmitter.cpp \
     ../src/libUnuk/Engine/NPC.cpp \
@@ -49,9 +47,6 @@ SOURCES += ../src/libUnuk/Engine/WorldManager.cpp \
     ../src/libUnuk/Engine/Collision.cpp \
     ../src/libUnuk/Engine/Character.cpp \
     ../src/libUnuk/Engine/AStar.cpp \
-    ../src/libUnuk/Map/MapEntities.cpp \
-    ../src/libUnuk/Map/MapElement.cpp \
-    ../src/libUnuk/Map/Map.cpp \
     ../src/libUnuk/Sprite/TextureManager.cpp \
     ../src/libUnuk/Sprite/Texture.cpp \
     ../src/libUnuk/Sprite/ImageLoader.cpp \
@@ -73,5 +68,6 @@ SOURCES += ../src/libUnuk/Engine/WorldManager.cpp \
     ../src/Unuk/Globals.cpp \
     ../src/Unuk/Game.cpp \
     ../src/libUnuk/LevelGen/LevelGen.cpp \
-    ../src/libUnuk/LevelGen/Level.cpp
+    ../src/libUnuk/LevelGen/MapEntities.cpp \
+    ../src/libUnuk/LevelGen/MapElement.cpp
 OTHER_FILES += 

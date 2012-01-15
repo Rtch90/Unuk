@@ -11,7 +11,7 @@
 #include "Globals.h"
 #include "Player.h"
 #include "../libUnuk/UI/IngameMenu.h"
-#include "../libUnuk/Map/Map.h"
+#include "../libUnuk/LevelGen/LevelGen.h"
 #include "../libUnuk/System/Timer.h"
 #include "../libUnuk/System/Debug.h"
 #include "../libUnuk/UI/Text.h"
@@ -53,7 +53,7 @@ private:
   Text _npcHealth;
 
   IngameMenu _ingameMenu;
-  Map _map;
+	LevelGen _map;
 
   Player* _player;
 };

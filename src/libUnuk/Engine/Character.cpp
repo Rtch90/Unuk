@@ -6,7 +6,7 @@ const float Character::CHARACTER_SPEED = 3.5f;
 static list<Character*>collisionList;
 static list<Character*>::iterator collisionIter;
 
-Character::Character(Map* mapArg) {
+Character::Character(LevelGen* mapArg) {
   map = mapArg;
   attacking = false;
   directionFacing = FACING_DOWN;

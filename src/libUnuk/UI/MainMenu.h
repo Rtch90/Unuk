@@ -3,7 +3,7 @@
 #include "../../Unuk/Constants.h"
 #include "../System/FPS.h"
 #include "../UI/ButtonGroup.h"
-#include "../Map/Map.h"
+#include "../LevelGen/LevelGen.h"
 #include "../System/Rect.h"
 #include "../UI/Text.h"
 
@@ -24,7 +24,7 @@ public:
 private:
   void Render(void);
 
-  Map _background;
+	LevelGen _background;
 
   Text lblMenu;
 

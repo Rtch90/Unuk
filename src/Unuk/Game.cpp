@@ -17,7 +17,7 @@ Game::~Game(void) {
 
 gameNavVal_t Game::Run(const string savegameIDArg) {
   _player->SetXY(50, 50);
-  _player->LoadSprites("../Data/Media/Images/Characters/template.png", 40, 45);
+	_player->LoadSprites("../Data/Media/Images/Characters/Player.png", 40, 45);
 
   LoadSavegame(savegameIDArg);
 

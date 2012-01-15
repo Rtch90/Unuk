@@ -1,6 +1,6 @@
 #include "NPC.h"
 
-NPC::NPC(Map* mapArg) : Character(mapArg) {
+NPC::NPC(LevelGen* mapArg) : Character(mapArg) {
   _moveTimer.Start();
   
   _moveChangeFrequency = 14000;
