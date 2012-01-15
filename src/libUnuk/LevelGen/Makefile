@@ -1,7 +1,7 @@
 CC = g++
 CFLAGS = -ansi -Wall -g
 LDADD = -lGL -lGLU -lSDL -lSDL_ttf -lSDL_gfx -lSDL_image -ltinyxml
-objects = Map.o MapElement.o MapEntities.o  \
+objects = LevelGen.o MapElement.o MapEntities.o  \
 
 .PHONY: default all clean
 

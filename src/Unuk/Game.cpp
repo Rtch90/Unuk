@@ -38,7 +38,7 @@ gameNavVal_t Game::Run(const string savegameIDArg) {
   _gameRenderTime.SetTextBlended("Render - XX", vsmall, COLOUR_BLACK);
 
   _gameUpdateTime.SetXY(10, 30);
-  _gameUpdateTime.SetTextBlended("Update - XX", vsmall, COLOUR_BLACK);
+	_gameUpdateTime.SetTextBlended("Update - XX", vsmall, COLOUR_BLACK);
 
   stringstream playerXYString;
   _playerXY.SetXY(10, 50);
