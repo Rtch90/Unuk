@@ -34,23 +34,31 @@ gameNavVal_t Game::Run(const string savegameIDArg) {
   Timer renderTimer;
   Timer updateTimer;
 
-  _gameRenderTime.SetXY(10, 10);
+  _gameRenderTime.SetXY(10, 50);
   _gameRenderTime.SetTextBlended("Render - XX", vsmall, COLOUR_BLACK);
 
-  _gameUpdateTime.SetXY(10, 30);
+  _gameUpdateTime.SetXY(10, 70);
   _gameUpdateTime.SetTextBlended("Update - XX", vsmall, COLOUR_BLACK);
 
   stringstream playerXYString;
-  _playerXY.SetXY(10, 50);
+  _playerXY.SetXY(10, 90);
   _playerXY.SetTextBlended("Player coords - XX XX", vsmall, COLOUR_BLACK);
 
-  stringstream playerHealth;
-  _playerHealth.SetXY(10, 80);
-  _playerHealth.SetTextBlended("Player Health - XX", vsmall, COLOUR_BLACK);
-
   stringstream npcHealth;
-  _npcHealth.SetXY(10, 100);
+  _npcHealth.SetXY(10, 110);
   _npcHealth.SetTextBlended("NPC 0 Health - XX", vsmall, COLOUR_BLACK);
+
+  _healthBarBg.SetRGB(0, 0, 0);
+  _healthBarBg.SetXY(10, 20);
+  _healthBarBg.SetWidthHeight(200, 25);
+  
+  _healthBar.SetRGB(255, 0, 0);
+  _healthBar.SetXY(10, 20);
+  _healthBar.SetWidthHeight(200, 25);
+
+  stringstream playerHealth;
+  _playerHealth.SetXY(15, 27);
+  _playerHealth.SetTextBlended("Player Health - XX", vsmall, COLOUR_WHITE);
 
   _gameRunning = true;
   while(_gameRunning) {
@@ -90,6 +98,14 @@ gameNavVal_t Game::Run(const string savegameIDArg) {
       fpsCalc.Start();
       frame = 0;
 
+      playerHealth.str("");
+      playerHealth << "Player Health: " << _player->GetHealth();
+      _playerHealth.SetTextBlended(playerHealth.str(), vsmall, COLOUR_WHITE);
+
+      _healthBar.SetWidthHeight(
+        (int)(((float)_player->GetHealth() / 100.0f) * 200.0f),
+        _healthBar.GetHeight());
+
       // Check to see if we are allowed to display debug info.
       if(debugEnabled) {
         _gameUpdateTime.SetTextBlended("Update - " + updateTimer.GetTicksStr(), vsmall, COLOUR_BLACK);
@@ -98,10 +114,6 @@ gameNavVal_t Game::Run(const string savegameIDArg) {
         playerXYString.str("");
         playerXYString << "Player coords: x" << _player->GetX() << ", y" << _player->GetY();
         _playerXY.SetTextBlended(playerXYString.str(), vsmall, COLOUR_BLACK);
-
-        playerHealth.str("");
-        playerHealth << "Player Health: " << _player->GetHealth();
-        _playerHealth.SetTextBlended(playerHealth.str(), vsmall, COLOUR_BLACK);
 
         int npc0Health = 0;
         if(_map.GetWorld().GetNPCCount() == 0) {
@@ -139,6 +151,7 @@ void Game::HandleInput(void) {
           _ingameMenu.SetStatus(true);
         if(event.key.keysym.sym == SDLK_p)
           debugEnabled = !debugEnabled;
+        _player->SetHealth(50);
       }
       else if(event.type == SDL_QUIT) {
         _gameRunning = false;
@@ -188,18 +201,22 @@ void Game::UpdateGame(void) {
 }
 
 void Game::Render(void) {
-	// SDL_FillRect(screen, NULL, 0); //  You might want to clear the buffer! --konom
+	//SDL_FillRect(screen, NULL, 0); //  You might want to clear the buffer! --konom
   if(_ingameMenu.GetStatus() == false) {
     _map.Render();
     _player->Render();
 
+    _healthBarBg.DrawLiteral();
+    _healthBar.DrawLiteral();
+    _playerHealth.RenderLiteral();
+   
     if(debugEnabled) {
       _gameRenderTime.RenderLiteral();
       _gameUpdateTime.RenderLiteral();
       _playerXY.RenderLiteral();
-      _playerHealth.RenderLiteral();
       _npcHealth.RenderLiteral();
     }
+
   } else {
     _ingameMenu.Render();
   }

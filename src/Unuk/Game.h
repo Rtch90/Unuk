@@ -16,6 +16,7 @@
 #include "../libUnuk/System/Debug.h"
 #include "../libUnuk/UI/Text.h"
 #include "../libUnuk/Engine/MemClass.h"
+#include "../libUnuk/System/Rect.h"
 using namespace std;
 
 enum gameNavVal_t { gameMainMenu, gameQuitGame };
@@ -49,11 +50,14 @@ private:
   Text _gameUpdateTime;
   Text _gameRenderTime;
   Text _playerXY;
-  Text _playerHealth;
   Text _npcHealth;
 
   IngameMenu _ingameMenu;
   Map _map;
 
   Player* _player;
+
+  Text _playerHealth;
+  Rect _healthBarBg;
+  Rect _healthBar;
 };
