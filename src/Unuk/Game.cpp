@@ -174,6 +174,7 @@ void Game::HandleInput(void) {
     case ingameMenuOptions:
       break;
     case ingameMenuMainMenu:
+			SDL_FillRect(screen, NULL, 0);
       _gameRunning = false;
       break;
     }
@@ -196,7 +197,7 @@ void Game::UpdateGame(void) {
 }
 
 void Game::Render(void) {
-	SDL_FillRect(screen, NULL, 0); //  You might want to clear the buffer! --konom
+	//SDL_FillRect(screen, NULL, 0); //  You might want to clear the buffer! --konom | I don't want a blacked out ingame menu, save it for MainMenu. --Allanis
   if(_ingameMenu.GetStatus() == false) {
     _map.Render();
     _player->Render();
