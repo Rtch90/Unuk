@@ -24,6 +24,8 @@ Character::Character(LevelGen* mapArg) {
 
   _healthBar.SetBackgroundRGB(0, 0, 0);
   _healthBar.SetForegroundRGB(255, 0, 0);
+
+  _showHealthBar = false;
 }
 
 Character::~Character(void) {
@@ -119,7 +121,12 @@ void Character::Render(void) {
     ApplySurface((int)x, (int)y, _texture, screen, &_sprites[directionFacing][_animationStage]);
   }
 
-  if(_healthBarDuration.IsStarted() && (_healthBarDuration.GetTicks() < 5000)) {
+  if(_showHealthBar && (_healthBarDuration.GetTicks() >= 5000)) {
+    _healthBarDuration.Stop();
+    _showHealthBar = false;
+  }
+
+  if(_showHealthBar) {
     _healthBar.Draw();
   }
 }
@@ -146,6 +153,7 @@ void Character::Update(void) {
 
 void Character::OnAttack(void) {
   _healthBarDuration.Start();
+  _showHealthBar = true;
 }
 
 void Character::Move(void) {

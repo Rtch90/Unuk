@@ -104,6 +104,7 @@ protected:
 
   Bar _healthBar;
   Timer _healthBarDuration;
+  bool _showHealthBar;
 
 private:
   static const int ANIMATION_SPEED         = 200;
