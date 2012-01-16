@@ -12,6 +12,7 @@
 #include "../LevelGen/LevelGen.h"
 #include "../System/Timer.h"
 #include "../UI/Text.h"
+#include "../UI/Bar.h"
 #include "../System/Debug.h"
 using namespace std;
 
@@ -98,6 +99,8 @@ protected:
   static const int ANIM_NO_FOOT      = 1;
   static const int ANIM_RIGHT_FOOT   = 2;
   static const int ANIM_ATTACK       = 3;
+
+  Bar _healthBar;
 
 private:
   static const int ANIMATION_SPEED         = 200;

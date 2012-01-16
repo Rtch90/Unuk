@@ -22,6 +22,8 @@ void NPC::Update(void) {
   else if(xVel < 0) directionFacing     = FACING_LEFT;
   else if(yVel > 0) directionFacing     = FACING_DOWN;
   else if(yVel < 0) directionFacing     = FACING_UP;
+
+  _healthBar.SetProgress((float)GetHealth() / 100.0f);
 }
 
 void NPC::Move(void) {

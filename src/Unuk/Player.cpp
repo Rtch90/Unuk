@@ -71,6 +71,8 @@ void Player::Update(void) {
 
   // For now The camera will be static.
   //SetCamera();
+
+  _healthBar.SetProgress((float)GetHealth() / 100.0f);
 }
 
 void Player::SetName(string nameArg) {

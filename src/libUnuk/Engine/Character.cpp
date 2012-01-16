@@ -21,6 +21,9 @@ Character::Character(LevelGen* mapArg) {
   _texture = NULL;
   
   collisionList.push_front(this);
+
+  _healthBar.SetBackgroundRGB(0, 0, 0);
+  _healthBar.SetForegroundRGB(255, 0, 0);
 }
 
 Character::~Character(void) {
@@ -50,6 +53,8 @@ void Character::LoadSprites(string filename, int wArg, int hArg) {
       _sprites[m_direction][m_action].h = (Sint16)h;
     }
   }
+
+  _healthBar.SetWidthHeight((int)w, 10);
 }
 
 void Character::AddSpeachBubble(string text) {
@@ -113,6 +118,8 @@ void Character::Render(void) {
     }
     ApplySurface((int)x, (int)y, _texture, screen, &_sprites[directionFacing][_animationStage]);
   }
+
+  _healthBar.Draw();
 }
 
 void Character::Update(void) {
@@ -131,6 +138,8 @@ void Character::Update(void) {
       }
     }
   }
+
+  _healthBar.SetProgress((float)_health / 100.0f);
 }
 
 void Character::Move(void) {
@@ -152,6 +161,8 @@ void Character::Move(void) {
   if(CheckTileCollisions())                                          y -= yVel;
   if(CheckEntityCollisions())                                        y -= yVel;
   if(CheckCharacterCollisions())                                     y -= yVel;
+
+  _healthBar.SetXY((int)x, (int)(y - _healthBar.GetHeight() - 5));
 }
 
 /*

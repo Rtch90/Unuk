@@ -196,7 +196,7 @@ void Game::UpdateGame(void) {
 }
 
 void Game::Render(void) {
-	//SDL_FillRect(screen, NULL, 0); //  You might want to clear the buffer! --konom
+	SDL_FillRect(screen, NULL, 0); //  You might want to clear the buffer! --konom
   if(_ingameMenu.GetStatus() == false) {
     _map.Render();
     _player->Render();
