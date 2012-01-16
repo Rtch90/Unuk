@@ -92,6 +92,7 @@ void WorldManager::OnPlayerAttack(Character* player) {
     }
 
     npc->SetHealth(npc->GetHealth() - 5);
+    npc->OnAttack();
 
     if(npc->GetHealth() <= 0) {
       i = _npcs.erase(i);

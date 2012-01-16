@@ -45,6 +45,8 @@ public:
   void Render(void);
   void Update(void);
 
+  void OnAttack(void);
+
   inline void* operator new(size_t size) {
     return gMemManager.Allocate(size);
   }
@@ -101,6 +103,7 @@ protected:
   static const int ANIM_ATTACK       = 3;
 
   Bar _healthBar;
+  Timer _healthBarDuration;
 
 private:
   static const int ANIMATION_SPEED         = 200;

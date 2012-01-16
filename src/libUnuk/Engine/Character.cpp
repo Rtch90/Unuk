@@ -119,7 +119,9 @@ void Character::Render(void) {
     ApplySurface((int)x, (int)y, _texture, screen, &_sprites[directionFacing][_animationStage]);
   }
 
-  _healthBar.Draw();
+  if(_healthBarDuration.IsStarted() && (_healthBarDuration.GetTicks() < 5000)) {
+    _healthBar.Draw();
+  }
 }
 
 void Character::Update(void) {
@@ -140,6 +142,10 @@ void Character::Update(void) {
   }
 
   _healthBar.SetProgress((float)_health / 100.0f);
+}
+
+void Character::OnAttack(void) {
+  _healthBarDuration.Start();
 }
 
 void Character::Move(void) {
