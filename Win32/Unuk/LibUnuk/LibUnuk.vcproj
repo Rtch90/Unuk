@@ -329,6 +329,14 @@
 			Name="Ui"
 			>
 			<File
+				RelativePath="..\..\..\src\libUnuk\UI\Bar.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libUnuk\UI\Bar.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\libUnuk\Ui\Button.cpp"
 				>
 			</File>

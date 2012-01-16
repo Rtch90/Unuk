@@ -48,13 +48,10 @@ gameNavVal_t Game::Run(const string savegameIDArg) {
   _npcHealth.SetXY(10, 110);
 	_npcHealth.SetTextBlended("NPC X Health - XX", vsmall, COLOUR_BLACK);
 
-  _healthBarBg.SetRGB(0, 0, 0);
-  _healthBarBg.SetXY(10, 20);
-  _healthBarBg.SetWidthHeight(200, 25);
-  
-  _healthBar.SetRGB(255, 0, 0);
-  _healthBar.SetXY(10, 20);
-  _healthBar.SetWidthHeight(200, 25);
+  _playerHealthBar.SetBackgroundRGB(0, 0, 0);
+  _playerHealthBar.SetForegroundRGB(255, 0, 0);
+  _playerHealthBar.SetXY(10, 20);
+  _playerHealthBar.SetWidthHeight(200, 25);
 
   stringstream playerHealth;
   _playerHealth.SetXY(15, 27);
@@ -102,9 +99,7 @@ gameNavVal_t Game::Run(const string savegameIDArg) {
       playerHealth << "Player Health: " << _player->GetHealth();
       _playerHealth.SetTextBlended(playerHealth.str(), vsmall, COLOUR_WHITE);
 
-      _healthBar.SetWidthHeight(
-        (int)(((float)_player->GetHealth() / 100.0f) * 200.0f),
-        _healthBar.GetHeight());
+      _playerHealthBar.SetProgress((float)_player->GetHealth() / 100.0f);
 
       // Check to see if we are allowed to display debug info.
       if(debugEnabled) {
@@ -206,8 +201,7 @@ void Game::Render(void) {
     _map.Render();
     _player->Render();
 
-    _healthBarBg.DrawLiteral();
-    _healthBar.DrawLiteral();
+    _playerHealthBar.DrawLiteral();
     _playerHealth.RenderLiteral();
    
     if(debugEnabled) {
