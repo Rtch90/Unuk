@@ -146,7 +146,6 @@ void Game::HandleInput(void) {
           _ingameMenu.SetStatus(true);
         if(event.key.keysym.sym == SDLK_p)
           debugEnabled = !debugEnabled;
-        _player->SetHealth(50);
       }
       else if(event.type == SDL_QUIT) {
         _gameRunning = false;
