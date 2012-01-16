@@ -211,6 +211,8 @@ void Game::Render(void) {
       _npcHealth.RenderLiteral();
     }
 
+    _eventHistory.Render();
+
   } else {
     _ingameMenu.Render();
   }

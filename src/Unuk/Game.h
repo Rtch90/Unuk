@@ -16,6 +16,7 @@
 #include "../libUnuk/System/Debug.h"
 #include "../libUnuk/UI/Text.h"
 #include "../libUnuk/UI/Bar.h"
+#include "../libUnuk/UI/EventHistory.h"
 #include "../libUnuk/Engine/MemClass.h"
 using namespace std;
 
@@ -59,4 +60,6 @@ private:
 
   Text  _playerHealth;
   Bar   _playerHealthBar;
+
+  EventHistory _eventHistory;
 };
