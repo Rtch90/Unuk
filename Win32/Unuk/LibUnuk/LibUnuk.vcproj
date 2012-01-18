@@ -361,6 +361,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\src\libUnuk\UI\EventHistory.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libUnuk\UI\EventHistory.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\libUnuk\Ui\Font.cpp"
 				>
 			</File>

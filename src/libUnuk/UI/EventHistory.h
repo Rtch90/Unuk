@@ -23,6 +23,9 @@ private:
   Timer _timeToVanish;
   bool _visible;
 
+  int _bgx;
+  int _bgy;
+
   static const int BOX_WIDTH;
   static const int BOX_HEIGHT;
 };

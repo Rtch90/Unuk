@@ -16,16 +16,25 @@ void Rect::SetWidthHeight(int wArg, int hArg) {
   rect.h = (Uint16)hArg;
 }
 
+void Rect::SetRGBA(Uint8 rArg, Uint8 gArg, Uint8 bArg, Uint8 aArg) {
+  r = rArg;
+  g = gArg;
+  b = bArg;
+  a = aArg;
+}
+
 void Rect::SetRGB(Uint8 rArg, Uint8 gArg, Uint8 bArg) {
   r = rArg;
   g = gArg;
   b = bArg;
+  a = 255;
 }
 
 void Rect::SetRGB(SDL_Color colour) {
   r = colour.r;
   g = colour.g;
   b = colour.b;
+  a = 255;
 }
 
 void Rect::Draw(void) {
@@ -36,7 +45,7 @@ void Rect::Draw(void) {
   offset.w = rect.w;
   offset.h = rect.h;
 
-  SDL_FillRect(screen, &offset, SDL_MapRGB(screen->format, r, g, b));
+  SDL_FillRect(screen, &offset, SDL_MapRGBA(screen->format, r, g, b, a));
 }
 
 void Rect::Draw(int xArg, int yArg) {
@@ -47,11 +56,11 @@ void Rect::Draw(int xArg, int yArg) {
   offset.w = (Sint16)rect.w;
   offset.h = (Sint16)rect.h;
 
-  SDL_FillRect(screen, &offset, SDL_MapRGB(screen->format, r, g, b));
+  SDL_FillRect(screen, &offset, SDL_MapRGBA(screen->format, r, g, b, a));
 }
 
 void Rect::DrawLiteral(void) {
-  SDL_FillRect(screen, &rect, SDL_MapRGB(screen->format, r, g, b));
+  SDL_FillRect(screen, &rect, SDL_MapRGBA(screen->format, r, g, b, a));
 }
 
 void Rect::DrawLiteral(int xArg, int yArg) {
@@ -62,5 +71,5 @@ void Rect::DrawLiteral(int xArg, int yArg) {
   offset.w = rect.w;
   offset.h = rect.h;
 
-  SDL_FillRect(screen, &offset, SDL_MapRGB(screen->format, r, g, b));
+  SDL_FillRect(screen, &offset, SDL_MapRGBA(screen->format, r, g, b, a));
 }

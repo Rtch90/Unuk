@@ -17,6 +17,7 @@ public:
   void SetXY(int xArg, int yArg);
   void SetWidthHeight(int wArg, int hArg);
 
+  void SetRGBA(Uint8 rArg, Uint8 gArg, Uint8 bArg, Uint8 aArg);
   void SetRGB(Uint8 rArg, Uint8 gArg, Uint8 bArg);
   void SetRGB(SDL_Color);
 
@@ -29,6 +30,7 @@ protected:
   Uint8 r;
   Uint8 g;
   Uint8 b;
+  Uint8 a;
 
 private:
   SDL_Rect rect;

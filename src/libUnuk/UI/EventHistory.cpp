@@ -1,15 +1,18 @@
+#include <SDL/SDL.h>
+#include <SDL/SDL_gfxPrimitives.h>
+
 #include "EventHistory.h"
 #include "../../Unuk/Constants.h"
+#include "../../Unuk/Globals.h"
 
 const int EventHistory::BOX_WIDTH   = 350;
 const int EventHistory::BOX_HEIGHT  = 130;
 
 EventHistory::EventHistory(void) {
-  _background.SetXY(SCREEN_WIDTH/2 - BOX_WIDTH/2, 10);
-  _background.SetWidthHeight(BOX_WIDTH, BOX_HEIGHT);
-  _background.SetRGB(0, 0, 0);
+  _bgx = SCREEN_WIDTH / 2 - BOX_WIDTH / 2;
+  _bgy = 10;
 
-  _text.SetXY(_background.GetX() + 5, _background.GetY() + 5);
+  _text.SetXY(_bgx + 5, _bgy + 5);
   
   _visible = false;
 }
@@ -46,6 +49,10 @@ void EventHistory::Render(void) {
     return;
   }
 
-  _background.DrawLiteral();
+  boxRGBA(screen,
+    _bgx, _bgy,
+    _bgx + BOX_WIDTH, _bgy + BOX_HEIGHT,
+    0, 0, 0, 128);
+
   _text.RenderLiteral();
 }
