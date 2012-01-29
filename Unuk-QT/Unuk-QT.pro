@@ -39,7 +39,9 @@ HEADERS += ../src/Libs/wglext.h \
     ../src/libUnuk/LevelGen/LevelGen.h \
     ../src/libUnuk/LevelGen/MapEntities.h \
     ../src/libUnuk/LevelGen/MapElement.h \
-    ../src/libUnuk/LevelGen/MapTile.h
+    ../src/libUnuk/LevelGen/MapTile.h \
+    ../src/libUnuk/UI/EventHistory.h \
+    ../src/libUnuk/UI/Bar.h
 SOURCES += ../src/libUnuk/Engine/WorldManager.cpp \
     ../src/libUnuk/Engine/ParticleEmitter.cpp \
     ../src/libUnuk/Engine/NPC.cpp \
