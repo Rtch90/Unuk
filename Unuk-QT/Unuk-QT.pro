@@ -14,8 +14,6 @@ HEADERS += ../src/Libs/wglext.h \
     ../src/libUnuk/Engine/MemClass.h \
     ../src/libUnuk/Engine/Collision.h \
     ../src/libUnuk/Engine/Character.h \
-    ../src/libUnuk/Engine/AStarBase.h \
-    ../src/libUnuk/Engine/AStar.h \
     ../src/libUnuk/Sprite/TextureManager.h \
     ../src/libUnuk/Sprite/Texture.h \
     ../src/libUnuk/Sprite/ImageLoader.h \
@@ -50,7 +48,6 @@ SOURCES += ../src/libUnuk/Engine/WorldManager.cpp \
     ../src/libUnuk/Engine/MemManager.cpp \
     ../src/libUnuk/Engine/Collision.cpp \
     ../src/libUnuk/Engine/Character.cpp \
-    ../src/libUnuk/Engine/AStar.cpp \
     ../src/libUnuk/Sprite/TextureManager.cpp \
     ../src/libUnuk/Sprite/Texture.cpp \
     ../src/libUnuk/Sprite/ImageLoader.cpp \
