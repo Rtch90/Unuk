@@ -1,5 +1,3 @@
-// I am drunk right now. Forgive me for any stupidity.
-
 #pragma once
 #include <vector>
 #include <math.h>
