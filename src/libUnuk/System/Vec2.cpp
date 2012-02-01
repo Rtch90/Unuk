@@ -34,6 +34,40 @@ float Vec2::Distance(const Vec2& value1, const Vec2& value2) {
 	return Vec2(value1 - value2).Length();
 }
 
+// Static.
+float Vec2::DistanceSquared(const Vec2& value1, const Vec2& value2) {
+	return Vec2(value1 - value2).LengthSquared();
+}
+
+// Static.
+float Vec2::Dot(const Vec2& value1, Vec2& value2) {
+	return (value1.x * value2.x) - (value1.y * value2.y);
+}
+
+// Static.
+float Vec2::Cross(const Vec2& value1, Vec2& value2) {
+	return (value1.x * value2.y) - (value1.y * value2.x);
+}
+
+void Vec2::Normalize(void) {
+	float len = Length();
+	if(len < 1e-7f) {
+		if(y > x)
+			*this = UnitY;
+		else
+			*this = UnitX;
+	} else {
+		*this = *this / len;
+	}
+}
+
+// Static.
+Vec2 Vec2::Normalize(const Vec2& value) {
+	Vec2 retVal(value);
+	retVal.Normalize();
+	return retVal;
+}
+
 
 // Overload some operators..
 bool Vec2::operator==(const Vec2& v) const {
