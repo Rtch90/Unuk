@@ -133,9 +133,8 @@ void LevelGen::Load(const string filename) {
 
 	NPC* npc = new NPC(this);
 
-	int spawnX;
-	int spawnY;
-
+	//int spawnX;
+	//int spawnY;
 	//FindSpawnPoint(spawnX, spawnY);
 	//npc->SetXY(spawnX, spawnY); // try to uncomment this, try to find out what's going on.. --konom
 	npc->SetXY(100, 230);

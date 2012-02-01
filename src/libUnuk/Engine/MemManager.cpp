@@ -37,15 +37,15 @@ void BitMapEntry::SetMultipleBits(int position, bool flag, int count) {
 
 void BitMapEntry::SetRangeOfInt(int* element, int msb, int lsb, bool flag) {
   if(flag) {
-    int mask = (unsigned(-1) << lsb) & (unsigned(-1) >> INT_SIZE - msb - 1);
+    int mask = (unsigned(-1) << lsb) & (unsigned(-1) >> (INT_SIZE - msb - 1));
     *element |= mask;
   } else {
-    int mask = (unsigned(-1) << lsb) & (unsigned(-1) >> INT_SIZE - msb - 1);
+    int mask = (unsigned(-1) << lsb) & (unsigned(-1) >> (INT_SIZE - msb - 1));
     *element &= ~mask;
   }
 }
 
-MemClass* BitMapEntry::FirstFreeBlock(size_t size) {
+MemClass* BitMapEntry::FirstFreeBlock(size_t/* size*/) {
   for(int i = 0; i < BIT_MAP_ELEMENTS; i++) {
     if(bitMap[i] == 0)
       // There aint any bits free.
@@ -54,7 +54,7 @@ MemClass* BitMapEntry::FirstFreeBlock(size_t size) {
     // Yield the first bit position. This is a 1
     // in an int from the right.
     int result = bitMap[i] & -(bitMap[i]);
-    void* address = 0;
+    //void* address = 0;
     int basePos = (INT_SIZE * i);
 
     switch(result) {
