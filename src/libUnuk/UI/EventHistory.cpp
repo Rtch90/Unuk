@@ -61,7 +61,7 @@ void EventHistory::Render(void) {
     _bgx, _bgy,
     _bgx + BOX_WIDTH, _bgy + BOX_HEIGHT,
     8,
-    0, 0, 0, 200);
+    0, 0, 0, 128);
   
   roundedRectangleRGBA(screen,
     _bgx, _bgy,
