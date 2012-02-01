@@ -9,10 +9,11 @@ Win32/Unuk/Unuk/Release
 Win32/Unuk/Unuk/*.user
 Win32/Unuk/Unuk.ncb
 Win32/Unuk/Unuk.suo
+Bin/Unuk
 Bin/*.dll
 *.swp
 *.o
 *.exe
 *.log
 *Unuk-QT
-*Unuk
+
