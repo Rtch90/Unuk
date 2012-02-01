@@ -125,6 +125,9 @@ void LevelGen::Load(const string filename) {
   // </map>
   levelWidth  = x * TILE_WIDTH;
   levelHeight = y * TILE_HEIGHT;
+  
+  // procedural generation
+  DoMagic();
 
   //character->Load(filename);
 
@@ -202,6 +205,37 @@ void LevelGen::Render(void) {
 void LevelGen::Unload(void) {
   _tileTextures.Unload();
   _entityTextures.Unload();
+}
+
+void LevelGen::DoMagic(void) {
+    int nextEntityGen = 1 + (rand() % 20);        
+    
+    const char* entityTextures[6] = {
+        "../Data/Media/Images/Entities/tree.png",
+        "../Data/Media/Images/Entities/hedge.png",
+        "../Data/Media/Images/Entities/barrel.png",
+        "../Data/Media/Images/Entities/closedChest.png",
+        "../Data/Media/Images/Entities/closedChestMetal.png",
+        "../Data/Media/Images/Entities/closedChestMetal2.png",
+    };
+    
+    for(int x = 0; x < TILE_ARRAY_SIZE; x++) {
+        for(int y = 0; y < TILE_ARRAY_SIZE; y++) {
+            nextEntityGen--;
+            if(!_tile[x][y].GetTileSolidity() && nextEntityGen <= 0) {
+                
+                int texId = rand() % 5;
+                _tile[x][y].SetEntityTexture(_entityTextures.AddAlpha(entityTextures[texId]));
+                
+                _tile[x][y].SetEntityXY(_tile[x][y].GetTileX() + TILE_WIDTH  / 2 - _tile[x][y].GetEntityWidth()  / 2,
+                                        _tile[x][y].GetTileY() + TILE_HEIGHT / 2 - _tile[x][y].GetEntityHeight() / 2);
+                
+                _tile[x][y].SetEntitySolidity(true);
+                
+                nextEntityGen =  1 + (rand() % 10);
+            }
+        }
+    }
 }
 
 string LevelGen::GetCurrentMap(void) {

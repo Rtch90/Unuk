@@ -77,7 +77,7 @@ void WorldManager::OnPlayerAttack(Player* player) {
     }
 
     // Distance is greater than 2.
-    if(diffX > 2 || diffY > 2) {
+    if(abs(diffX) > 2 || abs(diffY) > 2) {
       ++i;
       continue;
     }

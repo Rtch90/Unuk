@@ -47,6 +47,7 @@ public:
 
 private:
   void Unload(void);
+  void DoMagic(void);
 
   string _currentMap;
   int x;

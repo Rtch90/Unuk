@@ -18,13 +18,13 @@ public:
   string GetName(void) { return _name; }
   
   void SetLevel(int level);
-  int GetLevel() { return _level; }
+  int GetLevel(void) { return _level; }
 
   void SetExp(int exp);
-  int GetExp() { return _exp; }
+  int GetExp(void) { return _exp; }
   
-  int GetExpNeeded() { return _expNeeded; }
   void SetExpNeeded(int expNeeded);
+  int GetExpNeeded(void) { return _expNeeded; }
   
   static const int BASE_EXP_NEEDED;
   
