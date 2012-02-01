@@ -42,7 +42,8 @@ HEADERS += ../src/Libs/wglext.h \
     ../src/libUnuk/LevelGen/MapTile.h \
     ../src/libUnuk/UI/EventHistory.h \
     ../src/libUnuk/UI/Bar.h \
-    ../src/libUnuk/System/Vec2.h
+    ../src/libUnuk/System/Vec2.h \
+    ../src/libUnuk/System/MathBox.h
 SOURCES += ../src/libUnuk/Engine/WorldManager.cpp \
     ../src/libUnuk/Engine/ParticleEmitter.cpp \
     ../src/libUnuk/Engine/NPC.cpp \

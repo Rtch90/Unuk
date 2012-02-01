@@ -40,7 +40,7 @@ float Vec2::DistanceSquared(const Vec2& value1, const Vec2& value2) {
 }
 
 // Static.
-float Vec2::Dot(const Vec2& value1, Vec2& value2) {
+float Vec2::Dot(const Vec2& value1, const Vec2& value2) {
 	return (value1.x * value2.x) - (value1.y * value2.y);
 }
 
@@ -68,6 +68,42 @@ Vec2 Vec2::Normalize(const Vec2& value) {
 	return retVal;
 }
 
+// Static.
+Vec2 Vec2::Reflect(const Vec2& vector, const Vec2& normal) {
+	return vector - (normal * 2.0f * Dot(vector, normal));
+}
+
+// Static.
+Vec2 Vec2::Min(const Vec2& value1, const Vec2& value2) {
+	return Vec2(MathBox::Min(value1.x, value2.x), MathBox::Min(value1.y, value2.y));
+}
+
+// Static.
+Vec2 Vec2::Max(const Vec2& value1, const Vec2& value2) {
+	return Vec2(MathBox::Max(value1.x, value2.x), MathBox::Max(value1.y, value2.y));
+}
+
+// Static.
+Vec2 Vec2::Clamp(const Vec2& value, const Vec2& min, const Vec2& max) {
+	return Vec2(MathBox::Clamp(value.x, min.x, max.x), MathBox::Clamp(value.y, min.y, max.y));
+}
+
+// Static.
+Vec2 Vec2::Lerp(const Vec2& value1, const Vec2& value2, float amount) {
+	return Vec2(MathBox::Lerp(value1.x, value2.x, amount), MathBox::Lerp(value1.y, value2.y, amount));
+}
+
+// Static.
+Vec2 Vec2::Negate(const Vec2& value) {
+	return -value;
+}
+
+// Static.
+Vec2 Vec2::Rotate(const Vec2& value, const float radians) {
+	float c = cos(radians);
+	float s = sin(radians);
+	return Vec2(value.x * c - value.y * s, value.y * c + value.x * s);
+}
 
 // Overload some operators..
 bool Vec2::operator==(const Vec2& v) const {

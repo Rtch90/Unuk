@@ -4,6 +4,8 @@
 #include <vector>
 #include <math.h>
 
+#include "MathBox.h"
+
 // A handy structure for passing around 2D integer coords.
 struct Vec2i {
 	int x, y;
@@ -46,7 +48,7 @@ struct Vec2 {
 	static float DistanceSquared(const Vec2& value1, const Vec2& value2);
 
 	// Get the dot product of two vectors.
-	static float Dot(const Vec2& value1, Vec2& value2);
+	static float Dot(const Vec2& value1, const Vec2& value2);
 
 	/* Get the cross product of two vectors. Note that the \b mathmatical
 	 * definition of a cross product results in another vector oeroendicular
@@ -66,10 +68,10 @@ struct Vec2 {
 	static Vec2 Reflect(const Vec2& vector, const Vec2& normal);
 
 	// Get a new vector from the minimum x and y.
-	static Vec2 Min(Vec2& value1, Vec2& value2);
+	static Vec2 Min(const Vec2& value1, const Vec2& value2);
 
 	// Get a new vector from the maximum x and y.
-	static Vec2 Max(Vec2& value1, Vec2& value2);
+	static Vec2 Max(const Vec2& value1, const Vec2& value2);
 
 	// Clamp a vector to a given min and max.
 	static Vec2 Clamp(const Vec2& value, const Vec2& min, const Vec2& max);
@@ -80,7 +82,7 @@ struct Vec2 {
 	// Get a negated vector.
 	static Vec2 Negate(const Vec2& value);
 
-	static Vec2 Rotate(const Vec2& value, Vec2& radians);
+	static Vec2 Rotate(const Vec2& value, const float radians);
 
 	bool operator==(const Vec2& v)		const;
 	bool operator!=(const Vec2& v)		const;

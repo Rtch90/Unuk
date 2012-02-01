@@ -37,8 +37,8 @@ public:
 	void SetHealth(int health)          { _health = health; }
 	int GetHealth(void)                 { return _health; }
 
-	int  GetDirectionFacing(void)        { return directionFacing; }
-	void SetDirectionFacing(int dir)     { directionFacing = dir;  }
+	int  GetDirectionFacing(void)       { return directionFacing; }
+	void SetDirectionFacing(int dir)    { directionFacing = dir;  }
 
 	void AddSpeachBubble(string text);
 
