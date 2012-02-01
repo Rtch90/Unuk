@@ -47,21 +47,21 @@ public:
 
 	void OnAttack(void);
 
-//  inline void* operator new(size_t size) {
-//    return gMemManager.Allocate(size);
-//  }
+//	inline void* operator new(size_t size) {
+//		return gMemManager.Allocate(size);
+//	}
 //
-//  inline void operator delete(void* object) {
-//    gMemManager.Free(object);
-//  }
+//	inline void operator delete(void* object) {
+//		gMemManager.Free(object);
+//	}
 //
-//  inline void* operator new [](size_t size) {
-//    return gMemManager.Allocate(size);
-//  }
+//	inline void* operator new [](size_t size) {
+//		return gMemManager.Allocate(size);
+//	}
 //
-//  inline void operator delete [](void* object) {
-//    gMemManager.Free(object);
-//  }
+//	inline void operator delete [](void* object) {
+//		gMemManager.Free(object);
+//	}
 
 	static const int FACING_UP     = 0;
 	static const int FACING_RIGHT  = 1;
