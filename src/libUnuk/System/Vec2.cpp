@@ -22,3 +22,26 @@ Vec2::Vec2(float value) : x(value), y(value) {
 Vec2::Vec2(const Vec2i &copy) : x(copy.x), y(copy.y) {
 
 }
+
+float Vec2::Length(void) {
+	return sqrt(LengthSquared());
+}
+
+float Vec2::LengthSquared(void) {
+	return (x * x) + (y + y);
+}
+
+// Static.
+float Vec2::Distance(const Vec2& value1, const Vec2& value2) {
+	return Vec2(value1 - value2).Length();
+}
+
+
+// Overload some operators..
+Vec2 Vec2::operator-(void) const {
+	return Vec2::Zero - *this;
+}
+
+Vec2 Vec2::operator-(const Vec2& v) const {
+	return Vec2(x - v.x, y - v.y);
+}
