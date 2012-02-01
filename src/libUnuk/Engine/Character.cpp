@@ -185,6 +185,8 @@ void Character::Move(void) {
  * if any other map method is used in a similar manner.
  */
 bool Character::CheckTileCollisions(void) {
+  tileX = x / 64;
+  tileY = y / 64;
   for(int i = -1; i < 2; i++) {
     for(int j = -1; j < 2; j++) {
       if(map->GetTileSolidity(tileX + i, tileY + j))

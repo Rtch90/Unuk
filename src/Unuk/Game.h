@@ -16,7 +16,6 @@
 #include "../libUnuk/System/Debug.h"
 #include "../libUnuk/UI/Text.h"
 #include "../libUnuk/UI/Bar.h"
-#include "../libUnuk/UI/EventHistory.h"
 #include "../libUnuk/Engine/MemClass.h"
 using namespace std;
 
@@ -28,7 +27,7 @@ public:
   ~Game(void);
 
   gameNavVal_t Run(const string savegameIDArg);
-
+  
 private:
   void HandleInput(void);
   void UpdateGame(void);
@@ -62,6 +61,4 @@ private:
   Text  _playerExp;
   Bar   _playerHealthBar;
   Bar   _playerExpBar;
-
-  EventHistory _eventHistory;
 };

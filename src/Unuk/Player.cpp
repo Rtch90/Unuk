@@ -1,4 +1,6 @@
 #include "Player.h"
+#include "Globals.h"
+#include "../libUnuk/UI/EventHistory.h"
 
 // Pixels * 60 / sec.
 const float Player::PLAYER_SPEED = Character::CHARACTER_SPEED + 0.5f;
@@ -117,8 +119,13 @@ void Player::SetLevel(int level) {
 }
 
 void Player::SetExp(int exp) {
+  std::stringstream evtMsg;
+  evtMsg << "Gained " << exp << " Experience Points.";
+  eventHistory->LogEvent(evtMsg.str());
+  
   _exp += exp;
   if(_exp >= _expNeeded) {
+      eventHistory->LogEvent("Player leveled up!");
       SetLevel(_level + 1);
   } 
 }

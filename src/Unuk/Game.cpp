@@ -1,6 +1,8 @@
 #include "Game.h"
 #include "../libUnuk/Engine/NPC.h"
 #include "../libUnuk/Engine/WorldManager.h"
+#include "../Unuk/Globals.h"
+#include "../libUnuk/UI/EventHistory.h"
 
 Game::Game(void) {
   Debug::logger->message("Creating characters..");
@@ -16,8 +18,12 @@ Game::~Game(void) {
 }
 
 gameNavVal_t Game::Run(const string savegameIDArg) {
-  _player->SetXY(50, 50);
-	_player->LoadSprites("../Data/Media/Images/Characters/Player.png", 40, 45);
+  int spawnX;
+  int spawnY;
+  _map.FindSpawnPoint(spawnX, spawnY);
+    
+  _player->SetXY(spawnX*64, spawnY*64);
+  _player->LoadSprites("../Data/Media/Images/Characters/Player.png", 40, 45);
 
   LoadSavegame(savegameIDArg);
   
@@ -69,6 +75,8 @@ gameNavVal_t Game::Run(const string savegameIDArg) {
   stringstream playerExp;
   _playerExp.SetXY(15, 57);
   _playerExp.SetTextBlended("Player Level XX (XX/XX)", vsmall, COLOUR_WHITE);
+  
+  eventHistory = new EventHistory();
   
   _gameRunning = true;
   while(_gameRunning) {
@@ -152,6 +160,9 @@ gameNavVal_t Game::Run(const string savegameIDArg) {
     frameTimer.Start();
     frame++;
   }
+  
+  delete eventHistory;
+  
   return _runGameReturnValue;
 }
 
@@ -166,7 +177,7 @@ void Game::HandleInput(void) {
         if(event.key.keysym.sym == SDLK_p)
           debugEnabled = !debugEnabled;
         if(event.key.keysym.sym == SDLK_0)
-          _eventHistory.LogEvent("Item gained.");
+          eventHistory->LogEvent("Item gained.");
       }
       else if(event.type == SDL_QUIT) {
         _gameRunning = false;
@@ -235,7 +246,7 @@ void Game::Render(void) {
       _npcHealth.RenderLiteral();
     }
 
-    _eventHistory.Render();
+    eventHistory->Render();
 
   } else {
     _ingameMenu.Render();

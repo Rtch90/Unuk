@@ -15,6 +15,8 @@ public:
   void AddNPC(NPC* npc);
   void RemoveNPC(int index);
   NPC* GetNPC(int index);
+  
+  bool HasNPCIn(int xArg, int yArg);
 
   int  GetNPCCount() { return _npcs.size(); }
 

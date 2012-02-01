@@ -1,6 +1,8 @@
 #include "WorldManager.h"
 #include "NPC.h"
 #include "../../Unuk/Player.h"
+#include "../../Unuk/Globals.h"
+#include "../UI/EventHistory.h"
 
 WorldManager::WorldManager(void) {
 }
@@ -54,6 +56,17 @@ NPC* WorldManager::GetNPC(int index) {
   return NULL;
 }
 
+bool WorldManager::HasNPCIn(int xArg, int yArg) {
+  for(std::list<NPC*>::iterator i = _npcs.begin(); i != _npcs.end(); ++i) {
+    NPC* npc = (*i);
+    if(xArg >= npc->GetX() && xArg <= (npc->GetX() + npc->GetWidth()) &&
+       yArg >= npc->GetY() && yArg <= (npc->GetY() + npc->GetHeight())) {
+      return true;
+    }
+  }
+  return false;
+}
+
 void WorldManager::OnPlayerAttack(Player* player) {
   int playerX = (int)(player->GetX() / 32.0f);
   int playerY = (int)(player->GetY() / 32.0f);
@@ -96,8 +109,11 @@ void WorldManager::OnPlayerAttack(Player* player) {
     npc->OnAttack();
 
     if(npc->GetHealth() <= 0) {
+      eventHistory->LogEvent("Killed Bald Naked Dude!");
+      
       int expGain = 3 + (rand() % 2);
       player->SetExp(player->GetExp() + expGain);
+      
       i = _npcs.erase(i);
       delete npc;
     }

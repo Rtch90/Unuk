@@ -810,8 +810,8 @@
 			<tileTexture>grass</tileTexture>
 			<solidTile>false</solidTile>
 			
-      <entityTexture>barrel</entityTexture>
-      <solidEntity>true</solidEntity>
+      <entityTexture>null</entityTexture>
+      <solidEntity>false</solidEntity>
 			
 			<zLevel>100</zLevel>
 			
@@ -838,8 +838,8 @@
       <tileTexture>grass</tileTexture>
 			<solidTile>false</solidTile>
 			
-      <entityTexture>barrel</entityTexture>
-      <solidEntity>true</solidEntity>
+      <entityTexture>null</entityTexture>
+      <solidEntity>false</solidEntity>
 			
 			<zLevel>100</zLevel>
 			
@@ -2041,8 +2041,8 @@
 			<tileTexture>grass</tileTexture>
       <solidTile>true</solidTile>
 			
-      <entityTexture>tree</entityTexture>
-      <solidEntity>true</solidEntity>
+      <entityTexture>null</entityTexture>
+      <solidEntity>false</solidEntity>
 			
 			<zLevel>100</zLevel>
 			
@@ -2195,8 +2195,8 @@
       <tileTexture>grass</tileTexture>
       <solidTile>false</solidTile>
 
-      <entityTexture>tree</entityTexture>
-      <solidEntity>true</solidEntity>
+      <entityTexture>null</entityTexture>
+      <solidEntity>false</solidEntity>
 
       <zLevel>100</zLevel>
 

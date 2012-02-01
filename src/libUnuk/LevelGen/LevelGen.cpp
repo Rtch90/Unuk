@@ -132,28 +132,37 @@ void LevelGen::Load(const string filename) {
   //character->Load(filename);
 
   NPC* npc = new NPC(this);
+  
+  int spawnX;
+  int spawnY;
 
-  npc->SetXY(300, 300);
+  //FindSpawnPoint(spawnX, spawnY);
+  //npc->SetXY(spawnX, spawnY); // try to uncomment this, try to find out what's going on.. --konom
+  npc->SetXY(100, 200);
   npc->LoadSprites("../Data/Media/Images/Characters/template.png", 40,45);
   _world.AddNPC(npc);
 
   npc = new NPC(this);
-  npc->SetXY(150, 350);
+  //FindSpawnPoint(spawnX, spawnY);
+  npc->SetXY(300, 250);
   npc->LoadSprites("../Data/Media/Images/Characters/template.png", 40,45);
   _world.AddNPC(npc);
 
   npc = new NPC(this);
-  npc->SetXY(100, 250);
+  //FindSpawnPoint(spawnX, spawnY);
+  npc->SetXY(400, 100);
   npc->LoadSprites("../Data/Media/Images/Characters/template.png", 40,45);
   _world.AddNPC(npc);
   
   npc = new NPC(this);
-  npc->SetXY(170, 250);
+  //FindSpawnPoint(spawnX, spawnY);
+  npc->SetXY(200, 400);
   npc->LoadSprites("../Data/Media/Images/Characters/template.png", 40,45);
   _world.AddNPC(npc);
   
   npc = new NPC(this);
-  npc->SetXY(170, 230);
+  //FindSpawnPoint(spawnX, spawnY);
+  npc->SetXY(250, 250);
   npc->LoadSprites("../Data/Media/Images/Characters/template.png", 40,45);
   _world.AddNPC(npc);
 }
@@ -208,34 +217,67 @@ void LevelGen::Unload(void) {
 }
 
 void LevelGen::DoMagic(void) {
-    int nextEntityGen = 1 + (rand() % 20);        
-    
-    const char* entityTextures[6] = {
-        "../Data/Media/Images/Entities/tree.png",
-        "../Data/Media/Images/Entities/hedge.png",
-        "../Data/Media/Images/Entities/barrel.png",
-        "../Data/Media/Images/Entities/closedChest.png",
-        "../Data/Media/Images/Entities/closedChestMetal.png",
-        "../Data/Media/Images/Entities/closedChestMetal2.png",
-    };
-    
-    for(int x = 0; x < TILE_ARRAY_SIZE; x++) {
-        for(int y = 0; y < TILE_ARRAY_SIZE; y++) {
-            nextEntityGen--;
-            if(!_tile[x][y].GetTileSolidity() && nextEntityGen <= 0) {
+    GenerateEntities("tree", 25);
+    GenerateEntities("hedge", 15);
+    GenerateEntities("barrel", 40);
+    MakeWalkingPaths();
+}
+
+void LevelGen::GenerateEntities(const string& name, int frequency) {
+  int nextEntityGen = 1 + (rand() % frequency);
+  std::string filename = "../Data/Media/Images/Entities/" + name + ".png";
+
+  for(int x = 0; x < SCREEN_WIDTH/64 + 1; x++) {
+    for(int y = 0; y < SCREEN_HEIGHT/64; y++) {
+      nextEntityGen--;
+      if(!_tile[x][y].GetTileSolidity() && !_tile[x][y].GetEntitySolitity() && nextEntityGen <= 0) {
+        _tile[x][y].SetEntityTexture(_entityTextures.AddAlpha(filename));
+              
+        _tile[x][y].SetEntityXY(_tile[x][y].GetTileX() + TILE_WIDTH  / 2 - _tile[x][y].GetEntityWidth()  / 2,
+                                _tile[x][y].GetTileY() + TILE_HEIGHT / 2 - _tile[x][y].GetEntityHeight() / 2);
                 
-                int texId = rand() % 5;
-                _tile[x][y].SetEntityTexture(_entityTextures.AddAlpha(entityTextures[texId]));
+        _tile[x][y].SetEntitySolidity(true);
                 
-                _tile[x][y].SetEntityXY(_tile[x][y].GetTileX() + TILE_WIDTH  / 2 - _tile[x][y].GetEntityWidth()  / 2,
-                                        _tile[x][y].GetTileY() + TILE_HEIGHT / 2 - _tile[x][y].GetEntityHeight() / 2);
-                
-                _tile[x][y].SetEntitySolidity(true);
-                
-                nextEntityGen =  1 + (rand() % 10);
-            }
-        }
+        nextEntityGen =  1 + (rand() % frequency);
+      }
     }
+  }
+}
+
+void LevelGen::MakeWalkingPaths(void) {
+  int lastOpenY = rand() % 5;
+  
+  for(int x = 0; x < SCREEN_WIDTH/64 + 1; x++) {
+    bool pathFound = false;
+    
+    for(int y = 0; y < SCREEN_HEIGHT/64; y++) {
+      if(!_tile[x][y].GetEntitySolitity()) {
+        pathFound = true;
+        break;
+      } else {
+        lastOpenY = y;
+      }
+    }
+    
+    if(!pathFound) {
+      _tile[x][lastOpenY].SetEntityTexture(NULL);
+      _tile[x][lastOpenY].SetEntitySolidity(false);
+    }
+  }
+}
+
+void LevelGen::FindSpawnPoint(int& xArg, int& yArg) {
+  xArg = rand() % SCREEN_WIDTH;
+  yArg = rand() % SCREEN_HEIGHT;
+    
+  int tileX = xArg / 64;
+  int tileY = yArg / 64;
+  
+  if(!_tile[tileX][tileY].GetEntitySolitity() && !_world.HasNPCIn(xArg, yArg)) {
+      return;
+  }
+  
+  FindSpawnPoint(xArg, yArg);
 }
 
 string LevelGen::GetCurrentMap(void) {

@@ -10,6 +10,8 @@ int levelHeight;
 
 bool debugEnabled = true;
 
+EventHistory* eventHistory = NULL;
+
 int plrKeyUp;
 int plrKeyDown;
 int plrKeyeft;

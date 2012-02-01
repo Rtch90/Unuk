@@ -10,3 +10,7 @@ extern int levelWidth;
 extern int levelHeight;
 
 extern bool debugEnabled;
+
+class EventHistory;
+
+extern EventHistory* eventHistory;

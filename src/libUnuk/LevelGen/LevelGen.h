@@ -24,6 +24,8 @@ public:
   void Load(const string filename);
   void Update(void);
   void Render(void);
+  
+  void FindSpawnPoint(int& xArg, int& yArg);
 
 	bool GetTileSolidity(int xArg, int yArg);
 	int  GetTileX(int xArg, int yArg);
@@ -48,6 +50,8 @@ public:
 private:
   void Unload(void);
   void DoMagic(void);
+  void GenerateEntities(const std::string& name, int frequency);
+  void MakeWalkingPaths(void);
 
   string _currentMap;
   int x;
