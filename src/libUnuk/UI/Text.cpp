@@ -124,7 +124,7 @@ int Text::SetTextBlended(string textArg, textSizes_t size, SDL_Color colour,bool
 }
 
 int Text::SetTextBlended(string textArg, textSizes_t size, Uint8 r, Uint8 g, Uint8 b, bool wordWrap) {
-  SDL_Color f = { r, g, b };
+  SDL_Color f = { r, g, b, 0 };
   return SetTextBlended(textArg, size, f, wordWrap);
 }
 
@@ -192,8 +192,8 @@ int Text::SetTextShaded(string textArg, textSizes_t size, SDL_Color colour, SDL_
 }
 
 int Text::SetTextShaded(string textArg, textSizes_t size, Uint8 rF, Uint8 gF, Uint8 bF, Uint8 rB, Uint8 gB, Uint8 bB, bool wordWrap) {
-  SDL_Color f = { rF, gF, bF };
-  SDL_Color b = { rB, gB, bB };
+  SDL_Color f = { rF, gF, bF, 0 };
+  SDL_Color b = { rB, gB, bB, 0 };
   return SetTextShaded(textArg, size, f, b, wordWrap);
 }
 
