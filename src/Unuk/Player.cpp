@@ -120,7 +120,7 @@ void Player::SetLevel(int level) {
 
 void Player::SetExp(int exp) {
   std::stringstream evtMsg;
-  evtMsg << "Gained " << exp << " Experience Points.";
+  evtMsg << "Gained " << (exp - _exp) << " Experience Points.";
   eventHistory->LogEvent(evtMsg.str());
   
   _exp += exp;

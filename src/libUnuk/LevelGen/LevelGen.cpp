@@ -138,7 +138,7 @@ void LevelGen::Load(const string filename) {
 
   //FindSpawnPoint(spawnX, spawnY);
   //npc->SetXY(spawnX, spawnY); // try to uncomment this, try to find out what's going on.. --konom
-  npc->SetXY(100, 200);
+  npc->SetXY(100, 230);
   npc->LoadSprites("../Data/Media/Images/Characters/template.png", 40,45);
   _world.AddNPC(npc);
 

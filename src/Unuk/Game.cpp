@@ -17,12 +17,8 @@ Game::~Game(void) {
   //delete _player;
 }
 
-gameNavVal_t Game::Run(const string savegameIDArg) {
-  int spawnX;
-  int spawnY;
-  _map.FindSpawnPoint(spawnX, spawnY);
-    
-  _player->SetXY(spawnX*64, spawnY*64);
+gameNavVal_t Game::Run(const string savegameIDArg) {    
+  _player->SetXY(400, 400);
   _player->LoadSprites("../Data/Media/Images/Characters/Player.png", 40, 45);
 
   LoadSavegame(savegameIDArg);
