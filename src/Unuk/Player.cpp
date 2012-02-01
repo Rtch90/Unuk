@@ -3,8 +3,13 @@
 // Pixels * 60 / sec.
 const float Player::PLAYER_SPEED = Character::CHARACTER_SPEED + 0.5f;
 
-Player::Player(LevelGen *mapArg) : Character(mapArg) {
+// Amount of Exp needed to level up from 1 to 2
+const int Player::BASE_EXP_NEEDED = 10;
 
+Player::Player(LevelGen *mapArg) : Character(mapArg) {
+    _level = 1;
+    _exp = 0;
+    _expNeeded = BASE_EXP_NEEDED;
 }
 
 Player::~Player(void) {
@@ -100,4 +105,24 @@ void Player::Move() {
     SetXY((float)map->GetMapTransitionX(tileX, tileY), (float)map->GetMapTransitionY(tileX, tileY));
     map->Load(map->GetMapTransitionName(tileX, tileY));
   }
+}
+
+void Player::SetLevel(int level) {
+  _level = level;
+  _exp = _exp - _expNeeded;
+  if(_exp < 0) {
+    _exp = 0;
+  }
+  _expNeeded = pow(BASE_EXP_NEEDED, _level);
+}
+
+void Player::SetExp(int exp) {
+  _exp += exp;
+  if(_exp >= _expNeeded) {
+      SetLevel(_level + 1);
+  } 
+}
+
+void Player::SetExpNeeded(int expNeeded) {
+  _expNeeded = expNeeded;
 }

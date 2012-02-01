@@ -20,6 +20,9 @@ gameNavVal_t Game::Run(const string savegameIDArg) {
 	_player->LoadSprites("../Data/Media/Images/Characters/Player.png", 40, 45);
 
   LoadSavegame(savegameIDArg);
+  
+  // some weird bug. player->_exp is set to unreasonable number randomally after LoadSavegame returns.
+  _player->SetExpNeeded(Player::BASE_EXP_NEEDED);
 
   int fps = 0;
   int frame = 0;
@@ -34,18 +37,18 @@ gameNavVal_t Game::Run(const string savegameIDArg) {
   Timer renderTimer;
   Timer updateTimer;
 
-  _gameRenderTime.SetXY(10, 50);
+  _gameRenderTime.SetXY(10, 70);
   _gameRenderTime.SetTextBlended("Render - XX", vsmall, COLOUR_BLACK);
 
-  _gameUpdateTime.SetXY(10, 70);
+  _gameUpdateTime.SetXY(10, 90);
   _gameUpdateTime.SetTextBlended("Update - XX", vsmall, COLOUR_BLACK);
 
   stringstream playerXYString;
-  _playerXY.SetXY(10, 90);
+  _playerXY.SetXY(10, 110);
   _playerXY.SetTextBlended("Player coords - XX XX", vsmall, COLOUR_BLACK);
 
   stringstream npcHealth;
-  _npcHealth.SetXY(10, 110);
+  _npcHealth.SetXY(10, 130);
 	_npcHealth.SetTextBlended("NPC X Health - XX", vsmall, COLOUR_BLACK);
 
   _playerHealthBar.SetBackgroundRGB(0, 0, 0);
@@ -53,10 +56,20 @@ gameNavVal_t Game::Run(const string savegameIDArg) {
   _playerHealthBar.SetXY(10, 20);
   _playerHealthBar.SetWidthHeight(200, 25);
 
+  _playerExpBar.SetBackgroundRGB(0, 0, 0);
+  _playerExpBar.SetForegroundRGB(0, 0, 255);
+  _playerExpBar.SetXY(10, 50);
+  _playerExpBar.SetWidthHeight(200, 25);
+  _playerExpBar.SetProgress(0.0f);
+  
   stringstream playerHealth;
   _playerHealth.SetXY(15, 27);
   _playerHealth.SetTextBlended("Player Health - XX", vsmall, COLOUR_WHITE);
 
+  stringstream playerExp;
+  _playerExp.SetXY(15, 57);
+  _playerExp.SetTextBlended("Player Level XX (XX/XX)", vsmall, COLOUR_WHITE);
+  
   _gameRunning = true;
   while(_gameRunning) {
 		bool stillRunning = true;
@@ -96,10 +109,16 @@ gameNavVal_t Game::Run(const string savegameIDArg) {
       frame = 0;
 
       playerHealth.str("");
-      playerHealth << "Player Health: " << _player->GetHealth();
+      playerHealth << "Player Health - " << _player->GetHealth();
       _playerHealth.SetTextBlended(playerHealth.str(), vsmall, COLOUR_WHITE);
 
       _playerHealthBar.SetProgress((float)_player->GetHealth() / 100.0f);
+      
+      playerExp.str("");
+      playerExp << "Player Level " << _player->GetLevel() <<  "  (" << _player->GetExp() << "/" << _player->GetExpNeeded() << ")";
+      _playerExp.SetTextBlended(playerExp.str(), vsmall, COLOUR_WHITE);
+      
+      _playerExpBar.SetProgress((float)_player->GetExp() / (float)_player->GetExpNeeded());
 
       // Check to see if we are allowed to display debug info.
       if(debugEnabled) {
@@ -205,6 +224,9 @@ void Game::Render(void) {
 
     _playerHealthBar.DrawLiteral();
     _playerHealth.RenderLiteral();
+    
+    _playerExpBar.DrawLiteral();
+    _playerExp.RenderLiteral();
    
     if(debugEnabled) {
       _gameRenderTime.RenderLiteral();

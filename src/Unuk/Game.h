@@ -59,7 +59,9 @@ private:
   Player* _player;
 
   Text  _playerHealth;
+  Text  _playerExp;
   Bar   _playerHealthBar;
+  Bar   _playerExpBar;
 
   EventHistory _eventHistory;
 };

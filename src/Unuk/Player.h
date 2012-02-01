@@ -16,7 +16,18 @@ public:
 
   void SetName(string nameArg);
   string GetName(void) { return _name; }
+  
+  void SetLevel(int level);
+  int GetLevel() { return _level; }
 
+  void SetExp(int exp);
+  int GetExp() { return _exp; }
+  
+  int GetExpNeeded() { return _expNeeded; }
+  void SetExpNeeded(int expNeeded);
+  
+  static const int BASE_EXP_NEEDED;
+  
 protected:
   void Move(void);
   void CheckTileCollisions(void);
@@ -27,4 +38,7 @@ private:
 
   string _name;
   //int _health;
+  int _level;
+  int _exp;
+  int _expNeeded;
 };

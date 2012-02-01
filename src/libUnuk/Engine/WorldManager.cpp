@@ -1,5 +1,6 @@
 #include "WorldManager.h"
 #include "NPC.h"
+#include "../../Unuk/Player.h"
 
 WorldManager::WorldManager(void) {
 }
@@ -53,7 +54,7 @@ NPC* WorldManager::GetNPC(int index) {
   return NULL;
 }
 
-void WorldManager::OnPlayerAttack(Character* player) {
+void WorldManager::OnPlayerAttack(Player* player) {
   int playerX = (int)(player->GetX() / 32.0f);
   int playerY = (int)(player->GetY() / 32.0f);
   int playerDir = player->GetDirectionFacing();
@@ -95,6 +96,8 @@ void WorldManager::OnPlayerAttack(Character* player) {
     npc->OnAttack();
 
     if(npc->GetHealth() <= 0) {
+      int expGain = 3 + (rand() % 2);
+      player->SetExp(player->GetExp() + expGain);
       i = _npcs.erase(i);
       delete npc;
     }

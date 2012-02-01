@@ -143,6 +143,16 @@ void LevelGen::Load(const string filename) {
   npc->SetXY(100, 250);
   npc->LoadSprites("../Data/Media/Images/Characters/template.png", 40,45);
   _world.AddNPC(npc);
+  
+  npc = new NPC(this);
+  npc->SetXY(170, 250);
+  npc->LoadSprites("../Data/Media/Images/Characters/template.png", 40,45);
+  _world.AddNPC(npc);
+  
+  npc = new NPC(this);
+  npc->SetXY(170, 230);
+  npc->LoadSprites("../Data/Media/Images/Characters/template.png", 40,45);
+  _world.AddNPC(npc);
 }
 
 void LevelGen::Update(void) {

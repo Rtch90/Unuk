@@ -2,7 +2,7 @@
 #include <list>
 
 class NPC;
-class Character;
+class Player;
 
 class WorldManager {
 public:
@@ -18,7 +18,7 @@ public:
 
   int  GetNPCCount() { return _npcs.size(); }
 
-  void OnPlayerAttack(Character* player);
+  void OnPlayerAttack(Player* player);
 
 private:
   std::list<NPC*> _npcs;
