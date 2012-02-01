@@ -2,6 +2,7 @@
 
 #pragma once
 #include <vector>
+#include <math.h>
 
 // A handy structure for passing around 2D integer coords.
 struct Vec2i {

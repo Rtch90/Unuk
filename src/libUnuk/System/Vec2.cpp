@@ -1,5 +1,3 @@
-#include <math.h>
-
 #include "Vec2.h"
 
 Vec2 Vec2::Zero(0.0f, 0.0f);
@@ -38,10 +36,50 @@ float Vec2::Distance(const Vec2& value1, const Vec2& value2) {
 
 
 // Overload some operators..
+bool Vec2::operator==(const Vec2& v) const {
+	return x == v.x && y == v.y;
+}
+
+bool Vec2::operator!=(const Vec2& v) const {
+	return !(*this == v);
+}
+
 Vec2 Vec2::operator-(void) const {
 	return Vec2::Zero - *this;
 }
 
 Vec2 Vec2::operator-(const Vec2& v) const {
 	return Vec2(x - v.x, y - v.y);
+}
+
+Vec2 Vec2::operator+(const Vec2& v) const {
+	return Vec2(x + v.x, y + v.y);
+}
+
+Vec2 Vec2::operator/(float divider) const {
+	return Vec2(x / divider, y / divider);
+}
+
+Vec2 Vec2::operator*(float scaleFactor) const {
+	return Vec2(x * scaleFactor, y * scaleFactor);
+}
+
+Vec2& Vec2::operator+=(const Vec2& v) {
+	x += v.x, y += v.y;
+	return *this;
+}
+
+Vec2& Vec2::operator-=(const Vec2& v) {
+	x -= v.x, y -= v.y;
+	return *this;
+}
+
+Vec2& Vec2::operator*=(float scaleFactor) {
+	x *= scaleFactor, y *= scaleFactor;
+	return *this;
+}
+
+Vec2& Vec2::operator/=(float scaleFactor) {
+	x /= scaleFactor, y /= scaleFactor;
+	return *this;
 }
