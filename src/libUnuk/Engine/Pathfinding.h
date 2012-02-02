@@ -40,4 +40,15 @@ public:
 
 		UserState _UserState;
 	};
+
+	// Compare the f values of the two nodes.
+	class HeapCompare_f {
+	public:
+		bool operator()(const Node* x, const Node* y) const {
+			return x->f > y->f;
+		}
+	};
+
+public:
+
 };
