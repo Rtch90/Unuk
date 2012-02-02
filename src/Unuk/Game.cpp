@@ -232,7 +232,7 @@ void Game::Render(void) {
 }
 
 void Game::NewSavegame(const string savegameIDArg) {
-  string saveFilename = "../Save/" + _saveGameID;
+  string saveFilename = "../Save/" + savegameIDArg;
 
 	TiXmlDocument doc;
 

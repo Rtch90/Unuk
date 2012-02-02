@@ -127,6 +127,11 @@ void WorldManager::OnPlayerAttack(Player* player) {
       
       if(_npcs.empty()) {
         _level->Load("map");
+        
+        int spawnX;
+        int spawnY;
+        _level->FindSpawnPoint(spawnX, spawnY);
+        player->SetXY(spawnX, spawnY);
       }
     }
     else {
