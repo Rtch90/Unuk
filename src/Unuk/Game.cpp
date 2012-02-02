@@ -231,13 +231,86 @@ void Game::Render(void) {
 	SDL_Flip(screen);
 }
 
+void Game::NewSavegame(const string savegameIDArg) {
+  string saveFilename = "../Save/" + _saveGameID;
+
+	TiXmlDocument doc;
+
+	TiXmlDeclaration* decl = new TiXmlDeclaration("1.0", "", "");
+
+	TiXmlElement* saveElement = new TiXmlElement("save");
+
+	TiXmlElement* nameElement = new TiXmlElement("name");
+	TiXmlText* nameText = new TiXmlText("Allanis"); //TODO: replace with _player->GetName() when it works. --konom
+	nameElement->LinkEndChild(nameText);
+
+  int spawnX;
+  int spawnY;
+  _map.FindSpawnPoint(spawnX, spawnY);
+  
+  _player->SetXY(spawnX, spawnY);
+  
+	std::stringstream xString;
+	xString << spawnX;
+
+	TiXmlElement* xElement = new TiXmlElement("x");
+	TiXmlText* xText = new TiXmlText(xString.str().c_str());
+	xElement->LinkEndChild(xText);
+
+	std::stringstream yString;
+	yString << spawnY;
+
+	TiXmlElement* yElement = new TiXmlElement("y");
+	TiXmlText* yText = new TiXmlText(yString.str().c_str());
+	yElement->LinkEndChild(yText);
+  
+  _player->SetLevelLiteral(1);
+  
+  TiXmlElement* levelElement = new TiXmlElement("level");
+  TiXmlText* levelText = new TiXmlText("1");
+  levelElement->LinkEndChild(levelText);
+  
+  _player->SetExpLiteral(0);
+  
+  TiXmlElement* expElement = new TiXmlElement("exp");
+  TiXmlText* expText = new TiXmlText("0");
+  expElement->LinkEndChild(expText);
+  
+  TiXmlElement* healthElement = new TiXmlElement("health");
+  TiXmlText* healthText = new TiXmlText("100");
+  healthElement->LinkEndChild(healthText);
+
+	TiXmlElement* mapElement = new TiXmlElement("map");
+	TiXmlText* mapText = new TiXmlText("map"); //TODO: replace with actual map name.
+	mapElement->LinkEndChild(mapText);
+
+	saveElement->LinkEndChild(nameElement);
+	saveElement->LinkEndChild(xElement);
+	saveElement->LinkEndChild(yElement);
+  saveElement->LinkEndChild(levelElement);
+  saveElement->LinkEndChild(expElement);
+  saveElement->LinkEndChild(healthElement);
+	saveElement->LinkEndChild(mapElement);
+
+	doc.LinkEndChild(decl);
+	doc.LinkEndChild(saveElement);
+
+	doc.SaveFile(saveFilename.c_str());
+}
+
 void Game::LoadSavegame(const string savegameIDArg) {
 	_saveGameID = savegameIDArg;
 	string saveFilename = "../Save/" + _saveGameID;
 
 	// Converting to XML ftw!
 	TiXmlDocument mapFile(saveFilename.c_str());
-	assert(mapFile.LoadFile() == true);
+  
+  // Create new save if can't load file.
+  if(!mapFile.LoadFile()) {
+    NewSavegame(savegameIDArg);
+    _map.Load("map");
+    return;
+  }
 
 	TiXmlElement* rootElem = NULL;
 	TiXmlElement* dataElem = NULL;
@@ -306,7 +379,7 @@ void Game::LoadSavegame(const string savegameIDArg) {
 
 void Game::SaveSavegame(void) {
 	string saveFilename = "../Save/" + _saveGameID;
-
+  
 	TiXmlDocument doc;
 
 	TiXmlDeclaration* decl = new TiXmlDeclaration("1.0", "", "");

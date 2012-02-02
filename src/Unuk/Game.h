@@ -33,6 +33,7 @@ private:
   void UpdateGame(void);
   void Render(void);
 
+  void NewSavegame(const string savegameIDArg);
   void LoadSavegame(const string savegameIDArg);
   void SaveSavegame(void);
 
