@@ -128,14 +128,6 @@ gameNavVal_t Game::Run(const string savegameIDArg) {
 				playerXYString.str("");
 				playerXYString << "Player coords: x" << _player->GetX() << ", y" << _player->GetY();
 				_playerXY.SetTextBlended(playerXYString.str(), vsmall, COLOUR_BLACK);
-
-				int npc0Health = 0;
-				if(_map.GetWorld().GetNPCCount() == 0) {
-					npc0Health = 0;
-				}
-				else {
-					npc0Health = _map.GetWorld().GetNPC(0)->GetHealth();
-				}
 			}
 		}
 		// Restrict the fps.

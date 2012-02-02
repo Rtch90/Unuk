@@ -8,7 +8,8 @@ SDL_Event event;
 int levelWidth;
 int levelHeight;
 
-bool debugEnabled = true;
+// Start off false. press 'p' to turn it on!
+bool debugEnabled = false;
 
 EventHistory* eventHistory = NULL;
 
