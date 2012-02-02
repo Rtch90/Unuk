@@ -127,6 +127,8 @@ mainMenuNavVal_t MainMenu::Run(void) {
               case 3: return mainMenuExitGame;
             }
           }
+        } else if(event.key.keysym.sym == SDLK_ESCAPE) {
+          return mainMenuExitGame;
         }
       }
       else if(event.type == SDL_MOUSEBUTTONUP) {
