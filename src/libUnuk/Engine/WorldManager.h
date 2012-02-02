@@ -3,10 +3,11 @@
 
 class NPC;
 class Player;
+class LevelGen;
 
 class WorldManager {
 public:
-  WorldManager(void);
+  WorldManager(LevelGen* level);
   ~WorldManager(void);
 
   void Update(void);
@@ -15,6 +16,7 @@ public:
   void AddNPC(NPC* npc);
   void RemoveNPC(int index);
   NPC* GetNPC(int index);
+  void CreateNPC(int x, int y);
   
   bool HasNPCIn(int xArg, int yArg);
 
@@ -23,5 +25,6 @@ public:
   void OnPlayerAttack(Player* player);
 
 private:
+  LevelGen* _level;
   std::list<NPC*> _npcs;
 };

@@ -23,10 +23,8 @@ public:
   void SetExp(int exp);
   int GetExp(void) { return _exp; }
   
-  void SetExpNeeded(int expNeeded);
-  int GetExpNeeded(void) { return _expNeeded; }
-  
-  static const int BASE_EXP_NEEDED;
+  static const int MAX_LEVEL = 10;
+  static const int EXP_TABLE[MAX_LEVEL];
   
 protected:
   void Move(void);
@@ -37,8 +35,6 @@ private:
   static const float PLAYER_SPEED;
 
   string _name;
-  //int _health;
   int _level;
   int _exp;
-  int _expNeeded;
 };

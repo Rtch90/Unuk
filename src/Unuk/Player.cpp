@@ -5,13 +5,23 @@
 // Pixels * 60 / sec.
 const float Player::PLAYER_SPEED = Character::CHARACTER_SPEED + 0.5f;
 
-// Amount of Exp needed to level up from 1 to 2
-const int Player::BASE_EXP_NEEDED = 10;
+// Amount of Exp needed every level
+const int Player::EXP_TABLE[10] = {
+  10,
+  30,
+  90,
+  150,
+  300,
+  512,
+  1000,
+  2000,
+  3500,
+  5000
+};
 
 Player::Player(LevelGen *mapArg) : Character(mapArg) {
     _level = 1;
     _exp = 0;
-    _expNeeded = BASE_EXP_NEEDED;
 }
 
 Player::~Player(void) {
@@ -111,11 +121,10 @@ void Player::Move() {
 
 void Player::SetLevel(int level) {
   _level = level;
-  _exp = _exp - _expNeeded;
+  _exp = _exp - EXP_TABLE[level];
   if(_exp < 0) {
     _exp = 0;
   }
-  _expNeeded = pow(BASE_EXP_NEEDED, _level);
 }
 
 void Player::SetExp(int exp) {
@@ -123,13 +132,9 @@ void Player::SetExp(int exp) {
   evtMsg << "Gained " << (exp - _exp) << " Experience Points.";
   eventHistory->LogEvent(evtMsg.str());
   
-  _exp += exp;
-  if(_exp >= _expNeeded) {
+  _exp = exp;
+  if(_level != MAX_LEVEL && _exp >= EXP_TABLE[_level]) {
       eventHistory->LogEvent("Player leveled up!");
       SetLevel(_level + 1);
   } 
-}
-
-void Player::SetExpNeeded(int expNeeded) {
-  _expNeeded = expNeeded;
 }

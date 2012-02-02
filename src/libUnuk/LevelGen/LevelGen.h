@@ -52,6 +52,7 @@ private:
   void DoMagic(void);
   void GenerateEntities(const std::string& name, int frequency);
   void MakeWalkingPaths(void);
+  void GenerateEnemies(void);
 
   string _currentMap;
   int x;
@@ -59,6 +60,9 @@ private:
 
   static const int TILE_ARRAY_SIZE = 150;
   MapTile _tile[TILE_ARRAY_SIZE][TILE_ARRAY_SIZE];
+  
+  static const int BOUNDARIES_X = (SCREEN_WIDTH / TILE_WIDTH) - 2;
+  static const int BOUNDARIES_Y = (SCREEN_HEIGHT / TILE_HEIGHT) - 2;
 
   TextureManager _tileTextures;
   TextureManager _entityTextures;

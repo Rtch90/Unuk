@@ -1,7 +1,7 @@
 #include "LevelGen.h"
 #include "../Engine/NPC.h"
 
-LevelGen::LevelGen(void) {
+LevelGen::LevelGen(void) : _world(this) {
 
 }
 
@@ -128,42 +128,6 @@ void LevelGen::Load(const string filename) {
 
 	// procedural generation
 	DoMagic();
-
-	//character->Load(filename);
-
-	NPC* npc = new NPC(this);
-
-	//int spawnX;
-	//int spawnY;
-	//FindSpawnPoint(spawnX, spawnY);
-	//npc->SetXY(spawnX, spawnY); // try to uncomment this, try to find out what's going on.. --konom
-	npc->SetXY(100, 230);
-	npc->LoadSprites("../Data/Media/Images/Characters/template.png", 40,45);
-	_world.AddNPC(npc);
-
-	npc = new NPC(this);
-	//FindSpawnPoint(spawnX, spawnY);
-	npc->SetXY(300, 250);
-	npc->LoadSprites("../Data/Media/Images/Characters/template.png", 40,45);
-	_world.AddNPC(npc);
-
-	npc = new NPC(this);
-	//FindSpawnPoint(spawnX, spawnY);
-	npc->SetXY(400, 100);
-	npc->LoadSprites("../Data/Media/Images/Characters/template.png", 40,45);
-	_world.AddNPC(npc);
-
-	npc = new NPC(this);
-	//FindSpawnPoint(spawnX, spawnY);
-	npc->SetXY(200, 400);
-	npc->LoadSprites("../Data/Media/Images/Characters/template.png", 40,45);
-	_world.AddNPC(npc);
-
-	npc = new NPC(this);
-	//FindSpawnPoint(spawnX, spawnY);
-	npc->SetXY(250, 250);
-	npc->LoadSprites("../Data/Media/Images/Characters/template.png", 40,45);
-	_world.AddNPC(npc);
 }
 
 void LevelGen::Update(void) {
@@ -213,6 +177,7 @@ void LevelGen::Render(void) {
 void LevelGen::Unload(void) {
 	_tileTextures.Unload();
 	_entityTextures.Unload();
+  memset(_tile, sizeof(_tile), 0);
 }
 
 void LevelGen::DoMagic(void) {
@@ -220,14 +185,15 @@ void LevelGen::DoMagic(void) {
 		GenerateEntities("hedge", 15);
 		GenerateEntities("barrel", 40);
 		MakeWalkingPaths();
+    GenerateEnemies();
 }
 
 void LevelGen::GenerateEntities(const string& name, int frequency) {
 	int nextEntityGen = 1 + (rand() % frequency);
 	std::string filename = "../Data/Media/Images/Entities/" + name + ".png";
 
-	for(int x = 0; x < SCREEN_WIDTH/64 + 1; x++) {
-		for(int y = 0; y < SCREEN_HEIGHT/64; y++) {
+	for(int x = 0; x < BOUNDARIES_X; x++) {
+		for(int y = 0; y < BOUNDARIES_Y; y++) {
 			nextEntityGen--;
 			if(!_tile[x][y].GetTileSolidity() && !_tile[x][y].GetEntitySolitity() && nextEntityGen <= 0) {
 				_tile[x][y].SetEntityTexture(_entityTextures.AddAlpha(filename));
@@ -246,10 +212,10 @@ void LevelGen::GenerateEntities(const string& name, int frequency) {
 void LevelGen::MakeWalkingPaths(void) {
 	int lastOpenY = rand() % 5;
 
-	for(int x = 0; x < SCREEN_WIDTH/64 + 1; x++) {
+	for(int x = 0; x < BOUNDARIES_X; x++) {
 		bool pathFound = false;
 
-		for(int y = 0; y < SCREEN_HEIGHT/64; y++) {
+		for(int y = 0; y < BOUNDARIES_Y; y++) {
 			if(!_tile[x][y].GetEntitySolitity()) {
 				pathFound = true;
 				break;
@@ -266,17 +232,31 @@ void LevelGen::MakeWalkingPaths(void) {
 }
 
 void LevelGen::FindSpawnPoint(int& xArg, int& yArg) {
-	xArg = rand() % SCREEN_WIDTH;
-	yArg = rand() % SCREEN_HEIGHT;
+	xArg = rand() % (BOUNDARIES_X * TILE_WIDTH);
+	yArg = rand() % (BOUNDARIES_Y * TILE_HEIGHT);
 
 	int tileX = xArg / 64;
 	int tileY = yArg / 64;
 
-	if(!_tile[tileX][tileY].GetEntitySolitity() && !_world.HasNPCIn(xArg, yArg)) {
+	if(!_tile[tileX][tileY].GetEntitySolitity() && 
+     !_tile[tileX][tileY].GetTileSolidity() && 
+     !_world.HasNPCIn(xArg, yArg)) {
 			return;
 	}
 
 	FindSpawnPoint(xArg, yArg);
+}
+
+void LevelGen::GenerateEnemies(void) {
+  int npcsToGen = 4 + (rand() % 4);
+  
+  for(int i = 0; i < npcsToGen; i++) {
+    int spawnX;
+    int spawnY;
+    FindSpawnPoint(spawnX, spawnY);
+    
+    _world.CreateNPC(spawnX, spawnY);
+  }
 }
 
 string LevelGen::GetCurrentMap(void) {

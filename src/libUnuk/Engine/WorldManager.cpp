@@ -4,7 +4,8 @@
 #include "../../Unuk/Globals.h"
 #include "../UI/EventHistory.h"
 
-WorldManager::WorldManager(void) {
+WorldManager::WorldManager(LevelGen* level) {
+  _level = level;
 }
 
 WorldManager::~WorldManager(void) {
@@ -67,6 +68,13 @@ bool WorldManager::HasNPCIn(int xArg, int yArg) {
   return false;
 }
 
+void WorldManager::CreateNPC(int x, int y) {
+  NPC* npc = new NPC(_level);
+  npc->SetXY(x, y);
+  npc->LoadSprites("../Data/Media/Images/Characters/template.png", 40,45);
+  _npcs.push_back(npc);
+}
+
 void WorldManager::OnPlayerAttack(Player* player) {
   int playerX = (int)(player->GetX() / 32.0f);
   int playerY = (int)(player->GetY() / 32.0f);
@@ -105,7 +113,7 @@ void WorldManager::OnPlayerAttack(Player* player) {
       continue;
     }
 
-    npc->SetHealth(npc->GetHealth() - 5);
+    npc->SetHealth(npc->GetHealth() - 20);
     npc->OnAttack();
 
     if(npc->GetHealth() <= 0) {
@@ -116,6 +124,10 @@ void WorldManager::OnPlayerAttack(Player* player) {
       
       i = _npcs.erase(i);
       delete npc;
+      
+      if(_npcs.empty()) {
+        _level->Load("map");
+      }
     }
     else {
       ++i;

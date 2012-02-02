@@ -23,9 +23,6 @@ gameNavVal_t Game::Run(const string savegameIDArg) {
 
 	LoadSavegame(savegameIDArg);
 
-	// some weird bug. player->_exp is set to unreasonable number randomally after LoadSavegame returns.
-	_player->SetExpNeeded(Player::BASE_EXP_NEEDED);
-
 	int fps = 0;
 	int frame = 0;
 	int nextGameTick = SDL_GetTicks();
@@ -115,10 +112,10 @@ gameNavVal_t Game::Run(const string savegameIDArg) {
 			_playerHealthBar.SetProgress((float)_player->GetHealth() / 100.0f);
 
 			playerExp.str("");
-			playerExp << "Player Level " << _player->GetLevel() <<  "  (" << _player->GetExp() << "/" << _player->GetExpNeeded() << ")";
+			playerExp << "Player Level " << _player->GetLevel() <<  "  (" << _player->GetExp() << "/" << Player::EXP_TABLE[_player->GetLevel()] << ")";
 			_playerExp.SetTextBlended(playerExp.str(), vsmall, COLOUR_WHITE);
 
-			_playerExpBar.SetProgress((float)_player->GetExp() / (float)_player->GetExpNeeded());
+			_playerExpBar.SetProgress((float)_player->GetExp() / (float)Player::EXP_TABLE[_player->GetLevel()]);
 
 			// Check to see if we are allowed to display debug info.
 			if(debugEnabled) {
