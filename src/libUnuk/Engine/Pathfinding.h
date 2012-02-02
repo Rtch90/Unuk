@@ -60,7 +60,50 @@ public:
 	// Set the start/goal state.
 	void SetStartAndGoalStates(UserState& start, UserState& goal);
 
+	// Search one step.
+	unsigned int SearchStep(void);
+
+	// Call this to add a successor to a list of
+	// successors when expanding the seach frontier.
+	bool AddSuccessor(UserState& state);
+
+	// Free the solution nodes.
+	// This is done to clean up all used nodes in memory when you are
+	// done with the search.
+	void FreeSolutionNodes(void);
+
+	// -- Some methods for travelling through the solution. --
+
+	// Get the start node.
+	UserState* GetSolutionStart(void);
+
+	// Get the next node.
+	UserState* GetSolutionNext(void);
+
+	// Get the end node.
+	UserState* GetSolutionEnd(void);
+
+	// Step through the solution backwards.
+	UserState* GetSolutionPrev(void);
+
+	// It will be useful to be able to view the open
+	// and closed lists at each step for debugging.
+	UserState* GetOpenListStart(void);
+	UserState* GetOpenListStart(float& f, float& g, float& h);
+	UserState* GetOpenListNext(void);
+	UserState* GetOpenListNext(float& f, float& g, float& h);
+
+	// Closes states.
+	UserState* GetClosedListStart(void);
+	UserState* GetClosedListStart(float& f, float& g, float& h);
+	UserState* GetClosedListNext(void);
+	UserState* GetClosedListNext(float& f, float& g, float& h);
+
+	// Get the number of steps.
+	int GetStepCount(void)		{return _steps; }
+
 private:
-	int _state;
+	int  _state;
 	bool _cancelRequest;
+	int  _steps;
 };
