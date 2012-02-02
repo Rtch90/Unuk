@@ -25,8 +25,11 @@ class Game {
 public:
   Game(void);
   ~Game(void);
+  
+  void New(const string& savegameIDArg);
+  void Load(const string& savegameIDArg);
 
-  gameNavVal_t Run(const string savegameIDArg);
+  gameNavVal_t Run(void);
   
 private:
   void HandleInput(void);

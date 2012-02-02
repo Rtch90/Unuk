@@ -24,6 +24,23 @@
 #endif
 #endif
 
+static gameNavVal_t RunGame(bool load) {
+  Debug::logger->message("Entering game state..");
+  Game* game = new Game;
+  
+  if(load) {
+    game->Load("save");
+  } else {
+    game->New("save");
+  }
+
+  gameNavVal_t ret = game->Run();
+  
+  delete game;
+  
+  return ret;
+}
+
 #if !defined(_WIN32) || defined(_DEBUG)
 int main() {
 #else
@@ -78,10 +95,7 @@ int WINAPI WinMain(HINSTANCE,HINSTANCE,LPSTR,int) {
     switch(menu->Run()) {
     case mainMenuNewGame:
       delete menu;
-      Debug::logger->message("Entering game state..");
-      game = new Game;
-
-      switch(game->Run("save")) {
+      switch(RunGame(false)) {
       case gameMainMenu:
         menu = new MainMenu;
         break;
@@ -89,9 +103,17 @@ int WINAPI WinMain(HINSTANCE,HINSTANCE,LPSTR,int) {
         menuRunning = false;
         break;
       }
-      delete game;
       break;
     case mainMenuLoadGame:
+      delete menu;
+      switch(RunGame(true)) {
+      case gameMainMenu:
+        menu = new MainMenu;
+        break;
+      case gameQuitGame:
+        menuRunning = false;
+        break;
+      }
       break;
     case mainMenuOptions:
       break;

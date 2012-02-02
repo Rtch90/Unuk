@@ -17,11 +17,18 @@ Game::~Game(void) {
 	//delete _player;
 }
 
-gameNavVal_t Game::Run(const string savegameIDArg) {
+void Game::New(const string& savegameIDArg) {
+  NewSavegame(savegameIDArg);
+  _map.Load("map");
+}
+
+void Game::Load(const string& savegameIDArg) {
+  LoadSavegame(savegameIDArg);
+}
+
+gameNavVal_t Game::Run(void) {
 	_player->SetXY(400, 400);
 	_player->LoadSprites("../Data/Media/Images/Characters/Player.png", 40, 45);
-
-	LoadSavegame(savegameIDArg);
 
 	int fps = 0;
 	int frame = 0;
@@ -307,8 +314,7 @@ void Game::LoadSavegame(const string savegameIDArg) {
   
   // Create new save if can't load file.
   if(!mapFile.LoadFile()) {
-    NewSavegame(savegameIDArg);
-    _map.Load("map");
+    New(savegameIDArg);
     return;
   }
 
