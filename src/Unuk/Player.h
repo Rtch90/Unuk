@@ -23,6 +23,10 @@ public:
   void SetExp(int exp);
   int GetExp(void) { return _exp; }
   
+  void SetLevelLiteral(int level) { _level = level; }
+  void SetExpLiteral(int exp) { _exp = exp; }
+  void SetHealthLiteral(int health) { _health = health; }
+  
   static const int MAX_LEVEL = 10;
   static const int EXP_TABLE[MAX_LEVEL];
   

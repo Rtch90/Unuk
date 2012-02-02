@@ -268,6 +268,30 @@ void Game::LoadSavegame(const string savegameIDArg) {
 		// </y>
 
 		_player->SetXY((float)playerX, (float)playerY);
+	
+    // <level> - Parse the player level.
+    dataElem = dataElem->NextSiblingElement("level");
+    assert(dataElem != NULL);
+    int playerLevel = atoi(dataElem->GetText());
+    // </level>
+    
+    _player->SetLevelLiteral(playerLevel);
+    
+    // <exp> - Parse the player exp.
+    dataElem = dataElem->NextSiblingElement("exp");
+    assert(dataElem != NULL);
+    int playerExp = atoi(dataElem->GetText());
+    // </exp>
+    
+    _player->SetExpLiteral(playerExp);
+    
+    // <health> - Parse the player health.
+    dataElem = dataElem->NextSiblingElement("health");
+    assert(dataElem != NULL);
+    int playerHealth = atoi(dataElem->GetText());
+    // </health>
+    
+    _player->SetHealthLiteral(playerHealth);
 
 		// <map> - Parse the map file.
 		dataElem = dataElem->NextSiblingElement("map");
@@ -306,6 +330,27 @@ void Game::SaveSavegame(void) {
 	TiXmlElement* yElement = new TiXmlElement("y");
 	TiXmlText* yText = new TiXmlText(yString.str().c_str());
 	yElement->LinkEndChild(yText);
+  
+  std::stringstream levelString;
+  levelString << _player->GetLevel();
+  
+  TiXmlElement* levelElement = new TiXmlElement("level");
+  TiXmlText* levelText = new TiXmlText(levelString.str().c_str());
+  levelElement->LinkEndChild(levelText);
+  
+  std::stringstream expString;
+  expString << _player->GetExp();
+  
+  TiXmlElement* expElement = new TiXmlElement("exp");
+  TiXmlText* expText = new TiXmlText(expString.str().c_str());
+  expElement->LinkEndChild(expText);
+  
+  std::stringstream healthString;
+  healthString << _player->GetHealth();
+  
+  TiXmlElement* healthElement = new TiXmlElement("health");
+  TiXmlText* healthText = new TiXmlText(healthString.str().c_str());
+  healthElement->LinkEndChild(healthText);
 
 	TiXmlElement* mapElement = new TiXmlElement("map");
 	TiXmlText* mapText = new TiXmlText("map"); //TODO: replace with actual map name.
@@ -314,6 +359,9 @@ void Game::SaveSavegame(void) {
 	saveElement->LinkEndChild(nameElement);
 	saveElement->LinkEndChild(xElement);
 	saveElement->LinkEndChild(yElement);
+  saveElement->LinkEndChild(levelElement);
+  saveElement->LinkEndChild(expElement);
+  saveElement->LinkEndChild(healthElement);
 	saveElement->LinkEndChild(mapElement);
 
 	doc.LinkEndChild(decl);

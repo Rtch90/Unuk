@@ -1,7 +1,10 @@
 <?xml version="1.0" ?>
 <save>
     <name>Allanis</name>
-    <x>736</x>
-    <y>20</y>
+    <x>444</x>
+    <y>432</y>
+    <level>1</level>
+    <exp>8</exp>
+    <health>100</health>
     <map>map</map>
 </save>
