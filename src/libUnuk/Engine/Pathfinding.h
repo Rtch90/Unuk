@@ -50,5 +50,17 @@ public:
 	};
 
 public:
+	AStarSearch(void);
 
+	int GetState(void)				{ return _state; }
+
+	// Cancel the search and free up the memory. -- This can be called at any time.
+	void CancelSearch(void)		{ _cancelRequest = true; }
+
+	// Set the start/goal state.
+	void SetStartAndGoalStates(UserState& start, UserState& goal);
+
+private:
+	int _state;
+	bool _cancelRequest;
 };
