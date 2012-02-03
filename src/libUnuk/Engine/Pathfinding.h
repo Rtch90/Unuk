@@ -25,6 +25,7 @@ public:
 	};
 
 	// A node representing a possible state in the search.
+public:
 	class Node {
 	public:
 		// Keep a record of successor nodes.
@@ -51,6 +52,7 @@ public:
 
 public:
 	AStarSearch(void);
+	~AStarSearch(void);
 
 	int GetState(void)				{ return _state; }
 
@@ -103,7 +105,41 @@ public:
 	int GetStepCount(void)		{return _steps; }
 
 private:
-	int  _state;
+	// Called when a search fails or is cancelled to free up all unused memory.
+	void FreeAllNodes(void);
+
+	/*
+	 * Called when the search ends. A lot of nodes may
+	 * be created that are still present when the search
+	 * ends. They will be deleted with this method.
+	 */
+	void FreeUnusedNodes(void);
+
+	// Data.
+private:
+	// Heap.
+	vector<Node*> _openList;
+	vector<Node*> _closedList;
+	vector<Node*> _successors;
+
+	// State.
+	unsigned int  _state;
+
+	// Count steps.
+	int _steps;
+
+	// Start/Goal state pointers.
+	Node* _start;
+	Node* _goal;
+
+	Node* _currentSolutionNode;
+
+	// Debug
+	typename vector<Node*>::iterator iterDbgOpen;
+	typename vector<Node*>::iterator iterDbgClosed;
+
+	// Count memory allocations and free.
+	int _allocateNodeCount;
+
 	bool _cancelRequest;
-	int  _steps;
 };
