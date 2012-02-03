@@ -129,12 +129,12 @@ void AStarSearch<UserState>::FreeUnusedNodes(void) {
 
 }
 
-//template<class UserState>
-//Node* AStarSearch<UserState>::AllocateNode(void) {
-//
-//}
+template<class UserState>
+typename AStarSearch<UserState>::Node* AStarSearch<UserState>::AllocateNode(void) {
 
-//template<class UserState>
-//void Node::FreeNode(Node* node) {
-//
-//}
+}
+
+template<class UserState>
+void AStarSearch<UserState>::FreeNode(Node* node) {
+
+}
