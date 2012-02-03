@@ -115,6 +115,10 @@ private:
 	 */
 	void FreeUnusedNodes(void);
 
+	Node* AllocateNode(void);
+
+	void FreeNode(Node* node);
+
 	// Data.
 private:
 	// Heap.
