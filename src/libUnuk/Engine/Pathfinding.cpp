@@ -9,6 +9,11 @@ AStarSearch<UserState>::AStarSearch(void) :
 
 template<class UserState>
 AStarSearch<UserState>::~AStarSearch(void) {
+
+}
+
+template<class UserState>
+void AStarSearch<UserState>::SetStartAndGoalStates(UserState& start, UserState& goal) {
 	_cancelRequest= false;
 
 	_start = AllocateNode();
@@ -36,11 +41,6 @@ AStarSearch<UserState>::~AStarSearch(void) {
 
 	// Initialise counter for the search steps.
 	_steps = 0;
-}
-
-template<class UserState>
-void AStarSearch<UserState>::SetStartAndGoalStates(UserState& start, UserState& goal) {
-
 }
 
 template<class UserState>
