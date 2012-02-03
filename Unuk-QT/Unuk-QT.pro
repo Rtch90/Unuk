@@ -42,7 +42,8 @@ HEADERS += ../src/Libs/wglext.h \
     ../src/libUnuk/UI/Bar.h \
     ../src/libUnuk/System/Vec2.h \
     ../src/libUnuk/System/MathBox.h \
-    ../src/libUnuk/Engine/Pathfinding.h
+    ../src/libUnuk/Engine/Pathfinding.h \
+    ../src/libUnuk/UI/SavegameMenu.h
 SOURCES += ../src/libUnuk/Engine/WorldManager.cpp \
     ../src/libUnuk/Engine/ParticleEmitter.cpp \
     ../src/libUnuk/Engine/NPC.cpp \
@@ -75,5 +76,6 @@ SOURCES += ../src/libUnuk/Engine/WorldManager.cpp \
     ../src/libUnuk/UI/EventHistory.cpp \
     ../src/libUnuk/UI/Bar.cpp \
     ../src/libUnuk/System/Vec2.cpp \
-    ../src/libUnuk/Engine/Pathfinding.cpp
+    ../src/libUnuk/Engine/Pathfinding.cpp \
+    ../src/libUnuk/UI/SavegameMenu.cpp
 OTHER_FILES += 

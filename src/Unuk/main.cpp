@@ -3,8 +3,10 @@
 #include <SDL/SDL_ttf.h>
 #include <time.h>
 #include <iostream>
+#include <sstream>
 
 #include "../libUnuk/UI/MainMenu.h"
+#include "../libUnuk/UI/SavegameMenu.h"
 #include "../libUnuk/Engine/NPC.h"
 #include "../libUnuk/System/Debug.h"
 #include "../libUnuk/Engine/MemClass.h"
@@ -25,13 +27,24 @@
 #endif
 
 static gameNavVal_t RunGame(bool load) {
+  SavegameMenu savegameMenu;
+  savegameMenuNavVal_t savegameMenuRet = savegameMenu.Run();
+  if(savegameMenuRet == savegameMenuQuit) {
+    return gameQuitGame;
+  } else if(savegameMenuRet == savegameMenuCancel) {
+    return gameMainMenu;
+  }
+  
+  std::stringstream saveFilename;
+  saveFilename << "save_" << savegameMenu.GetSelection();
+  
 	Debug::logger->message("Entering game state..");
 	Game* game = new Game;
 
 	if(load) {
-		game->Load("save");
+		game->Load(saveFilename.str());
 	} else {
-		game->New("save");
+		game->New(saveFilename.str());
 	}
 
 	gameNavVal_t ret = game->Run();

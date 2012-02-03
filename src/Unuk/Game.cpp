@@ -18,11 +18,13 @@ Game::~Game(void) {
 }
 
 void Game::New(const string& savegameIDArg) {
+  _saveGameID = savegameIDArg;
   NewSavegame(savegameIDArg);
   _map.Load("map");
 }
 
 void Game::Load(const string& savegameIDArg) {
+  _saveGameID = savegameIDArg;
   LoadSavegame(savegameIDArg);
 }
 

@@ -12,7 +12,7 @@ Win32/Unuk/Unuk.ncb
 Win32/Unuk/Unuk.suo
 Bin/Unuk
 Bin/*.dll
-Save/save
+Save/save_*
 *.swp
 *.o
 *.exe
