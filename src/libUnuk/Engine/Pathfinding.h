@@ -331,34 +331,154 @@ public:
 
 	// It will be useful to be able to view the open
 	// and closed lists at each step for debugging.
-	UserState* GetOpenListStart(void);
-	UserState* GetOpenListStart(float& f, float& g, float& h);
-	UserState* GetOpenListNext(void);
-	UserState* GetOpenListNext(float& f, float& g, float& h);
+	UserState* GetOpenListStart(void) {
+		float f, g, h;
+		return GetOpenListStart(f, g, h);
+	}
+
+	UserState* GetOpenListStart(float& f, float& g, float& h) {
+		iterDbgOpen = _openList.begin();
+		if(iterDbgOpen != _openList.end()) {
+			f = (*iterDbgOpen)->f;
+			g = (*iterDbgOpen)->g;
+			h = (*iterDbgOpen)->h;
+			return &(*iterDbgOpen)->_userState;
+		}
+
+		return NULL;
+	}
+
+	UserState* GetOpenListNext(void) {
+		float f, g, h;
+		return GetOpenListNext(f, g, h);
+	}
+
+	UserState* GetOpenListNext(float& f, float& g, float& h) {
+		iterDbgOpen++;
+		if(iterDbgOpen != _openList.end()) {
+			f = (*iterDbgOpen)->f;
+			g = (*iterDbgOpen)->g;
+			h = (*iterDbgOpen)->h;
+			return &(*iterDbgOpen)->_userState;
+		}
+
+		return NULL;
+	}
 
 	// Closes states.
-	UserState* GetClosedListStart(void);
-	UserState* GetClosedListStart(float& f, float& g, float& h);
-	UserState* GetClosedListNext(void);
-	UserState* GetClosedListNext(float& f, float& g, float& h);
+	UserState* GetClosedListStart(void) {
+		float f, g, h;
+		return GetClosedListStart(f, g, h);
+	}
+
+	UserState* GetClosedListStart(float& f, float& g, float& h) {
+		iterDbgClosed = _closedList.begin();
+		if(iterDbgClosed != _closedList.begin()) {
+			f = (*iterDbgClosed)->f;
+			g = (*iterDbgClosed)->g;
+			h = (*iterDbgClosed)->h;
+			return &(iterDbgClosed)->_userState;
+		}
+
+		return NULL;
+	}
+
+	UserState* GetClosedListNext(void) {
+		float f, g, h;
+		return GetClosedListNext(f, g, h);
+	}
+
+	UserState* GetClosedListNext(float& f, float& g, float& h) {
+		iterDbgClosed++;
+		if(iterDbgClosed != _closedList.end()) {
+			f = (*iterDbgClosed)->f;
+			g = (*iterDbgClosed)->g;
+			h = (*iterDbgClosed)->h;
+			return &(*iterDbgClosed)->_userState;
+		}
+
+		return NULL;
+	}
 
 	// Get the number of steps.
 	int GetStepCount(void)		{return _steps; }
 
 private:
 	// Called when a search fails or is cancelled to free up all unused memory.
-	void FreeAllNodes(void);
+	void FreeAllNodes(void) {
+		// Iterate the open list and delete all nodes.
+		typename vector<Node*>::iterator iterOpen = _openList.begin();
+
+		while(iterOpen != _openList.end()) {
+			Node* n = (*iterOpen);
+			FreeNode(n);
+
+			iterOpen++;
+		}
+
+		_openList.clear();
+
+		// Iterate closed list and delete unused nodes.
+		typename vector<Node*>::iterator iterClosed;
+
+		for(iterClosed = _closedList.begin(); iterClosed != _closedList.end(); iterClosed++) {
+			Node* n = (*iterClosed);
+			FreeNode(n);
+		}
+
+		_closedList.clear();
+
+		// Delete the goal.
+		FreeNode(_goal);
+	}
 
 	/*
 	 * Called when the search ends. A lot of nodes may
 	 * be created that are still present when the search
 	 * ends. They will be deleted with this method.
 	 */
-	void FreeUnusedNodes(void);
+	void FreeUnusedNodes(void) {
+		// Iterate open list and delete unused nodes.
+		typename vector<Node*>::iterator iterOpen = _openList.begin();
 
-	Node* AllocateNode(void);
+		while(iterOpen != _openList.end()) {
+			Node *n = (*iterOpen);
 
-	void FreeNode(Node* node);
+			if(!n->child) {
+				FreeNode(n);
+				n = NULL;
+			}
+
+			iterOpen++;
+		}
+
+		_openList.clear();
+
+		// Iterate closed list and delete all unused nodes.
+		typename vector<Node*>::iterator iterClosed;
+
+		for(iterClosed = _closedList.begin(); iterClosed != _closedList.end(); iterClosed++) {
+			Node *n = (*iterClosed);
+
+			if(!n->child) {
+				FreeNode(n);
+				n = NULL;
+			}
+		}
+
+		_closedList.clear();
+
+	}
+
+	Node* AllocateNode(void) {
+		Node *p = new Node;
+		return p;
+	}
+
+	void FreeNode(Node* node) {
+		_allocateNodeCount--;
+		delete node;
+	}
 
 	// Data.
 private:
