@@ -76,6 +76,5 @@ SOURCES += ../src/libUnuk/Engine/WorldManager.cpp \
     ../src/libUnuk/UI/EventHistory.cpp \
     ../src/libUnuk/UI/Bar.cpp \
     ../src/libUnuk/System/Vec2.cpp \
-    ../src/libUnuk/Engine/Pathfinding.cpp \
     ../src/libUnuk/UI/SavegameMenu.cpp
 OTHER_FILES += 
