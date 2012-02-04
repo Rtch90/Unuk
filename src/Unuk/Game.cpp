@@ -252,10 +252,10 @@ void Game::NewSavegame(const string savegameIDArg) {
 	TiXmlElement* nameElement = new TiXmlElement("name");
 	TiXmlText* nameText = new TiXmlText("Allanis"); //TODO: replace with _player->GetName() when it works. --konom
 	nameElement->LinkEndChild(nameText);
-
+  
   int spawnX;
   int spawnY;
-  _map.FindSpawnPoint(spawnX, spawnY);
+  _map.FindSpawnPoint(spawnX, spawnY, _player->GetWidth(), _player->GetHeight());
   
   _player->SetXY(spawnX, spawnY);
   

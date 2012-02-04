@@ -1,3 +1,5 @@
+#include <list>
+
 #include "LevelGen.h"
 #include "../Engine/NPC.h"
 
@@ -235,20 +237,44 @@ void LevelGen::MakeWalkingPaths(void) {
 	}
 }
 
-void LevelGen::FindSpawnPoint(int& xArg, int& yArg) {
+void LevelGen::FindSpawnPoint(int& xArg, int& yArg, int objWidth, int objHeight) {
 	xArg = rand() % (BOUNDARIES_X * TILE_WIDTH);
 	yArg = rand() % (BOUNDARIES_Y * TILE_HEIGHT);
+  
+  if(_world.HasNPCIn(xArg, yArg)) {
+    goto findNext;
+  }
+  
+  SDL_Rect objRect;
+  objRect.x = xArg;
+  objRect.y = yArg;
+  objRect.w = objWidth;
+  objRect.h = objHeight;
+  
+  for(int x = 0; x < BOUNDARIES_X; x++) {
+    for(int y = 0; y < BOUNDARIES_Y; y++) {
+      if(_tile[x][y].GetTileSolidity()) {
+        goto findNext; 
+      }
+      
+      if(_tile[x][y].GetEntitySolitity()) {
+        SDL_Rect entityRect;
+        entityRect.x = _tile[x][y].GetEntityX();
+        entityRect.y = _tile[x][y].GetEntityY();
+        entityRect.w = _tile[x][y].GetEntityWidth();
+        entityRect.h = _tile[x][y].GetEntityHeight(); 
+        
+        if(CheckCollisionRect(entityRect, objRect)) {
+          goto findNext;
+        }
+      }
+    }
+  }
+  
+  return;
 
-	int tileX = xArg / 64;
-	int tileY = yArg / 64;
-
-	if(!_tile[tileX][tileY].GetEntitySolitity() && 
-     !_tile[tileX][tileY].GetTileSolidity() && 
-     !_world.HasNPCIn(xArg, yArg)) {
-			return;
-	}
-
-	FindSpawnPoint(xArg, yArg);
+findNext:
+	FindSpawnPoint(xArg, yArg, objWidth, objHeight);
 }
 
 void LevelGen::GenerateEnemies(void) {
@@ -257,7 +283,7 @@ void LevelGen::GenerateEnemies(void) {
   for(int i = 0; i < npcsToGen; i++) {
     int spawnX;
     int spawnY;
-    FindSpawnPoint(spawnX, spawnY);
+    FindSpawnPoint(spawnX, spawnY, 40,45);
     
     _world.CreateNPC(spawnX, spawnY);
   }

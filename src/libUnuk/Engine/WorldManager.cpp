@@ -130,7 +130,7 @@ void WorldManager::OnPlayerAttack(Player* player) {
         
         int spawnX;
         int spawnY;
-        _level->FindSpawnPoint(spawnX, spawnY);
+        _level->FindSpawnPoint(spawnX, spawnY, player->GetWidth(),player->GetHeight());
         player->SetXY(spawnX, spawnY);
       }
     }

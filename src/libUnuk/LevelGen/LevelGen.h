@@ -25,7 +25,7 @@ public:
   void Update(void);
   void Render(void);
   
-  void FindSpawnPoint(int& xArg, int& yArg);
+  void FindSpawnPoint(int& xArg, int& yArg, int objWidth, int objHeight);
 
 	bool GetTileSolidity(int xArg, int yArg);
 	int  GetTileX(int xArg, int yArg);
