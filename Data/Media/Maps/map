@@ -824,8 +824,8 @@
 			<tileTexture>grass</tileTexture>
 			<solidTile>false</solidTile>
 			
-      <entityTexture>cabin</entityTexture>
-      <solidEntity>true</solidEntity>
+      <entityTexture>null</entityTexture>
+      <solidEntity>false</solidEntity>
 			
 			<zLevel>100</zLevel>
 			
@@ -2052,8 +2052,8 @@
 		</tile>
 		
 		<tile>
-      <tileTexture>MessyBrickWall</tileTexture>
-      <solidTile>true</solidTile>
+      <tileTexture>grass</tileTexture>
+      <solidTile>false</solidTile>
 			
 			<entityTexture>null</entityTexture>
 			<solidEntity>false</solidEntity>
@@ -2066,8 +2066,8 @@
 		</tile>
 		
 		<tile>
-      <tileTexture>MessyBrickWall</tileTexture>
-      <solidTile>true</solidTile>
+      <tileTexture>grass</tileTexture>
+      <solidTile>false</solidTile>
 			
 			<entityTexture>null</entityTexture>
 			<solidEntity>false</solidEntity>
@@ -2080,8 +2080,8 @@
 		</tile>
 		
 		<tile>
-      <tileTexture>MessyBrickWall</tileTexture>
-      <solidTile>true</solidTile>
+      <tileTexture>grass</tileTexture>
+      <solidTile>false</solidTile>
 			
 			<entityTexture>null</entityTexture>
 			<solidEntity>false</solidEntity>
@@ -2094,8 +2094,8 @@
 		</tile>
 		
 		<tile>
-      <tileTexture>MessyBrickWall</tileTexture>
-      <solidTile>true</solidTile>
+      <tileTexture>grass</tileTexture>
+      <solidTile>false</solidTile>
 			
 			<entityTexture>null</entityTexture>
 			<solidEntity>false</solidEntity>
@@ -2108,8 +2108,8 @@
 		</tile>
 		
 		<tile>
-      <tileTexture>MessyBrickWall</tileTexture>
-      <solidTile>true</solidTile>
+      <tileTexture>grass</tileTexture>
+      <solidTile>false</solidTile>
 			
 			<entityTexture>null</entityTexture>
 			<solidEntity>false</solidEntity>
@@ -2122,8 +2122,8 @@
 		</tile>
 		
 		<tile>
-      <tileTexture>MessyBrickWall</tileTexture>
-      <solidTile>true</solidTile>
+      <tileTexture>grass</tileTexture>
+      <solidTile>false</solidTile>
 			
 			<entityTexture>null</entityTexture>
 			<solidEntity>false</solidEntity>
@@ -2136,8 +2136,8 @@
 		</tile>
 		
 		<tile>
-      <tileTexture>MessyBrickWall</tileTexture>
-      <solidTile>true</solidTile>
+      <tileTexture>grass</tileTexture>
+      <solidTile>false</solidTile>
 			
 			<entityTexture>null</entityTexture>
 			<solidEntity>false</solidEntity>
@@ -2150,8 +2150,8 @@
 		</tile>
 
     <tile>
-      <tileTexture>MessyBrickWall</tileTexture>
-      <solidTile>true</solidTile>
+      <tileTexture>grass</tileTexture>
+      <solidTile>false</solidTile>
 
       <entityTexture>null</entityTexture>
       <solidEntity>false</solidEntity>
@@ -2164,8 +2164,8 @@
     </tile>
 
     <tile>
-      <tileTexture>MessyBrickWall</tileTexture>
-      <solidTile>true</solidTile>
+      <tileTexture>grass</tileTexture>
+      <solidTile>false</solidTile>
 
       <entityTexture>null</entityTexture>
       <solidEntity>false</solidEntity>
@@ -2178,8 +2178,8 @@
     </tile>
 
     <tile>
-      <tileTexture>MessyBrickWall</tileTexture>
-      <solidTile>true</solidTile>
+      <tileTexture>grass</tileTexture>
+      <solidTile>false</solidTile>
 
       <entityTexture>null</entityTexture>
       <solidEntity>false</solidEntity>

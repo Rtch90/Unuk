@@ -241,15 +241,23 @@ void LevelGen::FindSpawnPoint(int& xArg, int& yArg, int objWidth, int objHeight)
 	xArg = rand() % (BOUNDARIES_X * TILE_WIDTH);
 	yArg = rand() % (BOUNDARIES_Y * TILE_HEIGHT);
   
-  if(_world.HasNPCIn(xArg, yArg)) {
-    goto findNext;
-  }
-  
   SDL_Rect objRect;
   objRect.x = xArg;
   objRect.y = yArg;
   objRect.w = objWidth;
   objRect.h = objHeight;
+  
+  NPC* npc = _world.GetNPCAt(xArg, yArg);
+  if(npc) {
+    SDL_Rect npcRect;
+    npcRect.x = npc->GetX();
+    npcRect.y = npc->GetY();
+    npcRect.w = npc->GetWidth();
+    npcRect.h = npc->GetHeight();
+    
+    if(CheckCollisionRect(npcRect, objRect))
+      goto findNext;
+  }
   
   for(int x = 0; x < BOUNDARIES_X; x++) {
     for(int y = 0; y < BOUNDARIES_Y; y++) {

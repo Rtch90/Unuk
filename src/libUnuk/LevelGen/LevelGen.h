@@ -62,7 +62,7 @@ private:
   MapTile _tile[TILE_ARRAY_SIZE][TILE_ARRAY_SIZE];
   
   static const int BOUNDARIES_X = (SCREEN_WIDTH / TILE_WIDTH) - 2;
-  static const int BOUNDARIES_Y = (SCREEN_HEIGHT / TILE_HEIGHT) - 2;
+  static const int BOUNDARIES_Y = (SCREEN_HEIGHT / TILE_HEIGHT) - 1;
 
   TextureManager _tileTextures;
   TextureManager _entityTextures;

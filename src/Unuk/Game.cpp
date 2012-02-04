@@ -29,7 +29,6 @@ void Game::Load(const string& savegameIDArg) {
 }
 
 gameNavVal_t Game::Run(void) {
-	_player->SetXY(400, 400);
 	_player->LoadSprites("../Data/Media/Images/Characters/Player.png", 40, 45);
 
 	int fps = 0;

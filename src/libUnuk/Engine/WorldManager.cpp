@@ -57,15 +57,15 @@ NPC* WorldManager::GetNPC(int index) {
   return NULL;
 }
 
-bool WorldManager::HasNPCIn(int xArg, int yArg) {
+NPC* WorldManager::GetNPCAt(int xArg, int yArg) {
   for(std::list<NPC*>::iterator i = _npcs.begin(); i != _npcs.end(); ++i) {
     NPC* npc = (*i);
     if(xArg >= npc->GetX() && xArg <= (npc->GetX() + npc->GetWidth()) &&
        yArg >= npc->GetY() && yArg <= (npc->GetY() + npc->GetHeight())) {
-      return true;
+      return npc;
     }
   }
-  return false;
+  return NULL;
 }
 
 void WorldManager::CreateNPC(int x, int y) {
