@@ -281,16 +281,53 @@ public:
 	// -- Some methods for travelling through the solution. --
 
 	// Get the start node.
-	UserState* GetSolutionStart(void);
+	UserState* GetSolutionStart(void) {
+		_currentSolutionNode = _start;
+		if(_start) {
+			return &_start->_userState;
+		} else {
+			return NULL;
+		}
+	}
 
 	// Get the next node.
-	UserState* GetSolutionNext(void);
+	UserState* GetSolutionNext(void) {
+		if(_currentSolutionNode) {
+			if(_currentSolutionNode->child) {
+				Node* child = _currentSolutionNode->child;
+				_currentSolutionNode = _currentSolutionNode->child;
+
+				return &child->_userState;
+			}
+		}
+
+		return NULL;
+	}
 
 	// Get the end node.
-	UserState* GetSolutionEnd(void);
+	UserState* GetSolutionEnd(void) {
+		_currentSolutionNode = _goal;
+		if(goal) {
+			return &goal->_userState;
+		} else {
+			return NULL;
+		}
+	}
 
 	// Step through the solution backwards.
-	UserState* GetSolutionPrev(void);
+	UserState* GetSolutionPrev(void) {
+		if(_currentSolutionNode) {
+			if(_currentSolutionNode->parent) {
+				Node* parent = _currentSolutionNode->parent;
+
+				_currentSolutionNode = _currentSolutionNode->parent;
+
+				return &parent->_userState;
+			}
+		}
+
+		return NULL;
+	}
 
 	// It will be useful to be able to view the open
 	// and closed lists at each step for debugging.
