@@ -177,7 +177,11 @@ void LevelGen::Render(void) {
 void LevelGen::Unload(void) {
 	_tileTextures.Unload();
 	_entityTextures.Unload();
-  memset(_tile, sizeof(_tile), 0);
+  for(int x = 0; x < TILE_ARRAY_SIZE; x++) {
+    for(int y = 0; y < TILE_ARRAY_SIZE; y++) {
+      _tile[x][y] = MapTile();
+    }
+  }
 }
 
 void LevelGen::DoMagic(void) {
