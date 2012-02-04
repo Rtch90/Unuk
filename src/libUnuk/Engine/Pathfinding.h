@@ -16,7 +16,7 @@ using namespace std;
 template<class UserState> class AStarSearch {
 public:
 	enum {
-		SEARCH_STATE_NOT_INITIALISED,
+		SEARCH_STATE_NOT_INITIALIZED,
 		SEARCH_STATE_SEARCHING,
 		SEARCH_STATE_SUCCEEDED,
 		SEARCH_STATE_FAILED,
@@ -39,7 +39,7 @@ public:
 
 		Node(void) : parent(0), child(0), g(0.0f), h(0.0f), f(0.0) {}
 
-		UserState _UserState;
+		UserState _userState;
 	};
 
 	// Compare the f values of the two nodes.
