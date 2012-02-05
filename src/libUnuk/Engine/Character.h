@@ -62,11 +62,13 @@ public:
 //	inline void operator delete [](void* object) {
 //		gMemManager.Free(object);
 //	}
-
-	static const int FACING_UP     = 0;
-	static const int FACING_RIGHT  = 1;
-	static const int FACING_DOWN   = 2;
-	static const int FACING_LEFT   = 3;
+  
+  enum {
+    FACING_UP,
+    FACING_RIGHT,
+    FACING_DOWN,
+    FACING_LEFT
+  };
 
 protected:
 	void Move(void);

@@ -16,6 +16,8 @@
 #include "../Engine/WorldManager.h"
 using namespace std;
 
+class Character;
+
 class LevelGen {
 public:
 	LevelGen(void);
@@ -46,6 +48,8 @@ public:
 	string GetCurrentMap(void);
 
 	WorldManager& GetWorld(void) { return _world; }
+  
+  void MoveIfPossible(Character* character, float xVel, float yVel);
 
 private:
   void Unload(void);

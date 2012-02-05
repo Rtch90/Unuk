@@ -157,6 +157,9 @@ void Character::OnAttack(void) {
 }
 
 void Character::Move(void) {
+  map->MoveIfPossible(this, xVel, yVel);
+  
+  /*
   x += xVel;
   tileX = (int)(((x + (w / 2)) / TILE_WIDTH));
   tileY = (int)(((y + (h / 2)) / TILE_HEIGHT));
@@ -175,7 +178,8 @@ void Character::Move(void) {
   if(CheckTileCollisions())                                          y -= yVel;
   if(CheckEntityCollisions())                                        y -= yVel;
   if(CheckCharacterCollisions())                                     y -= yVel;
-
+  */
+  
   _healthBar.SetXY((int)x, (int)(y - _healthBar.GetHeight() - 5));
 }
 

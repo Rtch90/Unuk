@@ -75,6 +75,23 @@ void WorldManager::CreateNPC(int x, int y) {
   _npcs.push_back(npc);
 }
 
+bool WorldManager::CheckCollision(const SDL_Rect& charRect) {
+  for(std::list<NPC*>::iterator i = _npcs.begin(); i != _npcs.end(); ++i) {
+    NPC* npc = (*i);
+    
+    SDL_Rect npcRect;
+    npcRect.x = npc->GetX();
+    npcRect.y = npc->GetY();
+    npcRect.w = npc->GetWidth();
+    npcRect.h = npc->GetHeight();
+    
+    if(CheckCollisionRect(npcRect, charRect)) {
+      return true;
+    }
+  }
+  return false;
+}
+
 void WorldManager::OnPlayerAttack(Player* player) {
   int playerX = (int)(player->GetX() / 32.0f);
   int playerY = (int)(player->GetY() / 32.0f);

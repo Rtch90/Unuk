@@ -5,6 +5,8 @@ class NPC;
 class Player;
 class LevelGen;
 
+#include <SDL/SDL.h>
+
 class WorldManager {
 public:
   WorldManager(LevelGen* level);
@@ -19,6 +21,7 @@ public:
   NPC* GetNPCAt(int xArg, int yArg);
   void CreateNPC(int x, int y);
   
+  bool CheckCollision(const SDL_Rect& charRect);
 
   int  GetNPCCount() { return _npcs.size(); }
 

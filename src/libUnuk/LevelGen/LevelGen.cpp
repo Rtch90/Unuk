@@ -297,6 +297,57 @@ void LevelGen::GenerateEnemies(void) {
   }
 }
 
+void LevelGen::MoveIfPossible(Character* character, float xVel, float yVel) {
+  if(xVel == 0.0f && yVel == 0.0f) {
+    return;
+  }
+  
+  int targetX = character->GetX() + xVel;
+  int targetY = character->GetY() + yVel;
+  
+  if(targetX < 0 || targetX > (SCREEN_WIDTH - character->GetWidth()) || 
+     targetY < 0 || targetY > (SCREEN_HEIGHT - character->GetHeight())) {
+    return;
+  }
+  
+  int targetTileX = targetX / TILE_WIDTH;
+  int targetTileY = targetY / TILE_HEIGHT;
+  
+  if(_tile[targetTileX][targetTileY].GetTileSolidity()) {
+    return;
+  }
+  
+  SDL_Rect charRect;
+  charRect.x = targetX;
+  charRect.y = targetY + (character->GetHeight() / 2);
+  charRect.w = character->GetWidth();
+  charRect.h = character->GetHeight() / 2;
+  
+  for(int x = 0; x < BOUNDARIES_X; x++) {
+    for(int y = 0; y < BOUNDARIES_Y; y++) {
+      if(!_tile[x][y].GetEntitySolitity()) {
+        continue;
+      }
+      
+      SDL_Rect entityRect;
+      entityRect.x = _tile[x][y].GetEntityX();
+      entityRect.y = _tile[x][y].GetEntityY();
+      entityRect.w = _tile[x][y].GetEntityWidth();
+      entityRect.h = _tile[x][y].GetEntityHeight();
+      
+      if(CheckCollisionRect(entityRect, charRect)) {
+        return;
+      }
+    }
+  }
+  
+  if(_world.CheckCollision(charRect)) {
+    return;
+  }
+  
+  character->SetXY(targetX, targetY);
+}
+
 string LevelGen::GetCurrentMap(void) {
 	return _currentMap;
 }
