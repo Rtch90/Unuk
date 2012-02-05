@@ -269,7 +269,7 @@ findNext:
 }
 
 void LevelGen::GenerateEnemies(void) {
-  int npcsToGen = 4 + (rand() % 4);
+  int npcsToGen = 4 + (rand() % ((_player->GetLevel() * 2) + 4));
   
   for(int i = 0; i < npcsToGen; i++) {
     int spawnX;
