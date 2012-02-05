@@ -224,6 +224,14 @@ void LevelGen::FindSpawnPoint(int& xArg, int& yArg, int objWidth, int objHeight)
 	xArg = rand() % (BOUNDARIES_X * TILE_WIDTH);
 	yArg = rand() % (BOUNDARIES_Y * TILE_HEIGHT);
   
+  if((xArg + objWidth + 1) > SCREEN_WIDTH) {
+    xArg = SCREEN_WIDTH - objWidth - 1;
+  }
+  
+  if((yArg + objHeight + 1) > SCREEN_HEIGHT) {
+    yArg = SCREEN_HEIGHT - objHeight - 1;
+  }
+  
   SDL_Rect objRect;
   objRect.x = xArg;
   objRect.y = yArg;
