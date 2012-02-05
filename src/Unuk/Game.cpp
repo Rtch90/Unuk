@@ -121,10 +121,10 @@ gameNavVal_t Game::Run(void) {
 			_playerHealthBar.SetProgress((float)_player->GetHealth() / 100.0f);
 
 			playerExp.str("");
-			playerExp << "Player Level " << _player->GetLevel() <<  "  (" << _player->GetExp() << "/" << Player::EXP_TABLE[_player->GetLevel()] << ")";
+			playerExp << "Player Level " << _player->GetLevel() <<  "  (" << _player->GetExp() << "/" << Player::EXP_TABLE[_player->GetLevel() - 1] << ")";
 			_playerExp.SetTextBlended(playerExp.str(), vsmall, COLOUR_WHITE);
 
-			_playerExpBar.SetProgress((float)_player->GetExp() / (float)Player::EXP_TABLE[_player->GetLevel()]);
+			_playerExpBar.SetProgress((float)_player->GetExp() / (float)Player::EXP_TABLE[_player->GetLevel() - 1]);
 
 			// Check to see if we are allowed to display debug info.
 			if(debugEnabled) {
