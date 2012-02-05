@@ -17,6 +17,7 @@
 using namespace std;
 
 class Character;
+class Player;
 
 class LevelGen {
 public:
@@ -28,7 +29,8 @@ public:
   void Render(void);
   
   void FindSpawnPoint(int& xArg, int& yArg, int objWidth, int objHeight);
-
+  void MoveIfPossible(Character* character, float xVel, float yVel, bool isPlayer = false);
+  
 	bool GetTileSolidity(int xArg, int yArg);
 	int  GetTileX(int xArg, int yArg);
 	int  GetTileY(int xArg, int yArg);
@@ -44,9 +46,9 @@ public:
 	string GetCurrentMap(void);
 
 	WorldManager& GetWorld(void) { return _world; }
-  
-  void MoveIfPossible(Character* character, float xVel, float yVel);
 
+  void SetPlayer(Player* player) { _player = player; }
+  
 private:
   void Unload(void);
   void DoMagic(void);
@@ -68,4 +70,6 @@ private:
   TextureManager _entityTextures;
 
   WorldManager _world;
+  
+  Player* _player;
 };

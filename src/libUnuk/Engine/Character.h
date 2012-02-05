@@ -40,8 +40,6 @@ public:
 	int  GetDirectionFacing(void)       { return directionFacing; }
 	void SetDirectionFacing(int dir)    { directionFacing = dir;  }
 
-	void AddSpeachBubble(string text);
-
 	void Render(void);
 	void Update(void);
 
@@ -72,10 +70,6 @@ public:
 
 protected:
 	void Move(void);
-
-	bool CheckTileCollisions(void);
-	bool CheckEntityCollisions(void);
-	bool CheckCharacterCollisions(void);
 
 	float x;
 	float y;
@@ -112,8 +106,6 @@ private:
 	static const int ANIMATION_SPEED         = 200;
 	static const int ATTACKING_DISPLAY_LEN   = 150;
 
-	static const int SPEACH_BUBBLE_DISPLAY_LENGTH = 6000;
-
 	SDL_Surface* _texture;
 
 	// [direction][action]
@@ -122,9 +114,4 @@ private:
 	Timer _animationTimer;
 	int _animationStage;
 	bool _leftFoot;
-
-	list<string> _speachBubble;
-	list<string>::iterator _speachBubbleIter;
-	Timer _speachBubbleTimer;
-	Text _speachBubbleText;
 };

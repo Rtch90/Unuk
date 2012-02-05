@@ -57,5 +57,7 @@ void NPC::Move(void) {
     }
     _moving = true;
   }
+  
+  map->MoveIfPossible(this, xVel, yVel, false);
   Character::Move();
 }

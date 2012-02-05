@@ -2,9 +2,10 @@
 
 #include "LevelGen.h"
 #include "../Engine/NPC.h"
+#include "../../Unuk/Player.h"
 
 LevelGen::LevelGen(void) : _world(this) {
-
+  _player = NULL;
 }
 
 LevelGen::~LevelGen(void) {
@@ -279,7 +280,7 @@ void LevelGen::GenerateEnemies(void) {
   }
 }
 
-void LevelGen::MoveIfPossible(Character* character, float xVel, float yVel) {
+void LevelGen::MoveIfPossible(Character* character, float xVel, float yVel, bool isPlayer) {
   if(xVel == 0.0f && yVel == 0.0f) {
     return;
   }
@@ -325,6 +326,18 @@ void LevelGen::MoveIfPossible(Character* character, float xVel, float yVel) {
   
   if(_world.CheckCollision(charRect, character)) {
     return;
+  }
+  
+  if(!isPlayer) {
+    SDL_Rect playerRect;
+    playerRect.x = _player->GetX();
+    playerRect.y = _player->GetY();
+    playerRect.w = _player->GetWidth();
+    playerRect.h = _player->GetHeight();
+    
+    if(CheckCollisionRect(playerRect, charRect)) {
+      return;
+    }
   }
   
   character->SetXY(targetX, targetY);

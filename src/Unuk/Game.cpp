@@ -7,6 +7,7 @@
 Game::Game(void) {
 	Debug::logger->message("Creating characters..");
 	_player = new Player(&_map);
+  _map.SetPlayer(_player);
 
 	_runGameReturnValue = gameMainMenu;
 }
