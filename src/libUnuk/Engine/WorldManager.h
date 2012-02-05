@@ -1,6 +1,7 @@
 #pragma once
 #include <list>
 
+class Character;
 class NPC;
 class Player;
 class LevelGen;
@@ -21,7 +22,7 @@ public:
   NPC* GetNPCAt(int xArg, int yArg);
   void CreateNPC(int x, int y);
   
-  bool CheckCollision(const SDL_Rect& charRect);
+  bool CheckCollision(const SDL_Rect& charRect, Character* exclude);
 
   int  GetNPCCount() { return _npcs.size(); }
 

@@ -75,9 +75,13 @@ void WorldManager::CreateNPC(int x, int y) {
   _npcs.push_back(npc);
 }
 
-bool WorldManager::CheckCollision(const SDL_Rect& charRect) {
+bool WorldManager::CheckCollision(const SDL_Rect& charRect, Character* exclude) {
   for(std::list<NPC*>::iterator i = _npcs.begin(); i != _npcs.end(); ++i) {
     NPC* npc = (*i);
+    
+    if(npc == exclude) {
+      continue;
+    }
     
     SDL_Rect npcRect;
     npcRect.x = npc->GetX();

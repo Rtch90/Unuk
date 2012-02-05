@@ -323,7 +323,7 @@ void LevelGen::MoveIfPossible(Character* character, float xVel, float yVel) {
     }
   }
   
-  if(_world.CheckCollision(charRect)) {
+  if(_world.CheckCollision(charRect, character)) {
     return;
   }
   
