@@ -118,7 +118,7 @@ void Player::Move() {
 
 void Player::SetLevel(int level) {
 	_level = level;
-	_exp = _exp - EXP_TABLE[level];
+	_exp = _exp - EXP_TABLE[level - 1];
 	if(_exp < 0) {
 		_exp = 0;
 	}
@@ -130,7 +130,7 @@ void Player::SetExp(int exp) {
 	eventHistory->LogEvent(evtMsg.str());
 
 	_exp = exp;
-	if(_level != MAX_LEVEL && _exp >= EXP_TABLE[_level]) {
+	if(_level != MAX_LEVEL && _exp >= EXP_TABLE[_level - 1]) {
 			eventHistory->LogEvent("Player leveled up!");
 			SetLevel(_level + 1);
 	}
