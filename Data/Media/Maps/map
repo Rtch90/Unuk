@@ -8,10 +8,6 @@
 			<solidEntity>false</solidEntity>
 			
 			<zLevel>100</zLevel>
-			
-			<mapTransition>map</mapTransition>
-			<mapTransX>0</mapTransX>
-			<mapTransY>0</mapTransY>
 		</tile>
 		
 		<tile>
@@ -2039,7 +2035,7 @@
 	<line>
 		<tile>
 			<tileTexture>grass</tileTexture>
-      <solidTile>true</solidTile>
+      <solidTile>false</solidTile>
 			
       <entityTexture>null</entityTexture>
       <solidEntity>false</solidEntity>

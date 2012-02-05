@@ -43,14 +43,6 @@ public:
   void SetZLevel(int arg)                           { _zLevel = arg; }
   int GetZLevel(void)                               { return _zLevel; }
 
-  // Map Transition Mutators.
-  void SetMapTransitionName(string arg)             { _mapTransitionName = arg; }
-  string GetMapTransitionName(void)                 { return _mapTransitionName; }
-
-  void SetMapTransitionXY(int xArg, int yArg)       { _mapTransitionX = xArg, _mapTransitionY = yArg; }
-  int GetMapTransitionX(void)                       { return _mapTransitionX; }
-  int GetMapTransitionY(void)                       { return _mapTransitionY; }
-
 private:
   MapElement _tile;
   MapEntityGeneric _entity;
@@ -58,9 +50,4 @@ private:
   // -1 is a 'special' tile, the next tile that the player walks
   // on is the players new zlevel.
   int _zLevel;
-
-  // If not 'null', switch map when the player walks on this tile.
-  string _mapTransitionName;
-  int _mapTransitionX;
-  int _mapTransitionY;
 };

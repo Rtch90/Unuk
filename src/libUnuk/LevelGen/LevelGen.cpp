@@ -98,24 +98,6 @@ void LevelGen::Load(const string filename) {
 				_tile[x][y].SetZLevel(atoi(dataElem->GetText()));
 				// </zlevel>
 
-				// <mapTransition>
-				dataElem = dataElem->NextSiblingElement("mapTransition");
-				assert(dataElem != NULL);
-				_tile[x][y].SetMapTransitionName(dataElem->GetText());
-				// </mapTransition>
-
-				// <mapTransX>
-				dataElem = dataElem->NextSiblingElement("mapTransX");
-				assert(dataElem != NULL);
-				// int mapTransX = atoi(dataElem->GetText()); // not referenced
-				// </mapTransX>
-
-				// <mapTransY>
-				dataElem = dataElem->NextSiblingElement("mapTransY");
-				assert(dataElem != NULL);
-			 // int mapTransY = atoi(dataElem->GetText()); // not referenced
-				// </mapTransY>
-
 				tileElem = tileElem->NextSiblingElement("tile");
 			}
 			//</tile>
@@ -390,16 +372,4 @@ int LevelGen::GetEntityHeight(int xArg, int yArg) {
 
 int LevelGen::GetTileZLevel(int xArg, int yArg) {
 	return _tile[xArg + 1][yArg + 1].GetZLevel();
-}
-
-string LevelGen::GetMapTransitionName(int xArg, int yArg) {
-	return _tile[xArg + 1][yArg + 1].GetMapTransitionName();
-}
-
-int LevelGen::GetMapTransitionX(int xArg, int yArg) {
-	return _tile[xArg + 1][yArg + 1].GetMapTransitionX();
-}
-
-int LevelGen::GetMapTransitionY(int xArg, int yArg) {
-	return _tile[xArg + 1][yArg + 1].GetMapTransitionY();
 }

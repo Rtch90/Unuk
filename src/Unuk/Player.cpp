@@ -113,10 +113,6 @@ void Player::SetCamera(void) {
 
 void Player::Move() {
 	Character::Move();
-	if(map->GetMapTransitionName(tileX, tileY) != "null") {
-		SetXY((float)map->GetMapTransitionX(tileX, tileY), (float)map->GetMapTransitionY(tileX, tileY));
-		map->Load(map->GetMapTransitionName(tileX, tileY));
-	}
 }
 
 void Player::SetLevel(int level) {

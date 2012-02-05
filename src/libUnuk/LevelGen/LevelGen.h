@@ -41,10 +41,6 @@ public:
 
 	int  GetTileZLevel(int xArg, int yArg);
 
-	string GetMapTransitionName(int xArg, int yArg);
-	int    GetMapTransitionX(int xArg, int yArg);
-	int    GetMapTransitionY(int xArg, int yArg);
-
 	string GetCurrentMap(void);
 
 	WorldManager& GetWorld(void) { return _world; }
