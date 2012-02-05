@@ -27,7 +27,7 @@ public:
   void SetExpLiteral(int exp) { _exp = exp; }
   void SetHealthLiteral(int health) { _health = health; }
   
-  static const int MAX_LEVEL = 10;
+  static const int MAX_LEVEL = 20;
   static const int EXP_TABLE[MAX_LEVEL];
   
 protected:

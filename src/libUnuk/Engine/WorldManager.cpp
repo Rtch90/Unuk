@@ -138,7 +138,32 @@ void WorldManager::OnPlayerAttack(Player* player) {
     npc->OnAttack();
 
     if(npc->GetHealth() <= 0) {
-      eventHistory->LogEvent("Killed Bald Naked Dude!");
+      
+      // Please note:
+      // Naked dudes are known to be sensitive to spicy food.
+      
+      char* waysOfDeath[] = {
+        "Choked Naked Dude!",
+        "Stabbed Naked Dude!",
+        "Urinated Acid on Naked Dude!",
+        "Killed Naked Dude with a dildo!",
+        "Poured Tabasco on Naked Dude!",
+        "Threw Acid on Naked Dude!",
+        "Slapped Naked Dude with Dead Fish!",
+        "Killed Naked Dude with a Pistol!",
+        "Ate Naked Dude's brain!",
+        "Slaughtered Naked Dude!",
+        "Roasted Naked Dude!",
+        "Paper Sprayed Naked Dude!",
+        "Stoned Naked Dude!",
+        "Slayed Naked Dude with a Katana!",
+        "Thew Chili Peppers on Naked Dude!",
+        "Used Karate on Naked Dude!",
+        "Beat the shit out of Naked Dude!",
+        "FUS RO DAH!"
+      };
+      
+      eventHistory->LogEvent(waysOfDeath[rand() % (sizeof(waysOfDeath)/sizeof(char*))]);
       
       int expGain = 3 + (rand() % 2);
       player->SetExp(player->GetExp() + expGain);

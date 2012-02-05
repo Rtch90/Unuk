@@ -6,7 +6,7 @@
 const float Player::PLAYER_SPEED = Character::CHARACTER_SPEED + 0.5f;
 
 // Amount of Exp needed every level
-const int Player::EXP_TABLE[10] = {
+const int Player::EXP_TABLE[MAX_LEVEL] = {
 	10,
 	30,
 	90,
@@ -16,7 +16,17 @@ const int Player::EXP_TABLE[10] = {
 	1000,
 	2000,
 	3500,
-	5000
+	5000,
+  6500,
+  8500,
+  10250,
+  12000,
+  15000,
+  25000,
+  50000,
+  65000,
+  80000,
+  100000
 };
 
 Player::Player(LevelGen *mapArg) : Character(mapArg) {
@@ -122,6 +132,10 @@ void Player::SetLevel(int level) {
 	if(_exp < 0) {
 		_exp = 0;
 	}
+  if(_level == MAX_LEVEL) {
+    eventHistory->LogEvent("YOU BEAT IT! I'M SO PROUD!");
+    eventHistory->LogEvent("*Sheds Tear*");
+  }
 }
 
 void Player::SetExp(int exp) {
