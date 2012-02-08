@@ -12,7 +12,7 @@ LevelGen::~LevelGen(void) {
 
 }
 
-void LevelGen::Load(const string filename) {
+void LevelGen::Load(const string& filename) {
 	Unload();
 	_currentMap = filename;
 	string fullMapPath = "../Data/Media/Maps/" + filename;
@@ -310,9 +310,9 @@ void LevelGen::MoveIfPossible(Character* character, float xVel, float yVel, bool
   
   SDL_Rect charRect;
   charRect.x = targetX;
-  charRect.y = targetY + (character->GetHeight() / 2);
+  charRect.y = targetY + (character->GetHeight() / 4) * 3;
   charRect.w = character->GetWidth();
-  charRect.h = character->GetHeight() / 2;
+  charRect.h = character->GetHeight() / 4;
   
   for(int x = 0; x < BOUNDARIES_X; x++) {
     for(int y = 0; y < BOUNDARIES_Y; y++) {
