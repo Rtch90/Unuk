@@ -25,7 +25,7 @@ void Game::New(const string& savegameIDArg) {
   
   int spawnX;
   int spawnY;
-  _map.FindSpawnPoint(spawnX, spawnY, _player->GetWidth(), _player->GetHeight());
+  _map.FindSpawnPoint(spawnX, spawnY, 40, 45);
   
   _player->SetXY((float)spawnX, (float)spawnY);
 }
@@ -36,7 +36,7 @@ void Game::Load(const string& savegameIDArg) {
   
   int spawnX;
   int spawnY;
-  _map.FindSpawnPoint(spawnX, spawnY, _player->GetWidth(), _player->GetHeight());
+  _map.FindSpawnPoint(spawnX, spawnY, 40, 45);
   
   _player->SetXY((float)spawnX, (float)spawnY);
 }
