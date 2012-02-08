@@ -142,7 +142,7 @@ void WorldManager::OnPlayerAttack(Player* player) {
 			// Please note:
 			// Naked dudes are known to be sensitive to spicy food.
 
-			char* waysOfDeath[] = {
+			std::string waysOfDeath[] = {
 				"Choked Naked Dude!",
 				"Stabbed Naked Dude!",
 				"Urinated Acid on Naked Dude!",
@@ -163,7 +163,7 @@ void WorldManager::OnPlayerAttack(Player* player) {
 				"FUS RO DAH!"
 			};
 
-			eventHistory->LogEvent(waysOfDeath[rand() % (sizeof(waysOfDeath)/sizeof(char*))]);
+			eventHistory->LogEvent(waysOfDeath[rand() % (sizeof(waysOfDeath)/sizeof(std::string))]);
 
 			int expGain = 3 + (rand() % 2);
 			player->SetExp(player->GetExp() + expGain);

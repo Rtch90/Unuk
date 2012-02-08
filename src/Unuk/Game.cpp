@@ -22,11 +22,23 @@ void Game::New(const string& savegameIDArg) {
   _saveGameID = savegameIDArg;
   NewSavegame(savegameIDArg);
   _map.Load("map");
+  
+  int spawnX;
+  int spawnY;
+  _map.FindSpawnPoint(spawnX, spawnY, _player->GetWidth(), _player->GetHeight());
+  
+  _player->SetXY((float)spawnX, (float)spawnY);
 }
 
 void Game::Load(const string& savegameIDArg) {
   _saveGameID = savegameIDArg;
   LoadSavegame(savegameIDArg);
+  
+  int spawnX;
+  int spawnY;
+  _map.FindSpawnPoint(spawnX, spawnY, _player->GetWidth(), _player->GetHeight());
+  
+  _player->SetXY((float)spawnX, (float)spawnY);
 }
 
 gameNavVal_t Game::Run(void) {
@@ -336,6 +348,7 @@ void Game::LoadSavegame(const string savegameIDArg) {
 		//_player->SetName(dataElem->GetText());
 		// </name>
 
+/*
 		// <x> - Parse the player x coord.
 		dataElem = dataElem->NextSiblingElement("x");
 		assert(dataElem != NULL);
@@ -347,9 +360,9 @@ void Game::LoadSavegame(const string savegameIDArg) {
 		assert(dataElem != NULL);
 		int playerY = atoi(dataElem->GetText());
 		// </y>
-
 		_player->SetXY((float)playerX, (float)playerY);
-	
+*/
+    
     // <level> - Parse the player level.
     dataElem = dataElem->NextSiblingElement("level");
     assert(dataElem != NULL);
@@ -398,6 +411,7 @@ void Game::SaveSavegame(void) {
 	TiXmlText* nameText = new TiXmlText("Allanis"); //TODO: replace with _player->GetName() when it works. --konom
 	nameElement->LinkEndChild(nameText);
 
+/*
 	std::stringstream xString;
 	xString << _player->GetX();
 
@@ -411,7 +425,8 @@ void Game::SaveSavegame(void) {
 	TiXmlElement* yElement = new TiXmlElement("y");
 	TiXmlText* yText = new TiXmlText(yString.str().c_str());
 	yElement->LinkEndChild(yText);
-  
+*/
+
   std::stringstream levelString;
   levelString << _player->GetLevel();
   
@@ -438,8 +453,8 @@ void Game::SaveSavegame(void) {
 	mapElement->LinkEndChild(mapText);
 
 	saveElement->LinkEndChild(nameElement);
-	saveElement->LinkEndChild(xElement);
-	saveElement->LinkEndChild(yElement);
+	//saveElement->LinkEndChild(xElement);
+	//saveElement->LinkEndChild(yElement);
   saveElement->LinkEndChild(levelElement);
   saveElement->LinkEndChild(expElement);
   saveElement->LinkEndChild(healthElement);
