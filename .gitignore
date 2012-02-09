@@ -15,7 +15,6 @@ Bin/*.dll
 Save/save*
 Save/save_*
 Data/Media/Maps/save*
-Data/Media/Maps/save_*
 *.swp
 *.o
 *.exe
