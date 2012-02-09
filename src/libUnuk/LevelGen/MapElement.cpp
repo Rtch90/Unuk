@@ -37,3 +37,6 @@ int MapElement::GetX(void)        { return x; }
 int MapElement::GetY(void)        { return y; }
 int MapElement::GetWidth(void)    { return _texture->w; }
 int MapElement::GetHeight(void)   { return _texture->h; }
+
+void   MapElement::SetTextureName(string name)  { _textureName = name; }
+string MapElement::GetTextureName(void)         { return _textureName; } 

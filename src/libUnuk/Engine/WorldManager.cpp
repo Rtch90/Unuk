@@ -172,7 +172,7 @@ void WorldManager::OnPlayerAttack(Player* player) {
 			delete npc;
 
 			if(_npcs.empty()) {
-				_level->Load("map");
+				_level->New();
 
 				int spawnX;
 				int spawnY;

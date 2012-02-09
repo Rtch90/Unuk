@@ -21,7 +21,6 @@ Game::~Game(void) {
 void Game::New(const string& savegameIDArg) {
   _saveGameID = savegameIDArg;
   NewSavegame(savegameIDArg);
-  _map.Load("map");
   
   int spawnX;
   int spawnY;
@@ -317,6 +316,12 @@ void Game::NewSavegame(const string savegameIDArg) {
 	doc.LinkEndChild(saveElement);
 
 	doc.SaveFile(saveFilename.c_str());
+  
+  stringstream mapPath;
+  mapPath << "Data/Media/Maps/" << _saveGameID;
+  
+  _map.New();
+  _map.Save(_saveGameID);
 }
 
 void Game::LoadSavegame(const string savegameIDArg) {
@@ -386,16 +391,12 @@ void Game::LoadSavegame(const string savegameIDArg) {
     // </health>
     
     _player->SetHealthLiteral(playerHealth);
-
-		// <map> - Parse the map file.
-		dataElem = dataElem->NextSiblingElement("map");
-		assert(dataElem != NULL);
-		_map.Load(dataElem->GetText());
-		// </map>
 	}
 	// <save>
 
 	// </save>
+  
+  _map.Load(_saveGameID);
 }
 
 void Game::SaveSavegame(void) {
@@ -448,20 +449,17 @@ void Game::SaveSavegame(void) {
   TiXmlText* healthText = new TiXmlText(healthString.str().c_str());
   healthElement->LinkEndChild(healthText);
 
-	TiXmlElement* mapElement = new TiXmlElement("map");
-	TiXmlText* mapText = new TiXmlText("map"); //TODO: replace with actual map name.
-	mapElement->LinkEndChild(mapText);
-
 	saveElement->LinkEndChild(nameElement);
 	//saveElement->LinkEndChild(xElement);
 	//saveElement->LinkEndChild(yElement);
   saveElement->LinkEndChild(levelElement);
   saveElement->LinkEndChild(expElement);
   saveElement->LinkEndChild(healthElement);
-	saveElement->LinkEndChild(mapElement);
 
 	doc.LinkEndChild(decl);
 	doc.LinkEndChild(saveElement);
 
 	doc.SaveFile(saveFilename.c_str());
+  
+  _map.Save(_saveGameID);
 }

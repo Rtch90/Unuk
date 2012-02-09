@@ -25,9 +25,13 @@ public:
   int GetY(void);
   int GetWidth(void);
   int GetHeight(void);
+  
+  void   SetTextureName(string path);
+  string GetTextureName(void);
 
 protected:
   SDL_Surface* _texture;
+  string _textureName;
 
   bool _solid;
 

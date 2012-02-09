@@ -24,7 +24,9 @@ public:
 	LevelGen(void);
 	~LevelGen(void);
 
+  void New(void);
   void Load(const string& filename);
+  void Save(const string& filename);
   void Update(void);
   void Render(void);
   
