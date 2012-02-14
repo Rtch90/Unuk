@@ -264,6 +264,9 @@ void LevelGen::DoMagic(void) {
   GenerateEntities("tree", 25);
   GenerateEntities("hedge", 15);
   GenerateEntities("barrel", 40);
+  GenerateEntities("barrel2", 100);
+  GenerateEntities("stone", 35);
+  GenerateEntities("stone2", 35);
   GenerateEntities("closedChest", 100); 
   GenerateEntities("closedChestMetal", 150); 
   GenerateEntities("closedChestMetal2", 250); 
