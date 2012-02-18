@@ -69,7 +69,7 @@ public:
   };
 
 protected:
-	void Move(void);
+	void HealthBarScroll(void);
 
 	float x;
 	float y;

@@ -123,7 +123,7 @@ void Player::SetCamera(void) {
 
 void Player::Move() {
   map->MoveIfPossible(this, xVel, yVel, true);
-	Character::Move();
+	Character::HealthBarScroll();
 }
 
 void Player::SetLevel(int level) {
