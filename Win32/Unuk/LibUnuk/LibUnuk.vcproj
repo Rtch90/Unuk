@@ -149,18 +149,6 @@
 			Name="Engine"
 			>
 			<File
-				RelativePath="..\..\..\src\libUnuk\Engine\AStar.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libUnuk\Engine\AStar.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libUnuk\Engine\AStarBase.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\src\libUnuk\Engine\Character.cpp"
 				>
 			</File>
@@ -202,6 +190,10 @@
 			</File>
 			<File
 				RelativePath="..\..\..\src\libUnuk\Engine\ParticleEmitter.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libUnuk\Engine\Pathfinding.h"
 				>
 			</File>
 			<File
@@ -390,6 +382,14 @@
 			</File>
 			<File
 				RelativePath="..\..\..\src\libUnuk\Ui\MainMenu.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libUnuk\UI\SavegameMenu.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libUnuk\UI\SavegameMenu.h"
 				>
 			</File>
 			<File

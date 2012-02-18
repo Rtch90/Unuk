@@ -163,7 +163,7 @@ void LevelGen::Save(const string& filename){
       TiXmlElement* tileElem = new TiXmlElement("tile");
       
       TiXmlElement* tileTextureElem = new TiXmlElement("tileTexture");
-      TiXmlText* tileTextureText = new TiXmlText(_tile[x][y].GetTileTextureName());
+      TiXmlText* tileTextureText = new TiXmlText(_tile[x][y].GetTileTextureName().c_str());
       tileTextureElem->LinkEndChild(tileTextureText);
       
       TiXmlElement* solidTileElem = new TiXmlElement("solidTile");
@@ -173,7 +173,7 @@ void LevelGen::Save(const string& filename){
       string entityTextureName = _tile[x][y].GetEntityTextureName();
       
       TiXmlElement* entityTextureElem = new TiXmlElement("entityTexture");
-      TiXmlText* entityTextureText = new TiXmlText(entityTextureName.empty() ? "null" : entityTextureName);
+      TiXmlText* entityTextureText = new TiXmlText(entityTextureName.empty() ? "null" : entityTextureName.c_str());
       entityTextureElem->LinkEndChild(entityTextureText);
       
       TiXmlElement* solidEntityElem = new TiXmlElement("solidEntity");
@@ -184,7 +184,7 @@ void LevelGen::Save(const string& filename){
       zLevelStr << _tile[x][y].GetZLevel();
       
       TiXmlElement* zLevelElem = new TiXmlElement("zLevel");
-      TiXmlText* zLevelText = new TiXmlText(zLevelStr.str());
+      TiXmlText* zLevelText = new TiXmlText(zLevelStr.str().c_str());
       zLevelElem->LinkEndChild(zLevelText);
       
       tileElem->LinkEndChild(tileTextureElem);
@@ -203,7 +203,7 @@ void LevelGen::Save(const string& filename){
 	string fullMapPath = "../Data/Media/Maps/" + filename;
   
   doc.LinkEndChild(rootElem);
-  doc.SaveFile(fullMapPath);
+  doc.SaveFile(fullMapPath.c_str());
 }
 
 void LevelGen::Update(void) {
@@ -344,34 +344,33 @@ void LevelGen::FindSpawnPoint(int& xArg, int& yArg, int objWidth, int objHeight)
     npcRect.w = npc->GetWidth();
     npcRect.h = npc->GetHeight();
     
-    if(CheckCollisionRect(npcRect, objRect))
-      goto findNext;
+    if(CheckCollisionRect(npcRect, objRect)) {
+      FindSpawnPoint(xArg, yArg, objWidth, objHeight);
+      return;
+    }
   }
   
-  for(int x = 0; x < BOUNDARIES_X; x++) {
-    for(int y = 0; y < BOUNDARIES_Y; y++) {
-      if(_tile[x][y].GetTileSolidity()) {
-        goto findNext; 
+  for(int i = 0; i < BOUNDARIES_X; i++) {
+    for(int j = 0; j < BOUNDARIES_Y; j++) {
+      if(_tile[i][j].GetTileSolidity()) {
+        FindSpawnPoint(xArg, yArg, objWidth, objHeight);
+        return;
       }
       
-      if(_tile[x][y].GetEntitySolitity()) {
+      if(_tile[i][j].GetEntitySolitity()) {
         SDL_Rect entityRect;
-        entityRect.x = _tile[x][y].GetEntityX();
-        entityRect.y = _tile[x][y].GetEntityY();
-        entityRect.w = _tile[x][y].GetEntityWidth();
-        entityRect.h = _tile[x][y].GetEntityHeight(); 
+        entityRect.x = _tile[i][j].GetEntityX();
+        entityRect.y = _tile[i][j].GetEntityY();
+        entityRect.w = _tile[i][j].GetEntityWidth();
+        entityRect.h = _tile[i][j].GetEntityHeight(); 
         
         if(CheckCollisionRect(entityRect, objRect)) {
-          goto findNext;
+          FindSpawnPoint(xArg, yArg, objWidth, objHeight);
+          return;
         }
       }
     }
   }
-  
-  return;
-
-findNext:
-	FindSpawnPoint(xArg, yArg, objWidth, objHeight);
 }
 
 void LevelGen::GenerateEnemies(void) {

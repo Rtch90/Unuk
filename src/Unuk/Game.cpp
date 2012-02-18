@@ -254,6 +254,9 @@ void Game::Render(void) {
 void Game::NewSavegame(const string savegameIDArg) {
   string saveFilename = "../Save/" + savegameIDArg;
 
+  _map.New();
+  _map.Save(_saveGameID);
+
 	TiXmlDocument doc;
 
 	TiXmlDeclaration* decl = new TiXmlDeclaration("1.0", "", "");
@@ -266,7 +269,7 @@ void Game::NewSavegame(const string savegameIDArg) {
   
   int spawnX;
   int spawnY;
-  _map.FindSpawnPoint(spawnX, spawnY, _player->GetWidth(), _player->GetHeight());
+  _map.FindSpawnPoint(spawnX, spawnY, 40, 45);
   
   _player->SetXY(spawnX, spawnY);
   
@@ -316,12 +319,6 @@ void Game::NewSavegame(const string savegameIDArg) {
 	doc.LinkEndChild(saveElement);
 
 	doc.SaveFile(saveFilename.c_str());
-  
-  stringstream mapPath;
-  mapPath << "Data/Media/Maps/" << _saveGameID;
-  
-  _map.New();
-  _map.Save(_saveGameID);
 }
 
 void Game::LoadSavegame(const string savegameIDArg) {
