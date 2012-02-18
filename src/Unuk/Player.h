@@ -26,6 +26,8 @@ public:
   void SetLevelLiteral(int level) { _level = level; }
   void SetExpLiteral(int exp) { _exp = exp; }
   void SetHealthLiteral(int health) { _health = health; }
+
+  void SetXY(float xArg, float yArg)	{ x = xArg, y = yArg; _lastTileX = xArg / TILE_WIDTH; _lastTileY = yArg / TILE_HEIGHT; }
   
   static const int MAX_LEVEL = 20;
   static const int EXP_TABLE[MAX_LEVEL];
@@ -41,4 +43,7 @@ private:
   string _name;
   int _level;
   int _exp;
+
+  int _lastTileX;
+  int _lastTileY;
 };

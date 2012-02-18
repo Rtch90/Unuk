@@ -32,6 +32,7 @@ public:
   
   void FindSpawnPoint(int& xArg, int& yArg, int objWidth, int objHeight);
   void MoveIfPossible(Character* character, float xVel, float yVel, bool isPlayer = false);
+  bool CanMoveToPoint(int xArg, int yArg);
   
 	bool GetTileSolidity(int xArg, int yArg);
 	int  GetTileX(int xArg, int yArg);
@@ -44,6 +45,8 @@ public:
 	int  GetEntityHeight(int xArg, int yArg);
 
 	int  GetTileZLevel(int xArg, int yArg);
+
+  MapTile& GetTile(int xArg, int yArg);
 
 	string GetCurrentMap(void);
 

@@ -32,6 +32,8 @@ const int Player::EXP_TABLE[MAX_LEVEL] = {
 Player::Player(LevelGen *mapArg) : Character(mapArg) {
 		_level = 1;
 		_exp = 0;
+    _lastTileX = 0;
+    _lastTileY = 0;
 }
 
 Player::~Player(void) {
@@ -99,6 +101,15 @@ void Player::Update(void) {
 	// For now The camera will be static.
 	//SetCamera();
 
+  int tileX = x / TILE_WIDTH;
+  int tileY = y / TILE_HEIGHT;
+  if(tileX != _lastTileX || tileY != _lastTileY) {
+    _lastTileX = tileX;
+    _lastTileY = tileY;
+    
+    map->GetWorld().OnPlayerMove(this);
+  }
+
 	_healthBar.SetProgress((float)GetHealth() / 100.0f);
 }
 
@@ -123,7 +134,7 @@ void Player::SetCamera(void) {
 
 void Player::Move() {
   map->MoveIfPossible(this, xVel, yVel, true);
-	Character::HealthBarScroll();
+  Character::HealthBarScroll();
 }
 
 void Player::SetLevel(int level) {

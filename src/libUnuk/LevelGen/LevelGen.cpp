@@ -255,7 +255,7 @@ void LevelGen::Unload(void) {
 	_entityTextures.Unload();
   for(int x = 0; x < TILE_ARRAY_SIZE; x++) {
     for(int y = 0; y < TILE_ARRAY_SIZE; y++) {
-      _tile[x][y] = MapTile();
+      _tile[x][y] = MapTile(this);
     }
   }
 }
@@ -411,17 +411,17 @@ void LevelGen::MoveIfPossible(Character* character, float xVel, float yVel, bool
   charRect.w = character->GetWidth();
   charRect.h = character->GetHeight() / 4;
   
-  for(int x = 0; x < BOUNDARIES_X; x++) {
-    for(int y = 0; y < BOUNDARIES_Y; y++) {
-      if(!_tile[x][y].GetEntitySolitity()) {
+  for(int i = 0; i < BOUNDARIES_X; i++) {
+    for(int j = 0; j < BOUNDARIES_Y; j++) {
+      if(!_tile[i][j].GetEntitySolitity()) {
         continue;
       }
       
       SDL_Rect entityRect;
-      entityRect.x = _tile[x][y].GetEntityX();
-      entityRect.y = _tile[x][y].GetEntityY();
-      entityRect.w = _tile[x][y].GetEntityWidth();
-      entityRect.h = _tile[x][y].GetEntityHeight();
+      entityRect.x = _tile[i][j].GetEntityX();
+      entityRect.y = _tile[i][j].GetEntityY();
+      entityRect.w = _tile[i][j].GetEntityWidth();
+      entityRect.h = _tile[i][j].GetEntityHeight();
       
       if(CheckCollisionRect(entityRect, charRect)) {
         return;
@@ -446,6 +446,41 @@ void LevelGen::MoveIfPossible(Character* character, float xVel, float yVel, bool
   }
   
   character->SetXY(targetX, targetY);
+}
+
+bool LevelGen::CanMoveToPoint(int xArg, int yArg) {
+  if(xArg < 0 || xArg > SCREEN_WIDTH || 
+     yArg < 0 || yArg > SCREEN_HEIGHT) {
+    return false;
+  }
+  
+  int tileX = xArg / TILE_WIDTH;
+  int tileY = yArg / TILE_HEIGHT;
+
+  if(_tile[tileX][tileY].GetTileSolidity()) {
+    return false;
+  }
+  
+  for(int i = 0; i < BOUNDARIES_X; i++) {
+    for(int j = 0; j < BOUNDARIES_Y; j++) {
+      if(!_tile[i][j].GetEntitySolitity()) {
+        continue;
+      }
+      
+      SDL_Rect entityRect;
+      entityRect.x = _tile[i][j].GetEntityX();
+      entityRect.y = _tile[i][j].GetEntityY();
+      entityRect.w = _tile[i][j].GetEntityWidth();
+      entityRect.h = _tile[i][j].GetEntityHeight();
+      
+      if(xArg >= entityRect.x && xArg <= (entityRect.x + entityRect.w) &&
+         yArg >= entityRect.y && yArg <= (entityRect.y + entityRect.h)) {
+        return false;
+      }
+    }
+  }
+
+  return true;
 }
 
 string LevelGen::GetCurrentMap(void) {
@@ -490,4 +525,8 @@ int LevelGen::GetEntityHeight(int xArg, int yArg) {
 
 int LevelGen::GetTileZLevel(int xArg, int yArg) {
 	return _tile[xArg + 1][yArg + 1].GetZLevel();
+}
+
+MapTile& LevelGen::GetTile(int xArg, int yArg) {
+  return _tile[xArg][yArg];
 }

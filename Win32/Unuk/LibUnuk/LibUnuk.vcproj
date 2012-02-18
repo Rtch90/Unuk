@@ -233,6 +233,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\src\libUnuk\LevelGen\MapTile.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\libUnuk\LevelGen\MapTile.h"
 				>
 			</File>
@@ -314,6 +318,14 @@
 			</File>
 			<File
 				RelativePath="..\..\..\src\libUnuk\System\Timer.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libUnuk\System\Vec2.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libUnuk\System\Vec2.h"
 				>
 			</File>
 		</Filter>

@@ -37,7 +37,7 @@ public:
 		float h; // Heuristic estimate of the distance of the goal.
 		float f; // Sum of cost and heuristic.
 
-		Node(void) : parent(0), child(0), g(0.0f), h(0.0f), f(0.0) {}
+		Node(UserState userState) : parent(0), child(0), g(0.0f), h(0.0f), f(0.0), _userState(userState) {}
 
 		UserState _userState;
 	};
@@ -68,13 +68,10 @@ public:
 	void SetStartAndGoalStates(UserState& start, UserState& goal) {
 		_cancelRequest= false;
 
-		_start = AllocateNode();
-		_goal  = AllocateNode();
+		_start = AllocateNode(start);
+		_goal  = AllocateNode(goal);
 
 		assert((_start != NULL && _goal != NULL));
-
-		_start->_userState = _start;
-		_goal->_userState  = _goal;
 
 		_state = SEARCH_STATE_SEARCHING;
 
@@ -245,7 +242,7 @@ public:
 	// Call this to add a successor to a list of
 	// successors when expanding the seach frontier.
 	bool AddSuccessor(UserState& state) {
-		Node* node = Allocate();
+		Node* node = AllocateNode(state);
 
 		if(node) {
 			node->_userState = state;
@@ -307,8 +304,8 @@ public:
 	// Get the end node.
 	UserState* GetSolutionEnd(void) {
 		_currentSolutionNode = _goal;
-		if(goal) {
-			return &goal->_userState;
+		if(_goal) {
+			return &_goal->_userState;
 		} else {
 			return NULL;
 		}
@@ -470,8 +467,8 @@ private:
 
 	}
 
-	Node* AllocateNode(void) {
-		Node *p = new Node;
+	Node* AllocateNode(UserState& userState) {
+		Node *p = new Node(userState);
 		return p;
 	}
 

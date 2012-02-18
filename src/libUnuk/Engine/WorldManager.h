@@ -27,6 +27,7 @@ public:
   int  GetNPCCount() { return _npcs.size(); }
 
   void OnPlayerAttack(Player* player);
+  void OnPlayerMove(Player* player);
 
 private:
   LevelGen* _level;

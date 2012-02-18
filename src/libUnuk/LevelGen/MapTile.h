@@ -7,11 +7,15 @@
 #include "../Sprite/ApplySurface.h"
 #include "../LevelGen/MapElement.h"
 #include "../LevelGen/MapEntities.h"
+#include "../Engine/Pathfinding.h"
+#include "../System/Vec2.h"
 using namespace std;
+
+class LevelGen;
 
 class MapTile {
 public:
-  MapTile(void)                                     {  }
+  MapTile(LevelGen* level = NULL) : _level(level)          {  }
   ~MapTile(void)                                    {  }
 
   void Render(void)                                 { _tile.Render(), _entity.Render(); }
@@ -48,7 +52,16 @@ public:
   void SetZLevel(int arg)                           { _zLevel = arg; }
   int GetZLevel(void)                               { return _zLevel; }
 
+  // Pathfinding stuff.
+  MapTile(const MapTile& source);
+  bool IsSameState(MapTile& tile);
+  bool IsGoal(MapTile& tile);
+  float GoalDistanceEstimate(MapTile& goal);
+  float GetCost(MapTile& goal);
+  bool GetSuccessors(AStarSearch<MapTile>* search, MapTile* parent);
+
 private:
+  LevelGen* _level;
   MapElement _tile;
   MapEntityGeneric _entity;
 

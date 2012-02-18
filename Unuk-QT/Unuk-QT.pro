@@ -77,6 +77,7 @@ SOURCES += ../src/libUnuk/Engine/WorldManager.cpp \
     ../src/libUnuk/LevelGen/LevelGen.cpp \
     ../src/libUnuk/LevelGen/MapEntities.cpp \
     ../src/libUnuk/LevelGen/MapElement.cpp \
+    ../src/libUnuk/LevelGen/MapTile.cpp \
     ../src/libUnuk/UI/EventHistory.cpp \
     ../src/libUnuk/UI/Bar.cpp \
     ../src/libUnuk/System/Vec2.cpp \
