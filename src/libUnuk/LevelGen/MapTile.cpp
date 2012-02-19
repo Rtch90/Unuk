@@ -39,8 +39,7 @@ bool MapTile::GetSuccessors(AStarSearch<MapTile>* search, MapTile* parent) {
 	}
 
 	// Add tile to the right if possible
-	// TODO: replace 64 with map width
-	if(tileX < 64) {
+	if(tileX < TILE_WIDTH) {
 		MapTile& successor = _level->GetTile(tileX + 1, tileY);
 		if(successor.GetTileSolidity() || successor.GetEntitySolitity()) {
 			search->AddSuccessor(successor);
@@ -56,8 +55,7 @@ bool MapTile::GetSuccessors(AStarSearch<MapTile>* search, MapTile* parent) {
 	}
 
 	// Add tile to the top if possible
-	// TODO: replace 64 with map height
-	if(tileY < 64) {
+	if(tileY < TILE_HEIGHT) {
 		MapTile& successor = _level->GetTile(tileX, tileY + 1);
 		if(successor.GetTileSolidity() || successor.GetEntitySolitity()) {
 			search->AddSuccessor(successor);
