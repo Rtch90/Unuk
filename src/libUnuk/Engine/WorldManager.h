@@ -30,23 +30,6 @@ public:
 	void OnPlayerAttack(Player* player);
 	void OnPlayerMove(Player* player);
 
-	// Overload new and delete operators to utilize MemManager.
-	inline void* operator new(size_t size) {
-		return gMemManager.Allocate(size);
-	}
-
-	inline void operator delete(void* object) {
-		gMemManager.Free(object);
-	}
-
-	inline void* operator new [](size_t size) {
-		return gMemManager.Allocate(size);
-	}
-
-	inline void operator delete [](void* object) {
-		gMemManager.Free(object);
-	}
-
 private:
 	LevelGen* _level;
 	std::list<NPC*> _npcs;
