@@ -45,28 +45,29 @@ public:
 
 	void OnAttack(void);
 
-//	inline void* operator new(size_t size) {
-//		return gMemManager.Allocate(size);
-//	}
-//
-//	inline void operator delete(void* object) {
-//		gMemManager.Free(object);
-//	}
-//
-//	inline void* operator new [](size_t size) {
-//		return gMemManager.Allocate(size);
-//	}
-//
-//	inline void operator delete [](void* object) {
-//		gMemManager.Free(object);
-//	}
-  
-  enum {
-    FACING_UP,
-    FACING_RIGHT,
-    FACING_DOWN,
-    FACING_LEFT
-  };
+	// Overload new and delete operators to utilize MemManager.
+	inline void* operator new(size_t size) {
+		return gMemManager.Allocate(size);
+	}
+
+	inline void operator delete(void* object) {
+		gMemManager.Free(object);
+	}
+
+	inline void* operator new [](size_t size) {
+		return gMemManager.Allocate(size);
+	}
+
+	inline void operator delete [](void* object) {
+		gMemManager.Free(object);
+	}
+
+	enum {
+		FACING_UP,
+		FACING_RIGHT,
+		FACING_DOWN,
+		FACING_LEFT
+	};
 
 protected:
 	void HealthBarScroll(void);

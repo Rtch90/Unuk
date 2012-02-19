@@ -14,6 +14,7 @@
 #include "../LevelGen/MapTile.h"
 #include "../System/Debug.h"
 #include "../Engine/WorldManager.h"
+#include "../Engine/MemClass.h"
 using namespace std;
 
 class Character;
@@ -24,16 +25,16 @@ public:
 	LevelGen(void);
 	~LevelGen(void);
 
-  void New(void);
-  void Load(const string& filename);
-  void Save(const string& filename);
-  void Update(void);
-  void Render(void);
-  
-  void FindSpawnPoint(int& xArg, int& yArg, int objWidth, int objHeight);
-  void MoveIfPossible(Character* character, float xVel, float yVel, bool isPlayer = false);
-  bool CanMoveToPoint(int xArg, int yArg);
-  
+	void New(void);
+	void Load(const string& filename);
+	void Save(const string& filename);
+	void Update(void);
+	void Render(void);
+
+	void FindSpawnPoint(int& xArg, int& yArg, int objWidth, int objHeight);
+	void MoveIfPossible(Character* character, float xVel, float yVel, bool isPlayer = false);
+	bool CanMoveToPoint(int xArg, int yArg);
+
 	bool GetTileSolidity(int xArg, int yArg);
 	int  GetTileX(int xArg, int yArg);
 	int  GetTileY(int xArg, int yArg);
@@ -46,35 +47,35 @@ public:
 
 	int  GetTileZLevel(int xArg, int yArg);
 
-  MapTile& GetTile(int xArg, int yArg);
+	MapTile& GetTile(int xArg, int yArg);
 
 	string GetCurrentMap(void);
 
 	WorldManager& GetWorld(void) { return _world; }
 
-  void SetPlayer(Player* player) { _player = player; }
-  
+	void SetPlayer(Player* player) { _player = player; }
+
 private:
-  void Unload(void);
-  void DoMagic(void);
-  void GenerateEntities(const std::string& name, int frequency);
-  void MakeWalkingPaths(void);
-  void GenerateEnemies(void);
+	void Unload(void);
+	void DoMagic(void);
+	void GenerateEntities(const std::string& name, int frequency);
+	void MakeWalkingPaths(void);
+	void GenerateEnemies(void);
 
-  string _currentMap;
-  int x;
-  int y;
+	string _currentMap;
+	int x;
+	int y;
 
-  static const int TILE_ARRAY_SIZE = 150;
-  MapTile _tile[TILE_ARRAY_SIZE][TILE_ARRAY_SIZE];
-  
-  static const int BOUNDARIES_X = (SCREEN_WIDTH / TILE_WIDTH);
-  static const int BOUNDARIES_Y = (SCREEN_HEIGHT / TILE_HEIGHT);
+	static const int TILE_ARRAY_SIZE = 150;
+	MapTile _tile[TILE_ARRAY_SIZE][TILE_ARRAY_SIZE];
 
-  TextureManager _tileTextures;
-  TextureManager _entityTextures;
+	static const int BOUNDARIES_X = (SCREEN_WIDTH / TILE_WIDTH);
+	static const int BOUNDARIES_Y = (SCREEN_HEIGHT / TILE_HEIGHT);
 
-  WorldManager _world;
-  
-  Player* _player;
+	TextureManager _tileTextures;
+	TextureManager _entityTextures;
+
+	WorldManager _world;
+
+	Player* _player;
 };
