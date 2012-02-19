@@ -1,4 +1,4 @@
-#pragma once;
+#pragma once
 #include "../../Unuk/Player.h"
 #include "../System/Timer.h"
 #include "ParticleEmitter.h"
@@ -13,9 +13,10 @@ public:
 		ICE
 	};
 
-	void CastSpell(Player* player);
+	void CastSpell(/*Player* player*/);
+	void Render(void);
 
 private:
 	Timer* _timeBetweenCast;
-
+	ParticleEmitter* _particle;
 };

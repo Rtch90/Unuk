@@ -187,7 +187,7 @@ void WorldManager::OnPlayerAttack(Player* player) {
 }
 
 void WorldManager::OnPlayerMove(Player* player) {
-  for(std::list<NPC*>::iterator i = _npcs.begin(); i != _npcs.end(); ++i) {
-    (*i)->OnPlayerMove(player);
-  }
+	for(std::list<NPC*>::iterator i = _npcs.begin(); i != _npcs.end(); ++i) {
+		(*i)->OnPlayerMove(player);
+	}
 }

@@ -1,7 +1,6 @@
 #pragma once
 #include <list>
 #include "MemClass.h"
-
 class Character;
 class NPC;
 class Player;
