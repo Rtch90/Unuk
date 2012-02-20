@@ -41,6 +41,7 @@ HEADERS += ../src/Libs/wglext.h \
     ../src/libUnuk/LevelGen/MapEntities.h \
     ../src/libUnuk/LevelGen/MapElement.h \
     ../src/libUnuk/LevelGen/MapTile.h \
+    ../src/libUnuk/LevelGen/AStarTile.h \
     ../src/libUnuk/UI/EventHistory.h \
     ../src/libUnuk/UI/Bar.h \
     ../src/libUnuk/System/Vec2.h \
@@ -77,7 +78,7 @@ SOURCES += ../src/libUnuk/Engine/WorldManager.cpp \
     ../src/libUnuk/LevelGen/LevelGen.cpp \
     ../src/libUnuk/LevelGen/MapEntities.cpp \
     ../src/libUnuk/LevelGen/MapElement.cpp \
-    ../src/libUnuk/LevelGen/MapTile.cpp \
+    ../src/libUnuk/LevelGen/AStarTile.cpp \
     ../src/libUnuk/UI/EventHistory.cpp \
     ../src/libUnuk/UI/Bar.cpp \
     ../src/libUnuk/System/Vec2.cpp \

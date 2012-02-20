@@ -152,7 +152,7 @@ public:
 
 			// The user provides this functions and uses AddSuccessor to add each
 			// successor of node 'n' to _successors.
-			bool ret = n->_userState.GetSuccessors(this, n->parent ? &n->parent->_userState : NULL);
+			bool ret = n->_userState.GetSuccessors(this/*, n->parent ? &n->parent->_userState : NULL*/);
 
 			if(!ret) {
 				typename vector<Node*>::iterator successor;

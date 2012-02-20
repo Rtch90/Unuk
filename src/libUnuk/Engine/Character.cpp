@@ -15,9 +15,13 @@ Character::Character(LevelGen* mapArg) {
 	_leftFoot = false;
 	_health = 100;
 
-	xVel = 0.0f;
+  x = 0;
+  y = 0;
+	w = 40;
+  h = 45;
+  xVel = 0.0f;
 	yVel = 0.0f;
-
+  
 	_texture = NULL;
 
 	collisionList.push_front(this);

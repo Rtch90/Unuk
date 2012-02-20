@@ -40,6 +40,9 @@ void LevelGen::New(void) {
   
   // procedural generation
 	DoMagic();
+
+  // pathfinding
+  UpdateAStarTiles();
 }
 
 void LevelGen::Load(const string& filename) {
@@ -146,6 +149,8 @@ void LevelGen::Load(const string& filename) {
   _world = WorldManager(this);
   
   GenerateEnemies();
+
+  UpdateAStarTiles();
 }
 
 void LevelGen::Save(const string& filename){
@@ -255,7 +260,7 @@ void LevelGen::Unload(void) {
 	_entityTextures.Unload();
   for(int x = 0; x < TILE_ARRAY_SIZE; x++) {
     for(int y = 0; y < TILE_ARRAY_SIZE; y++) {
-      _tile[x][y] = MapTile(this);
+      _tile[x][y] = MapTile();
     }
   }
 }
@@ -269,7 +274,7 @@ void LevelGen::DoMagic(void) {
   GenerateEntities("stone2", 35);
   GenerateEntities("closedChest", 100); 
   GenerateEntities("closedChestMetal", 150); 
-  GenerateEntities("closedChestMetal2", 250); 
+  GenerateEntities("closedChestMetal2", 250);
   MakeWalkingPaths();
   GenerateEnemies();
 }
@@ -448,19 +453,18 @@ void LevelGen::MoveIfPossible(Character* character, float xVel, float yVel, bool
   character->SetXY(targetX, targetY);
 }
 
-bool LevelGen::CanMoveToPoint(int xArg, int yArg) {
+bool LevelGen::MetaTilePassable(int xArg, int yArg) {
   if(xArg < 0 || xArg > SCREEN_WIDTH || 
      yArg < 0 || yArg > SCREEN_HEIGHT) {
     return false;
   }
-  
-  int tileX = xArg / TILE_WIDTH;
-  int tileY = yArg / TILE_HEIGHT;
+/*
+  SDL_Rect moverRect;
+  moverRect.x = xArg;
+  moverRect.y = yArg;
+  moverRect.w = 40;
+  moverRect.h = 45;
 
-  if(_tile[tileX][tileY].GetTileSolidity()) {
-    return false;
-  }
-  
   for(int i = 0; i < BOUNDARIES_X; i++) {
     for(int j = 0; j < BOUNDARIES_Y; j++) {
       if(!_tile[i][j].GetEntitySolitity()) {
@@ -473,14 +477,32 @@ bool LevelGen::CanMoveToPoint(int xArg, int yArg) {
       entityRect.w = _tile[i][j].GetEntityWidth();
       entityRect.h = _tile[i][j].GetEntityHeight();
       
-      if(xArg >= entityRect.x && xArg <= (entityRect.x + entityRect.w) &&
-         yArg >= entityRect.y && yArg <= (entityRect.y + entityRect.h)) {
+      if(CheckCollisionRect(moverRect, entityRect)) {
         return false;
       }
     }
   }
 
+  SDL_Rect playerRect;
+  playerRect.x = _player->GetX();
+  playerRect.y = _player->GetY();
+  playerRect.w = _player->GetWidth();
+  playerRect.h = _player->GetHeight();
+
+  if(CheckCollisionRect(moverRect, playerRect)) {
+    return false;
+  }
+*/
   return true;
+}
+
+void LevelGen::UpdateAStarTiles(void) {
+  for(int x = 0; x < ASTAR_ARRAY_SIZE; x++) {
+    for(int y = 0; y < ASTAR_ARRAY_SIZE; y++) {
+      bool passable = MetaTilePassable(x * AStarTile::FAKE_SIZE, y * AStarTile::FAKE_SIZE);
+      _astarTile[x][y] = AStarTile(this, x, y, passable);
+    }
+  }
 }
 
 string LevelGen::GetCurrentMap(void) {
@@ -527,6 +549,6 @@ int LevelGen::GetTileZLevel(int xArg, int yArg) {
 	return _tile[xArg + 1][yArg + 1].GetZLevel();
 }
 
-MapTile& LevelGen::GetTile(int xArg, int yArg) {
-  return _tile[xArg][yArg];
+AStarTile& LevelGen::GetAStarTile(int xArg, int yArg) {
+  return _astarTile[xArg][yArg];
 }

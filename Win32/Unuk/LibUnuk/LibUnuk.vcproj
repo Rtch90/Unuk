@@ -209,6 +209,14 @@
 			Name="LevelGen"
 			>
 			<File
+				RelativePath="..\..\..\src\libUnuk\LevelGen\AStarTile.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libUnuk\LevelGen\AStarTile.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\libUnuk\LevelGen\LevelGen.cpp"
 				>
 			</File>
@@ -230,10 +238,6 @@
 			</File>
 			<File
 				RelativePath="..\..\..\src\libUnuk\LevelGen\MapEntities.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libUnuk\LevelGen\MapTile.cpp"
 				>
 			</File>
 			<File

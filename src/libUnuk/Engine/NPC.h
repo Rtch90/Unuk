@@ -2,7 +2,7 @@
 
 #include "Character.h"
 #include "Pathfinding.h"
-#include "../LevelGen/MapTile.h"
+#include "../LevelGen/AStarTile.h"
 
 class Player;
 
@@ -11,7 +11,8 @@ public:
 	NPC(LevelGen* mapArg);
 	~NPC(void);
 
-	void Update(void);
+	void ForceMove(void);
+  void Update(void);
 
   void OnPlayerMove(Player* player);
 
@@ -19,15 +20,10 @@ protected:
 	void Move(void);
 
 private:
-	int _moveChangeFrequency;
-
-	int _moveDurationCurrent;
-	int _moveDurationMin;
-	int _moveDurationMax;
-
 	bool _moving;
 
-	Timer _moveTimer;
-
-  AStarSearch<MapTile> _astar;
+  AStarSearch<AStarTile> _astar;
+  bool _walkInPath;
+  AStarTile* _target;
+  AStarTile* _lastTarget;
 };

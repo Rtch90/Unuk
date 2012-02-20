@@ -12,6 +12,7 @@
 #include "../Sprite/ImageLoader.h"
 #include "../Sprite/ApplySurface.h"
 #include "../LevelGen/MapTile.h"
+#include "../LevelGen/AStarTile.h"
 #include "../System/Debug.h"
 #include "../Engine/WorldManager.h"
 using namespace std;
@@ -32,7 +33,7 @@ public:
   
   void FindSpawnPoint(int& xArg, int& yArg, int objWidth, int objHeight);
   void MoveIfPossible(Character* character, float xVel, float yVel, bool isPlayer = false);
-  bool CanMoveToPoint(int xArg, int yArg);
+  bool MetaTilePassable(int xArg, int yArg);
   
 	bool GetTileSolidity(int xArg, int yArg);
 	int  GetTileX(int xArg, int yArg);
@@ -46,7 +47,7 @@ public:
 
 	int  GetTileZLevel(int xArg, int yArg);
 
-  MapTile& GetTile(int xArg, int yArg);
+  AStarTile& GetAStarTile(int xArg, int yArg);
 
 	string GetCurrentMap(void);
 
@@ -60,13 +61,17 @@ private:
   void GenerateEntities(const std::string& name, int frequency);
   void MakeWalkingPaths(void);
   void GenerateEnemies(void);
+  void UpdateAStarTiles(void);
 
   string _currentMap;
   int x;
   int y;
 
-  static const int TILE_ARRAY_SIZE = 150;
+  static const int TILE_ARRAY_SIZE = 15;
   MapTile _tile[TILE_ARRAY_SIZE][TILE_ARRAY_SIZE];
+
+  static const int ASTAR_ARRAY_SIZE = TILE_ARRAY_SIZE * (TILE_WIDTH / AStarTile::FAKE_SIZE);
+  AStarTile _astarTile[ASTAR_ARRAY_SIZE][ASTAR_ARRAY_SIZE];
   
   static const int BOUNDARIES_X = (SCREEN_WIDTH / TILE_WIDTH);
   static const int BOUNDARIES_Y = (SCREEN_HEIGHT / TILE_HEIGHT);

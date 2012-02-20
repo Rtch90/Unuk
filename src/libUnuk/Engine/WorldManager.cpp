@@ -71,6 +71,7 @@ NPC* WorldManager::GetNPCAt(int xArg, int yArg) {
 void WorldManager::CreateNPC(int x, int y) {
 	NPC* npc = new NPC(_level);
 	npc->SetXY(x, y);
+  npc->ForceMove();
 	npc->LoadSprites("../Data/Media/Images/Characters/template.png", 40,45);
 	_npcs.push_back(npc);
 }
