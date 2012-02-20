@@ -17,17 +17,17 @@ void NPC::ForceMove(void) {
 }
 
 void NPC::Update(void) {
-  // Store the NPC's health.
-  // int health = GetHealth(); // not referenced
+	// Store the NPC's health.
+	// int health = GetHealth(); // not referenced
 
-  Move();
+	Move();
 
-  if(xVel > 0) directionFacing          = FACING_RIGHT;
-  else if(xVel < 0) directionFacing     = FACING_LEFT;
-  else if(yVel > 0) directionFacing     = FACING_DOWN;
-  else if(yVel < 0) directionFacing     = FACING_UP;
+	if(xVel > 0) directionFacing          = FACING_RIGHT;
+	else if(xVel < 0) directionFacing     = FACING_LEFT;
+	else if(yVel > 0) directionFacing     = FACING_DOWN;
+	else if(yVel < 0) directionFacing     = FACING_UP;
 
-  _healthBar.SetProgress((float)GetHealth() / 100.0f);
+	_healthBar.SetProgress((float)GetHealth() / 100.0f);
 }
 
 void NPC::Move(void) {

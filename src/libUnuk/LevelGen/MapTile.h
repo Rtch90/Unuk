@@ -14,7 +14,7 @@ public:
   MapTile(void)                                     {  }
   ~MapTile(void)                                    {  }
 
-  void Render(void)                                 { _tile.Render(), _entity.Render(); }
+	void Render(void)                                 { _tile.Render(), _entity.Render(); }
 
   // Tile Mutators.
   SDL_Surface* SetTileTexture(SDL_Surface* arg)	 	  { _tile.SetTexture(arg); return NULL; }
@@ -29,29 +29,30 @@ public:
   int GetTileX(void)                                { return _tile.GetX(); }
   int GetTileY(void)                                { return _tile.GetY(); }
 
-  // Entity Mutators.
-  void SetEntityTexture(SDL_Surface* arg)           { _entity.SetTexture(arg); }
-  void SetEntityTextureName(string path)            { _entity.SetTextureName(path); }
-  void SetEntityXY(int xArg, int yArg)              { _entity.SetXY(xArg, yArg); }
-  void SetEntitySolidity(bool arg)                  { _entity.SetSolidity(arg); }
-  bool GetEntitySolitity(void)                      { return _entity.GetSolidity(); }
 
-  // Entity Mutators.
-  int GetEntityX(void)                              { return _entity.GetX(); }
-  int GetEntityY(void)                              { return _entity.GetY(); }
-  int GetEntityWidth(void)                          { return _entity.GetWidth(); }
-  int GetEntityHeight(void)                         { return _entity.GetHeight(); }
-  string GetEntityTextureName(void)                 { return _entity.GetTextureName(); }
+	// Entity Mutators.
+	void SetEntityTexture(SDL_Surface* arg)           { _entity.SetTexture(arg); }
+	void SetEntityTextureName(string path)            { _entity.SetTextureName(path); }
+	void SetEntityXY(int xArg, int yArg)              { _entity.SetXY(xArg, yArg); }
+	void SetEntitySolidity(bool arg)                  { _entity.SetSolidity(arg); }
+	bool GetEntitySolitity(void)                      { return _entity.GetSolidity(); }
+
+	// Entity Mutators.
+	int GetEntityX(void)                              { return _entity.GetX(); }
+	int GetEntityY(void)                              { return _entity.GetY(); }
+	int GetEntityWidth(void)                          { return _entity.GetWidth(); }
+	int GetEntityHeight(void)                         { return _entity.GetHeight(); }
+	string GetEntityTextureName(void)                 { return _entity.GetTextureName(); }
 
   // ZLevel Mutators.
-  void SetZLevel(int arg)                           { _zLevel = arg; }
-  int GetZLevel(void)                               { return _zLevel; }
+	void SetZLevel(int arg)                           { _zLevel = arg; }
+	int GetZLevel(void)                               { return _zLevel; }
 
 private:
   MapElement _tile;
   MapEntityGeneric _entity;
 
-  // -1 is a 'special' tile, the next tile that the player walks
-  // on is the players new zlevel.
-  int _zLevel;
+	// -1 is a 'special' tile, the next tile that the player walks
+	// on is the players new zlevel.
+	int _zLevel;
 };

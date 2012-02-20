@@ -15,6 +15,7 @@
 #include "../LevelGen/AStarTile.h"
 #include "../System/Debug.h"
 #include "../Engine/WorldManager.h"
+#include "../Engine/MemClass.h"
 using namespace std;
 
 class Character;
@@ -53,8 +54,8 @@ public:
 
 	WorldManager& GetWorld(void) { return _world; }
 
-  void SetPlayer(Player* player) { _player = player; }
-  
+	void SetPlayer(Player* player) { _player = player; }
+
 private:
   void Unload(void);
   void DoMagic(void);

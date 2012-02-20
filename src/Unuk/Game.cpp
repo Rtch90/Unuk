@@ -7,7 +7,7 @@
 Game::Game(void) {
 	Debug::logger->message("Creating characters..");
 	_player = new Player(&_map);
-  _map.SetPlayer(_player);
+	_map.SetPlayer(_player);
 
 	_runGameReturnValue = gameMainMenu;
 }
@@ -19,29 +19,29 @@ Game::~Game(void) {
 }
 
 void Game::New(const string& savegameIDArg) {
-  _saveGameID = savegameIDArg;
-  NewSavegame(savegameIDArg);
-  
-  int spawnX;
-  int spawnY;
-  _map.FindSpawnPoint(spawnX, spawnY, 40, 45);
-  
-  _player->SetXY((float)spawnX, (float)spawnY);
+	_saveGameID = savegameIDArg;
+	NewSavegame(savegameIDArg);
+
+	int spawnX;
+	int spawnY;
+	_map.FindSpawnPoint(spawnX, spawnY, 40, 45);
+
+	_player->SetXY((float)spawnX, (float)spawnY);
 }
 
 void Game::Load(const string& savegameIDArg) {
-  _saveGameID = savegameIDArg;
-  LoadSavegame(savegameIDArg);
-  
-  int spawnX;
-  int spawnY;
-  _map.FindSpawnPoint(spawnX, spawnY, 40, 45);
-  
-  _player->SetXY((float)spawnX, (float)spawnY);
+	_saveGameID = savegameIDArg;
+	LoadSavegame(savegameIDArg);
+
+	int spawnX;
+	int spawnY;
+	_map.FindSpawnPoint(spawnX, spawnY, 40, 45);
+
+	_player->SetXY((float)spawnX, (float)spawnY);
 }
 
 gameNavVal_t Game::Run(void) {
-	_player->LoadSprites("../Data/Media/Images/Characters/Player.png", 40, 45);
+	_player->LoadSprites("../Data/Media/Images/Characters/Reniesta.png", 40, 45);
 
 	int fps = 0;
 	int frame = 0;
@@ -252,10 +252,10 @@ void Game::Render(void) {
 }
 
 void Game::NewSavegame(const string savegameIDArg) {
-  string saveFilename = "../Save/" + savegameIDArg;
+	string saveFilename = "../Save/" + savegameIDArg;
 
-  _map.New();
-  _map.Save(_saveGameID);
+	_map.New();
+	_map.Save(_saveGameID);
 
 	TiXmlDocument doc;
 
@@ -266,13 +266,13 @@ void Game::NewSavegame(const string savegameIDArg) {
 	TiXmlElement* nameElement = new TiXmlElement("name");
 	TiXmlText* nameText = new TiXmlText("Allanis"); //TODO: replace with _player->GetName() when it works. --konom
 	nameElement->LinkEndChild(nameText);
-  
-  int spawnX;
-  int spawnY;
-  _map.FindSpawnPoint(spawnX, spawnY, 40, 45);
-  
-  _player->SetXY(spawnX, spawnY);
-  
+
+	int spawnX;
+	int spawnY;
+	_map.FindSpawnPoint(spawnX, spawnY, 40, 45);
+
+	_player->SetXY(spawnX, spawnY);
+
 	std::stringstream xString;
 	xString << spawnX;
 
@@ -286,22 +286,22 @@ void Game::NewSavegame(const string savegameIDArg) {
 	TiXmlElement* yElement = new TiXmlElement("y");
 	TiXmlText* yText = new TiXmlText(yString.str().c_str());
 	yElement->LinkEndChild(yText);
-  
-  _player->SetLevelLiteral(1);
-  
-  TiXmlElement* levelElement = new TiXmlElement("level");
-  TiXmlText* levelText = new TiXmlText("1");
-  levelElement->LinkEndChild(levelText);
-  
-  _player->SetExpLiteral(0);
-  
-  TiXmlElement* expElement = new TiXmlElement("exp");
-  TiXmlText* expText = new TiXmlText("0");
-  expElement->LinkEndChild(expText);
-  
-  TiXmlElement* healthElement = new TiXmlElement("health");
-  TiXmlText* healthText = new TiXmlText("100");
-  healthElement->LinkEndChild(healthText);
+
+	_player->SetLevelLiteral(1);
+
+	TiXmlElement* levelElement = new TiXmlElement("level");
+	TiXmlText* levelText = new TiXmlText("1");
+	levelElement->LinkEndChild(levelText);
+
+	_player->SetExpLiteral(0);
+
+	TiXmlElement* expElement = new TiXmlElement("exp");
+	TiXmlText* expText = new TiXmlText("0");
+	expElement->LinkEndChild(expText);
+
+	TiXmlElement* healthElement = new TiXmlElement("health");
+	TiXmlText* healthText = new TiXmlText("100");
+	healthElement->LinkEndChild(healthText);
 
 	TiXmlElement* mapElement = new TiXmlElement("map");
 	TiXmlText* mapText = new TiXmlText("map"); //TODO: replace with actual map name.
@@ -310,9 +310,9 @@ void Game::NewSavegame(const string savegameIDArg) {
 	saveElement->LinkEndChild(nameElement);
 	saveElement->LinkEndChild(xElement);
 	saveElement->LinkEndChild(yElement);
-  saveElement->LinkEndChild(levelElement);
-  saveElement->LinkEndChild(expElement);
-  saveElement->LinkEndChild(healthElement);
+	saveElement->LinkEndChild(levelElement);
+	saveElement->LinkEndChild(expElement);
+	saveElement->LinkEndChild(healthElement);
 	saveElement->LinkEndChild(mapElement);
 
 	doc.LinkEndChild(decl);
@@ -327,12 +327,12 @@ void Game::LoadSavegame(const string savegameIDArg) {
 
 	// Converting to XML ftw!
 	TiXmlDocument mapFile(saveFilename.c_str());
-  
-  // Create new save if can't load file.
-  if(!mapFile.LoadFile()) {
-    New(savegameIDArg);
-    return;
-  }
+
+	// Create new save if can't load file.
+	if(!mapFile.LoadFile()) {
+		New(savegameIDArg);
+		return;
+	}
 
 	TiXmlElement* rootElem = NULL;
 	TiXmlElement* dataElem = NULL;
@@ -364,41 +364,41 @@ void Game::LoadSavegame(const string savegameIDArg) {
 		// </y>
 		_player->SetXY((float)playerX, (float)playerY);
 */
-    
-    // <level> - Parse the player level.
-    dataElem = dataElem->NextSiblingElement("level");
-    assert(dataElem != NULL);
-    int playerLevel = atoi(dataElem->GetText());
-    // </level>
-    
-    _player->SetLevelLiteral(playerLevel);
-    
-    // <exp> - Parse the player exp.
-    dataElem = dataElem->NextSiblingElement("exp");
-    assert(dataElem != NULL);
-    int playerExp = atoi(dataElem->GetText());
-    // </exp>
-    
-    _player->SetExpLiteral(playerExp);
-    
-    // <health> - Parse the player health.
-    dataElem = dataElem->NextSiblingElement("health");
-    assert(dataElem != NULL);
-    int playerHealth = atoi(dataElem->GetText());
-    // </health>
-    
-    _player->SetHealthLiteral(playerHealth);
+
+		// <level> - Parse the player level.
+		dataElem = dataElem->NextSiblingElement("level");
+		assert(dataElem != NULL);
+		int playerLevel = atoi(dataElem->GetText());
+		// </level>
+
+		_player->SetLevelLiteral(playerLevel);
+
+		// <exp> - Parse the player exp.
+		dataElem = dataElem->NextSiblingElement("exp");
+		assert(dataElem != NULL);
+		int playerExp = atoi(dataElem->GetText());
+		// </exp>
+
+		_player->SetExpLiteral(playerExp);
+
+		// <health> - Parse the player health.
+		dataElem = dataElem->NextSiblingElement("health");
+		assert(dataElem != NULL);
+		int playerHealth = atoi(dataElem->GetText());
+		// </health>
+
+		_player->SetHealthLiteral(playerHealth);
 	}
 	// <save>
 
 	// </save>
-  
-  _map.Load(_saveGameID);
+
+	_map.Load(_saveGameID);
 }
 
 void Game::SaveSavegame(void) {
 	string saveFilename = "../Save/" + _saveGameID;
-  
+
 	TiXmlDocument doc;
 
 	TiXmlDeclaration* decl = new TiXmlDeclaration("1.0", "", "");
@@ -425,38 +425,38 @@ void Game::SaveSavegame(void) {
 	yElement->LinkEndChild(yText);
 */
 
-  std::stringstream levelString;
-  levelString << _player->GetLevel();
-  
-  TiXmlElement* levelElement = new TiXmlElement("level");
-  TiXmlText* levelText = new TiXmlText(levelString.str().c_str());
-  levelElement->LinkEndChild(levelText);
-  
-  std::stringstream expString;
-  expString << _player->GetExp();
-  
-  TiXmlElement* expElement = new TiXmlElement("exp");
-  TiXmlText* expText = new TiXmlText(expString.str().c_str());
-  expElement->LinkEndChild(expText);
-  
-  std::stringstream healthString;
-  healthString << _player->GetHealth();
-  
-  TiXmlElement* healthElement = new TiXmlElement("health");
-  TiXmlText* healthText = new TiXmlText(healthString.str().c_str());
-  healthElement->LinkEndChild(healthText);
+	std::stringstream levelString;
+	levelString << _player->GetLevel();
+
+	TiXmlElement* levelElement = new TiXmlElement("level");
+	TiXmlText* levelText = new TiXmlText(levelString.str().c_str());
+	levelElement->LinkEndChild(levelText);
+
+	std::stringstream expString;
+	expString << _player->GetExp();
+
+	TiXmlElement* expElement = new TiXmlElement("exp");
+	TiXmlText* expText = new TiXmlText(expString.str().c_str());
+	expElement->LinkEndChild(expText);
+
+	std::stringstream healthString;
+	healthString << _player->GetHealth();
+
+	TiXmlElement* healthElement = new TiXmlElement("health");
+	TiXmlText* healthText = new TiXmlText(healthString.str().c_str());
+	healthElement->LinkEndChild(healthText);
 
 	saveElement->LinkEndChild(nameElement);
 	//saveElement->LinkEndChild(xElement);
 	//saveElement->LinkEndChild(yElement);
-  saveElement->LinkEndChild(levelElement);
-  saveElement->LinkEndChild(expElement);
-  saveElement->LinkEndChild(healthElement);
+	saveElement->LinkEndChild(levelElement);
+	saveElement->LinkEndChild(expElement);
+	saveElement->LinkEndChild(healthElement);
 
 	doc.LinkEndChild(decl);
 	doc.LinkEndChild(saveElement);
 
 	doc.SaveFile(saveFilename.c_str());
-  
-  _map.Save(_saveGameID);
+
+	_map.Save(_saveGameID);
 }

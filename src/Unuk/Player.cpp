@@ -17,23 +17,23 @@ const int Player::EXP_TABLE[MAX_LEVEL] = {
 	2000,
 	3500,
 	5000,
-  6500,
-  8500,
-  10250,
-  12000,
-  15000,
-  25000,
-  50000,
-  65000,
-  80000,
-  100000
+	6500,
+	8500,
+	10250,
+	12000,
+	15000,
+	25000,
+	50000,
+	65000,
+	80000,
+	100000
 };
 
 Player::Player(LevelGen *mapArg) : Character(mapArg) {
 		_level = 1;
 		_exp = 0;
-    _lastTileX = 0;
-    _lastTileY = 0;
+		_lastTileX = 0;
+		_lastTileY = 0;
 }
 
 Player::~Player(void) {
@@ -101,14 +101,14 @@ void Player::Update(void) {
 	// For now The camera will be static.
 	//SetCamera();
 
-  int tileX = x / TILE_WIDTH;
-  int tileY = y / TILE_HEIGHT;
-  if(tileX != _lastTileX || tileY != _lastTileY) {
-    _lastTileX = tileX;
-    _lastTileY = tileY;
-    
-    map->GetWorld().OnPlayerMove(this);
-  }
+	int tileX = x / TILE_WIDTH;
+	int tileY = y / TILE_HEIGHT;
+	if(tileX != _lastTileX || tileY != _lastTileY) {
+		_lastTileX = tileX;
+		_lastTileY = tileY;
+
+		map->GetWorld().OnPlayerMove(this);
+	}
 
 	_healthBar.SetProgress((float)GetHealth() / 100.0f);
 }
@@ -133,8 +133,8 @@ void Player::SetCamera(void) {
 }
 
 void Player::Move() {
-  map->MoveIfPossible(this, xVel, yVel, true);
-  Character::HealthBarScroll();
+	map->MoveIfPossible(this, xVel, yVel, true);
+	Character::HealthBarScroll();
 }
 
 void Player::SetLevel(int level) {
@@ -143,10 +143,10 @@ void Player::SetLevel(int level) {
 	if(_exp < 0) {
 		_exp = 0;
 	}
-  if(_level == MAX_LEVEL) {
-    eventHistory->LogEvent("YOU BEAT IT! I'M SO PROUD!");
-    eventHistory->LogEvent("*Sheds Tear*");
-  }
+	if(_level == MAX_LEVEL) {
+		eventHistory->LogEvent("YOU BEAT IT! I'M SO PROUD!");
+		eventHistory->LogEvent("*Sheds Tear*");
+	}
 }
 
 void Player::SetExp(int exp) {

@@ -1,5 +1,4 @@
 CONFIG -= qt
-
 LIBS += -lGL \
     -lSDL \
     -lSDL_ttf \
@@ -7,7 +6,6 @@ LIBS += -lGL \
     -lSDL_gfx \
     -ltinyxml \
     -lGLU
-
 HEADERS += ../src/Libs/wglext.h \
     ../src/Libs/glxext.h \
     ../src/libUnuk/Engine/WorldManager.h \
@@ -47,8 +45,8 @@ HEADERS += ../src/Libs/wglext.h \
     ../src/libUnuk/System/Vec2.h \
     ../src/libUnuk/System/MathBox.h \
     ../src/libUnuk/Engine/Pathfinding.h \
-    ../src/libUnuk/UI/SavegameMenu.h
-
+    ../src/libUnuk/UI/SavegameMenu.h \
+    ../src/libUnuk/Engine/Spells.h
 SOURCES += ../src/libUnuk/Engine/WorldManager.cpp \
     ../src/libUnuk/Engine/ParticleEmitter.cpp \
     ../src/libUnuk/Engine/NPC.cpp \
@@ -82,4 +80,5 @@ SOURCES += ../src/libUnuk/Engine/WorldManager.cpp \
     ../src/libUnuk/UI/EventHistory.cpp \
     ../src/libUnuk/UI/Bar.cpp \
     ../src/libUnuk/System/Vec2.cpp \
-    ../src/libUnuk/UI/SavegameMenu.cpp
+    ../src/libUnuk/UI/SavegameMenu.cpp \
+    ../src/libUnuk/Engine/Spells.cpp
