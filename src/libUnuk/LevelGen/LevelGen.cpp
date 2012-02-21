@@ -17,8 +17,8 @@ void LevelGen::New(void) {
   
   _world = WorldManager(this);
   
-  levelWidth  = TILE_ARRAY_SIZE;
-  levelHeight = TILE_ARRAY_SIZE;
+  levelWidth  = TILE_ARRAY_WIDTH;
+  levelHeight = TILE_ARRAY_HEIGHT;
   
   for(x = 0; x < levelWidth; x++) {
     for(y = 0; y < levelHeight; y++) {
@@ -258,23 +258,23 @@ void LevelGen::Render(void) {
 void LevelGen::Unload(void) {
 	_tileTextures.Unload();
 	_entityTextures.Unload();
-  for(int x = 0; x < TILE_ARRAY_SIZE; x++) {
-    for(int y = 0; y < TILE_ARRAY_SIZE; y++) {
+  for(int x = 0; x < TILE_ARRAY_WIDTH; x++) {
+    for(int y = 0; y < TILE_ARRAY_HEIGHT; y++) {
       _tile[x][y] = MapTile();
     }
   }
 }
 
 void LevelGen::DoMagic(void) {
-  GenerateEntities("tree", 25);
-  GenerateEntities("hedge", 15);
-  GenerateEntities("barrel", 40);
-  GenerateEntities("barrel2", 100);
-  GenerateEntities("stone", 35);
-  GenerateEntities("stone2", 35);
-  GenerateEntities("closedChest", 100); 
-  GenerateEntities("closedChestMetal", 150); 
-  GenerateEntities("closedChestMetal2", 250);
+  GenerateEntities("tree", 45);
+  GenerateEntities("hedge", 35);
+  GenerateEntities("barrel", 60);
+  GenerateEntities("barrel2", 120);
+  GenerateEntities("stone", 55);
+  GenerateEntities("stone2", 55);
+  GenerateEntities("closedChest", 120); 
+  GenerateEntities("closedChestMetal", 170); 
+  GenerateEntities("closedChestMetal2", 270);
   MakeWalkingPaths();
   GenerateEnemies();
 }
@@ -283,8 +283,8 @@ void LevelGen::GenerateEntities(const string& name, int frequency) {
 	int nextEntityGen = 1 + (rand() % frequency);
 	std::string filename = "../Data/Media/Images/Entities/" + name + ".png";
 
-	for(int x = 0; x < BOUNDARIES_X; x++) {
-		for(int y = 0; y < BOUNDARIES_Y; y++) {
+	for(int x = 0; x < TILE_ARRAY_WIDTH; x++) {
+		for(int y = 0; y < TILE_ARRAY_HEIGHT; y++) {
 			nextEntityGen--;
 			if(!_tile[x][y].GetTileSolidity() && !_tile[x][y].GetEntitySolitity() && nextEntityGen <= 0) {
 				_tile[x][y].SetEntityTextureName(name);
@@ -304,10 +304,10 @@ void LevelGen::GenerateEntities(const string& name, int frequency) {
 void LevelGen::MakeWalkingPaths(void) {
 	int lastOpenY = rand() % 5;
 
-	for(int x = 0; x < BOUNDARIES_X; x++) {
+	for(int x = 0; x < TILE_ARRAY_WIDTH; x++) {
 		bool pathFound = false;
 
-		for(int y = 0; y < BOUNDARIES_Y; y++) {
+		for(int y = 0; y < TILE_ARRAY_HEIGHT; y++) {
 			if(!_tile[x][y].GetEntitySolitity()) {
 				pathFound = true;
 				break;
@@ -324,8 +324,8 @@ void LevelGen::MakeWalkingPaths(void) {
 }
 
 void LevelGen::FindSpawnPoint(int& xArg, int& yArg, int objWidth, int objHeight) {
-	xArg = rand() % (BOUNDARIES_X * TILE_WIDTH);
-	yArg = rand() % (BOUNDARIES_Y * TILE_HEIGHT);
+	xArg = rand() % (TILE_ARRAY_WIDTH * TILE_WIDTH);
+	yArg = rand() % (TILE_ARRAY_HEIGHT * TILE_HEIGHT);
   
   if((xArg + objWidth + 1) > SCREEN_WIDTH) {
     xArg = SCREEN_WIDTH - objWidth - 1;
@@ -355,8 +355,8 @@ void LevelGen::FindSpawnPoint(int& xArg, int& yArg, int objWidth, int objHeight)
     }
   }
   
-  for(int i = 0; i < BOUNDARIES_X; i++) {
-    for(int j = 0; j < BOUNDARIES_Y; j++) {
+  for(int i = 0; i < TILE_ARRAY_WIDTH; i++) {
+    for(int j = 0; j < TILE_ARRAY_HEIGHT; j++) {
       if(_tile[i][j].GetTileSolidity()) {
         FindSpawnPoint(xArg, yArg, objWidth, objHeight);
         return;
@@ -395,8 +395,8 @@ void LevelGen::MoveIfPossible(Character* character, float xVel, float yVel, bool
     return;
   }
   
-  int targetX = character->GetX() + xVel;
-  int targetY = character->GetY() + yVel;
+  float targetX = character->GetX() + xVel;
+  float targetY = character->GetY() + yVel;
   
   if(targetX < 0 || targetX > (SCREEN_WIDTH - character->GetWidth()) || 
      targetY < 0 || targetY > (SCREEN_HEIGHT - character->GetHeight())) {
@@ -416,8 +416,8 @@ void LevelGen::MoveIfPossible(Character* character, float xVel, float yVel, bool
   charRect.w = character->GetWidth();
   charRect.h = character->GetHeight() / 4;
   
-  for(int i = 0; i < BOUNDARIES_X; i++) {
-    for(int j = 0; j < BOUNDARIES_Y; j++) {
+  for(int i = 0; i < TILE_ARRAY_WIDTH; i++) {
+    for(int j = 0; j < TILE_ARRAY_HEIGHT; j++) {
       if(!_tile[i][j].GetEntitySolitity()) {
         continue;
       }
@@ -434,8 +434,10 @@ void LevelGen::MoveIfPossible(Character* character, float xVel, float yVel, bool
     }
   }
   
-  if(_world.CheckCollision(charRect, character)) {
-    return;
+  if(true) {
+    if(_world.CheckCollision(charRect, character)) {
+      return;
+    }
   }
   
   if(!isPlayer) {
@@ -453,20 +455,15 @@ void LevelGen::MoveIfPossible(Character* character, float xVel, float yVel, bool
   character->SetXY(targetX, targetY);
 }
 
-bool LevelGen::MetaTilePassable(int xArg, int yArg) {
-  if(xArg < 0 || xArg > SCREEN_WIDTH || 
-     yArg < 0 || yArg > SCREEN_HEIGHT) {
-    return false;
-  }
-/*
-  SDL_Rect moverRect;
-  moverRect.x = xArg;
-  moverRect.y = yArg;
-  moverRect.w = 40;
-  moverRect.h = 45;
+bool LevelGen::AStarTilePassable(int xArg, int yArg) {
+  SDL_Rect tileRect;
+  tileRect.x = xArg * AStarTile::FAKE_SIZE;
+  tileRect.y = yArg * AStarTile::FAKE_SIZE;
+  tileRect.w = 40;
+  tileRect.h = 45;
 
-  for(int i = 0; i < BOUNDARIES_X; i++) {
-    for(int j = 0; j < BOUNDARIES_Y; j++) {
+  for(int i = 0; i < TILE_ARRAY_WIDTH; i++) {
+    for(int j = 0; j < TILE_ARRAY_HEIGHT; j++) {
       if(!_tile[i][j].GetEntitySolitity()) {
         continue;
       }
@@ -477,7 +474,7 @@ bool LevelGen::MetaTilePassable(int xArg, int yArg) {
       entityRect.w = _tile[i][j].GetEntityWidth();
       entityRect.h = _tile[i][j].GetEntityHeight();
       
-      if(CheckCollisionRect(moverRect, entityRect)) {
+      if(CheckCollisionRect(tileRect, entityRect)) {
         return false;
       }
     }
@@ -485,22 +482,24 @@ bool LevelGen::MetaTilePassable(int xArg, int yArg) {
 
   SDL_Rect playerRect;
   playerRect.x = _player->GetX();
-  playerRect.y = _player->GetY();
+  playerRect.y = _player->GetY() + (_player->GetHeight() / 4) * 3;
   playerRect.w = _player->GetWidth();
-  playerRect.h = _player->GetHeight();
+  playerRect.h = _player->GetHeight() / 4;
 
-  if(CheckCollisionRect(moverRect, playerRect)) {
+  if(CheckCollisionRect(tileRect, playerRect)) {
     return false;
   }
-*/
+
   return true;
 }
 
 void LevelGen::UpdateAStarTiles(void) {
-  for(int x = 0; x < ASTAR_ARRAY_SIZE; x++) {
-    for(int y = 0; y < ASTAR_ARRAY_SIZE; y++) {
-      bool passable = MetaTilePassable(x * AStarTile::FAKE_SIZE, y * AStarTile::FAKE_SIZE);
-      _astarTile[x][y] = AStarTile(this, x, y, passable);
+  int maxX = levelWidth / AStarTile::FAKE_SIZE;
+  int maxY = levelHeight / AStarTile::FAKE_SIZE;
+  
+  for(int x = 0; x < maxX; x++) {
+    for(int y = 0; y < maxY; y++) {
+      _astarTile[x][y] = AStarTile(this, x, y, AStarTilePassable(x, y));
     }
   }
 }

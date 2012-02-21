@@ -18,8 +18,7 @@ public:
   int GetX() { return x * FAKE_SIZE; }
   int GetY() { return y * FAKE_SIZE; }
 
-  static const int FAKE_SIZE = 64
-    ;
+  static const int FAKE_SIZE = 16;
 
 private:
   LevelGen* _level;

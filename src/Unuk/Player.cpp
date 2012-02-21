@@ -100,9 +100,10 @@ void Player::Update(void) {
 
 	// For now The camera will be static.
 	//SetCamera();
+  
+  tileX = x / AStarTile::FAKE_SIZE;
+  tileY = y / AStarTile::FAKE_SIZE;
 
-	int tileX = x / TILE_WIDTH;
-	int tileY = y / TILE_HEIGHT;
 	if(tileX != _lastTileX || tileY != _lastTileY) {
 		_lastTileX = tileX;
 		_lastTileY = tileY;

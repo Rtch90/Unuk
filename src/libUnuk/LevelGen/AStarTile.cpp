@@ -21,31 +21,43 @@ float AStarTile::GetCost(AStarTile& goal) {
 }
 
 bool AStarTile::GetSuccessors(AStarSearch<AStarTile>* search) {
-  if(_level->MetaTilePassable((x - 1) * FAKE_SIZE, y * FAKE_SIZE)) {
+  if(!_level) {
+    return false;
+  }
+  
+  if(x > 0) {
     AStarTile& successor = _level->GetAStarTile(x - 1, y);
-    if(!search->AddSuccessor(successor)) {
-      return false;
+    if(successor._passable) {
+      if(!search->AddSuccessor(successor)) {
+        return false;
+      }
     }
   }
 
-  if(_level->MetaTilePassable((x + 1) * FAKE_SIZE, y * FAKE_SIZE)) {
+  if(x < (levelWidth / FAKE_SIZE)) {
     AStarTile& successor = _level->GetAStarTile(x + 1, y);
-    if(!search->AddSuccessor(successor)) {
-      return false;
+    if(successor._passable) {
+      if(!search->AddSuccessor(successor)) {
+        return false;
+      }
     }
   }
 
-  if(_level->MetaTilePassable(x * FAKE_SIZE, (y - 1) * FAKE_SIZE)) {
+  if(y > 0) {
     AStarTile& successor = _level->GetAStarTile(x, y - 1);
-    if(!search->AddSuccessor(successor)) {
-      return false;
+    if(successor._passable) {
+      if(!search->AddSuccessor(successor)) {
+        return false;
+      }
     }
   }
 
-  if(_level->MetaTilePassable(x * FAKE_SIZE, (y + 1) * FAKE_SIZE)) {
+  if(y < (levelHeight / FAKE_SIZE)) {
     AStarTile& successor = _level->GetAStarTile(x, y + 1);
-    if(!search->AddSuccessor(successor)) {
-      return false;
+    if(successor._passable) {
+      if(!search->AddSuccessor(successor)) {
+        return false;
+      }
     }
   }
 

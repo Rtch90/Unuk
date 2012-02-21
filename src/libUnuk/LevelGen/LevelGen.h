@@ -34,7 +34,6 @@ public:
   
   void FindSpawnPoint(int& xArg, int& yArg, int objWidth, int objHeight);
   void MoveIfPossible(Character* character, float xVel, float yVel, bool isPlayer = false);
-  bool MetaTilePassable(int xArg, int yArg);
   
 	bool GetTileSolidity(int xArg, int yArg);
 	int  GetTileX(int xArg, int yArg);
@@ -54,7 +53,8 @@ public:
 
 	WorldManager& GetWorld(void) { return _world; }
 
-	void SetPlayer(Player* player) { _player = player; }
+	void SetPlayer(Player* player)  { _player = player; }
+  Player* GetPlayer()             { return _player; }
 
 private:
   void Unload(void);
@@ -62,20 +62,20 @@ private:
   void GenerateEntities(const std::string& name, int frequency);
   void MakeWalkingPaths(void);
   void GenerateEnemies(void);
+  bool AStarTilePassable(int xArg, int yArg);
   void UpdateAStarTiles(void);
 
   string _currentMap;
   int x;
   int y;
 
-  static const int TILE_ARRAY_SIZE = 15;
-  MapTile _tile[TILE_ARRAY_SIZE][TILE_ARRAY_SIZE];
+  static const int TILE_ARRAY_WIDTH = (SCREEN_WIDTH / TILE_WIDTH) + 1;
+  static const int TILE_ARRAY_HEIGHT = (SCREEN_HEIGHT / TILE_HEIGHT) + 1;
+  MapTile _tile[TILE_ARRAY_WIDTH][TILE_ARRAY_HEIGHT];
 
-  static const int ASTAR_ARRAY_SIZE = TILE_ARRAY_SIZE * (TILE_WIDTH / AStarTile::FAKE_SIZE);
-  AStarTile _astarTile[ASTAR_ARRAY_SIZE][ASTAR_ARRAY_SIZE];
-  
-  static const int BOUNDARIES_X = (SCREEN_WIDTH / TILE_WIDTH);
-  static const int BOUNDARIES_Y = (SCREEN_HEIGHT / TILE_HEIGHT);
+  static const int ASTAR_ARRAY_WIDTH = TILE_ARRAY_WIDTH * (TILE_WIDTH / AStarTile::FAKE_SIZE);
+  static const int ASTAR_ARRAY_HEIGHT = TILE_ARRAY_HEIGHT * (TILE_HEIGHT / AStarTile::FAKE_SIZE);
+  AStarTile _astarTile[ASTAR_ARRAY_WIDTH][ASTAR_ARRAY_HEIGHT];
 
   TextureManager _tileTextures;
   TextureManager _entityTextures;

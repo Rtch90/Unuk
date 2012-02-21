@@ -1,10 +1,7 @@
 #include "Character.h"
 
 // Pixels * 60 / sec
-const float Character::CHARACTER_SPEED = 3.5f;
-
-static list<Character*>collisionList;
-static list<Character*>::iterator collisionIter;
+const float Character::CHARACTER_SPEED = 1.0f;
 
 Character::Character(LevelGen* mapArg) {
 	map = mapArg;
@@ -24,8 +21,6 @@ Character::Character(LevelGen* mapArg) {
   
 	_texture = NULL;
 
-	collisionList.push_front(this);
-
 	_healthBar.SetBackgroundRGB(0, 0, 0);
 	_healthBar.SetForegroundRGB(255, 0, 0);
 
@@ -34,12 +29,6 @@ Character::Character(LevelGen* mapArg) {
 
 Character::~Character(void) {
 	SDL_FreeSurface(_texture);
-	for(collisionIter = collisionList.begin(); collisionIter != collisionList.end(); collisionIter++) {
-		if((*collisionIter) == this) {
-			collisionList.erase(collisionIter);
-			break;
-		}
-	}
 }
 
 void Character::LoadSprites(string filename, int wArg, int hArg) {
