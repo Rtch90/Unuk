@@ -3,6 +3,7 @@
 #include "Character.h"
 #include "Pathfinding.h"
 #include "../LevelGen/AStarTile.h"
+#include "../System/Timer.h"
 
 class Player;
 
@@ -18,6 +19,7 @@ public:
 
 protected:
 	void Move(void);
+  void AttackPlayer(void);
 
 private:
 	bool _moving;
@@ -26,4 +28,8 @@ private:
   bool _walkInPath;
   AStarTile* _target;
   AStarTile* _lastTarget;
+  
+  Timer _attackTimer;
+  
+  static const int ATTACK_FREQUENCY = 1000;
 };

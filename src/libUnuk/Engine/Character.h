@@ -46,7 +46,6 @@ public:
 	void OnAttack(void);
 
 	// Overload new and delete operators to utilize MemManager.
-  /*
 	inline void* operator new(size_t size) {
 		return gMemManager.Allocate(size);
 	}
@@ -62,7 +61,6 @@ public:
 	inline void operator delete [](void* object) {
 		gMemManager.Free(object);
 	}
-  */
 
 	enum {
 		FACING_UP,

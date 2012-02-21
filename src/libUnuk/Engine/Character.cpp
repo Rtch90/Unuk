@@ -1,7 +1,7 @@
 #include "Character.h"
 
 // Pixels * 60 / sec
-const float Character::CHARACTER_SPEED = 1.0f;
+const float Character::CHARACTER_SPEED = 2.0f;
 
 Character::Character(LevelGen* mapArg) {
 	map = mapArg;

@@ -219,6 +219,18 @@ void Game::UpdateGame(void) {
 	if(_ingameMenu.GetStatus() == false) {
 		_map.Update();
 		_player->Update();
+    
+    if(gameOver) {
+      gameOver = false;
+      
+      _map.New();
+      _player->SetHealth(100);
+      _player->SetLevelLiteral(1);
+      _player->SetExpLiteral(0);
+      
+      New(_saveGameID);
+    }
+    
 	} else {
 		// :D
 	}

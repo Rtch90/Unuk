@@ -16,3 +16,5 @@ int plrKeyeft;
 int plrKeyRight;
 
 int plrBtnSpell;
+
+bool gameOver = false;

@@ -11,3 +11,5 @@ extern bool debugEnabled;
 class EventHistory;
 
 extern EventHistory* eventHistory;
+
+extern bool gameOver;

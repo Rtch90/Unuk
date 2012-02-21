@@ -31,22 +31,10 @@ void NPC::Update(void) {
 }
 
 void NPC::Move(void) {
-  Character::HealthBarScroll();
-  
   xVel = 0.0f;
   yVel = 0.0f;
   
-  if(!_walkInPath) {
-    return;
-  }
-  
-	Vec2 realPos(x, y);
-  
   Character* player = map->GetPlayer();
-  
-  if(fabs((player->GetX() - x)) > 256 || fabs((player->GetY() - y)) > 256) {
-    return;
-  }
   
   SDL_Rect selfRect;
   selfRect.x = x - 5;
@@ -60,7 +48,36 @@ void NPC::Move(void) {
   playerRect.w = player->GetWidth() + 5;
   playerRect.h = player->GetHeight() + 5;
   
-  if(CheckCollisionRect(selfRect, playerRect)) {
+  bool isNearPlayer = CheckCollisionRect(selfRect, playerRect);
+  
+  if(isNearPlayer) {
+    if(!attackTimer.IsStarted()) {
+      attackTimer.Start();
+    } else {
+      if(attackTimer.GetTicks() >= ATTACK_FREQUENCY) {
+        attackTimer.Start();
+        AttackPlayer();
+      }
+    }
+  } else {
+    if(attackTimer.IsStarted()) {
+      attackTimer.Stop();
+    }
+  }
+  
+  Character::HealthBarScroll();
+  
+  if(!_walkInPath) {
+    return;
+  }
+  
+	Vec2 realPos(x, y);
+  
+  if(fabs((player->GetX() - x)) > 256 || fabs((player->GetY() - y)) > 256) {
+    return;
+  }
+  
+  if(isNearPlayer) {
     _walkInPath = false;
     return;
   }
@@ -77,7 +94,7 @@ void NPC::Move(void) {
   else if(dx < 0.0f) {
     xVel = -CHARACTER_SPEED;
   }
- if(dy > 0.0f) {
+  if(dy > 0.0f) {
     yVel = CHARACTER_SPEED;
   }
   else if(dy < 0.0f) {
@@ -87,7 +104,9 @@ void NPC::Move(void) {
   if(xVel != 0.0f || yVel != 0.0f) { 
     map->MoveIfPossible(this, xVel, yVel, false);
   }
-  else {
+  
+  if(dx >= -CHARACTER_SPEED && dx <= CHARACTER_SPEED &&
+     dy >= -CHARACTER_SPEED && dy <= CHARACTER_SPEED) {
     _target = _astar.GetSolutionNext();
     
     if(_target == NULL || _target == _lastTarget) {
@@ -134,5 +153,13 @@ void NPC::OnPlayerMove(Player* player) {
       tileX = _target->GetX() / AStarTile::FAKE_SIZE;
       tileY = _target->GetY() / AStarTile::FAKE_SIZE;
     }
+  }
+}
+
+void NPC::AttackPlayer() {
+  map->GetPlayer()->SetHealth(map->GetPlayer()->GetHealth() - (rand() % 3));
+  map->GetPlayer()->OnAttack();
+  if(map->GetPlayer()->GetHealth() < 0) {
+    gameOver = true;
   }
 }

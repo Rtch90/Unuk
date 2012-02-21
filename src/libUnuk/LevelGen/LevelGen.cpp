@@ -150,10 +150,10 @@ void LevelGen::Save(const string& filename){
   
   TiXmlElement* rootElem = new TiXmlElement("map");
   
-  for(y = 0; y < TILE_ARRAY_WIDTH; y++) {
+  for(y = 0; y < TILE_ARRAY_HEIGHT; y++) {
     TiXmlElement* lineElem = new TiXmlElement("line");
     
-    for(x = 0; x < TILE_ARRAY_HEIGHT; x++) {
+    for(x = 0; x < TILE_ARRAY_WIDTH; x++) {
       TiXmlElement* tileElem = new TiXmlElement("tile");
       
       TiXmlElement* tileTextureElem = new TiXmlElement("tileTexture");
@@ -339,7 +339,7 @@ void LevelGen::FindSpawnPoint(int& xArg, int& yArg, int objWidth, int objHeight)
 }
 
 void LevelGen::GenerateEnemies(void) {
-  int npcsToGen = 4 + (rand() % ((_player->GetLevel() * 2) + 4));
+  int npcsToGen = (_player->GetLevel() * 2) + (rand() % 4);
   
   for(int i = 0; i < npcsToGen; i++) {
     int spawnX;
@@ -394,10 +394,8 @@ void LevelGen::MoveIfPossible(Character* character, float xVel, float yVel, bool
     }
   }
   
-  if(true) {
-    if(_world.CheckCollision(charRect, character)) {
-      return;
-    }
+  if(_world.CheckCollision(charRect, character)) {
+    return;
   }
   
   if(!isPlayer) {
@@ -442,9 +440,9 @@ bool LevelGen::AStarTilePassable(int xArg, int yArg) {
 
   SDL_Rect playerRect;
   playerRect.x = _player->GetX();
-  playerRect.y = _player->GetY() + (_player->GetHeight() / 4) * 3;
+  playerRect.y = _player->GetY()/* + (_player->GetHeight() / 4) * 3*/;
   playerRect.w = _player->GetWidth();
-  playerRect.h = _player->GetHeight() / 4;
+  playerRect.h = _player->GetHeight()/* / 4*/;
 
   if(CheckCollisionRect(tileRect, playerRect)) {
     return false;

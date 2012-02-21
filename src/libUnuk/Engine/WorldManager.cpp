@@ -86,9 +86,9 @@ bool WorldManager::CheckCollision(const SDL_Rect& charRect, Character* exclude) 
     
     SDL_Rect npcRect;
     npcRect.x = npc->GetX();
-    npcRect.y = npc->GetY() + (npc->GetHeight() / 4) * 3;
+    npcRect.y = npc->GetY()/* + (npc->GetHeight() / 4) * 3*/;
     npcRect.w = npc->GetWidth();
-    npcRect.h = npc->GetHeight() / 4;
+    npcRect.h = npc->GetHeight()/* / 4*/;
 
 		if(CheckCollisionRect(npcRect, charRect)) {
 			return true;
