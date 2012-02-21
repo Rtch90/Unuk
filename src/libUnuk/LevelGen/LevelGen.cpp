@@ -16,12 +16,9 @@ void LevelGen::New(void) {
   Unload();
   
   _world = WorldManager(this);
-  
-  levelWidth  = TILE_ARRAY_WIDTH;
-  levelHeight = TILE_ARRAY_HEIGHT;
-  
-  for(x = 0; x < levelWidth; x++) {
-    for(y = 0; y < levelHeight; y++) {
+
+  for(x = 0; x < TILE_ARRAY_WIDTH; x++) {
+    for(y = 0; y < TILE_ARRAY_HEIGHT; y++) {
       _tile[x][y].SetTileTextureName("grass");
       
       stringstream tilePath;
@@ -34,9 +31,6 @@ void LevelGen::New(void) {
       _tile[x][y].SetZLevel(100);
     }
   }
-  
-  levelWidth  *= TILE_WIDTH;
-  levelHeight *= TILE_HEIGHT;
   
   // procedural generation
 	DoMagic();
@@ -143,8 +137,6 @@ void LevelGen::Load(const string& filename) {
 		// </line>
 	}
 	// </map>
-	levelWidth  = x * TILE_WIDTH;
-	levelHeight = y * TILE_HEIGHT;
   
   _world = WorldManager(this);
   
@@ -158,13 +150,10 @@ void LevelGen::Save(const string& filename){
   
   TiXmlElement* rootElem = new TiXmlElement("map");
   
-  int levelWidthTiles   = levelWidth / TILE_WIDTH;
-  int levelHeightTiles  = levelHeight / TILE_HEIGHT;
-  
-  for(y = 0; y < levelHeightTiles; y++) {
+  for(y = 0; y < TILE_ARRAY_WIDTH; y++) {
     TiXmlElement* lineElem = new TiXmlElement("line");
     
-    for(x = 0; x < levelWidthTiles; x++) {
+    for(x = 0; x < TILE_ARRAY_HEIGHT; x++) {
       TiXmlElement* tileElem = new TiXmlElement("tile");
       
       TiXmlElement* tileTextureElem = new TiXmlElement("tileTexture");
@@ -217,37 +206,8 @@ void LevelGen::Update(void) {
 }
 
 void LevelGen::Render(void) {
-	int xOrig = (camera.x / TILE_WIDTH) - 1;
-	int yOrig = (camera.y / TILE_HEIGHT) - 1;
-
-	if (xOrig < 0) xOrig = 0;
-	if (yOrig < 0) yOrig = 0;
-
-	int xEnd = xOrig + (SCREEN_WIDTH  / TILE_WIDTH) + 3;
-	int yEnd = yOrig + (SCREEN_HEIGHT / TILE_HEIGHT) + 3;
-
-	/* the fuck is this Allanis? --konom
-	if(xEnd < x)
-		xEnd++;
-	else
-		xEnd = x;
-
-	if(yEnd < y)
-		yEnd++;
-	else
-		yEnd = y;
-	*/
-
-	if (xEnd > x) xEnd = x;
-	if (yEnd > y) yEnd = y;
-	if (xEnd < 0) xEnd = 0;
-	if (yEnd < 0) yEnd = 0;
-
-	if (xOrig > xEnd) xOrig = xEnd - 1;
-	if (yOrig > yEnd) yOrig = yEnd - 1;
-
-	for(int i = xOrig; i < xEnd; i++) {
-		for(int j = yOrig; j < yEnd; j++) {
+	for(int i = 0; i < TILE_ARRAY_WIDTH; i++) {
+		for(int j = 0; j < TILE_ARRAY_HEIGHT; j++) {
 			_tile[i][j].Render();
 		}
 	}
@@ -283,8 +243,8 @@ void LevelGen::GenerateEntities(const string& name, int frequency) {
 	int nextEntityGen = 1 + (rand() % frequency);
 	std::string filename = "../Data/Media/Images/Entities/" + name + ".png";
 
-	for(int x = 0; x < TILE_ARRAY_WIDTH; x++) {
-		for(int y = 0; y < TILE_ARRAY_HEIGHT; y++) {
+	for(int x = 0; x < (TILE_ARRAY_WIDTH - 1); x++) {
+		for(int y = 0; y < (TILE_ARRAY_HEIGHT - 1); y++) {
 			nextEntityGen--;
 			if(!_tile[x][y].GetTileSolidity() && !_tile[x][y].GetEntitySolitity() && nextEntityGen <= 0) {
 				_tile[x][y].SetEntityTextureName(name);
@@ -324,8 +284,8 @@ void LevelGen::MakeWalkingPaths(void) {
 }
 
 void LevelGen::FindSpawnPoint(int& xArg, int& yArg, int objWidth, int objHeight) {
-	xArg = rand() % (TILE_ARRAY_WIDTH * TILE_WIDTH);
-	yArg = rand() % (TILE_ARRAY_HEIGHT * TILE_HEIGHT);
+	xArg = rand() % ((TILE_ARRAY_WIDTH - 1) * TILE_WIDTH);
+	yArg = rand() % ((TILE_ARRAY_HEIGHT - 1) * TILE_HEIGHT);
   
   if((xArg + objWidth + 1) > SCREEN_WIDTH) {
     xArg = SCREEN_WIDTH - objWidth - 1;
@@ -494,11 +454,8 @@ bool LevelGen::AStarTilePassable(int xArg, int yArg) {
 }
 
 void LevelGen::UpdateAStarTiles(void) {
-  int maxX = levelWidth / AStarTile::FAKE_SIZE;
-  int maxY = levelHeight / AStarTile::FAKE_SIZE;
-  
-  for(int x = 0; x < maxX; x++) {
-    for(int y = 0; y < maxY; y++) {
+  for(int x = 0; x < ASTAR_ARRAY_WIDTH; x++) {
+    for(int y = 0; y < ASTAR_ARRAY_HEIGHT; y++) {
       _astarTile[x][y] = AStarTile(this, x, y, AStarTilePassable(x, y));
     }
   }

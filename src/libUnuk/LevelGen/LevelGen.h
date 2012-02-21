@@ -55,6 +55,11 @@ public:
 
 	void SetPlayer(Player* player)  { _player = player; }
   Player* GetPlayer()             { return _player; }
+  
+  static const int TILE_ARRAY_WIDTH = (SCREEN_WIDTH / TILE_WIDTH) + 1;
+  static const int TILE_ARRAY_HEIGHT = (SCREEN_HEIGHT / TILE_HEIGHT) + 1;
+  static const int ASTAR_ARRAY_WIDTH = TILE_ARRAY_WIDTH * (TILE_WIDTH / AStarTile::FAKE_SIZE);
+  static const int ASTAR_ARRAY_HEIGHT = TILE_ARRAY_HEIGHT * (TILE_HEIGHT / AStarTile::FAKE_SIZE);
 
 private:
   void Unload(void);
@@ -69,12 +74,8 @@ private:
   int x;
   int y;
 
-  static const int TILE_ARRAY_WIDTH = (SCREEN_WIDTH / TILE_WIDTH) + 1;
-  static const int TILE_ARRAY_HEIGHT = (SCREEN_HEIGHT / TILE_HEIGHT) + 1;
+  
   MapTile _tile[TILE_ARRAY_WIDTH][TILE_ARRAY_HEIGHT];
-
-  static const int ASTAR_ARRAY_WIDTH = TILE_ARRAY_WIDTH * (TILE_WIDTH / AStarTile::FAKE_SIZE);
-  static const int ASTAR_ARRAY_HEIGHT = TILE_ARRAY_HEIGHT * (TILE_HEIGHT / AStarTile::FAKE_SIZE);
   AStarTile _astarTile[ASTAR_ARRAY_WIDTH][ASTAR_ARRAY_HEIGHT];
 
   TextureManager _tileTextures;

@@ -5,9 +5,6 @@ SDL_Surface* errorTexture   = NULL;
 SDL_Rect camera;
 SDL_Event event;
 
-int levelWidth;
-int levelHeight;
-
 // Start off false. press 'p' to turn it on!
 bool debugEnabled = false;
 

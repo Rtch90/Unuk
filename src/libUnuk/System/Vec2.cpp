@@ -26,17 +26,17 @@ float Vec2::Length(void) {
 }
 
 float Vec2::LengthSquared(void) {
-	return (x * x) + (y + y);
+	return (x * x) + (y * y);
 }
 
 // Static.
 float Vec2::Distance(const Vec2& value1, const Vec2& value2) {
-	return Vec2(value1 - value2).Length();
+	return (value1 - value2).Length();
 }
 
 // Static.
 float Vec2::DistanceSquared(const Vec2& value1, const Vec2& value2) {
-	return Vec2(value1 - value2).LengthSquared();
+	return (value1 - value2).LengthSquared();
 }
 
 // Static.

@@ -44,6 +44,10 @@ void NPC::Move(void) {
   
   Character* player = map->GetPlayer();
   
+  if(fabs((player->GetX() - x)) > 256 || fabs((player->GetY() - y)) > 256) {
+    return;
+  }
+  
   SDL_Rect selfRect;
   selfRect.x = x - 5;
   selfRect.y = y - 5;
@@ -96,12 +100,9 @@ void NPC::Move(void) {
 }
 
 void NPC::OnPlayerMove(Player* player) {
-  Vec2 selfPos(x, y);
-  Vec2 playerPos(player->GetX(), player->GetY());
-  if(Vec2::DistanceSquared(selfPos, playerPos) > 96*96) {
+  if(fabs((player->GetX() - x)) > 256 || fabs((player->GetY() - y)) > 256) {
     return;
   }
-  
   
 	AStarTile& start = map->GetAStarTile(x / AStarTile::FAKE_SIZE, y / AStarTile::FAKE_SIZE);
 	AStarTile& goal = map->GetAStarTile(player->GetX() / AStarTile::FAKE_SIZE, player->GetY() / AStarTile::FAKE_SIZE);

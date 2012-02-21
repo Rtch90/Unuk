@@ -7,7 +7,7 @@ class LevelGen;
 class AStarTile {
 public:
   AStarTile() {}
-  AStarTile(LevelGen* level, int xArg, int yArg, bool passable) : _level(level), x(xArg), y(yArg), _passable(passable) {}
+  AStarTile(LevelGen* level, int xArg, int yArg, bool passable) : _level(level), _passable(passable), x(xArg), y(yArg)  {}
 
   bool IsSameState(AStarTile& tile);
   bool IsGoal(AStarTile& tile);
@@ -18,7 +18,7 @@ public:
   int GetX() { return x * FAKE_SIZE; }
   int GetY() { return y * FAKE_SIZE; }
 
-  static const int FAKE_SIZE = 16;
+  static const int FAKE_SIZE = 32;
 
 private:
   LevelGen* _level;

@@ -37,7 +37,6 @@ protected:
 	void CheckTileCollisions(void);
 
 private:
-	void SetCamera(void);
 	static const float PLAYER_SPEED;
 
 	string _name;

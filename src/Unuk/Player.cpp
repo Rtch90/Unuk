@@ -118,21 +118,6 @@ void Player::SetName(string nameArg) {
 	_name = nameArg;
 }
 
-void Player::SetCamera(void) {
-	camera.x = (Sint16)((x + w / 2) - SCREEN_WIDTH  / 2);
-	camera.y = (Sint16)((y + h / 2) - SCREEN_HEIGHT / 2);
-
-	if(camera.x < 0)
-		camera.x = 0;
-	if(camera.y < 0)
-		camera.y = 0;
-
-	if(camera.x > levelWidth - camera.w)
-		camera.x = levelWidth - camera.w;
-	if(camera.y > levelHeight - camera.h)
-		camera.y = levelHeight = camera.h;
-}
-
 void Player::Move() {
 	map->MoveIfPossible(this, xVel, yVel, true);
 	Character::HealthBarScroll();

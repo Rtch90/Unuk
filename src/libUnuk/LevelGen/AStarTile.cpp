@@ -34,7 +34,7 @@ bool AStarTile::GetSuccessors(AStarSearch<AStarTile>* search) {
     }
   }
 
-  if(x < (levelWidth / FAKE_SIZE)) {
+  if(x < (LevelGen::ASTAR_ARRAY_WIDTH - 2)) {
     AStarTile& successor = _level->GetAStarTile(x + 1, y);
     if(successor._passable) {
       if(!search->AddSuccessor(successor)) {
@@ -52,7 +52,7 @@ bool AStarTile::GetSuccessors(AStarSearch<AStarTile>* search) {
     }
   }
 
-  if(y < (levelHeight / FAKE_SIZE)) {
+  if(y < (LevelGen::ASTAR_ARRAY_HEIGHT - 2)) {
     AStarTile& successor = _level->GetAStarTile(x, y + 1);
     if(successor._passable) {
       if(!search->AddSuccessor(successor)) {
