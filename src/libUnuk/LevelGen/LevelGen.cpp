@@ -227,9 +227,10 @@ void LevelGen::Unload(void) {
 
 void LevelGen::DoMagic(void) {
   GenerateEntities("tree", 45);
-  GenerateEntities("hedge", 35);
-  GenerateEntities("barrel", 60);
-  GenerateEntities("barrel2", 120);
+  GenerateEntities("bush", 30);
+  GenerateEntities("hedge", 45);
+  GenerateEntities("barrel", 50);
+  GenerateEntities("barrel2", 100);
   GenerateEntities("stone", 55);
   GenerateEntities("stone2", 55);
   GenerateEntities("closedChest", 120); 
