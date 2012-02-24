@@ -366,8 +366,6 @@ void LevelGen::Inflate(Serialiser* serialiser) {
         _tile[x][y].SetEntityXY(_tile[x][y].GetTileX() + TILE_WIDTH  / 2 - _tile[x][y].GetEntityWidth()  / 2,
                                 _tile[x][y].GetTileY() + TILE_HEIGHT / 2 - _tile[x][y].GetEntityHeight() / 2);
       }
-
-      
     }
   }
 }

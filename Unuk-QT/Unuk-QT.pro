@@ -6,6 +6,7 @@ LIBS += -lGL \
     -lSDL_gfx \
     -ltinyxml \
     -lGLU
+
 HEADERS += ../src/Libs/wglext.h \
     ../src/Libs/glxext.h \
     ../src/libUnuk/Engine/WorldManager.h \
@@ -19,7 +20,7 @@ HEADERS += ../src/Libs/wglext.h \
     ../src/libUnuk/Sprite/Texture.h \
     ../src/libUnuk/Sprite/ImageLoader.h \
     ../src/libUnuk/Sprite/ApplySurface.h \
-    ../src/libUnuk/System/Serialisation.h \
+    ../src/libUnuk/System/Serialiser.h \
     ../src/libUnuk/System/Serialisable.h \
     ../src/libUnuk/System/Rect.h \
     ../src/libUnuk/System/Input.h \
@@ -59,7 +60,7 @@ SOURCES += ../src/libUnuk/Engine/WorldManager.cpp \
     ../src/libUnuk/Sprite/Texture.cpp \
     ../src/libUnuk/Sprite/ImageLoader.cpp \
     ../src/libUnuk/Sprite/ApplySurface.cpp \
-    ../src/libUnuk/System/Serialisation.cpp \
+    ../src/libUnuk/System/Serialiser.cpp \
     ../src/libUnuk/System/Timer.cpp \
     ../src/libUnuk/System/Rect.cpp \
     ../src/libUnuk/System/Input.cpp \
