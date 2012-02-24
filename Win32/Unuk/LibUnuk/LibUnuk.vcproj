@@ -241,6 +241,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\src\libUnuk\LevelGen\MapTile.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\libUnuk\LevelGen\MapTile.h"
 				>
 			</File>
@@ -314,6 +318,18 @@
 			</File>
 			<File
 				RelativePath="..\..\..\src\libUnuk\System\Rect.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libUnuk\System\Serialisable.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libUnuk\System\Serialiser.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libUnuk\System\Serialiser.h"
 				>
 			</File>
 			<File

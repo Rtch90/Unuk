@@ -7,14 +7,19 @@
 #include "../Sprite/ApplySurface.h"
 #include "../LevelGen/MapElement.h"
 #include "../LevelGen/MapEntities.h"
+#include "../System/Serialisable.h"
+#include "../System/Serialiser.h"
 using namespace std;
 
-class MapTile {
+class MapTile : public Serialisable {
 public:
   MapTile(void)                                     {  }
   ~MapTile(void)                                    {  }
 
 	void Render(void)                                 { _tile.Render(), _entity.Render(); }
+
+  void Deflate(Serialiser* serialiser);
+  void Inflate(Serialiser* serialiser);
 
   // Tile Mutators.
   SDL_Surface* SetTileTexture(SDL_Surface* arg)	 	  { _tile.SetTexture(arg); return NULL; }
@@ -28,7 +33,6 @@ public:
   void SetTileXY(int xArg, int yArg)                { _tile.SetXY(xArg, yArg); }
   int GetTileX(void)                                { return _tile.GetX(); }
   int GetTileY(void)                                { return _tile.GetY(); }
-
 
 	// Entity Mutators.
 	void SetEntityTexture(SDL_Surface* arg)           { _entity.SetTexture(arg); }
@@ -44,15 +48,7 @@ public:
 	int GetEntityHeight(void)                         { return _entity.GetHeight(); }
 	string GetEntityTextureName(void)                 { return _entity.GetTextureName(); }
 
-  // ZLevel Mutators.
-	void SetZLevel(int arg)                           { _zLevel = arg; }
-	int GetZLevel(void)                               { return _zLevel; }
-
 private:
   MapElement _tile;
   MapEntityGeneric _entity;
-
-	// -1 is a 'special' tile, the next tile that the player walks
-	// on is the players new zlevel.
-	int _zLevel;
 };

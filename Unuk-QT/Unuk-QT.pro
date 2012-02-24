@@ -19,6 +19,8 @@ HEADERS += ../src/Libs/wglext.h \
     ../src/libUnuk/Sprite/Texture.h \
     ../src/libUnuk/Sprite/ImageLoader.h \
     ../src/libUnuk/Sprite/ApplySurface.h \
+    ../src/libUnuk/System/Serialisation.h \
+    ../src/libUnuk/System/Serialisable.h \
     ../src/libUnuk/System/Rect.h \
     ../src/libUnuk/System/Input.h \
     ../src/libUnuk/System/FPS.h \
@@ -57,6 +59,7 @@ SOURCES += ../src/libUnuk/Engine/WorldManager.cpp \
     ../src/libUnuk/Sprite/Texture.cpp \
     ../src/libUnuk/Sprite/ImageLoader.cpp \
     ../src/libUnuk/Sprite/ApplySurface.cpp \
+    ../src/libUnuk/System/Serialisation.cpp \
     ../src/libUnuk/System/Timer.cpp \
     ../src/libUnuk/System/Rect.cpp \
     ../src/libUnuk/System/Input.cpp \
@@ -76,6 +79,7 @@ SOURCES += ../src/libUnuk/Engine/WorldManager.cpp \
     ../src/libUnuk/LevelGen/LevelGen.cpp \
     ../src/libUnuk/LevelGen/MapEntities.cpp \
     ../src/libUnuk/LevelGen/MapElement.cpp \
+    ../src/libUnuk/LevelGen/MapTile.cpp \
     ../src/libUnuk/LevelGen/AStarTile.cpp \
     ../src/libUnuk/UI/EventHistory.cpp \
     ../src/libUnuk/UI/Bar.cpp \

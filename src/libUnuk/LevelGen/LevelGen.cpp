@@ -2,6 +2,7 @@
 
 #include "LevelGen.h"
 #include "../Engine/NPC.h"
+#include "../System/Serialiser.h"
 #include "../../Unuk/Player.h"
 
 LevelGen::LevelGen(void) : _world(this) {
@@ -28,7 +29,6 @@ void LevelGen::New(void) {
       _tile[x][y].SetTileSolidity(false);
       _tile[x][y].SetTileXY(x * TILE_WIDTH, y * TILE_HEIGHT);
       _tile[x][y].SetEntitySolidity(false);
-      _tile[x][y].SetZLevel(100);
     }
   }
   
@@ -41,103 +41,14 @@ void LevelGen::New(void) {
 
 void LevelGen::Load(const string& filename) {
 	Unload();
+
 	_currentMap = filename;
 	string fullMapPath = "../Data/Media/Maps/" + filename;
-	TiXmlDocument mapFile(fullMapPath.c_str());
 
-	assert(mapFile.LoadFile() == true);
+  Serialiser serialiser;
+  serialiser.Load(fullMapPath);
+  Inflate(&serialiser);
 
-	// Getting dirty with some XML. This seems like a nicer
-	// approach to loading maps, rather than parsing text files.
-	TiXmlElement* rootElem = NULL;
-	TiXmlElement* lineElem = NULL;
-	TiXmlElement* tileElem = NULL;
-	TiXmlElement* dataElem = NULL;
-
-	x = -1;
-	y = -1;
-
-	// <map> - Let's start parsing the map.
-	rootElem = mapFile.FirstChildElement("map");
-	assert(rootElem != NULL);
-	if(rootElem) {
-		// <line> - We want to tile one line at a time. line represents
-		// the row we are tiling.
-		lineElem = rootElem->FirstChildElement("line");
-		assert(lineElem != NULL);
-		while(lineElem) {
-			y++;
-			x = -1;
-
-			// <tile> - Then we will select the tile. and increment x to keep tiling that row.
-			tileElem = lineElem->FirstChildElement("tile");
-			assert(tileElem != NULL);
-			while(tileElem) {
-				x++;
-				_tile[x][y].SetTileXY(x * TILE_WIDTH, y * TILE_HEIGHT);
-
-				// <tileTexture> - Apply a teture to the tile.
-				dataElem = tileElem->FirstChildElement("tileTexture");
-				assert(dataElem != NULL);
-				stringstream tilePath;
-				tilePath << "../Data/Media/Images/Tiles/" << dataElem->GetText() << ".png";
-				_tile[x][y].SetTileTexture(_tileTextures.Add(tilePath.str()));
-        _tile[x][y].SetTileTextureName(dataElem->GetText());
-				// <tileTexture> - Finished applying the texture, move to the next sibling.
-
-				// <solidTile> - Check to see if the tile is solid or not.
-				dataElem = dataElem->NextSiblingElement("solidTile");
-				assert(dataElem != NULL);
-				string tileSolidity = dataElem->GetText();
-				assert(tileSolidity == "false" || tileSolidity == "true");
-				if(tileSolidity == "false")
-					_tile[x][y].SetTileSolidity(false);
-				else
-					_tile[x][y].SetTileSolidity(true);
-				// </solidTile>
-
-				// <entityTexture>
-				dataElem = dataElem->NextSiblingElement("entityTexture");
-				assert(dataElem != NULL);
-				string entityName = dataElem->GetText();
-				if(entityName != "null") {
-					stringstream entityPath;
-					entityPath << "../Data/Media/Images/Entities/" << entityName << ".png";
-					_tile[x][y].SetEntityTexture(_entityTextures.AddAlpha(entityPath.str()));
-          _tile[x][y].SetEntityTextureName(entityName);
-
-					_tile[x][y].SetEntityXY(_tile[x][y].GetTileX() + TILE_WIDTH  / 2 - _tile[x][y].GetEntityWidth()  / 2,
-																	 _tile[x][y].GetTileY() + TILE_HEIGHT / 2 - _tile[x][y].GetEntityHeight() / 2);
-				}
-				// </entityTexture>
-
-				// <SolidEntity>
-				dataElem = dataElem->NextSiblingElement("solidEntity");
-				assert(dataElem != NULL);
-				string entitySolidity = dataElem->GetText();
-				assert(entitySolidity == "false" || entitySolidity == "true");
-				if(entitySolidity == "false")
-					_tile[x][y].SetEntitySolidity(false);
-				else
-					_tile[x][y].SetEntitySolidity(true);
-				// </solidEntity>
-
-				// <zlevel>
-				dataElem = dataElem->NextSiblingElement("zLevel");
-				assert(dataElem != NULL);
-				_tile[x][y].SetZLevel(atoi(dataElem->GetText()));
-				// </zlevel>
-
-				tileElem = tileElem->NextSiblingElement("tile");
-			}
-			//</tile>
-
-			lineElem = lineElem->NextSiblingElement("line");
-		}
-		// </line>
-	}
-	// </map>
-  
   _world = WorldManager(this);
   
   GenerateEnemies();
@@ -145,59 +56,15 @@ void LevelGen::Load(const string& filename) {
   UpdateAStarTiles();
 }
 
-void LevelGen::Save(const string& filename){
-  TiXmlDocument doc;
-  
-  TiXmlElement* rootElem = new TiXmlElement("map");
-  
-  for(y = 0; y < TILE_ARRAY_HEIGHT; y++) {
-    TiXmlElement* lineElem = new TiXmlElement("line");
-    
-    for(x = 0; x < TILE_ARRAY_WIDTH; x++) {
-      TiXmlElement* tileElem = new TiXmlElement("tile");
-      
-      TiXmlElement* tileTextureElem = new TiXmlElement("tileTexture");
-      TiXmlText* tileTextureText = new TiXmlText(_tile[x][y].GetTileTextureName().c_str());
-      tileTextureElem->LinkEndChild(tileTextureText);
-      
-      TiXmlElement* solidTileElem = new TiXmlElement("solidTile");
-      TiXmlText* solidTileText = new TiXmlText(_tile[x][y].GetTileSolidity() ? "true" : "false");
-      solidTileElem->LinkEndChild(solidTileText);
-      
-      string entityTextureName = _tile[x][y].GetEntityTextureName();
-      
-      TiXmlElement* entityTextureElem = new TiXmlElement("entityTexture");
-      TiXmlText* entityTextureText = new TiXmlText(entityTextureName.empty() ? "null" : entityTextureName.c_str());
-      entityTextureElem->LinkEndChild(entityTextureText);
-      
-      TiXmlElement* solidEntityElem = new TiXmlElement("solidEntity");
-      TiXmlText* solidEntityText = new TiXmlText(_tile[x][y].GetEntitySolitity() ? "true" : "false");
-      solidEntityElem->LinkEndChild(solidEntityText);
-      
-      stringstream zLevelStr;
-      zLevelStr << _tile[x][y].GetZLevel();
-      
-      TiXmlElement* zLevelElem = new TiXmlElement("zLevel");
-      TiXmlText* zLevelText = new TiXmlText(zLevelStr.str().c_str());
-      zLevelElem->LinkEndChild(zLevelText);
-      
-      tileElem->LinkEndChild(tileTextureElem);
-      tileElem->LinkEndChild(solidTileElem);
-      tileElem->LinkEndChild(entityTextureElem);
-      tileElem->LinkEndChild(solidEntityElem);
-      tileElem->LinkEndChild(zLevelElem);
-      
-      lineElem->LinkEndChild(tileElem);
-    }
-    
-    rootElem->LinkEndChild(lineElem);
-  }
-  
+void LevelGen::Save(const string& filename) {
+  Serialiser serialiser;
+  Deflate(&serialiser);
+ 
   _currentMap = filename;
 	string fullMapPath = "../Data/Media/Maps/" + filename;
   
-  doc.LinkEndChild(rootElem);
-  doc.SaveFile(fullMapPath.c_str());
+  serialiser.Save(fullMapPath);
+  
 }
 
 void LevelGen::Update(void) {
@@ -318,11 +185,6 @@ void LevelGen::FindSpawnPoint(int& xArg, int& yArg, int objWidth, int objHeight)
   
   for(int i = 0; i < TILE_ARRAY_WIDTH; i++) {
     for(int j = 0; j < TILE_ARRAY_HEIGHT; j++) {
-      if(_tile[i][j].GetTileSolidity()) {
-        FindSpawnPoint(xArg, yArg, objWidth, objHeight);
-        return;
-      }
-      
       if(_tile[i][j].GetEntitySolitity()) {
         SDL_Rect entityRect;
         entityRect.x = _tile[i][j].GetEntityX();
@@ -460,6 +322,56 @@ void LevelGen::UpdateAStarTiles(void) {
   }
 }
 
+void LevelGen::Deflate(Serialiser* serialiser) {
+  serialiser->StepIn("map");
+  for(int y = 0; y < TILE_ARRAY_HEIGHT; y++) {
+    serialiser->StepIn("line");
+    for(int x = 0; x < TILE_ARRAY_WIDTH; x++) {
+      serialiser->StepIn("tile");
+      _tile[x][y].Deflate(serialiser);
+      serialiser->StepOut();
+    }
+    serialiser->StepOut();
+  }
+  serialiser->StepOut();
+}
+
+void LevelGen::Inflate(Serialiser* serialiser) {
+  serialiser->FirstElement("map");
+  
+  x = 0;
+  y = 0;
+
+  while(serialiser->NextElement("line")) {
+    x = 0;
+    while(serialiser->NextElement("tile")) {
+      _tile[x][y].Inflate(serialiser);
+      x++;
+    }
+    serialiser->RollBack();
+    y++;
+  }
+
+  for(x = 0; x < TILE_ARRAY_WIDTH; x++) {
+    for(y = 0; y < TILE_ARRAY_HEIGHT; y++) {
+      string tileTextureName = _tile[x][y].GetTileTextureName();
+      if(tileTextureName != "null") {
+        _tile[x][y].SetTileTexture(_tileTextures.AddAlpha("../Data/Media/Images/Tiles/" + tileTextureName + ".png"));
+        _tile[x][y].SetTileXY(x * TILE_WIDTH, y * TILE_HEIGHT);
+      }
+
+			string entityTextureName = _tile[x][y].GetEntityTextureName();
+      if(entityTextureName != "null") {
+        _tile[x][y].SetEntityTexture(_entityTextures.AddAlpha("../Data/Media/Images/Entities/" + entityTextureName + ".png"));
+        _tile[x][y].SetEntityXY(_tile[x][y].GetTileX() + TILE_WIDTH  / 2 - _tile[x][y].GetEntityWidth()  / 2,
+                                _tile[x][y].GetTileY() + TILE_HEIGHT / 2 - _tile[x][y].GetEntityHeight() / 2);
+      }
+
+      
+    }
+  }
+}
+
 string LevelGen::GetCurrentMap(void) {
 	return _currentMap;
 }
@@ -498,10 +410,6 @@ int LevelGen::GetEntityWidth(int xArg, int yArg) {
 
 int LevelGen::GetEntityHeight(int xArg, int yArg) {
 	return _tile[xArg + 1][yArg + 1].GetEntityHeight();
-}
-
-int LevelGen::GetTileZLevel(int xArg, int yArg) {
-	return _tile[xArg + 1][yArg + 1].GetZLevel();
 }
 
 AStarTile& LevelGen::GetAStarTile(int xArg, int yArg) {

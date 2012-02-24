@@ -14,6 +14,7 @@
 #include "../LevelGen/MapTile.h"
 #include "../LevelGen/AStarTile.h"
 #include "../System/Debug.h"
+#include "../System/Serialisable.h"
 #include "../Engine/WorldManager.h"
 #include "../Engine/MemClass.h"
 using namespace std;
@@ -21,7 +22,7 @@ using namespace std;
 class Character;
 class Player;
 
-class LevelGen {
+class LevelGen : public Serialisable {
 public:
 	LevelGen(void);
 	~LevelGen(void);
@@ -70,11 +71,13 @@ private:
   bool AStarTilePassable(int xArg, int yArg);
   void UpdateAStarTiles(void);
 
+  void Deflate(Serialiser* serialiser);
+  void Inflate(Serialiser* serialiser);
+
   string _currentMap;
   int x;
   int y;
 
-  
   MapTile _tile[TILE_ARRAY_WIDTH][TILE_ARRAY_HEIGHT];
   AStarTile _astarTile[ASTAR_ARRAY_WIDTH][ASTAR_ARRAY_HEIGHT];
 

@@ -1,66 +1,42 @@
 #include "MapTile.h"
-#include "LevelGen.h"
 
-MapTile::MapTile(const MapTile& source) {
-	_level = source._level;
-	_tile = source._tile;
-	_entity = source._entity;
-	_zLevel = source._zLevel;
+void MapTile::Deflate(Serialiser* serialiser) {
+  string  tileTexture    = _tile.GetTextureName();
+  bool    solidTile      = _tile.GetSolidity();
+  string  entityTexture  = _entity.GetTextureName();
+  bool    solidEntity    = _entity.GetSolidity();
+
+  if(tileTexture.empty()) {
+    tileTexture = "null";
+  }
+  if(entityTexture.empty()) {
+    entityTexture = "null";
+  }
+
+  serialiser->RegisterMember("tileTexture",   MEMBER_STRING,  &tileTexture);
+  serialiser->RegisterMember("solidTile",     MEMBER_BOOL,    &solidTile);
+  serialiser->RegisterMember("entityTexture", MEMBER_STRING,  &entityTexture);
+  serialiser->RegisterMember("solidEntity",   MEMBER_BOOL,    &solidEntity);
+
+  serialiser->WriteMembers();
 }
 
-bool MapTile::IsSameState(MapTile& tile) {
-	return (tile.GetTileX() == _tile.GetX()) && (tile.GetTileY() == _tile.GetY());
-}
+void MapTile::Inflate(Serialiser* serialiser) {
+  string  tileTexture;
+  bool    solidTile;
+  string  entityTexture;
+  bool    solidEntity;
 
-bool MapTile::IsGoal(MapTile& tile) {
-	return IsSameState(tile);
-}
+  serialiser->RegisterMember("tileTexture",   MEMBER_STRING,  &tileTexture);
+  serialiser->RegisterMember("solidTile",     MEMBER_BOOL,    &solidTile);
+  serialiser->RegisterMember("entityTexture", MEMBER_STRING,  &entityTexture);
+  serialiser->RegisterMember("solidEntity",   MEMBER_BOOL,    &solidEntity);
 
-float MapTile::GoalDistanceEstimate(MapTile& goal) {
-	Vec2 thisPos(_tile.GetX(), _tile.GetY());
-	Vec2 goalPos(goal.GetTileX(), goal.GetTileY());
-	return fabs(Vec2::DistanceSquared(thisPos, goalPos));
-}
+  serialiser->ReadMembers();
 
-float MapTile::GetCost(MapTile& goal) {
-	return 64.0f*64.0f;
-}
+  _tile.SetTextureName(tileTexture);
+  _tile.SetSolidity(solidTile);
 
-bool MapTile::GetSuccessors(AStarSearch<MapTile>* search, MapTile* parent) {
-	int tileX = _tile.GetX() / TILE_WIDTH;
-	int tileY = _tile.GetY() / TILE_HEIGHT;
-
-	// Add tile to the left if possible.
-	if(tileX > 0) {
-		MapTile& successor = _level->GetTile(tileX - 1, tileY);
-		if(successor.GetTileSolidity() || successor.GetEntitySolitity()) {
-			search->AddSuccessor(successor);
-		}
-	}
-
-	// Add tile to the right if possible
-	if(tileX < TILE_WIDTH) {
-		MapTile& successor = _level->GetTile(tileX + 1, tileY);
-		if(successor.GetTileSolidity() || successor.GetEntitySolitity()) {
-			search->AddSuccessor(successor);
-		}
-	}
-
-	// Add tile to the bottom if possible
-	if(tileY > 0) {
-		MapTile& successor = _level->GetTile(tileX, tileY - 1);
-		if(successor.GetTileSolidity() || successor.GetEntitySolitity()) {
-			search->AddSuccessor(successor);
-		}
-	}
-
-	// Add tile to the top if possible
-	if(tileY < TILE_HEIGHT) {
-		MapTile& successor = _level->GetTile(tileX, tileY + 1);
-		if(successor.GetTileSolidity() || successor.GetEntitySolitity()) {
-			search->AddSuccessor(successor);
-		}
-	}
-
-	return true;
+  _entity.SetTextureName(entityTexture);
+  _entity.SetSolidity(solidEntity);
 }
