@@ -107,7 +107,7 @@ void Serialiser::RegisterMember(const string& name, int type, void* data) {
 }
 
 void Serialiser::WriteMembers(void) {
-  Debug::logger->message("WriteMembers()");
+  //Debug::logger->message("WriteMembers()");
 
   std::stringstream sstream;
   

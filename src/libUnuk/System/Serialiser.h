@@ -12,7 +12,7 @@ enum {
   MEMBER_INT,
   MEMBER_FLOAT,
   MEMBER_BOOL,
-  MEMBER_STRING,
+  MEMBER_STRING
 };
 
 class SerialiserMember {
