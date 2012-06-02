@@ -16,7 +16,7 @@ public:
   MapTile(void)                                     {  }
   ~MapTile(void)                                    {  }
 
-	void Render(void)                                 { _tile.Render(), _entity.Render(); }
+  void Render(void)                                 { _tile.Render(), _entity.Render(); }
 
   void Deflate(Serialiser* serialiser);
   void Inflate(Serialiser* serialiser);
@@ -34,19 +34,19 @@ public:
   int GetTileX(void)                                { return _tile.GetX(); }
   int GetTileY(void)                                { return _tile.GetY(); }
 
-	// Entity Mutators.
-	void SetEntityTexture(SDL_Surface* arg)           { _entity.SetTexture(arg); }
-	void SetEntityTextureName(string path)            { _entity.SetTextureName(path); }
-	void SetEntityXY(int xArg, int yArg)              { _entity.SetXY(xArg, yArg); }
-	void SetEntitySolidity(bool arg)                  { _entity.SetSolidity(arg); }
-	bool GetEntitySolitity(void)                      { return _entity.GetSolidity(); }
+  // Entity Mutators.
+  void SetEntityTexture(SDL_Surface* arg)           { _entity.SetTexture(arg); }
+  void SetEntityTextureName(string path)            { _entity.SetTextureName(path); }
+  void SetEntityXY(int xArg, int yArg)              { _entity.SetXY(xArg, yArg); }
+  void SetEntitySolidity(bool arg)                  { _entity.SetSolidity(arg); }
+  bool GetEntitySolitity(void)                      { return _entity.GetSolidity(); }
 
-	// Entity Mutators.
-	int GetEntityX(void)                              { return _entity.GetX(); }
-	int GetEntityY(void)                              { return _entity.GetY(); }
-	int GetEntityWidth(void)                          { return _entity.GetWidth(); }
-	int GetEntityHeight(void)                         { return _entity.GetHeight(); }
-	string GetEntityTextureName(void)                 { return _entity.GetTextureName(); }
+  // Entity Mutators.
+  int GetEntityX(void)                              { return _entity.GetX(); }
+  int GetEntityY(void)                              { return _entity.GetY(); }
+  int GetEntityWidth(void)                          { return _entity.GetWidth(); }
+  int GetEntityHeight(void)                         { return _entity.GetHeight(); }
+  string GetEntityTextureName(void)                 { return _entity.GetTextureName(); }
 
 private:
   MapElement _tile;

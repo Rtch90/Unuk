@@ -13,5 +13,5 @@ void Spells::CastSpell() {
 }
 
 void Spells::Render(void) {
-	//_particle->Render();
+  //_particle->Render();
 }

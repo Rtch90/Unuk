@@ -24,7 +24,7 @@ void Serialiser::StepOut(void) {
   }
 
   TiXmlElement* parentElement = _parentElements.back();
-  
+
   // This happens when stepping out of root.
   if(parentElement == _currentElement) {
     return;
@@ -55,7 +55,7 @@ bool Serialiser::FirstElement(const string& name) {
 
     return false;
   }
-  
+
   if(oldElement) {
     // Save the old element as parent.
     _parentElements.push_back(oldElement);
@@ -78,7 +78,7 @@ bool Serialiser::NextElement(const string& name) {
   if(!_currentElement) {
     // Restore the old element if new one was not found.
     _currentElement = oldElement;
-    
+
     return false;
   }
 
@@ -110,7 +110,7 @@ void Serialiser::WriteMembers(void) {
   //Debug::logger->message("WriteMembers()");
 
   std::stringstream sstream;
-  
+
   for(list<SerialiserMember>::iterator i = _members.begin(); i != _members.end(); ++i) {
     TiXmlText* text = NULL;
 
@@ -146,7 +146,7 @@ void Serialiser::WriteMembers(void) {
 void Serialiser::ReadMembers(void) {
   for(list<SerialiserMember>::iterator i = _members.begin(); i != _members.end(); ++i) {
     TiXmlElement* element = _currentElement->FirstChildElement(i->_name.c_str());
-    
+
     if(!element) {
       continue;
     }

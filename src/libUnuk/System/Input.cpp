@@ -31,6 +31,9 @@ bool CreateInput(void) {
 
   memcpy(keyboard.keys, tempKeys, sizeof(char) * keyboard.keycount);
   mouse.buttons = SDL_GetMouseState(&mouse.dx, &mouse.dy);
+  if(&keyboard > 0 || &mouse > 0){
+    Debug::logger->message("Input device registered");
+  }
   return true;
 }
 
@@ -79,4 +82,5 @@ bool MouseStillUp(int button)     { return(!_curr_mouse(button) && !_old_mouse(b
 void DestroyInput(void) {
   free(keyboard.keys);
   free(keyboard.oldKeys);
+  Debug::logger->message("Input device destroyed");
 }

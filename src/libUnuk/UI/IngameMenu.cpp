@@ -71,22 +71,22 @@ ingameMenuNavVal_t IngameMenu::HandleInput(void) {
         _buttons.SelectPrevious();
       } else if(event.key.keysym.sym == SDLK_RETURN) {
         switch(_buttons.GetSelectedButton()) {
-          case 0: return ingameMenuResume;
-          case 1: return ingameMenuSaveGame;
-          case 2: return ingameMenuLoadGame;
-          case 3: return ingameMenuOptions;
-          case 4: return ingameMenuMainMenu;
+        case 0: return ingameMenuResume;
+        case 1: return ingameMenuSaveGame;
+        case 2: return ingameMenuLoadGame;
+        case 3: return ingameMenuOptions;
+        case 4: return ingameMenuMainMenu;
         }
       }
     }
     else if(event.type == SDL_MOUSEBUTTONUP) {
       if(event.button.button == SDL_BUTTON_LEFT) {
         switch(_buttons.CheckMouseOver()) {
-          case 0: return ingameMenuResume;
-          case 1: return ingameMenuSaveGame;
-          case 2: return ingameMenuLoadGame;
-          case 3: return ingameMenuOptions;
-          case 4: return ingameMenuMainMenu;
+        case 0: return ingameMenuResume;
+        case 1: return ingameMenuSaveGame;
+        case 2: return ingameMenuLoadGame;
+        case 3: return ingameMenuOptions;
+        case 4: return ingameMenuMainMenu;
         }
       }
     }

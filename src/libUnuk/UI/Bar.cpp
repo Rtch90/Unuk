@@ -21,10 +21,10 @@ void Bar::SetWidthHeight(int wArg, int hArg) {
   if(width == wArg && height == hArg) {
     return;
   }
-  
+
   width = wArg;
   height = hArg;
-  
+
   _bgRect.SetWidthHeight(width, height);
 
   SetProgress(_progress);
@@ -48,7 +48,7 @@ void Bar::SetForegroundRGB(SDL_Color colour) {
 
 void Bar::SetProgress(float progress) {
   _progress = progress;
-  
+
   _fgRect.SetWidthHeight((int)(progress * width), height);
 }
 

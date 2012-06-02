@@ -12,9 +12,9 @@ public:
   void message(const char *msg, ...);
   static bool openLog(bool logToFile);
   static void closeLog(void);
-  
+
   static Debug *logger;
 
-private: 
+private:
   std::ofstream _logFile;
 };

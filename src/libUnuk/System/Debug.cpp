@@ -34,13 +34,13 @@ Debug::Debug(bool logToFile) {
 
 Debug::~Debug(void) {
   time_t timestamp;
-  
+
   // We only need to close the log if it is open.
   if(_logFile) {
     // Give it a closing timestamp.
     timestamp = time(NULL);
     _logFile << endl << "Log Closed: " << ctime(&timestamp) << endl;
-    
+
     // Close the log file.
     _logFile.close();
   }
@@ -73,11 +73,11 @@ void Debug::message(const char *msg, ...) {
   if(outLen >= sizeof(outBuf)) {
     outLen = sizeof(outBuf);
   }
-  
+
   if(_logFile) {
     _logFile << outBuf << endl;
   }
-  
+
   cerr << outBuf << endl;
 }
 

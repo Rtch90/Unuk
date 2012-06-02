@@ -24,7 +24,7 @@ bool AStarTile::GetSuccessors(AStarSearch<AStarTile>* search) {
   if(!_level) {
     return false;
   }
-  
+
   if(x > 0) {
     AStarTile& successor = _level->GetAStarTile(x - 1, y);
     if(successor._passable) {

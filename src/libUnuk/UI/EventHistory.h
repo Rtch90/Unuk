@@ -17,7 +17,7 @@ public:
 
 private:
   void BakeText(void);
-  
+
   std::list<std::string> _events;
   Text _titleText;
   Text _text;

@@ -32,7 +32,7 @@ public:
 private:
   Rect _bgRect; // background
   Rect _fgRect; // foreground
-  
+
   float _progress;
 
   int x;

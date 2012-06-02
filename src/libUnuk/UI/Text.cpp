@@ -88,7 +88,7 @@ int Text::SetTextBlended(string textArg, textSizes_t size, SDL_Color colour,bool
   if(wordWrap) {
     finalTextContents = DoWordWrap(font, finalTextContents);
   }
-  
+
   std::list<std::string> lines;
   std::string line;
   for(int i = 0; i < (int)finalTextContents.size(); i++) {
@@ -115,7 +115,7 @@ int Text::SetTextBlended(string textArg, textSizes_t size, SDL_Color colour,bool
       w = linePixelWidth;
     }
 
-    h += linePixelHeight + lineSpacing; 
+    h += linePixelHeight + lineSpacing;
 
     _lines.push_back(lineSurf);
   }
@@ -183,7 +183,7 @@ int Text::SetTextShaded(string textArg, textSizes_t size, SDL_Color colour, SDL_
       w = linePixelWidth;
     }
 
-    h += linePixelHeight + lineSpacing; 
+    h += linePixelHeight + lineSpacing;
 
     _lines.push_back(lineSurf);
   }
@@ -201,8 +201,8 @@ void Text::Render(void) {
   int yOffset = 0;
   for(std::list<SDL_Surface*>::iterator it = _lines.begin(); it != _lines.end(); ++it) {
     SDL_Surface* lineSurf = *it;
-    ApplySurface(x, y + yOffset, lineSurf, screen);  
-    yOffset += lineSurf->h + lineSpacing; 
+    ApplySurface(x, y + yOffset, lineSurf, screen);
+    yOffset += lineSurf->h + lineSpacing;
   }
 }
 
@@ -210,8 +210,8 @@ void Text::Render(int xArg, int yArg) {
   int yOffset = 0;
   for(std::list<SDL_Surface*>::iterator it = _lines.begin(); it != _lines.end(); ++it) {
     SDL_Surface* lineSurf = *it;
-    ApplySurface(x + xArg, y + yArg + yOffset, lineSurf, screen);  
-    yOffset += lineSurf->h + lineSpacing; 
+    ApplySurface(x + xArg, y + yArg + yOffset, lineSurf, screen);
+    yOffset += lineSurf->h + lineSpacing;
   }
 }
 
@@ -219,8 +219,8 @@ void Text::RenderLiteral(void) {
   int yOffset = 0;
   for(std::list<SDL_Surface*>::iterator it = _lines.begin(); it != _lines.end(); ++it) {
     SDL_Surface* lineSurf = *it;
-    ApplySurfaceLiteral(x, y + yOffset, lineSurf, screen);  
-    yOffset += lineSurf->h + lineSpacing; 
+    ApplySurfaceLiteral(x, y + yOffset, lineSurf, screen);
+    yOffset += lineSurf->h + lineSpacing;
   }
 }
 
@@ -228,8 +228,8 @@ void Text::RenderLiteral(int xArg, int yArg) {
   int yOffset = 0;
   for(std::list<SDL_Surface*>::iterator it = _lines.begin(); it != _lines.end(); ++it) {
     SDL_Surface* lineSurf = *it;
-    ApplySurfaceLiteral(x + xArg, y + yArg + yOffset, lineSurf, screen);  
-    yOffset += lineSurf->h + lineSpacing; 
+    ApplySurfaceLiteral(x + xArg, y + yArg + yOffset, lineSurf, screen);
+    yOffset += lineSurf->h + lineSpacing;
   }
 }
 
@@ -263,7 +263,7 @@ std::string Text::DoWordWrap(TTF_Font* fontArg, const std::string& textArg) {
     word = strtok(NULL, " ");
   }
 
- // delete[] tokenizedText;
+  // delete[] tokenizedText;
 
   return wrappedText;
 }

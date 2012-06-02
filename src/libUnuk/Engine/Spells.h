@@ -5,18 +5,18 @@
 
 class Spells {
 public:
-	Spells(void);
-	~Spells(void);
+  Spells(void);
+  ~Spells(void);
 
-	enum {
-		FIREBALL,
-		ICE
-	};
+  enum {
+    FIREBALL,
+    ICE
+  };
 
-	void CastSpell(/*Player* player*/);
-	void Render(void);
+  void CastSpell(/*Player* player*/);
+  void Render(void);
 
 private:
-	Timer* _timeBetweenCast;
-	ParticleEmitter* _particle;
+  Timer* _timeBetweenCast;
+  ParticleEmitter* _particle;
 };

@@ -30,7 +30,7 @@ bool MapElement::GetSolidity(void) {
 
 void MapElement::SetXY(int xArg, int yArg) {
   x = xArg,
-  y = yArg;
+      y = yArg;
 }
 
 int MapElement::GetX(void)        { return x; }
@@ -39,4 +39,4 @@ int MapElement::GetWidth(void)    { return _texture->w; }
 int MapElement::GetHeight(void)   { return _texture->h; }
 
 void   MapElement::SetTextureName(string name)  { _textureName = name; }
-string MapElement::GetTextureName(void)         { return _textureName; } 
+string MapElement::GetTextureName(void)         { return _textureName; }

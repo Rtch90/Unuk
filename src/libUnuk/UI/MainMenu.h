@@ -24,7 +24,7 @@ public:
 private:
   void Render(void);
 
-	LevelGen _background;
+  LevelGen _background;
 
   Text lblMenu;
 

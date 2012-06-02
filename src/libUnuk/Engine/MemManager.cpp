@@ -1,206 +1,535 @@
-#include "MemClass.h"
+#include <new>
+#include <cassert>
+#include <cstdio>
+
+#ifdef _WIN32
+#include <windows.h>
+#endif
+
+#include <malloc.h>
+#include <string.h>
+
 #include "MemManager.h"
 
-MemManager gMemManager;
 
-void BitMapEntry::SetBit(int position, bool flag) {
-	blocksAvailable += flag ? 1 : -1;
-	int elementNo = position / INT_SIZE;
-	int bitNo = position % INT_SIZE;
-	if(flag)
-		bitMap[elementNo] = bitMap[elementNo] | (1 << bitNo);
-	else
-		bitMap[elementNo] = bitMap[elementNo] & ~(1 << bitNo);
+// This is rather C'ish, it can't really be helped since using new/delete inside allocation
+// routines would be, well, no fun. This also excludes SDL containers.
+
+// Don't use this here..
+#ifdef new
+#undef new
+#endif
+
+// We will dump the report here..
+const char logFileName[] = "../Bin/MemLeaks.log";
+
+// Longs are guaranteed to be 2 bits.
+typedef unsigned long uint32;
+
+// Identifiers which are placed to allocated buffer (4-byte alignment)
+const uint32 memPrefix  = 0xBAADF00D;
+const uint32 memPostfix = 0xBABE2BED;
+const uint32 memNotUsed = 0xDEADC0DE;
+
+// Identifiers for array / non array allocations / deleted allocations.
+const uint32 nonArrayAllocation  = 0x2BADF00D;
+const uint32 arrayAllocation      = 0xBAD4ACE2;
+const uint32 invalidAllocation    = 0x76543210;
+
+// Amount. Be careful, this could be a memory overkill.
+const int numberPrefix  = 32;   // 128 bytes.
+const int numberPostfix = 32;   // 128 bytes.
+
+void RemoveMessages(void) {
+#ifdef _WIN32
+  MSG msg = { 0 };
+  while(PeekMessage(&msg, 0, 0, 0, PM_REMOVE)) {
+    if(msg.message == WM_PAINT)
+      return;
+  }
+#endif
 }
 
-void BitMapEntry::SetMultipleBits(int position, bool flag, int count) {
-	blocksAvailable += flag ? count : -count;
-	int elementNo = position / INT_SIZE;
-	int bitNo = position % INT_SIZE;
+struct AllocationUnit {
+  // Just for convenience.
+  uint32* prefixPointer;
+  uint32* postfixPointer;
+  uint32* dataPointer;
 
-	int bitSize = (count <= INT_SIZE - bitNo) ? count : INT_SIZE - bitNo;
-	SetRangeOfInt(&bitMap[elementNo], bitNo + bitSize - 1, bitNo, flag);
-	count -= bitSize;
-	if(!count) return;
+  // Size with and withough manager extras.
+  size_t requestedSize;
+  size_t overallSize;
 
-	int i = ++elementNo;
-	while(count >= 0) {
-		if(count <= INT_SIZE) {
-			SetRangeOfInt(&bitMap[i], count - 1, 0, flag);
-			return;
-		} else
-			bitMap[i] = flag ? unsigned (-1) : 0;
-		count -= 32;
-		i++;
-	}
+  // Catches mixing new[]/delete and new/delete[] changed from bool to int
+  // to catch problems with memory blocks allocated without using memory manager.
+  int arrayAllocated;
+
+  // Allocation info which may or may not be present.
+  char* allocatedFrom;
+
+  // Allocation was marked during last snapshot, therfore, it will not be shown
+  // at leak snapshot dump.
+  bool markedSnapshot;
+};
+
+AllocationUnit* CreateAllocationUnit(void) {
+  AllocationUnit* unit = static_cast<AllocationUnit*> (malloc(sizeof(AllocationUnit)));
+
+  unit->prefixPointer   = 0;
+  unit->postfixPointer  = 0;
+  unit->dataPointer     = 0;
+
+  unit->requestedSize   = 0;
+  unit->overallSize     = 0;
+
+  unit->arrayAllocated  = nonArrayAllocation;
+  unit->allocatedFrom   = 0;
+
+  unit->markedSnapshot = false;
+
+  return unit;
 }
 
-void BitMapEntry::SetRangeOfInt(int* element, int msb, int lsb, bool flag) {
-	if(flag) {
-		int mask = (unsigned(-1) << lsb) & (unsigned(-1) >> (INT_SIZE - msb - 1));
-		*element |= mask;
-	} else {
-		int mask = (unsigned(-1) << lsb) & (unsigned(-1) >> (INT_SIZE - msb - 1));
-		*element &= ~mask;
-	}
+void deleteAllocationUnit(AllocationUnit* unit) {
+  if(unit->allocatedFrom)
+    free(unit->allocatedFrom);
+  if(unit->prefixPointer)
+    free(unit->prefixPointer);
+  unit->arrayAllocated = invalidAllocation;
+  free(unit);
 }
 
-MemClass* BitMapEntry::FirstFreeBlock(size_t/* size*/) {
-	for(int i = 0; i < BIT_MAP_ELEMENTS; i++) {
-		if(bitMap[i] == 0)
-			// There aint any bits free.
-			continue;
+// Allocation information.
 
-		// Yield the first bit position. This is a 1
-		// in an int from the right.
-		int result = bitMap[i] & -(bitMap[i]);
-		//void* address = 0;
-		int basePos = (INT_SIZE * i);
+struct AllocationLink {
+  AllocationUnit* allocationUnit;
+  AllocationLink* next;
+};
 
-		switch(result) {
-			// Make the corresponfing bit 0 so block is no longer free.
-		case 0x00000001: return ComplexObjectAddress(basePos + 0);
-		case 0x00000002: return ComplexObjectAddress(basePos + 1);
-		case 0x00000004: return ComplexObjectAddress(basePos + 2);
-		case 0x00000008: return ComplexObjectAddress(basePos + 3);
-		case 0x00000010: return ComplexObjectAddress(basePos + 4);
-		case 0x00000020: return ComplexObjectAddress(basePos + 5);
-		case 0x00000040: return ComplexObjectAddress(basePos + 6);
-		case 0x00000080: return ComplexObjectAddress(basePos + 7);
-		case 0x00000100: return ComplexObjectAddress(basePos + 8);
-		case 0x00000200: return ComplexObjectAddress(basePos + 9);
-		case 0x00000400: return ComplexObjectAddress(basePos + 10);
-		case 0x00000800: return ComplexObjectAddress(basePos + 11);
-		case 0x00001000: return ComplexObjectAddress(basePos + 12);
-		case 0x00002000: return ComplexObjectAddress(basePos + 13);
-		case 0x00004000: return ComplexObjectAddress(basePos + 14);
-		case 0x00008000: return ComplexObjectAddress(basePos + 15);
-		case 0x00010000: return ComplexObjectAddress(basePos + 16);
-		case 0x00020000: return ComplexObjectAddress(basePos + 17);
-		case 0x00040000: return ComplexObjectAddress(basePos + 18);
-		case 0x00080000: return ComplexObjectAddress(basePos + 19);
-		case 0x00100000: return ComplexObjectAddress(basePos + 20);
-		case 0x00200000: return ComplexObjectAddress(basePos + 21);
-		case 0x00400000: return ComplexObjectAddress(basePos + 22);
-		case 0x00800000: return ComplexObjectAddress(basePos + 23);
-		case 0x01000000: return ComplexObjectAddress(basePos + 24);
-		case 0x02000000: return ComplexObjectAddress(basePos + 25);
-		case 0x04000000: return ComplexObjectAddress(basePos + 26);
-		case 0x08000000: return ComplexObjectAddress(basePos + 27);
-		case 0x10000000: return ComplexObjectAddress(basePos + 28);
-		case 0x20000000: return ComplexObjectAddress(basePos + 29);
-		case 0x40000000: return ComplexObjectAddress(basePos + 30);
-		case 0x80000000: return ComplexObjectAddress(basePos + 31);
-		default: break;
-		}
-	}
-	return 0;
+struct AllocationRoot {
+  AllocationLink* first;
+};
+
+// Hash data.
+static const int hashSize = 3677;   // Prime number. Big enough?
+static AllocationRoot hashMap[hashSize] = { 0 };
+
+static int allocationCount    = 0;    // Amount of allocations.
+static int allocationMemory   = 0;    // Memory allocated.
+
+static int PeakMemoryUsage    = 0;
+static int peakPointers        = 0;
+
+int CalculateHashIndex(const void* buffer) {
+  int value = reinterpret_cast<int> (buffer);
+  // Shift lower bits (alignment would kill coverage).
+  value >>= 4;
+
+  // Create index.
+  value %= hashSize;
+  return value;
 }
 
-MemClass* BitMapEntry::ComplexObjectAddress(int pos) {
-	SetBit(pos, false);
-	return &((static_cast<MemClass*>(Head()) + (pos / INT_SIZE)) [INT_SIZE - (pos % INT_SIZE + 1)]);
+void AddAllocation(AllocationUnit* allocation) {
+  assert(allocation);
+
+  ++allocationCount;
+  allocationMemory += allocation->requestedSize;
+
+  AllocationLink* link = static_cast<AllocationLink*> (malloc(sizeof(AllocationLink)));
+  link->allocationUnit = allocation;
+  link->next = 0;
+
+  int hashIndex = CalculateHashIndex(allocation->dataPointer);
+  if(hashMap[hashIndex].first == 0)
+    hashMap[hashIndex].first = link;
+  else {
+    // Push front.
+    link->next = hashMap[hashIndex].first;
+    hashMap[hashIndex].first = link;
+  }
+
+  if(allocationMemory > PeakMemoryUsage)
+    PeakMemoryUsage = allocationMemory;
+  if(allocationCount > peakPointers)
+    peakPointers = allocationCount;
 }
 
-void* BitMapEntry::Head(void) {
-	return gMemManager.GetMemoryPoolList()[index];
+AllocationUnit* FindAllocation(void* pointer) {
+  int hashIndex = CalculateHashIndex(pointer);
+  AllocationLink* current = hashMap[hashIndex].first;
+
+  while(current) {
+    if(current->allocationUnit->dataPointer == pointer)
+      return current->allocationUnit;
+    current = current->next;
+  }
+
+  RemoveMessages();
+  assert(!"Allocation not found. Uninitialized pointer?");
+  return 0;
 }
 
-void* MemManager::Allocate(size_t size) {
-	// None array.
-	if(size == sizeof(MemClass)) {
-		set<BitMapEntry*>::iterator freeMapI = _freeMapEntries.begin();
-		if(freeMapI != _freeMapEntries.end()) {
-			BitMapEntry* mapEntry = *freeMapI;
-			return mapEntry->FirstFreeBlock(size);
-		} else {
-			AllocateChunkAndInitBitMap();
-			_freeMapEntries.insert(&(_bitMapEntryList[_bitMapEntryList.size() - 1]));
-			return _bitMapEntryList[_bitMapEntryList.size() - 1].FirstFreeBlock(size);
-		}
-	} else {
-		// Array.
-		if(_arrayMemoryList.empty()) {
-			return AllocateArrayMemory(size);
-		} else {
-			map<void*, ArrayMemoryInfo>::iterator infoI    = _arrayMemoryList.begin();
-			map<void*, ArrayMemoryInfo>::iterator infoEndI = _arrayMemoryList.end();
+void RemoveAllocation(AllocationUnit* allocation) {
+  if(allocationCount <= 0) {
+    RemoveMessages();
+    assert(allocationCount > 0);
+  }
 
-			while(infoI != infoEndI) {
-				ArrayMemoryInfo info = (*infoI).second;
-				if(info.StartPosition != 0)
-					// Only search the memory blocks where allocation
-					// is done from first byte.
-					continue;
-				else {
-					BitMapEntry* entry = &_bitMapEntryList[info.memPoolListIndex];
-					if(entry->blocksAvailable < (size / sizeof(MemClass)))
-						return AllocateArrayMemory(size);
-					else {
-						info.StartPosition = BIT_MAP_SIZE - entry->blocksAvailable;
-						info.Size = size / sizeof(MemClass);
-						MemClass* baseAddress = static_cast<MemClass*>(_memoryPoolList[info.memPoolListIndex]) + info.StartPosition;
+  int hashIndex = CalculateHashIndex(allocation->dataPointer);
 
-						_arrayMemoryList[baseAddress] = info;
-						SetMultipleBlockBits(&info, false);
+  AllocationLink* current = hashMap[hashIndex].first;
+  AllocationLink* previous = 0;
 
-						return baseAddress;
-					}
-				}
-			}
-		}
-	}
-	return 0;
+  while(current) {
+    if(current->allocationUnit == allocation) {
+      // Remove.
+      if(previous)
+        previous->next = current->next;
+      else
+        hashMap[hashIndex].first = current->next;
+
+      --allocationCount;
+      allocationMemory -= current->allocationUnit->requestedSize;
+
+      // Free memory.
+      deleteAllocationUnit(current->allocationUnit);
+      free(current);
+
+      return;
+    }
+    previous = current;
+    current = current->next;
+  }
+  RemoveMessages();
+  assert(!"Allocation not found. Uninitialized pointer?");
 }
 
-void* MemManager::AllocateArrayMemory(size_t size) {
-	void* chunkAddress = AllocateChunkAndInitBitMap();
-	ArrayMemoryInfo info;
-	info.memPoolListIndex = _memoryPoolList.size() - 1;
-	info.StartPosition = 0;
-	info.Size = size / sizeof(MemClass);
-	_arrayMemoryList[chunkAddress] = info;
-	SetMultipleBlockBits(&info, false);
-	return chunkAddress;
+void DumpLeakReport(void) {
+  if(allocationCount > 0) {
+    DumpLeakSnapshot(true);
+  } else {
+    // Remove file.
+    fclose(fopen(logFileName, "wt"));
+  }
 }
 
-void* MemManager::AllocateChunkAndInitBitMap(void) {
-	BitMapEntry mapEntry;
-	MemClass* memoryBeginAddress = reinterpret_cast<MemClass*>(new char[sizeof(MemClass) * BIT_MAP_SIZE]);
-	_memoryPoolList.push_back(memoryBeginAddress);
-	mapEntry.index = _memoryPoolList.size() - 1;
-	_bitMapEntryList.push_back(mapEntry);
-	return memoryBeginAddress;
+void TestIdentifiers(AllocationUnit* allocation) {
+  for(int i = 0; i < numberPrefix; ++i) {
+    if(allocation->prefixPointer[i] != memPrefix) {
+      RemoveMessages();
+      assert(!"Buffer prefix messed up!");
+    }
+  }
+  for(int i = 0; i < numberPostfix; ++i) {
+    if(allocation->postfixPointer[i] != memPostfix) {
+      RemoveMessages();
+      assert(!"Buffer postfix messed up!");
+    }
+  }
 }
 
-void MemManager::Free(void* object) {
-	if(_arrayMemoryList.find(object) == _arrayMemoryList.end())
-		// Simple block deletion.
-		SetBlockBit(object, true);
-	else {
-		// Memory block deletion.
-		ArrayMemoryInfo *info = &_arrayMemoryList[object];
-		SetMultipleBlockBits(info, true);
-	}
+// After deinitialization, dump leak report on every deallocation.
+struct InitializationTracker {
+  static bool programExiting;
+
+  InitializationTracker(void) {
+    programExiting = false;
+  }
+
+  ~InitializationTracker(void) {
+    programExiting = true;
+    DumpLeakReport();
+  }
+};
+
+bool InitializationTracker::programExiting = false;
+static InitializationTracker tracker;
+
+void MarkLeakSnapshot(void) {
+  if(allocationCount > 0) {
+    int currentIndex = 0;
+    for(int i = 0; i < hashSize; ++i) {
+      AllocationLink* currentLink = hashMap[i].first;
+      while(currentLink != 0) {
+        currentLink->allocationUnit->markedSnapshot = true;
+        currentLink = currentLink->next;
+      }
+    }
+  }
 }
 
-void MemManager::SetBlockBit(void* object, bool flag) {
-	int i = _bitMapEntryList.size() - 1;
-	for(; i >= 0; i--) {
-		BitMapEntry* bitMap = &_bitMapEntryList[i];
-		if((bitMap->Head() <= object) && (&(static_cast<MemClass*>(bitMap->Head()))[BIT_MAP_SIZE - 1] >= object)) {
-			int position = static_cast<MemClass*>(object)- static_cast<MemClass*>(bitMap->Head());
-			bitMap->SetBit(position, flag);
-			flag ? bitMap->blocksAvailable++ : bitMap->blocksAvailable--;
-		}
-	}
+void DumpLeakSnapshot(bool fromStart) {
+  if(allocationCount > 0) {
+    FILE* fp = fopen(logFileName, "wt");
+    if(fp == NULL) {
+      return;
+    }
+
+    if(!fromStart)
+      fprintf(fp, "(SNAPSHOT)\n\n");
+    fprintf(fp, "Peak memory usage: %d bytes\n", PeakMemoryUsage);
+    fprintf(fp, "Overall memory leaked: %d bytes\n", allocationMemory);
+    fprintf(fp, "Pointers left: %d\n\n", allocationCount);
+
+    int currentIndex = 0;
+    for(int i = 0; i < hashSize; ++i) {
+      AllocationLink* currentLink = hashMap[i].first;
+      while(currentLink != 0) {
+        if(!currentLink->allocationUnit->markedSnapshot || fromStart) {
+          //if(strcmp(currentLink->allocationUnit->allocatedFrom, "(???: line 0)") != 0)
+          if(!strstr(currentLink->allocationUnit->allocatedFrom, "???")) {
+            // Temp: show only over 2MB
+            //if(currentLink->allocationUnit->requestedSize > 1*1024*1024) {
+            fprintf(fp, "Allocation %d:\n", ++currentIndex);
+            fprintf(fp, "\tAllocated from: %s\n", currentLink->allocationUnit->allocatedFrom);
+            fprintf(fp, "\tAllocation size: %d bytes\n", currentLink->allocationUnit->requestedSize);
+            if(currentLink->allocationUnit->arrayAllocated == nonArrayAllocation)
+              fprintf(fp, "\tAllocated with new()\n");
+            else
+              fprintf(fp, "\tAllocated with new[]\n");
+
+            // To get the contents of some char array strings.
+#define MEMMANAGER_MAX_PRINT_SIZE 80
+            int arraySize = currentLink->allocationUnit->requestedSize;
+            if(currentLink->allocationUnit->arrayAllocated == arrayAllocation && arraySize < MEMMANAGER_MAX_PRINT_SIZE) {
+              char* data = (char*)currentLink->allocationUnit->requestedSize;
+              char databuf[MEMMANAGER_MAX_PRINT_SIZE + 2];
+              bool noControlChars = true;
+              int j;
+              for(j = 0; j < arraySize; j++) {
+                if(data[j] == '\n' || data[j] == '\r')
+                  databuf[j] = ' ';
+                else
+                  databuf[j] = data[j];
+                if(data[j] < 32 && data[j] != '\n' && data[j] != '\r') {
+                  if(data[j] != '\0') noControlChars = false;
+                  break;
+                }
+              }
+              databuf[j] != '\0';
+              if(noControlChars) {
+                fprintf(fp, "\tData: \"%s\"\n", data);
+              }
+            }
+            fprintf(fp, "\n");
+            //}
+          }
+        }
+        currentLink = currentLink->next;
+      }
+    }
+    fclose(fp);
+  }
 }
 
-void MemManager::SetMultipleBlockBits(ArrayMemoryInfo* info, bool flag) {
-	BitMapEntry* mapEntry = &_bitMapEntryList[info->memPoolListIndex];
-	mapEntry->SetMultipleBits(info->StartPosition, flag, info->Size);
+char debugAllocInfo[256 + 1] = { 0 };
+int debugAllocatedSinceInfo = -1;
+// Just a hack to add extra info to allocations.
+void DebugSetAllocationInfo(const char* allocationInfo) {
+  if(allocationInfo == NULL)
+    debugAllocInfo[0] = '\0';
+  else
+    strncpy(debugAllocInfo, allocationInfo, 256);
+  debugAllocatedSinceInfo = 0;
 }
 
-vector<void*>& MemManager::GetMemoryPoolList(void) {
-	return _memoryPoolList;
+// Operator new implementation.
+void* operator new(size_t originalSize, const char* filename, int lineNumber, bool arrayAllocated) {
+  // Handle 0-byte request. we must return a unique pointer
+  // (or unique value actually).
+  if(originalSize == 0)
+    originalSize = 1;
+
+  // To 4-byte boundary (since our identifiers are unit32's).
+  if(int foo = originalSize % 4)
+    originalSize += 4 - foo;
+
+  // Make some room for prefix and postfix.
+  size_t size = originalSize;
+  size += numberPrefix  * 4;
+  size += numberPostfix * 4;
+
+  // Yes, Infinate loop really is the way to go :)
+  while(true) {
+    AllocationUnit* allocation = CreateAllocationUnit();
+    void* buffer = malloc(size);
+
+    // Both have to succeed. We want to handle out-of-memory.
+    if((buffer) && (allocation)) {
+      char* info;
+      if(debugAllocInfo[0] != '\0' && debugAllocatedSinceInfo >= 0) {
+        info = static_cast<char*>(malloc(strlen(filename) + strlen(debugAllocInfo) + 60));
+        if(info) {
+          if(debugAllocatedSinceInfo == 0)
+            sprintf(info, "(%s: line %d)\t Info: \"%s\"", filename, lineNumber, debugAllocInfo);
+          else
+            sprintf(info, "(%s: line %d)\n\tInfo: (\"%s\", %d allocs ago)", filename, lineNumber, debugAllocInfo, debugAllocatedSinceInfo);
+        }
+      } else {
+        info = static_cast<char*> (malloc(strlen(filename) + 20));
+        if(info) {
+          sprintf(info, "(%s: line %d)", filename, lineNumber);
+        }
+      }
+
+      // Fill in allocation info.
+      allocation->prefixPointer = static_cast<uint32*> (buffer);
+      allocation->dataPointer = allocation->prefixPointer + numberPrefix;
+      allocation->postfixPointer = allocation->dataPointer + (originalSize / 4);
+
+      allocation->allocatedFrom = info;
+      if(arrayAllocated)
+        allocation->arrayAllocated = arrayAllocation;
+      else
+        allocation->arrayAllocated = nonArrayAllocation;
+      allocation->overallSize = size;
+      allocation->requestedSize = originalSize;
+
+      // Fill in our identifiers.
+      for(int i = 0; i < numberPrefix; ++i)
+        allocation->prefixPointer[i] = memPrefix;
+      for(int i = 0; i < int(originalSize / 4); ++i)
+        allocation->dataPointer[i] = memNotUsed;
+      for(int i = 0; i < numberPostfix; ++i)
+        allocation->postfixPointer[i] = memPostfix;
+
+      AddAllocation(allocation);
+      return allocation->dataPointer;
+    }
+
+    // If only one of them succeeded, free it first.
+    if(buffer)
+      free(buffer);
+    if(allocation)
+      deleteAllocationUnit(allocation);
+
+    // Test error-handling functions.
+    std::new_handler globalHandler = std::set_new_handler(0);
+    std::set_new_handler(globalHandler);
+
+    // If we have one, try it. otherwise throw a bad allocation.
+    // (And hope for someone to catch it).
+    if(globalHandler)
+      (*globalHandler) ();
+    else
+      throw std::bad_alloc();
+  }
+}
+
+void operator delete(void* buffer, bool arrayDeleted) throw() {
+  // Deleting null-pointer is legal.
+  if(buffer == 0)
+    return;
+
+  AllocationUnit* allocation = FindAllocation(buffer);
+  if(!allocation) {
+    RemoveMessages();
+    assert(allocation);
+  }
+
+  // Test out of bounds.
+  TestIdentifiers(allocation);
+
+  // Test that the block was allocated by memory manager.
+  // Test array operator mixing.
+  if(allocation->arrayAllocated != arrayAllocation && allocation->arrayAllocated != nonArrayAllocation) {
+    RemoveMessages();
+    assert(!"Deleting block with invalid allocation type");
+  } else {
+    if((arrayDeleted && allocation->arrayAllocated == nonArrayAllocation) || (!arrayDeleted && allocation->arrayAllocated == arrayAllocation)) {
+      RemoveMessages();
+      assert(!"Mixed array and normal versions");
+    }
+  }
+  RemoveAllocation(allocation);
+
+  // If quitting, dump report on each deallocation.
+  if(InitializationTracker::programExiting == true)
+    DumpLeakReport();
+}
+
+void* operator new(size_t size, const char* filename, int lineNumber) throw(std::bad_alloc) {
+  return operator new(size, filename, lineNumber, false);
+}
+void* operator new(size_t size) throw(std::bad_alloc) {
+  return operator new(size, "???", 0, false);
+}
+void* operator new[](size_t size, const char* filename, int lineNumber) throw(std::bad_alloc) {
+  return operator new(size, filename, lineNumber, true);
+}
+void* operator new[](size_t size) throw(std::bad_alloc) {
+  return operator new(size, "???", 0 , true);
+}
+void operator delete(void* buffer) throw() {
+  operator delete(buffer, false);
+}
+void operator delete[](void* buffer) throw() {
+  operator delete(buffer, true);
+}
+
+void MemManager::SetFailingPercentage(int percentage) {
+}
+
+void MemManager::ValidatePointer(void* pointer) {
+  AllocationUnit* allocation = FindAllocation(pointer);
+  if(!allocation) {
+    RemoveMessages();
+    assert(allocation);
+    return;
+  }
+  // Test out-of-bounds.
+  TestIdentifiers(allocation);
+}
+
+void MemManager::ValidateAllPointers(void) {
+  for(int i = 0; i < hashSize; ++i) {
+    AllocationLink* currentLink = hashMap[i].first;
+    while(currentLink != 0) {
+      if(currentLink)
+        TestIdentifiers(currentLink->allocationUnit);
+
+      currentLink = currentLink->next;
+    }
+  }
+}
+
+int MemManager::AmountOfMemoryAllocated(void* pointer, bool includeManagerExtra) {
+  return 0;
+}
+
+int MemManager::AmountOfMemoryInUse(void* pointer) {
+  int result = 0;
+
+  for(int i = 0; i < hashSize; ++i) {
+    AllocationLink* currentLink = hashMap[i].first;
+    while(currentLink != 0) {
+      if(currentLink)
+        result += currentLink->allocationUnit->requestedSize;
+      currentLink = currentLink->next;
+    }
+  }
+  return result;
+}
+
+void MemManager::LogStatistics(const char* filename) {
+}
+
+void MemManager::LogUnusedPointers(const char* filename, float freePercentage) {
+}
+
+int MemManager::AmountOfMemoryInUse(bool includeManagerExta) {
+  return allocationMemory;
+}
+
+int MemManager::AmountOfPeakMemoryInUse(bool includeManagerExtra) {
+  return 0;
+}
+
+int MemManager::AmountOfMemoryAllocations(void) {
+  return allocationCount;
+}
+
+int MemManager::AmountOfPeakMemoryAllocations(void) {
+  return 0;
 }

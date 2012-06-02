@@ -84,7 +84,7 @@ bool Button::CheckMouseOver(void) {
   return false;
 }
 
-void Button::SetHighlighted(bool highlighted) { 
+void Button::SetHighlighted(bool highlighted) {
   if(_highlighted != highlighted) {
     if(highlighted) {
       _button.SetRGB(_highlightColour);

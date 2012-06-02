@@ -24,39 +24,39 @@ class Player;
 
 class LevelGen : public Serialisable {
 public:
-	LevelGen(void);
-	~LevelGen(void);
+  LevelGen(void);
+  ~LevelGen(void);
 
   void New(void);
   void Load(const string& filename);
   void Save(const string& filename);
   void Update(void);
   void Render(void);
-  
+
   void FindSpawnPoint(int& xArg, int& yArg, int objWidth, int objHeight);
   void MoveIfPossible(Character* character, float xVel, float yVel, bool isPlayer = false);
-  
-	bool GetTileSolidity(int xArg, int yArg);
-	int  GetTileX(int xArg, int yArg);
-	int  GetTileY(int xArg, int yArg);
 
-	bool GetEntitySolidity(int xArg, int yArg);
-	int  GetEntityX(int xArg, int yArg);
-	int  GetEntityY(int xArg, int yArg);
-	int  GetEntityWidth(int xArg, int yArg);
-	int  GetEntityHeight(int xArg, int yArg);
+  bool GetTileSolidity(int xArg, int yArg);
+  int  GetTileX(int xArg, int yArg);
+  int  GetTileY(int xArg, int yArg);
 
-	int  GetTileZLevel(int xArg, int yArg);
+  bool GetEntitySolidity(int xArg, int yArg);
+  int  GetEntityX(int xArg, int yArg);
+  int  GetEntityY(int xArg, int yArg);
+  int  GetEntityWidth(int xArg, int yArg);
+  int  GetEntityHeight(int xArg, int yArg);
+
+  int  GetTileZLevel(int xArg, int yArg);
 
   AStarTile& GetAStarTile(int xArg, int yArg);
 
-	string GetCurrentMap(void);
+  string GetCurrentMap(void);
 
-	WorldManager& GetWorld(void) { return _world; }
+  WorldManager& GetWorld(void) { return _world; }
 
-	void SetPlayer(Player* player)  { _player = player; }
+  void SetPlayer(Player* player)  { _player = player; }
   Player* GetPlayer()             { return _player; }
-  
+
   static const int TILE_ARRAY_WIDTH = (SCREEN_WIDTH / TILE_WIDTH) + 1;
   static const int TILE_ARRAY_HEIGHT = (SCREEN_HEIGHT / TILE_HEIGHT) + 1;
   static const int ASTAR_ARRAY_WIDTH = TILE_ARRAY_WIDTH * (TILE_WIDTH / AStarTile::FAKE_SIZE);
@@ -85,6 +85,6 @@ private:
   TextureManager _entityTextures;
 
   WorldManager _world;
-  
+
   Player* _player;
 };

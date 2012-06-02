@@ -1,88 +1,53 @@
 #pragma once
-#include <iostream>
-#include <vector>
-#include <string>
-#include <string.h>
-#include <vector>
-#include <set>
-#include <map>
-#include <bitset>
-using namespace std;
 
-const int BIT_MAP_SIZE   = 1024;
-const int INT_SIZE      = sizeof(int) * 8;
-const int BIT_MAP_ELEMENTS = BIT_MAP_SIZE / INT_SIZE;
+#ifndef INCLUDED_NEW
+#define INCLUDED_NEW
+#include <new>
+#endif
 
-/*
- * Memory Allocation Pattern.
- * 11111111 11111111 11111111
- * 11111110 11111111 11111111
- * 11111100 11111111 11111111
- *
- * If all bits for the first section becomes zero go to next section.
- *
- * 00000000 11111111 11111111
- * 00000000 11111110 11111111
- * 00000000 11111100 11111111
- * 00000000 11111000 11111111
- *
- * The lookup inside the map becomes 0(1) for the first available free block.
- */
-
-class MemClass;
-
-typedef struct BitMapEntry {
-  int index;
-  int blocksAvailable;
-  int bitMap[BIT_MAP_SIZE];
+class MemManager {
+  // Not implemented.
+  MemManager(void);
+  ~MemManager(void);
 
 public:
-  BitMapEntry():blocksAvailable(BIT_MAP_SIZE) {
-    // All blocks are free to begin with and bit value 1
-    // in the map denotes available blocks.
-    memset(bitMap, 0xff, BIT_MAP_SIZE / sizeof(char));
-  }
+  // Affect behavior.
+  static void SetFailingPercentage(int percentage);
 
-  void SetBit(int position, bool flag);
-  void SetMultipleBits(int position, bool flag, int count);
-  void SetRangeOfInt(int* element, int msb, int lsb, bool flag);
-  MemClass* FirstFreeBlock(size_t size);
-  MemClass* ComplexObjectAddress(int pos);
-  void* Head(void);
-} BitMapEntry;
+  // Pointers.
+  static void ValidatePointer(void* pointer);
+  static void ValidateAllPointers(void);
+  static int AmountOfMemoryAllocated(void* pointer, bool includeManagerExtra = false);
+  static int AmountOfMemoryInUse(void* pointer);
 
-typedef struct ArrayInfo {
-  int memPoolListIndex;
-  int StartPosition;
-  int Size;
-} ArrayMemoryInfo;
+  // Logging.
+  static void LogStatistics(const char* filename);
+  static void LogUnusedPointers(const char* filename, float freePercentage);
 
-class IMemManager {
-public:
-  virtual void* Allocate(size_t size) = 0;
-  virtual void  Free(void* object)    = 0;
+  // Memory statistics.
+  static int AmountOfMemoryInUse(bool includeManagerExta = false);
+  static int AmountOfPeakMemoryInUse(bool includeManagerExtra = false);
+  static int AmountOfMemoryAllocations(void);
+  static int AmountOfPeakMemoryAllocations(void);
 };
 
-class MemManager : public IMemManager {
-public:
-  MemManager(void)  {}
-  ~MemManager(void) {}
+// Quick hack to get some extra information about allocations.
+void DebugSetAllocationInfo(const char* allocationInfo);
+void DumpLeakSnapshot(bool fromStart = false);
+void MarkLeakSnapshot(void);
 
-  void* Allocate(size_t size);
-  void  Free(void* object);
-  vector<void*>& GetMemoryPoolList(void);
+// Global operators.
+void* operator new(size_t size, const char* filename, int lineNumber) throw(std::bad_alloc);
+void* operator new(size_t size) throw(std::bad_alloc);
+void* operator new[](size_t size, const char* filename, int lineNumber) throw(std::bad_alloc);
+void* operator new[](size_t size) throw(std::bad_alloc);
+void operator delete(void* buffer) throw();
+void operator delete[](void* buffer) throw();
 
-private:
-  void* AllocateArrayMemory(size_t size);
-  void* AllocateChunkAndInitBitMap(void);
-  void SetBlockBit(void* object, bool flag);
-  void SetMultipleBlockBits(ArrayMemoryInfo* info, bool flag);
-
-  // The following lists will maintain one to one correspondace
-  // and should be the same size.
-  vector<void*> _memoryPoolList;
-  vector<BitMapEntry> _bitMapEntryList;
-
-  set<BitMapEntry*> _freeMapEntries;
-  map<void*, ArrayMemoryInfo> _arrayMemoryList;
-};
+// I don't think there are any compilers that don't define these, but just in case.
+#ifndef __FILE__
+#define __FILE__ "???"
+#endif
+#ifndef __LINE__
+#define __LINE__ 0
+#endif

@@ -12,7 +12,6 @@ HEADERS += ../src/Libs/wglext.h \
     ../src/libUnuk/Engine/WorldManager.h \
     ../src/libUnuk/Engine/ParticleEmitter.h \
     ../src/libUnuk/Engine/NPC.h \
-    ../src/libUnuk/Engine/MemManager.h \
     ../src/libUnuk/Engine/MemClass.h \
     ../src/libUnuk/Engine/Collision.h \
     ../src/libUnuk/Engine/Character.h \
@@ -49,11 +48,11 @@ HEADERS += ../src/Libs/wglext.h \
     ../src/libUnuk/System/MathBox.h \
     ../src/libUnuk/Engine/Pathfinding.h \
     ../src/libUnuk/UI/SavegameMenu.h \
-    ../src/libUnuk/Engine/Spells.h
+    ../src/libUnuk/Engine/Spells.h \
+    ../src/libUnuk/Engine/MemManager.h
 SOURCES += ../src/libUnuk/Engine/WorldManager.cpp \
     ../src/libUnuk/Engine/ParticleEmitter.cpp \
     ../src/libUnuk/Engine/NPC.cpp \
-    ../src/libUnuk/Engine/MemManager.cpp \
     ../src/libUnuk/Engine/Collision.cpp \
     ../src/libUnuk/Engine/Character.cpp \
     ../src/libUnuk/Sprite/TextureManager.cpp \
@@ -86,4 +85,5 @@ SOURCES += ../src/libUnuk/Engine/WorldManager.cpp \
     ../src/libUnuk/UI/Bar.cpp \
     ../src/libUnuk/System/Vec2.cpp \
     ../src/libUnuk/UI/SavegameMenu.cpp \
-    ../src/libUnuk/Engine/Spells.cpp
+    ../src/libUnuk/Engine/Spells.cpp \
+    ../src/libUnuk/Engine/MemManager.cpp

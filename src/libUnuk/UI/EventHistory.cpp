@@ -15,9 +15,9 @@ EventHistory::EventHistory(void) {
   _titleText.SetXY(_bgx + BOX_WIDTH/2, _bgy + 5);
   _titleText.SetTextBlended("Unuk Log", small, 0, 255, 255);
   _titleText.SetXY(_titleText.GetX() - _titleText.GetWidth()/2, _titleText.GetY());
-  
+
   _text.SetXY(_bgx + 5, _bgy + 30);
-  
+
   _visible = false;
 }
 
@@ -42,9 +42,9 @@ void EventHistory::LogEvent(const std::string& evtText) {
 void EventHistory::Render(void) {
   if(_visible && (_timeToVanish.GetTicks() >= 5000)) {
     _timeToVanish.Stop();
-    
+
     _events.erase(_events.begin());
-    
+
     if(_events.empty()) {
       _visible = false;
     } else {
@@ -56,18 +56,18 @@ void EventHistory::Render(void) {
   if(!_visible) {
     return;
   }
-  
+
   roundedBoxRGBA(screen,
-    _bgx, _bgy,
-    _bgx + BOX_WIDTH, _bgy + BOX_HEIGHT,
-    8,
-    0, 0, 0, 128);
-  
+                 _bgx, _bgy,
+                 _bgx + BOX_WIDTH, _bgy + BOX_HEIGHT,
+                 8,
+                 0, 0, 0, 128);
+
   roundedRectangleRGBA(screen,
-    _bgx, _bgy,
-    _bgx + BOX_WIDTH, _bgy + BOX_HEIGHT,
-    8,
-    0, 255, 255, 255);
+                       _bgx, _bgy,
+                       _bgx + BOX_WIDTH, _bgy + BOX_HEIGHT,
+                       8,
+                       0, 255, 255, 255);
 
   _titleText.RenderLiteral();
   _text.RenderLiteral();
@@ -80,6 +80,6 @@ void EventHistory::BakeText(void) {
     textStr.append("\n");
   }
 
-  _text.SetTextBlended(textStr, small, 255, 255, 255);  
+  _text.SetTextBlended(textStr, small, 255, 255, 255);
 }
 

@@ -35,7 +35,7 @@ MainMenu::MainMenu(void) {
   btnExit->SetText("Exit");
   btnExit->SetHighlightRGB(255, 128, 0);
   btnExit->SetHighlighted(false);
-  btnExit->SetXY(100, 300);  
+  btnExit->SetXY(100, 300);
 
   grpMain.AddButton(btnNewGame);
   grpMain.AddButton(btnLoadGame);
@@ -116,15 +116,15 @@ mainMenuNavVal_t MainMenu::Run(void) {
         } else if(event.key.keysym.sym == SDLK_RETURN) {
           if(btnNewGameActive) {
             switch(grpNewGame.GetSelectedButton()) {
-              case 0: return mainMenuNewGame; break;
-              case 1: btnNewGameActive = false; break;
+            case 0: return mainMenuNewGame; break;
+            case 1: btnNewGameActive = false; break;
             }
           } else {
             switch(grpMain.GetSelectedButton()) {
-              case 0: btnNewGameActive = !btnNewGameActive; break;
-              case 1: return mainMenuLoadGame;
-              case 2: return mainMenuOptions;
-              case 3: return mainMenuExitGame;
+            case 0: btnNewGameActive = !btnNewGameActive; break;
+            case 1: return mainMenuLoadGame;
+            case 2: return mainMenuOptions;
+            case 3: return mainMenuExitGame;
             }
           }
         } else if(event.key.keysym.sym == SDLK_ESCAPE) {
@@ -134,16 +134,16 @@ mainMenuNavVal_t MainMenu::Run(void) {
       else if(event.type == SDL_MOUSEBUTTONUP) {
         if(event.button.button == SDL_BUTTON_LEFT) {
           switch(grpMain.CheckMouseOver()) {
-            case 0: btnNewGameActive = !btnNewGameActive; break;
-            case 1: return mainMenuLoadGame;
-            case 2: return mainMenuOptions;
-            case 3: return mainMenuExitGame;
+          case 0: btnNewGameActive = !btnNewGameActive; break;
+          case 1: return mainMenuLoadGame;
+          case 2: return mainMenuOptions;
+          case 3: return mainMenuExitGame;
           }
 
           if(btnNewGameActive) {
             switch(grpNewGame.CheckMouseOver()) {
-              case 0: return mainMenuNewGame; break;
-              case 1: btnNewGameActive = false; break;
+            case 0: return mainMenuNewGame; break;
+            case 1: btnNewGameActive = false; break;
             }
           }
         }
