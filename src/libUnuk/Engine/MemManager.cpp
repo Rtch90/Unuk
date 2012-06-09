@@ -118,7 +118,7 @@ static int allocationCount    = 0;    // Amount of allocations.
 static int allocationMemory   = 0;    // Memory allocated.
 
 static int PeakMemoryUsage    = 0;
-static int peakPointers        = 0;
+static int peakPointers       = 0;
 
 int CalculateHashIndex(const void* buffer) {
   int value = reinterpret_cast<int> (buffer);

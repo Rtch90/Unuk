@@ -5,7 +5,6 @@
 
 #include "../../Unuk/Globals.h"
 #include "../../Unuk/Constants.h"
-#include "../Engine/MemClass.h"
 #include "../Sprite/ApplySurface.h"
 #include "../Sprite/ImageLoader.h"
 #include "../Engine/Collision.h"

@@ -16,7 +16,6 @@
 #include "../System/Debug.h"
 #include "../System/Serialisable.h"
 #include "../Engine/WorldManager.h"
-#include "../Engine/MemClass.h"
 using namespace std;
 
 class Character;

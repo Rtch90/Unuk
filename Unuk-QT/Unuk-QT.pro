@@ -12,7 +12,6 @@ HEADERS += ../src/Libs/wglext.h \
     ../src/libUnuk/Engine/WorldManager.h \
     ../src/libUnuk/Engine/ParticleEmitter.h \
     ../src/libUnuk/Engine/NPC.h \
-    ../src/libUnuk/Engine/MemClass.h \
     ../src/libUnuk/Engine/Collision.h \
     ../src/libUnuk/Engine/Character.h \
     ../src/libUnuk/Sprite/TextureManager.h \

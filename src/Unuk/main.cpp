@@ -10,7 +10,6 @@
 #include "../libUnuk/Engine/NPC.h"
 #include "../libUnuk/System/Debug.h"
 #include "../libUnuk/System/Input.h"
-#include "../libUnuk/Engine/MemClass.h"
 
 #include "Constants.h"
 #include "Globals.h"
