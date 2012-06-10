@@ -165,10 +165,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\libUnuk\Engine\MemClass.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\src\libUnuk\Engine\MemManager.cpp"
 				>
 			</File>

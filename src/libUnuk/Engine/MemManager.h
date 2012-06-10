@@ -51,3 +51,7 @@ void operator delete[](void* buffer) throw();
 #ifndef __LINE__
 #define __LINE__ 0
 #endif
+
+#ifndef _MSC_VER
+#define new(__FILE__, __LINE__)
+#endif
