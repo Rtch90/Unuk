@@ -7,6 +7,8 @@
 #include <vector>
 using namespace std;
 
+#include "../Engine/MemManager.h"
+
 // Disable warning that debugging information has lines that are truncated.
 #ifdef WIN32
 #pragma warning(disable : 4786)
@@ -468,7 +470,7 @@ private:
   }
 
   Node* AllocateNode(UserState& userState) {
-    Node *p = new Node(userState);
+    Node *p = scNew(Node,(userState));
     return p;
   }
 
