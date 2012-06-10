@@ -420,7 +420,7 @@ void Game::SaveSavegame(void) {
   TiXmlElement* saveElement = new TiXmlElement("save");
 
   TiXmlElement* nameElement = new TiXmlElement("name");
-  TiXmlText* nameText = new TiXmlText("Allanis"); //TODO: replace with _player->GetName() when it works. --konom
+  TiXmlText* nameText = new TiXmlText("Allanis"); //TODO: replace with _player->GetName() when it works.
   nameElement->LinkEndChild(nameText);
 
   /*

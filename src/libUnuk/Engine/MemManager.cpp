@@ -277,7 +277,7 @@ void DumpLeakSnapshot(bool fromStart) {
       AllocationLink* currentLink = hashMap[i].first;
       while(currentLink != 0) {
         if(!currentLink->allocationUnit->markedSnapshot || fromStart) {
-          //if(strcmp(currentLink->allocationUnit->allocatedFrom, "(???: line 0)") != 0)
+          //if(strcmp(currentLink->allocationUnit->allocatedFrom, "(???: line 0)") != 0) {
           if(!strstr(currentLink->allocationUnit->allocatedFrom, "???")) {
             // Temp: show only over 2MB
             //if(currentLink->allocationUnit->requestedSize > 1*1024*1024) {
