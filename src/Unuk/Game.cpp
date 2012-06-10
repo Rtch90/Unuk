@@ -1,4 +1,5 @@
 #include "Game.h"
+#include "../libUnuk/Engine/MemManager.h"
 #include "../libUnuk/Engine/NPC.h"
 #include "../libUnuk/Engine/WorldManager.h"
 #include "../Unuk/Globals.h"
@@ -6,7 +7,7 @@
 
 Game::Game(void) {
   Debug::logger->message("Creating characters..");
-  _player = new Player(&_map);
+  _player = scNew(Player,(&_map));
   _map.SetPlayer(_player);
 
   _runGameReturnValue = gameMainMenu;
@@ -85,7 +86,7 @@ gameNavVal_t Game::Run(void) {
   _playerExpBar.SetWidthHeight(200, 25);
   _playerExpBar.SetProgress(0.0f);
 
-  eventHistory = new EventHistory();
+  eventHistory = scNew(EventHistory,);
 
   _gameRunning = true;
   while(_gameRunning) {

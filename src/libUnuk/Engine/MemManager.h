@@ -52,6 +52,4 @@ void operator delete[](void* buffer) throw();
 #define __LINE__ 0
 #endif
 
-#ifndef _MSC_VER
-#define new(__FILE__, __LINE__)
-#endif
+#define scNew(cName, params) (new (__FILE__, __LINE__)(cName)(params))

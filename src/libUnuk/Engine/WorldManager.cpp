@@ -1,4 +1,5 @@
 #include "WorldManager.h"
+#include "MemManager.h"
 #include "NPC.h"
 #include "../../Unuk/Player.h"
 #include "../../Unuk/Globals.h"
@@ -69,7 +70,7 @@ NPC* WorldManager::GetNPCAt(int xArg, int yArg) {
 }
 
 void WorldManager::CreateNPC(int x, int y) {
-  NPC* npc = new NPC(_level);
+  NPC* npc = scNew(NPC,(_level));
   npc->SetXY(x, y);
   npc->ForceMove();
   npc->LoadSprites("../Data/Media/Images/Characters/template.png", 40,45);

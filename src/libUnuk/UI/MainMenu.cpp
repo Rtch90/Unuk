@@ -1,7 +1,8 @@
 #include "MainMenu.h"
+#include "../Engine/MemManager.h"
 
 MainMenu::MainMenu(void) {
-  Button* btnNewGame = new Button();
+  Button* btnNewGame = scNew(Button,);
   btnNewGame->SetOutRGB(200, 200, 200);
   btnNewGame->SetOverRGB(255, 255, 255);
   btnNewGame->SetTextRGB(0, 0, 0);
@@ -10,7 +11,7 @@ MainMenu::MainMenu(void) {
   btnNewGame->SetHighlightRGB(255, 128, 0);
   btnNewGame->SetHighlighted(false);
 
-  Button* btnLoadGame = new Button();
+  Button* btnLoadGame = scNew(Button,);
   btnLoadGame->SetOutRGB(200, 200, 200);
   btnLoadGame->SetOverRGB(255, 255, 255);
   btnLoadGame->SetTextRGB(0, 0, 0);
@@ -19,7 +20,7 @@ MainMenu::MainMenu(void) {
   btnLoadGame->SetHighlighted(false);
   btnLoadGame->SetXY(100, 200);
 
-  Button* btnOptions = new Button();
+  Button* btnOptions = scNew(Button,);
   btnOptions->SetOutRGB(200, 200, 200);
   btnOptions->SetOverRGB(255, 255, 255);
   btnOptions->SetTextRGB(0, 0, 0);
@@ -28,7 +29,7 @@ MainMenu::MainMenu(void) {
   btnOptions->SetHighlighted(false);
   btnOptions->SetXY(100, 250);
 
-  Button* btnExit = new Button();
+  Button* btnExit = scNew(Button,);
   btnExit->SetOutRGB(200, 200, 200);
   btnExit->SetOverRGB(255, 255, 255);
   btnExit->SetTextRGB(0, 0, 0);
@@ -54,7 +55,7 @@ MainMenu::MainMenu(void) {
   lblMenu.SetXY(100, 75);
   lblMenu.SetTextBlended("Unuk", vlarge, 0, 0, 0);
 
-  Button* btnNewGameYes = new Button();
+  Button* btnNewGameYes = scNew(Button,);
   btnNewGameYes->SetOutRGB(20, 150, 20);
   btnNewGameYes->SetOverRGB(20, 255, 20);
   btnNewGameYes->SetTextRGB(0, 0, 0);
@@ -63,7 +64,7 @@ MainMenu::MainMenu(void) {
   btnNewGameYes->SetHighlighted(false);
   btnNewGameYes->SetXY(rectNewGame.GetX() + rectNewGame.GetWidth() / 2 - 40 - btnNewGameYes->GetWidth(), 190);
 
-  Button* btnNewGameNo = new Button();
+  Button* btnNewGameNo = scNew(Button,);
   btnNewGameNo->SetOutRGB(150, 20, 20);
   btnNewGameNo->SetOverRGB(255, 20, 20);
   btnNewGameNo->SetTextRGB(0, 0, 0);
