@@ -1,9 +1,10 @@
 #include "IngameMenu.h"
+#include "../Engine/MemManager.h"
 
 IngameMenu::IngameMenu(void) {
   _active = false;
 
-  Button* btnResume = new Button();
+  Button* btnResume = scNew(Button,);
   btnResume->SetOutRGB(200, 200, 200);
   btnResume->SetOverRGB(255, 255, 255);
   btnResume->SetTextRGB(0, 0, 0);
@@ -12,7 +13,7 @@ IngameMenu::IngameMenu(void) {
   btnResume->SetHighlighted(false);
   btnResume->SetXY(SCREEN_WIDTH / 2 - btnResume->GetWidth() / 2, 50);
 
-  Button* btnSaveGame = new Button();
+  Button* btnSaveGame = scNew(Button,);
   btnSaveGame->SetOutRGB(200, 200, 200);
   btnSaveGame->SetOverRGB(255, 255, 255);
   btnSaveGame->SetTextRGB(0, 0, 0);
@@ -21,7 +22,7 @@ IngameMenu::IngameMenu(void) {
   btnSaveGame->SetHighlighted(false);
   btnSaveGame->SetXY(SCREEN_WIDTH / 2 - btnSaveGame->GetWidth() / 2, 100);
 
-  Button* btnLoadGame = new Button();
+  Button* btnLoadGame = scNew(Button,);
   btnLoadGame->SetOutRGB(200, 200, 200);
   btnLoadGame->SetOverRGB(255, 255, 255);
   btnLoadGame->SetTextRGB(0, 0, 0);
@@ -30,7 +31,7 @@ IngameMenu::IngameMenu(void) {
   btnLoadGame->SetHighlighted(false);
   btnLoadGame->SetXY(SCREEN_WIDTH / 2 - btnLoadGame->GetWidth() / 2, 150);
 
-  Button* btnOptions = new Button();
+  Button* btnOptions = scNew(Button,);
   btnOptions->SetOutRGB(200, 200, 200);
   btnOptions->SetOverRGB(255, 255, 255);
   btnOptions->SetTextRGB(0, 0, 0);
@@ -39,7 +40,7 @@ IngameMenu::IngameMenu(void) {
   btnOptions->SetHighlighted(false);
   btnOptions->SetXY(SCREEN_WIDTH / 2 - btnOptions->GetWidth() / 2, 200);
 
-  Button* btnExitToMenu = new Button();
+  Button* btnExitToMenu = scNew(Button,);
   btnExitToMenu->SetOutRGB(200, 200, 200);
   btnExitToMenu->SetOverRGB(255, 255, 255);
   btnExitToMenu->SetTextRGB(0, 0, 0);

@@ -3,8 +3,8 @@
 #include <cstdarg>
 #include <ctime>
 #include "Debug.h"
+#include "../libUnuk/Engine/MemManager.h"
 #include "string"
-
 
 using namespace std;
 
@@ -87,7 +87,7 @@ bool Debug::openLog(bool logToFile) {
     logger->message("Warning: Multiple calls to openLog().");
     return false;
   }
-  logger = new Debug(logToFile);
+  logger = scNew(Debug,logToFile);
   return true;
 }
 

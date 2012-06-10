@@ -7,6 +7,7 @@
 
 #include "../libUnuk/UI/MainMenu.h"
 #include "../libUnuk/UI/SavegameMenu.h"
+#include "../libUnuk/Engine/MemManager.h"
 #include "../libUnuk/Engine/NPC.h"
 #include "../libUnuk/System/Debug.h"
 #include "../libUnuk/System/Input.h"
@@ -40,7 +41,7 @@ static gameNavVal_t RunGame(bool load) {
   saveFilename << "save_" << savegameMenu.GetSelection();
 
   Debug::logger->message("Entering game state..");
-  Game* game = new Game;
+  Game* game = scNew(Game,);
 
   if(load) {
     game->Load(saveFilename.str());
@@ -97,7 +98,7 @@ int WINAPI WinMain(HINSTANCE,HINSTANCE,LPSTR,int) {
   Text::LoadFonts();
 
   Debug::logger->message("Creating mainmenu..");
-  MainMenu* menu = new MainMenu;
+  MainMenu* menu = scNew(MainMenu,);
 
   // Initiate input.
   Debug::logger->message("Setting up I/O..");
@@ -113,7 +114,7 @@ int WINAPI WinMain(HINSTANCE,HINSTANCE,LPSTR,int) {
       delete menu;
       switch(RunGame(false)) {
       case gameMainMenu:
-        menu = new MainMenu;
+        menu = scNew(MainMenu,);
         break;
       case gameQuitGame:
         menuRunning = false;
@@ -124,7 +125,7 @@ int WINAPI WinMain(HINSTANCE,HINSTANCE,LPSTR,int) {
       delete menu;
       switch(RunGame(true)) {
       case gameMainMenu:
-        menu = new MainMenu;
+        menu = scNew(MainMenu,);
         break;
       case gameQuitGame:
         menuRunning = false;
