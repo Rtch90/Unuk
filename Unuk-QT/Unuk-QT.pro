@@ -1,3 +1,6 @@
+unix {
+	QMAKE_CXXFLAGS += -m32
+}
 CONFIG -= qt
 LIBS += -lGL \
     -lSDL \
